@@ -18,10 +18,15 @@ body{
   height: 900vw;
   overflow-y: hidden;
   width: 10.7vw;
-  background:#333;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 1vw;
+  padding-right: 1vw;
   z-index: 1;
+  text-decoration: none;
+  border: 1px solid #777;
+  background: #333;
+  font-family: 'Courier New', sans-serif;
+  color: white;
+  display: inline-block;
 }
 .menu{
   padding-left: 0px;
@@ -29,10 +34,12 @@ body{
 .right{
   position: absolute;
   margin-left: 270px;
-  padding-left: 24px;
-  top: 24px;
-  width: 63vw;
+  padding-left: 0px;
+  top: 0px;
+  width: 83.3vw;
   z-index: 1;
+  border: 1px;
+  margin-left: 12.7vw;
 }
 .nav-item{
   display: block;
