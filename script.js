@@ -303,9 +303,8 @@ function transformToE(object) {
     }
 }
 function loop() {
-    /*if (player.blackhole_shield || player.blackhole_invasion != 1){
-        player.volumes = player.volumes.add(player.dimensions[0].mul(player.dimensions_multi[0]).div(30));
-    }*/
+    player.volumes = player.volumes.add(player.dimensions[0].mul(player.dimensions_multi[0]).div(30));
+
     if (player.volumes.gt(player.space_max) && !player.no_space_max){
         player.volumes = player.space_max
         
@@ -374,6 +373,22 @@ function fix(){
 
     }
 }
+function changeDisplayMode(){
+    $("#dialog-place").html(`
+    <p>修改数字显示方式：</p>
+    <select id="select-display-mode">
+        <option value=\"0\">重要单位</option>
+        <option value=\"1\">总是以mm^4为单位</option> 
+        <option value=\"2\">总是以mm^4为单位</option>
+        <option value=\"3\">对数</option>
+    </select>
+    `)
+    closeButton.setAttribute("onclick",`
+    player.display_mode = Number($("#select-display-mode").val());
+    modal.close();
+    `)
+    modal.showModal();
+}
 function load() {
     //window.template = $("#app").html();
 	hard_reset();
@@ -382,8 +397,10 @@ function load() {
 		Object.assign(player, loadplayer)
 	}
     fix()
-    main_option_ABCD.set_list([$("#page1")[0],$("#page2")[0]]);
-    suboption_ABCD.set_list([$("#page2_save")[0],$("#page2_about")[0]]);
+    main_option_ABCD.set_list([$("#page1")[0],$("#page2")[0],$("#page2")[0]]);
+    suboption_ABCD.set_list([$("#page2_save")[0],$("#page2_about")[0],$("#page2_visual")[0]]);
     
     setInterval(loop,fastly ? 1 : 1000/30);
+    window.closeButton = document.querySelector("[data-close-modal]")
+    window.modal = document.querySelector("[data-modal]")
 }

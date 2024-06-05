@@ -5,6 +5,75 @@ body {
   position: relative;
 }
 
+/* CSS Document */
+
+
+.right h1{
+  margin-top: 0px;
+}
+body{
+  margin:0px;
+}
+.main-sidebar {
+  height: 900vw;
+  overflow-y: hidden;
+  width: 10.7vw;
+  background:#333;
+  padding-left: 10px;
+  padding-right: 10px;
+  z-index: 1;
+}
+.menu{
+  padding-left: 0px;
+}
+.right{
+  position: absolute;
+  margin-left: 270px;
+  padding-left: 24px;
+  top: 24px;
+  width: 63vw;
+  z-index: 1;
+}
+.nav-item{
+  display: block;
+  height:24px;
+  text-align: center;
+  color: #eee;
+  list-style:none;
+  padding-left: 12px;
+  padding-top : 8px;
+  border-radius: 9px;
+}
+.nav-item:hover{
+  color: #fff;
+  background-color: #555;
+}
+.classname{
+  color:#069;
+}
+.dialog {
+  background-color: #333;
+  color:#fff
+}
+.titl{
+  padding-top: 16px;
+  color: #fff;
+  font-size: 24px;
+  text-align: center;
+
+}
+
+.heimu{
+  color: #000;
+  background-color: #000;
+  border-radius: 5px;
+}
+
+.heimu.mouseenter{
+  color: #fff;
+  background-color: #000;
+}
+
 .pts-dis {
   margin: 4px 4px;
   font-size: 48px;
