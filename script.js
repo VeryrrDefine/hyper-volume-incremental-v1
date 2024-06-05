@@ -15,15 +15,10 @@ function decodeBase64(input) {
     return decoded;  
 }  
 function export_copy() {
-    if (player.blackhole_invasion!=1){
         return navigator.clipboard.writeText(reverseString(encodeBase64(JSON.stringify(player))))
-    }else{
-        player.volumes = E(0);
-        $("#notice").text("です");
-    }
+   
 }
 function export_file() {
-    if (player.blackhole_invasion!=1){
         let str = reverseString(encodeBase64(JSON.stringify(player)))
         let file = new Blob([str], {type: "text/plain"})
         window.URL = window.URL || window.webkitURL;
@@ -32,10 +27,7 @@ function export_file() {
         a.download = "Volume Incremental Save - "+getCurrentBeijingTime()+".txt"
         a.click()
         return navigator.clipboard.writeText(reverseString(encodeBase64(JSON.stringify(player))))
-    }else{
-        player.volumes = E(0);
-        $("#notice").text("です");
-    }
+    
 }
 function getCurrentBeijingTime() {  
     const now = new Date();  
@@ -175,45 +167,7 @@ function display_volumes(a){
         return `${formatWhole(a)} mm<sup>4</sup>`
     }
 }
-var turn_en ={
-    "${You have}" :"You have",
-    "${volumes}":"Hyper-volumes",
-    "${options}":"Options",
-    "${you_can_save_volumes}" :"You can save max",
-    "${upgrade}":"upgrade",
-    "${dimension}": "dimension",
-    "${prize}" :"prize",
-    "${export}":"export",
-    "${export_file}" :"export as file",
-    "${import}":"import",
-    "${import_file}" :"import as file",
-    "${hard_reset}": "<del>Hard</del>Hard Reset"
-}
-var turn_zh ={
-    "${You have}" :"你有",
-    "${volumes}":"体积",
-    "${options}":"选项",
-    "${you_can_save_volumes}" :"你最多可以存储",
-    "${upgrade}":"升级",
-    "${dimension}": "维度",
-    "${prize}" :"价格",
-    "${export}":"导出",
-    "${export_file}" :"导出为文件",
-    "${import}":"导入",
-    "${import_file}" :"以文件导入",
-    "${save}" :"存档",
-    "${about}" :"关于",
-    "${hard_reset}": "<del>困难地</del>硬重置"
-}
-function change_language(a){
-    let template_show = template;
-    for (const key in window[`turn_${a}`]){
-        template_show = template_show.replaceAll(key,window[`turn_${a}`][key])
-    }
-    $("#app").html(template_show);
-    player.language = a;
-    
-}
+
 function maxDimensions(){
     for (let i = 1; i<= 8;  i++){
         buydim(i,true);
@@ -230,12 +184,10 @@ function display(){
     
     
     $(".pts-dis").html(display_volumes(player.volumes))
-    $("#allmaxButton")[player.bh_i_times.gt(0) ? "show" : "hide"]()
-    $("#getBlackholeShield")[(player.bh_i_times.gt(0) && player.blackhole_shield == 0 )? "show" : "hide"]()
-    $("#break_space_max")[(player.volumes.gt("1.797e308") && !player.no_space_max)? "show" : "hide"]()
-    $("#space_maxt")[(!player.no_space_max)? "show" : "hide"]()
+   // $("#allmaxButton")[player.bh_i_times.gt(0) ? "show" : "hide"]()
+   //$("#space_maxt")[(!player.no_space_max)? "show" : "hide"]()
     $("#space_max").html(display_volumes(player.space_max))
-    $("#bhi_times").html(`(${formatWhole(player.bh_i_times)}/5)`)
+    //$("#bhi_times").html(`(${formatWhole(player.bh_i_times)}/5)`)
     $("#spacemax_levelup_need").html(`(${formatWhole(player.space_max_times)}/${player.space_max_timesm} 每次${display_volumes(player.space_max_need)})`)
     for (let i = 0; i< 8;  i++){
         $(`#d${i+1}`).text(formatWhole(player.dimensions[i]));
@@ -299,11 +251,7 @@ function reset_dimensions(){
         }
     )
 }
-function gainBlackHoleShield(){
-    if (player.bh_i_times.gte(5)){
-        player.blackhole_shield = true
-    }
-}
+
 function hard_reset(){
     player = {
         volumes: E(10),
@@ -317,14 +265,13 @@ function hard_reset(){
         no_space_max: false,
         notice: "",
         language: "en",
-        blackhole_shield: false,
+        //blackhole_shield: false,
         dimensions_buymulti: [ 
             E(2), E(2), E(2), E(2), E(2), E(2), E(2), E(2)
         ],
-        blackhole_invasion: false,
-        bh_i_times : EN(0)
+        //blackhole_invasion: false,
+       // bh_i_times : EN(0)
     }
-    change_language(player.language)
     reset_dimensions()
 }
 var settings = {
@@ -356,14 +303,14 @@ function transformToE(object) {
     }
 }
 function loop() {
-    if (player.blackhole_shield || player.blackhole_invasion != 1){
+    /*if (player.blackhole_shield || player.blackhole_invasion != 1){
         player.volumes = player.volumes.add(player.dimensions[0].mul(player.dimensions_multi[0]).div(30));
-    }
+    }*/
     if (player.volumes.gt(player.space_max) && !player.no_space_max){
         player.volumes = player.space_max
         
     }
-    if (player.volumes.gte(E("1.414092421672706e36")) && player.volumes.lt(E("1.414092421672706e39")) && player.blackhole_invasion==0){
+    /*if (player.volumes.gte(E("1.414092421672706e36")) && player.volumes.lt(E("1.414092421672706e39")) && player.blackhole_invasion==0){
         $("#notice").html("总觉得哪里不对劲...")
         $("body").addClass("corrupted")
     }
@@ -390,7 +337,7 @@ function loop() {
             alert("你之前的进度被黑洞吞噬了, 不过,你获得了一个永久的buff:<br>维度1加成: x1.01")
             location.href = location.href
         }
-    }
+    }*/
     calculate_dim()
     if (player.space_max_times.eq(player.space_max_timesm)){
         player.space_max_level = player.space_max_level.add(1);
@@ -404,9 +351,9 @@ function loop() {
         player.dimensions_multi[i] = player.dimensions_buymulti[i].pow(player.dimensions_bought[i]);
         player.dimensions_cost[i] = player.dimensions_scale[i].pow(player.dimensions_bought[i].add(1));
     }
-    if (player.blackhole_invasion==2){
+    /*if (player.blackhole_invasion==2){
         player.space_max_timesm =  E(1);
-    }
+    }*/
     save();
     display();
 }
@@ -417,7 +364,7 @@ function fix(){
     player.space_max_need = ENify(player.space_max_need);
     player.space_max_times = ENify(player.space_max_times);
     player.space_max_timesm = ENify(player.space_max_timesm);
-    player.bh_i_times = ENify(player.bh_i_times);
+    //player.bh_i_times = ENify(player.bh_i_times);
     for (let i = 0; i< 8;  i++){
         player.dimensions_multi[i] = ENify(player.dimensions_multi[i])
         player.dimensions_buymulti[i] = ENify(player.dimensions_buymulti[i])
@@ -428,7 +375,7 @@ function fix(){
     }
 }
 function load() {
-    window.template = $("#app").html();
+    //window.template = $("#app").html();
 	hard_reset();
 	let loadplayer = JSON.parse(localStorage.getItem("volume-incremental"));
 	if (loadplayer != null) {
