@@ -55,12 +55,20 @@ body{
   color: #fff;
   background-color: #555;
 }
-.classname{
-  color:#069;
+.news{
+  margin:0px;
+  text-decoration: none;
+  border: 1px solid #777;
+  background: #333;
+  font-family: 'Courier New', sans-serif;
+  color: white;
+  display: inline-block;
 }
 .dialog {
   background-color: #333;
-  color:#fff
+  color:#fff;
+  border-color: #666;
+  
 }
 .titl{
   padding-top: 16px;
@@ -210,7 +218,12 @@ button {
     text-shadow: 1px 1px 3px #ff7, -1px -1px 3px #ff7, 0 0 24px #ff7
   }
 }
-
+.soft {
+	color: hsl(237, 15%, 47%);
+	font-weight: bold;
+	text-shadow: 0px 1px 0px hsl(252, 19%, 57%);
+	pointer-events: none;
+}
 .btn {
   cursor: pointer;
   font-size: 12px;
@@ -223,7 +236,42 @@ button {
   color: white;
   display: inline-block;
 }
-
+input {
+  cursor: pointer;
+  font-size: 12px;
+  max-width: 250px;
+  padding: 7px 25px;
+  text-decoration: none;
+  border: 1px solid #777;
+  background: #333;
+  font-family: 'Courier New', sans-serif;
+  color: white;
+  display: inline-block;
+}
+select {
+  cursor: pointer;
+  font-size: 12px;
+  max-width: 250px;
+  padding: 7px 25px;
+  text-decoration: none;
+  border: 1px solid #777;
+  background: #333;
+  font-family: 'Courier New', sans-serif;
+  color: white;
+  display: inline-block;
+}
+.btn:hover {
+  cursor: pointer;
+  font-size: 12px;
+  max-width: 250px;
+  padding: 7px 25px;
+  text-decoration: none;
+  border: 1px solid #888;
+  background: #555;
+  font-family: 'Courier New', sans-serif;
+  color: white;
+  display: inline-block;
+}
 .square {
   cursor: pointer;
   font-size: 12px;

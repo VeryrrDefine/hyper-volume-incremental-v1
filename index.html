@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>体积增量</title>
+    <title>超体积增量</title>
     <link rel="stylesheet" href="style.css">
     
     <script src="ExpantaNum.js"></script>
@@ -13,11 +13,12 @@
 </head>
 <body onload="load()" id="app">
     <aside class="main-sidebar">
-        <div class="titl">体积增量</div>
+        <div class="titl">超体积增量</div>
         <menu class="menu">
             <li class="nav-item actived" onclick="main_option_ABCD.show(1)">体积</li>
-            <li class="nav-item actived" onclick="main_option_ABCD.show(2)">升级</li>
-            <li class="nav-item actived" onclick="main_option_ABCD.show(3)">选项</li>
+            <li class="nav-item actived" onclick="main_option_ABCD.show(3)">升级</li>
+            <li class="nav-item actived" onclick="main_option_ABCD.show(2)">选项</li>
+            <li class="nav-item actived" onclick="main_option_ABCD.show(4)">成就</li>
         </menu>
     </aside>
     <!-- <p style="text-align: center; 
@@ -36,17 +37,16 @@
     transform: translateX(-176px); transition: transform 4.87s linear 0s;">如果你能看懂啊这段文字，说明新闻被人啊🤪～啊🤪～啊咦😬啊咦😬啊→啊↑啊↓😨啊😰～嗯💥哎哎🤗哎哦哎嗯😋～哦哎🥳爱爱爱爱爱😍了</p>
     -->
     <aside class="right">
-        <!--<div style="height: 20px; background-color: #333;">
-            <p class="news">来看看这是什么物业 78物业</p>
-        </div>-->
+        <div class="news"style="height: 20px; background-color: #333;">
+            <span id="huishengdong">来看看这是什么物业 78物业</span><br>
+        </div>
     <div align="center" id="pts">
-        你有<div class="pts-dis">114514 mm<sup>4</sup></div>体积<br>
+        你有<div class="pts-dis">114514 mm<sup>4</sup></div>4维体积<br>
     </div>
     <br>
     </div>
     
     <div id="page1" align="center">
-        <button class="btn" onclick="maxDimensions()" id="allmaxButton">全部最大化</button>
         <p><button class="btn" onclick="(function(){if(player.volumes.lt(10)){player.volumes=E(10)}else{window.open('https://www.bilibili.com/video/BV1GJ411x7h7')}})()">出bug了？点击这个按钮</button></p>
         
         <div id="space_maxt">
@@ -98,10 +98,11 @@
             <button class="btn" onclick="import_save()">导入</button>
             <button class="btn" onclick="import_file()">以文件导入</button>
             <button class="btn" onclick="formated_hard_reset()"><del>困难地</del>硬重置</button>
+            <button class="btn" onclick="redeem()">兑换码</button>
         </div>
         
         <div align="center" id="page2_about">
-            当前版本: v1.0.0-pre4<br>
+            当前版本: v1.0.0-pre5<br>
             <del>拿0100000000a7的游戏的CSS改的</del><br>
             <del>绝对没有</del><br>
         </div>
@@ -109,11 +110,29 @@
             <button class="btn" onclick="changeDisplayMode()">切换显示方式</button>
         </div>
     </div>
+    <div id="page3" align="center">
+        <div>
+            你有0 mm<sup>5</sup>5维体积<br>
+            你有0 mm<sup>6</sup>6维体积<br>
+            你有0 mm<sup>7</sup>7维体积<br>
+            你有0 mm<sup>8</sup>8维体积<br>
+            <span>升级：移除4维体积的存储硬上限</span>
+            <button class="btn" onclick="buyUpgrade">价格：1 ly<sup>4</sup></button><br>
+
+            <span>升级：将维度1的软上限推迟9e15%</span>
+            <button class="btn" onclick="buyUpgrade">价格：1,000 mm<sup>5</sup></button><br>
+
+
+            <span>升级：增加5维体积收益</span>
+            <button class="btn" onclick="buyUpgrade">价格：10,000 mm<sup>6</sup></button><br>
+        </div>
+    </div>
     </aside>
     <dialog data-modal class="dialog">
         <div id="dialog-place"></div>
-        <button class="btn" data-close-modal>关闭</button>
+        <button class="btn" data-ok-modal>关闭</button>
+        <button class="btn" data-close-modal onclick="$('.dialog')[0].close();">取消</button>
     </dialog>
-    <br><br>
+    <br><br><span id="d9" class="display:none">114514</span>
 </body> 
 </html> 

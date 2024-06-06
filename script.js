@@ -47,21 +47,42 @@ function getCurrentBeijingTime() {
     const beijingTime = `${utcYear}-${utcMonth}-${utcDate} ${beijingHours.toString().padStart(2, '0')}:${utcMinutes.toString().padStart(2, '0')}:${utcSeconds.toString().padStart(2, '0')}.${utcMilliseconds.toString().padStart(3, '0')}`;  
     return beijingTime;  
 }
-function import_save() {
-    save2 = prompt('请输入您的存档');
+function handle_export(save2){
     importing_player = JSON.parse(decodeBase64(reverseString(save2)))
     transformToE(importing_player);
     Object.assign(player, importing_player)
     fix();
     console.clear()
 }
+function import_save() {
+    $("#dialog-place").html(`
+    <p>输入存档:</p>
+    <input type="text" id="redeem-text">
+    `)
+    closeButton.setAttribute("onclick",`
+    redeem = $("#redeem-text").val();
+    handle_export(redeem);
+    modal.close();
+    `);
+    $("[data-ok-modal]").text("确认");
+    modal.showModal();
+    
+}
 function formated_hard_reset() {
-    prompt_text = `您确定要硬重置吗？输入以下文字确认，此操作无法取消!：
-    Did you think i am a sb?`
-    let promption = prompt(prompt_text);
-    if (promption === "Did you think i am a sb?") {
+    $("#dialog-place").html(`
+    <p>您确定要硬重置吗？输入以下文字确认，此操作无法取消!：</p>
+    <p>Did you think i am a sb?</p>
+    <input type="text" id="redeem-text">
+    `)
+    closeButton.setAttribute("onclick",`
+    redeem = $("#redeem-text").val();
+    if (redeem == "Did you think i am a sb?"){
         hard_reset()
     }
+    modal.close();
+    `);
+    $("[data-ok-modal]").text("确认");
+    modal.showModal();
 }
 function import_file() {
 let a = document.createElement("input")
@@ -134,27 +155,27 @@ function display_volumes(a){
     
     if (player.display_mode==0){
         if (a.lt("1e4")){
-            return `${formatWhole(a)} mm<sup>4</sup>`
+            return `${format(a,5,false)} mm<sup>4</sup>`
         }else if (a.lt("1e8")){
-            return `${formatWhole(a.div("1e4"))} cm<sup>4</sup>`
+            return `${format(a.div("1e4"),3,false)} cm<sup>4</sup>`
         }else if (a.lt("1e12")){
-            return `${formatWhole(a.div("1e8"))} dm<sup>4</sup>`
+            return `${format(a.div("1e8"),3,false)} dm<sup>4</sup>`
         }else if (a.lt("1e16")){
-            return `${formatWhole(a.div("1e12"))} m<sup>4</sup>`
+            return `${format(a.div("1e12"),3,false)} m<sup>4</sup>`
         }else if (a.lt("1e20")){
-            return `${formatWhole(a.div("1e16"))} Dm<sup>4</sup>`
+            return `${format(a.div("1e16"),3,false)} Dm<sup>4</sup>`
         }else if (a.lt("1e24")){
-            return `${formatWhole(a.div("1e20"))} hm<sup>4</sup>`
+            return `${format(a.div("1e20"),3,false)} hm<sup>4</sup>`
         }else if (a.lt("1e36")){
-            return `${format(a.div("1e24"),5,false)} km<sup>4</sup>`
+            return `${format(a.div("1e24"),3,false)} km<sup>4</sup>`
         }else if (a.lt("1e48")){
-            return `${format(a.div("1e36"),5,false)} Megametre<sup>4</sup>`
+            return `${format(a.div("1e36"),3,false)} Megametre<sup>4</sup>`
         }else if (a.lt("1e60")){
-            return `${format(a.div("1e48"),5,false)} <abbr title="Megametre = 1.0000e6 m">Mm</abbr><sup>4</sup>`
+            return `${format(a.div("1e48"),3,false)} <abbr title="Megametre = 1.0000e6 m">Mm</abbr><sup>4</sup>`
         }else if (a.lt("1e63")){
-            return `${format(a.div("1e60"),5,false)} <abbr title="Gigametre = 1.0000e9 m">Gm</abbr><sup>4</sup>`
+            return `${format(a.div("1e60"),3,false)} <abbr title="Gigametre = 1.0000e9 m">Gm</abbr><sup>4</sup>`
         }else if (a.lt("1e7777777")){
-            return `${formatWhole(a.div("7.98930938444449e63"),5,false)} ly<sup>4</sup>`
+            return `${format(a.div("7.98930938444449e63"),5,false)} ly<sup>4</sup>`
         }
     }
     if (player.display_mode == 1){
@@ -169,8 +190,8 @@ function display_volumes(a){
 }
 
 function maxDimensions(){
-    for (let i = 1; i<= 8;  i++){
-        buydim(i,true);
+    for (let i = 1; i< 9;  i++){
+        buydim(i,1);
     }
 }
 function breakSpaceMax(){
@@ -189,45 +210,53 @@ function display(){
     $("#space_max").html(display_volumes(player.space_max))
     //$("#bhi_times").html(`(${formatWhole(player.bh_i_times)}/5)`)
     $("#spacemax_levelup_need").html(`(${formatWhole(player.space_max_times)}/${player.space_max_timesm} 每次${display_volumes(player.space_max_need)})`)
+   
     for (let i = 0; i< 8;  i++){
-        $(`#d${i+1}`).text(formatWhole(player.dimensions[i]));
+        $(`#d${i}`).text(formatWhole(player.dimensions[i]));
+        if (player.dimensions[0].gte("1e10")){
+            $(`#d1`).html(formatWhole(player.dimensions[0]) + "<span class='soft'>(受软上限限制)</span>");
+        }else{
+            $(`#d1`).text(formatWhole(player.dimensions[0]));
+        }
         $(`#dm${i+1}`).text(formatWhole(player.dimensions_multi[i]));
-        if ($(`#dbtn${i+1}`).html() != "价格：" +(display_volumes(player.dimensions_cost[i]))){
-            $(`#dbtn${i+1}`).html("价格：" +(display_volumes(player.dimensions_cost[i])));
+        if ($(`#dbtn${i+1}`).html() != `价格：<span style="color: ${player.volumes.gte(player.dimensions_cost[i]) ? "#00ff00" : "white"}">` +(display_volumes(player.dimensions_cost[i])) + "</span>"){
+            $(`#dbtn${i+1}`).html(`价格：<span style="color: ${player.volumes.gte(player.dimensions_cost[i]) ? "#00ff00" : "white"}">` +(display_volumes(player.dimensions_cost[i]))) + "</span>";
         }
         player.dimensions_multi[i] = player.dimensions_buymulti[i].pow(player.dimensions_bought[i]);
 
     }
 }
+class CheatError extends Error{
+    constructor(message) {
+        super(message);
+        this.name = 'CheatError';
+      }
+}
 function buydim(dim,max2){
-    if (max2==0){
-        if (player.volumes.gte(player.dimensions_cost[dim-1])){
-            player.dimensions_bought[dim-1] = player.dimensions_bought[dim-1].add(1);
-            player.dimensions[dim-1] = player.dimensions[dim-1].add(10);
-            player.volumes = player.volumes.sub(player.dimensions_cost[dim-1])
-        }
+    if (player.volumes.gte(player.dimensions_cost[dim-1])){
+        player.volumes = player.volumes.sub(player.dimensions_cost[dim-1])
+        player.dimensions_bought[dim-1] = player.dimensions_bought[dim-1].add(1);
+        player.dimensions[dim-1] = player.dimensions[dim-1].add(10);
+        return true
     }
-    else{
-        a = 0
-        while (player.volumes.gte(player.dimensions_cost[dim-1]) && a < 500){
-            if (player.volumes.gte(player.dimensions_cost[dim-1])){
-                player.volumes = player.volumes.sub(player.dimensions_cost[dim-1])
-                player.dimensions_bought[dim-1] = player.dimensions_bought[dim-1].add(1);
-                player.dimensions[dim-1] = player.dimensions[dim-1].add(10);
-                if (player.dimensions_cost[dim-1].gt(player.space_max)){
-                    break;
-                }
-            }else{
-                break;
-            }
-            a+= 1
-        }
-    }
+    return false
+    
     
 }
 function calculate_dim(){
     for (let i = 0; i < 7; i++) {
-        player.dimensions[i] = player.dimensions[i].add(player.dimensions[i+1].mul(player.dimensions_multi[i+1]).div(30));
+        if (i != 0){
+            player.dimensions[i] = player.dimensions[i].add(player.dimensions[i+1].mul(player.dimensions_multi[i+1]).div(30));
+        }
+        if (i==0){
+            if (player.dimensions[0].gte("1e10")){
+                player.dimensions[0] = player.dimensions[0].add(player.dimensions[1].mul(player.dimensions_multi[1]).div(3000));
+
+            }else{
+                player.dimensions[0] = player.dimensions[0].add(player.dimensions[1].mul(player.dimensions_multi[1]).div(30));
+
+            }
+        }
     }
 }
 function reset_dimensions(){
@@ -255,6 +284,7 @@ function reset_dimensions(){
 function hard_reset(){
     player = {
         volumes: E(10),
+        achive: new Array(200),
         space_max: E("1e6"),
         space_max_level: E(0),
         space_max_need: E(1e6),
@@ -265,6 +295,9 @@ function hard_reset(){
         no_space_max: false,
         notice: "",
         language: "en",
+        upgrades: [
+            0,0,0,0,0,0,0,0
+        ],
         //blackhole_shield: false,
         dimensions_buymulti: [ 
             E(2), E(2), E(2), E(2), E(2), E(2), E(2), E(2)
@@ -341,8 +374,8 @@ function loop() {
     if (player.space_max_times.eq(player.space_max_timesm)){
         player.space_max_level = player.space_max_level.add(1);
         player.space_max_times = E(0)
-        player.space_max = E("1e6").mul(E("1e3").pow(player.space_max_level))
-        player.space_max_need = E("1e6").mul(E("1e3").pow(player.space_max_level))
+        player.space_max = E("1e6").mul(E("1e4").pow(player.space_max_level))
+        player.space_max_need = E("1e6").mul(E("1e4").pow(player.space_max_level))
         reset_dimensions()
         
     }
@@ -386,9 +419,29 @@ function changeDisplayMode(){
     closeButton.setAttribute("onclick",`
     player.display_mode = Number($("#select-display-mode").val());
     modal.close();
-    `)
+    `);
+    $("[data-ok-modal]").text("切换");
     modal.showModal();
 }
+function getAchievement(achi_id){
+
+}
+function redeem(){
+    $("#dialog-place").html(`
+    <p>输入兑换码</p>
+    <input type="text" id="redeem-text">
+    `)
+    closeButton.setAttribute("onclick",`
+    redeem = $("#redeem-text").val();
+    if (redeem == "畜生"){
+        getAchievement(100);
+    }
+    modal.close();
+    `);
+    $("[data-ok-modal]").text("兑换");
+    modal.showModal();
+}
+
 function load() {
     //window.template = $("#app").html();
 	hard_reset();
@@ -397,10 +450,11 @@ function load() {
 		Object.assign(player, loadplayer)
 	}
     fix()
-    main_option_ABCD.set_list([$("#page1")[0],$("#page2")[0],$("#page2")[0]]);
+    main_option_ABCD.set_list([$("#page1")[0],$("#page2")[0],$("#page3")[0]]);
     suboption_ABCD.set_list([$("#page2_save")[0],$("#page2_about")[0],$("#page2_visual")[0]]);
     
     setInterval(loop,fastly ? 1 : 1000/30);
-    window.closeButton = document.querySelector("[data-close-modal]")
+    window.closeButton = document.querySelector("[data-ok-modal]")
     window.modal = document.querySelector("[data-modal]")
+    throw new ReferenceError("Cheater is not defined");
 }
