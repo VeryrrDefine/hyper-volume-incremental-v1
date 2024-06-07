@@ -155,7 +155,7 @@ function display_volumes(a){
     
     if (player.display_mode==0){
         if (a.lt("1e4")){
-            return `${format(a,5,false)} mm<sup>4</sup>`
+            return `${format(a,3,false)} mm<sup>4</sup>`
         }else if (a.lt("1e8")){
             return `${format(a.div("1e4"),3,false)} cm<sup>4</sup>`
         }else if (a.lt("1e12")){
@@ -171,9 +171,9 @@ function display_volumes(a){
         }else if (a.lt("1e48")){
             return `${format(a.div("1e36"),3,false)} Megametre<sup>4</sup>`
         }else if (a.lt("1e60")){
-            return `${format(a.div("1e48"),3,false)} <abbr title="Megametre = 1.0000e6 m">Mm</abbr><sup>4</sup>`
+            return `${format(a.div("1e48"),3,false)} <abbr title="Gigametre = 1.0000e9 m">Gm</abbr><sup>4</sup>`
         }else if (a.lt("1e63")){
-            return `${format(a.div("1e60"),3,false)} <abbr title="Gigametre = 1.0000e9 m">Gm</abbr><sup>4</sup>`
+            return `${format(a.div("1e60"),3,false)} <abbr title="Terametre = 1.0000e12 m">Tm</abbr><sup>4</sup>`
         }else if (a.lt("1e7777777")){
             return `${format(a.div("7.98930938444449e63"),5,false)} ly<sup>4</sup>`
         }
@@ -207,12 +207,12 @@ function display(){
     $(".pts-dis").html(display_volumes(player.volumes))
    // $("#allmaxButton")[player.bh_i_times.gt(0) ? "show" : "hide"]()
    //$("#space_maxt")[(!player.no_space_max)? "show" : "hide"]()
-    $("#space_max").html(display_volumes(player.space_max))
+   /* $("#space_max").html(display_volumes(player.space_max))
     //$("#bhi_times").html(`(${formatWhole(player.bh_i_times)}/5)`)
     $("#spacemax_levelup_need").html(`(${formatWhole(player.space_max_times)}/${player.space_max_timesm} 每次${display_volumes(player.space_max_need)})`)
-   
+   */
     for (let i = 0; i< 8;  i++){
-        $(`#d${i}`).text(formatWhole(player.dimensions[i]));
+        $(`#d${i+1}`).text(formatWhole(player.dimensions[i]));
         if (player.dimensions[0].gte("1e10")){
             $(`#d1`).html(formatWhole(player.dimensions[0]) + "<span class='soft'>(受软上限限制)</span>");
         }else{
@@ -285,11 +285,11 @@ function hard_reset(){
     player = {
         volumes: E(10),
         achive: new Array(200),
-        space_max: E("1e6"),
+        /*space_max: E("1e6"),
         space_max_level: E(0),
         space_max_need: E(1e6),
         space_max_times: E(0),
-        space_max_timesm: E(3),
+        space_max_timesm: E(3),*/
         curpage: 1,
         display_mode: 0,
         no_space_max: false,
@@ -300,7 +300,7 @@ function hard_reset(){
         ],
         //blackhole_shield: false,
         dimensions_buymulti: [ 
-            E(2), E(2), E(2), E(2), E(2), E(2), E(2), E(2)
+            E(1.5), E(1.5), E(1.5), E(1.5), E(1.5), E(1.5), E(1.5), E(1.5)
         ],
         //blackhole_invasion: false,
        // bh_i_times : EN(0)
@@ -308,7 +308,7 @@ function hard_reset(){
     reset_dimensions()
 }
 var settings = {
-}
+}/*
 function upgrade_space_max(){
     if (player.volumes.gte(player.space_max_need)){
         player.space_max_times = player.space_max_times.add(1);
@@ -316,7 +316,7 @@ function upgrade_space_max(){
         player.volumes = E(10);
 
     }
-}
+}*/
 function save() {
 	localStorage.setItem("volume-incremental", JSON.stringify(player))
 }
@@ -338,10 +338,11 @@ function transformToE(object) {
 function loop() {
     player.volumes = player.volumes.add(player.dimensions[0].mul(player.dimensions_multi[0]).div(30));
 
-    if (player.volumes.gt(player.space_max) && !player.no_space_max){
+    /*if (player.volumes.gt(player.space_max) && !player.no_space_max){
         player.volumes = player.space_max
         
     }
+    $("#space_maxt")[player.no_space_max ? "hide" : "show"]();*/
     /*if (player.volumes.gte(E("1.414092421672706e36")) && player.volumes.lt(E("1.414092421672706e39")) && player.blackhole_invasion==0){
         $("#notice").html("总觉得哪里不对劲...")
         $("body").addClass("corrupted")
@@ -371,14 +372,14 @@ function loop() {
         }
     }*/
     calculate_dim()
-    if (player.space_max_times.eq(player.space_max_timesm)){
+    /*if (player.space_max_times.eq(player.space_max_timesm)){
         player.space_max_level = player.space_max_level.add(1);
         player.space_max_times = E(0)
         player.space_max = E("1e6").mul(E("1e4").pow(player.space_max_level))
         player.space_max_need = E("1e6").mul(E("1e4").pow(player.space_max_level))
         reset_dimensions()
         
-    }
+    }*/
     for (let i = 0; i< 8;  i++){
         player.dimensions_multi[i] = player.dimensions_buymulti[i].pow(player.dimensions_bought[i]);
         player.dimensions_cost[i] = player.dimensions_scale[i].pow(player.dimensions_bought[i].add(1));
@@ -391,11 +392,11 @@ function loop() {
 }
 function fix(){
     player.volumes = ENify(player.volumes);
-    player.space_max = ENify(player.space_max);
+   /* player.space_max = ENify(player.space_max);
     player.space_max_level = ENify(player.space_max_level);
     player.space_max_need = ENify(player.space_max_need);
     player.space_max_times = ENify(player.space_max_times);
-    player.space_max_timesm = ENify(player.space_max_timesm);
+    player.space_max_timesm = ENify(player.space_max_timesm);*/
     //player.bh_i_times = ENify(player.bh_i_times);
     for (let i = 0; i< 8;  i++){
         player.dimensions_multi[i] = ENify(player.dimensions_multi[i])
@@ -441,7 +442,28 @@ function redeem(){
     $("[data-ok-modal]").text("兑换");
     modal.showModal();
 }
+function randomGain(a){
+    result = Math.floor(Math.random()*100+1)
+    if (result == 8 || result == 9) {
+        player.volumes = player.volumes.add("1e100");
+        player.no_space_max = true;
 
+    }else if ((a==undefined)){
+        $("#dialog-place").html(`
+        <p>没抽到...</p>
+        <p>惩罚: 所有维度被开10次方</p>
+        `)
+        closeButton.setAttribute("onclick",`
+        modal.close();
+        `);
+        for (i=0 ;  i<8; i++){
+            player.dimensions[i] = player.dimensions[i].pow(0.1)
+
+        }
+        $("[data-ok-modal]").text("确定");
+        modal.showModal();
+    }
+}
 function load() {
     //window.template = $("#app").html();
 	hard_reset();
@@ -450,7 +472,7 @@ function load() {
 		Object.assign(player, loadplayer)
 	}
     fix()
-    main_option_ABCD.set_list([$("#page1")[0],$("#page2")[0],$("#page3")[0]]);
+    main_option_ABCD.set_list([$("#page1")[0],$("#page2")[0],$("#page3")[0],$("#page4")[0]]);
     suboption_ABCD.set_list([$("#page2_save")[0],$("#page2_about")[0],$("#page2_visual")[0]]);
     
     setInterval(loop,fastly ? 1 : 1000/30);

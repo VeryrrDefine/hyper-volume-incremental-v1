@@ -236,6 +236,18 @@ button {
   color: white;
   display: inline-block;
 }
+.achive {
+  cursor: pointer;
+  font-size: 12px;
+  text-decoration: none;
+  border: 1px solid #777;
+  background: #333;
+  font-family: 'Courier New', sans-serif;
+  color: white;
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+}
 input {
   cursor: pointer;
   font-size: 12px;
