@@ -238,7 +238,7 @@ button {
 }
 .achive {
   cursor: pointer;
-  font-size: 12px;
+  font-size: 10px;
   text-decoration: none;
   border: 1px solid #777;
   background: #333;
@@ -247,6 +247,7 @@ button {
   display: inline-block;
   width: 70px;
   height: 70px;
+  text-align: center;
 }
 input {
   cursor: pointer;

@@ -1,3 +1,4 @@
+VERSION = "v1.0.0-pre8"
 function reverseString(input) {
     var charArray = input.split('');
     charArray.reverse();
@@ -101,11 +102,10 @@ a.onchange = () => {
     fr.readAsText(a.files[0]);
     }   
 }
-fastly = 0
+fastly = location.host=="veryrrdefine.github.io"? 0 : 1
 
 E = ExpantaNum
 function ENify(a){
-    console.log(a)
     b = new ExpantaNum(0);
     if (a !== undefined){
         b.array = a.array;
@@ -121,12 +121,7 @@ class ABCD{
 
     }
 	set_list(a){
-		/*
-		example : [
-			document.querySelectorAll(".a")[0],document.querySelectorAll("#b")[0]
-		]
-		when execute show(1), id aaa show, other hide
-		*/
+		
 		this.elementlist=a;
         this.show(1)
 
@@ -134,7 +129,6 @@ class ABCD{
 	show(x){
 		let q = x-1
 		for (const l in this.elementlist){
-            console.log(this.elementlist[l])
 			if (l==q){
 				this.elementlist[l].style.display="block";
 			}else{
@@ -151,8 +145,8 @@ class ABCD{
 function switchpage(page) {
     player.curpage = page
 }
-function display_volumes(a){
-    
+function display_volumes(a,b){
+    return (()=>{
     if (player.display_mode==0){
         if (a.lt("1e4")){
             return `${format(a,3,false)} mm<sup>4</sup>`
@@ -169,61 +163,138 @@ function display_volumes(a){
         }else if (a.lt("1e36")){
             return `${format(a.div("1e24"),3,false)} km<sup>4</sup>`
         }else if (a.lt("1e48")){
-            return `${format(a.div("1e36"),3,false)} Megametre<sup>4</sup>`
+            return `${format(a.div("1e36"),3,false)} <abbr title="Megametre = 1.000e6 m">Mm</abbr><sup>4</sup>`
         }else if (a.lt("1e60")){
-            return `${format(a.div("1e48"),3,false)} <abbr title="Gigametre = 1.0000e9 m">Gm</abbr><sup>4</sup>`
-        }else if (a.lt("1e63")){
-            return `${format(a.div("1e60"),3,false)} <abbr title="Terametre = 1.0000e12 m">Tm</abbr><sup>4</sup>`
-        }else if (a.lt("1e7777777")){
-            return `${format(a.div("7.98930938444449e63"),5,false)} ly<sup>4</sup>`
+            return `${format(a.div("1e48"),3,false)} <abbr title="Gigametre = 1.000e9 m">Gm</abbr><sup>4</sup>`
+        }else if (a.lt("7.98930938444449e63")){
+            return `${format(a.div("1e60"),3,false)} <abbr title="Terametre = 1.000e12 m">Tm</abbr><sup>4</sup>`
+        }else if (a.lt("9.041324011762711e89")){
+            return `${format(a.div("7.98930938444449e63"),3,false)} ly<sup>4</sup>`
+        }else if (a.lt("9.041324011762711e101")){
+            return `${format(a.div("9.041324011762711e89"),3,false)} kpc<sup>4</sup>`
+        }else if (a.lt("9.041324011762711e113")){
+            return `${format(a.div("9.041324011762711e101"),3,false)} Mpc<sup>4</sup>`
+        }else if (a.lt("9.041324011762711e125")){
+            return `${format(a.div("9.041324011762711e113"),3,false)} Gpc<sup>4</sup>`
+        }else{
+            return `${format(a.div("9.041324011762711e125"),3,false)} Tpc<sup>4</sup>`
         }
     }
     if (player.display_mode == 1){
         return `${formatWhole(a)} mm<sup>4</sup>`
     }
-    if (player.display_mode == 3){
-        return `e${format(a.logarithm(10),4,true)} mm<sup>4</sup>`
-    }
     if (player.display_mode==2){
-        return `${formatWhole(a)} mm<sup>4</sup>`
+        return `${to_offsets(a)} mm<sup>4</sup>`
+    }
+    if (player.display_mode == 3){
+        return `e${format(a.logarithm(10),3,true)} mm<sup>4</sup>`
+    }
+    if (player.display_mode==4){
+        return `${to_offsets(a.div("1e12"))} m<sup>4</sup>`
+    }})().replaceAll("<sup>4</sup>",b?"^4":"<sup>4</sup>")
+}
+function to_offsets(a){
+    return `${format(a.div(E(1000).pow(E.floor(a.logarithm(1000)))),3,true)} ${offsets_1[E.floor(a.logarithm(1000))]}`
+}
+const offsets_1=[
+    "","K","M","B","T","Qa","Qi","Sx","Sp","Oc","No","Dc",
+    "UDc","DDc","TDc","QaDc", "QiDc","SxDc","SpDc","OcDc", "NoDc","Vg",
+    "UVg","DVg","TVg","QaVg", "QiVg","SxVg","SpVg","OcVg", "NoVg","Tg",
+    "UTg","DTg","TTg","QaTg", "QiTg","SxTg","SpTg","OcTg", "NoTg","Vg<sup>3</sup>",
+    
+]
+const LY = E("7.98930938444449e63")
+function gainMM5(){
+    if (player.volumes.gte("1e100")){
+        player.mm5_volumes = player.mm5_volumes.add(E.floor(player.volumes.div("1e99").logarithm("10")))
+        player.upgrades[0]=0;
+        player.dimensions_buymulti[0] = E(1.8)
+        player.volumes = E(10);
+        reset_dimensions();
+
+
     }
 }
-
+function buyAll(){
+    buydim(1);
+    buydim(2);
+    buydim(3);
+    buydim(4);
+    buydim(5);
+    buydim(6);
+    buydim(7);
+    buydim(8);
+}
+function buyUpgrade(a){
+    switch(a){
+        case 1:
+            if (player.volumes.gte(LY) && !player.upgrades[0]){
+                player.volumes = player.volumes.sub(LY);
+                player.upgrades[0] = 1;
+                player.dimensions_buymulti[0]=player.upgrades[3] ? E(7) : E(2.5);
+            }
+            break;
+        case 2:
+            if (player.mm5_volumes.gte(1) && !player.upgrades[1]){
+                player.mm5_volumes = player.mm5_volumes.sub(1);
+                player.upgrades[1] = 1;
+                player.dimensions_buymulti[1]=E(2.5);
+            }
+            break;
+        case 3:
+            if (player.mm5_volumes.gte(10) && !player.upgrades[2]){
+                player.mm5_volumes = player.mm5_volumes.sub(10);
+                player.upgrades[2] = 1;
+                player.dimensions_buymulti[2]=E(3);
+            }
+            break;
+        case 114514:
+            if (player.mm5_volumes.gte("1e3") && !player.upgrades[3]){
+                player.mm5_volumes = player.mm5_volumes.sub("1e3");
+                player.upgrades[3] = 1;
+                player.dimensions_buymulti[0]=E(7);
+            }
+            break;
+        case 114515:
+            if (player.mm5_volumes.gte("1e4") && !player.upgrades[4]){
+                player.mm5_volumes = player.mm5_volumes.sub("1e4");
+                player.upgrades[4] = 1;
+                player.dimensions_buymulti[0]=E(10);
+            }
+            break;
+    }
+    
+}
 function maxDimensions(){
     for (let i = 1; i< 9;  i++){
         buydim(i,1);
     }
 }
-function breakSpaceMax(){
-    if (player.volumes.gt("1.797e308") && !player.no_space_max){
-        reset_dimensions()
-        player.volumes = E("1e224");
-        player.no_space_max = true
-    }
-}
 function display(){
+    document.title=`多维体积增量: 你有 ${display_volumes(player.volumes,1)}体积`
+    $("#_5-dimension-volumes").html(`${format(player.mm5_volumes,3,0)}`)
+    $("#notice").html(`
+    每秒增加 ${display_volumes(player.dimensions[DIMENSIONS_POINTS][0].mul(player.dimensions[DIMENSIONS_MULTI][0]))}体积<br>
+    每分钟增加 ${display_volumes(player.dimensions[DIMENSIONS_POINTS][0].mul(player.dimensions[DIMENSIONS_MULTI][0]).mul(60))}体积<br>
+    每小时增加 ${display_volumes(player.dimensions[DIMENSIONS_POINTS][0].mul(player.dimensions[DIMENSIONS_MULTI][0]).mul(3600))}体积<br>
     
-    
+    `)
     $(".pts-dis").html(display_volumes(player.volumes))
-   // $("#allmaxButton")[player.bh_i_times.gt(0) ? "show" : "hide"]()
-   //$("#space_maxt")[(!player.no_space_max)? "show" : "hide"]()
-   /* $("#space_max").html(display_volumes(player.space_max))
-    //$("#bhi_times").html(`(${formatWhole(player.bh_i_times)}/5)`)
-    $("#spacemax_levelup_need").html(`(${formatWhole(player.space_max_times)}/${player.space_max_timesm} 每次${display_volumes(player.space_max_need)})`)
-   */
+   
     for (let i = 0; i< 8;  i++){
-        $(`#d${i+1}`).text(formatWhole(player.dimensions[i]));
-        if (player.dimensions[0].gte("1e10")){
-            $(`#d1`).html(formatWhole(player.dimensions[0]) + "<span class='soft'>(受软上限限制)</span>");
-        }else{
-            $(`#d1`).text(formatWhole(player.dimensions[0]));
+        $(`#d${i+1}`).text(formatWhole(player.dimensions[DIMENSIONS_POINTS][i]));
+        $(`#dm${i+1}`).text(formatWhole(player.dimensions[DIMENSIONS_MULTI][i]));
+        if ($(`#dbtn${i+1}`).html() != `价格：<span style="color: ${player.volumes.gte(player.dimensions[DIMENSIONS_COST][i]) ? "#00ff00" : "white"}">` +(display_volumes(player.dimensions[DIMENSIONS_COST][i])) + "</span>"){
+            $(`#dbtn${i+1}`).html(`价格：<span style="color: ${player.volumes.gte(player.dimensions[DIMENSIONS_COST][i]) ? "#00ff00" : "white"}">` +(display_volumes(player.dimensions[DIMENSIONS_COST][i]))) + "</span>";
         }
-        $(`#dm${i+1}`).text(formatWhole(player.dimensions_multi[i]));
-        if ($(`#dbtn${i+1}`).html() != `价格：<span style="color: ${player.volumes.gte(player.dimensions_cost[i]) ? "#00ff00" : "white"}">` +(display_volumes(player.dimensions_cost[i])) + "</span>"){
-            $(`#dbtn${i+1}`).html(`价格：<span style="color: ${player.volumes.gte(player.dimensions_cost[i]) ? "#00ff00" : "white"}">` +(display_volumes(player.dimensions_cost[i]))) + "</span>";
-        }
-        player.dimensions_multi[i] = player.dimensions_buymulti[i].pow(player.dimensions_bought[i]);
+        player.dimensions[DIMENSIONS_MULTI][i] = player.dimensions_buymulti[i].pow(player.dimensions[DIMENSIONS_BOUGHT][i]);
 
+    }
+    for (const index in format4_numbers_tags){
+        format4_numbers_tags[index].innerHTML = display_volumes(E(format4_numbers_orig[index]));
+    }
+    for (const index in format5_numbers_tags){
+        format5_numbers_tags[index].innerHTML = format(format5_numbers_orig[index],3,0)+" mm<sup>5</sup>";
     }
 }
 class CheatError extends Error{
@@ -233,10 +304,10 @@ class CheatError extends Error{
       }
 }
 function buydim(dim,max2){
-    if (player.volumes.gte(player.dimensions_cost[dim-1])){
-        player.volumes = player.volumes.sub(player.dimensions_cost[dim-1])
-        player.dimensions_bought[dim-1] = player.dimensions_bought[dim-1].add(1);
-        player.dimensions[dim-1] = player.dimensions[dim-1].add(10);
+    if (player.volumes.gte(player.dimensions[DIMENSIONS_COST][dim-1])){
+        player.volumes = player.volumes.sub(player.dimensions[DIMENSIONS_COST][dim-1])
+        player.dimensions[DIMENSIONS_BOUGHT][dim-1] = player.dimensions[DIMENSIONS_BOUGHT][dim-1].add(1);
+        player.dimensions[DIMENSIONS_POINTS][dim-1] = player.dimensions[DIMENSIONS_POINTS][dim-1].add(10);
         return true
     }
     return false
@@ -246,77 +317,54 @@ function buydim(dim,max2){
 function calculate_dim(){
     for (let i = 0; i < 7; i++) {
         if (i != 0){
-            player.dimensions[i] = player.dimensions[i].add(player.dimensions[i+1].mul(player.dimensions_multi[i+1]).div(30));
+            player.dimensions[DIMENSIONS_POINTS][i] = player.dimensions[DIMENSIONS_POINTS][i].add(player.dimensions[DIMENSIONS_POINTS][i+1].mul(player.dimensions[DIMENSIONS_MULTI][i+1]).div(30));
         }
         if (i==0){
-            if (player.dimensions[0].gte("1e10")){
-                player.dimensions[0] = player.dimensions[0].add(player.dimensions[1].mul(player.dimensions_multi[1]).div(3000));
+            player.dimensions[DIMENSIONS_POINTS][0] = player.dimensions[DIMENSIONS_POINTS][0].add(player.dimensions[DIMENSIONS_POINTS][1].mul(player.dimensions[DIMENSIONS_MULTI][1]).div(30));
 
-            }else{
-                player.dimensions[0] = player.dimensions[0].add(player.dimensions[1].mul(player.dimensions_multi[1]).div(30));
-
-            }
         }
     }
 }
 function reset_dimensions(){
     Object.assign(player,
         {
-            dimensions: [ // 买要几point
-                E(0), E(0), E(0), E(0), E(0), E(0), E(0), E(0)
-            ],
-            dimensions_multi: [
-                E(1), E(1), E(1), E(1), E(1), E(1), E(1), E(1)
-            ],
-            dimensions_bought: [ // 买了几次
-                E(0), E(0), E(0), E(0), E(0), E(0), E(0), E(0), 
-            ],
-            dimensions_cost: [ 
-                E(10), E(100), E(1000), E(1e4), E(1e5), E(1e6), E(1e7), E(1e8)
-            ],
-            dimensions_scale: [
-                E(10), E(100), E(1000), E(1e4), E(1e5), E(1e6), E(1e7), E(1e8)
+            dimensions:[
+            [E(0),E(0),E(0),E(0),E(0),E(0),E(0),E(0)], //dimensions
+            [E(1),E(1),E(1),E(1),E(1),E(1),E(1),E(1)], //dimensions_multi
+            [E(0),E(0),E(0),E(0),E(0),E(0),E(0),E(0)], // dimensions_bought
+            [E(10), E(100), E(1000), E(1e4), E(1e5), E(1e6), E(1e7), E(1e8)],// dim_cost
+            [E(10), E(100), E(1000), E(1e4), E(1e5), E(1e6), E(1e7), E(1e8)],// dim_scale
             ]
         }
     )
 }
-
+const DIMENSIONS_POINTS = 0;
+const DIMENSIONS_MULTI = 1;
+const DIMENSIONS_BOUGHT = 2;
+const DIMENSIONS_COST = 3;
+const DIMENSIONS_SCALE = 4;
 function hard_reset(){
     player = {
         volumes: E(10),
+        mm5_volumes: E(0),
         achive: new Array(200),
-        /*space_max: E("1e6"),
-        space_max_level: E(0),
-        space_max_need: E(1e6),
-        space_max_times: E(0),
-        space_max_timesm: E(3),*/
+        version: "v1.0.0-pre7",
         curpage: 1,
         display_mode: 0,
-        no_space_max: false,
         notice: "",
         language: "en",
         upgrades: [
             0,0,0,0,0,0,0,0
         ],
-        //blackhole_shield: false,
         dimensions_buymulti: [ 
-            E(1.5), E(1.5), E(1.5), E(1.5), E(1.5), E(1.5), E(1.5), E(1.5)
+            E(1.8), E(1.8), E(1.8), E(1.8), E(1.8), E(1.8), E(1.8), E(1.8)
         ],
-        //blackhole_invasion: false,
-       // bh_i_times : EN(0)
+
     }
     reset_dimensions()
 }
 var settings = {
-}/*
-function upgrade_space_max(){
-    if (player.volumes.gte(player.space_max_need)){
-        player.space_max_times = player.space_max_times.add(1);
-        reset_dimensions();
-        player.volumes = E(10);
-
-    }
-}*/
+}
 function save() {
 	localStorage.setItem("volume-incremental", JSON.stringify(player))
 }
@@ -336,53 +384,14 @@ function transformToE(object) {
     }
 }
 function loop() {
-    player.volumes = player.volumes.add(player.dimensions[0].mul(player.dimensions_multi[0]).div(30));
+    player.volumes = player.volumes.add(player.dimensions[DIMENSIONS_POINTS][0].mul(player.dimensions[DIMENSIONS_MULTI][0]).div(30));
 
-    /*if (player.volumes.gt(player.space_max) && !player.no_space_max){
-        player.volumes = player.space_max
-        
-    }
-    $("#space_maxt")[player.no_space_max ? "hide" : "show"]();*/
-    /*if (player.volumes.gte(E("1.414092421672706e36")) && player.volumes.lt(E("1.414092421672706e39")) && player.blackhole_invasion==0){
-        $("#notice").html("总觉得哪里不对劲...")
-        $("body").addClass("corrupted")
-    }
-
-    if (player.volumes.gte(E("1.414092421672706e39")) && player.blackhole_invasion==0){
-        
-        player.blackhole_invasion = 1
-    }
-    if (player.blackhole_invasion == 1 && player.blackhole_shield==0){
-        $("#notice").html("我嘞个大纲啊 黑洞来了！！！！！<br>DEBUFF: 维度增加的体积无效，且体积每秒减少"+display_volumes(E(1e37*30)))
-        player.volumes = player.volumes.sub(E("1e37"))
-        if (player.volumes.lt(0)){
-            player.dimensions_buymulti[0] = player.dimensions_buymulti[0].mul(1.01);
-            reset_dimensions();
-            player.volumes=E(10);
-            player.space_max = E(1e6);
-            player.space_max_level = E(0);
-            player.space_max_need =  E(1e6);
-            player.space_max_times =  E(0);
-            player.space_max_timesm =  E(2);
-            player.bh_i_times = player.bh_i_times.add(1);
-            player.blackhole_invasion = 0
-            save();
-            alert("你之前的进度被黑洞吞噬了, 不过,你获得了一个永久的buff:<br>维度1加成: x1.01")
-            location.href = location.href
-        }
-    }*/
+    
     calculate_dim()
-    /*if (player.space_max_times.eq(player.space_max_timesm)){
-        player.space_max_level = player.space_max_level.add(1);
-        player.space_max_times = E(0)
-        player.space_max = E("1e6").mul(E("1e4").pow(player.space_max_level))
-        player.space_max_need = E("1e6").mul(E("1e4").pow(player.space_max_level))
-        reset_dimensions()
-        
-    }*/
+    
     for (let i = 0; i< 8;  i++){
-        player.dimensions_multi[i] = player.dimensions_buymulti[i].pow(player.dimensions_bought[i]);
-        player.dimensions_cost[i] = player.dimensions_scale[i].pow(player.dimensions_bought[i].add(1));
+        player.dimensions[DIMENSIONS_MULTI][i] = player.dimensions_buymulti[i].pow(player.dimensions[DIMENSIONS_BOUGHT][i]);
+        player.dimensions[DIMENSIONS_COST][i] = player.dimensions[DIMENSIONS_SCALE][i].pow(player.dimensions[DIMENSIONS_BOUGHT][i].add(1));
     }
     /*if (player.blackhole_invasion==2){
         player.space_max_timesm =  E(1);
@@ -392,18 +401,14 @@ function loop() {
 }
 function fix(){
     player.volumes = ENify(player.volumes);
-   /* player.space_max = ENify(player.space_max);
-    player.space_max_level = ENify(player.space_max_level);
-    player.space_max_need = ENify(player.space_max_need);
-    player.space_max_times = ENify(player.space_max_times);
-    player.space_max_timesm = ENify(player.space_max_timesm);*/
-    //player.bh_i_times = ENify(player.bh_i_times);
+    player.mm5_volumes = ENify(player.mm5_volumes);
+   
     for (let i = 0; i< 8;  i++){
-        player.dimensions_multi[i] = ENify(player.dimensions_multi[i])
+        player.dimensions[DIMENSIONS_MULTI][i] = ENify(player.dimensions[DIMENSIONS_MULTI][i])
         player.dimensions_buymulti[i] = ENify(player.dimensions_buymulti[i])
-        player.dimensions_bought[i] = ENify(player.dimensions_bought[i])
-        player.dimensions[i] = ENify(player.dimensions[i])
-        player.dimensions_scale[i] = ENify(player.dimensions_scale[i])
+        player.dimensions[DIMENSIONS_BOUGHT][i] = ENify(player.dimensions[DIMENSIONS_BOUGHT][i])
+        player.dimensions[DIMENSIONS_POINTS][i] = ENify(player.dimensions[DIMENSIONS_POINTS][i])
+        player.dimensions[DIMENSIONS_SCALE][i] = ENify(player.dimensions[DIMENSIONS_SCALE][i])
 
     }
 }
@@ -413,8 +418,9 @@ function changeDisplayMode(){
     <select id="select-display-mode">
         <option value=\"0\">重要单位</option>
         <option value=\"1\">总是以mm^4为单位</option> 
-        <option value=\"2\">总是以mm^4为单位</option>
+        <option value=\"2\">总是以mm^4为单位，使用K,M,B,T,...单位</option>
         <option value=\"3\">对数</option>
+        <option value=\"4\">总是以m^4为单位，使用K,M,B,T,...单位</option>
     </select>
     `)
     closeButton.setAttribute("onclick",`
@@ -457,7 +463,7 @@ function randomGain(a){
         modal.close();
         `);
         for (i=0 ;  i<8; i++){
-            player.dimensions[i] = player.dimensions[i].pow(0.1)
+            player.dimensions[DIMENSIONS_POINTS][i] = player.dimensions[DIMENSIONS_POINTS][i].pow(0.1)
 
         }
         $("[data-ok-modal]").text("确定");
@@ -465,7 +471,17 @@ function randomGain(a){
     }
 }
 function load() {
-    //window.template = $("#app").html();
+    window.format4_numbers_tags = document.querySelectorAll("[to-format-4]");
+    window.format4_numbers_orig = []
+    for (const tags of format4_numbers_tags){
+        format4_numbers_orig.push(tags.innerHTML);
+    }
+    window.format5_numbers_tags = document.querySelectorAll("[to-format-5]");
+    window.format5_numbers_orig = []
+    for (const tags of format5_numbers_tags){
+        format5_numbers_orig.push(tags.innerHTML);
+    }
+
 	hard_reset();
 	let loadplayer = JSON.parse(localStorage.getItem("volume-incremental"));
 	if (loadplayer != null) {
@@ -478,5 +494,9 @@ function load() {
     setInterval(loop,fastly ? 1 : 1000/30);
     window.closeButton = document.querySelector("[data-ok-modal]")
     window.modal = document.querySelector("[data-modal]")
+    $("#music")[0].loop = true;
+    $("#music")[0].volume = 0.5;
+    
+    $("#music")[0].muted = true;
     throw new ReferenceError("Cheater is not defined");
 }

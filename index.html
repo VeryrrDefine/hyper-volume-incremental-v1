@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>超体积增量</title>
+    <title>多维体积增量</title>
     <link rel="stylesheet" href="style.css">
     
     <script src="ExpantaNum.js"></script>
@@ -12,8 +12,9 @@
     <script src="format_expantanum.js"></script>
 </head>
 <body onload="load()" id="app">
+    <audio src="" id="music"></audio>
     <aside class="main-sidebar">
-        <div class="titl">超体积增量</div>
+        <div class="titl">多维体积增量</div>
         <menu class="menu">
             <li class="nav-item actived" onclick="main_option_ABCD.show(1)">体积</li>
             <li class="nav-item actived" onclick="main_option_ABCD.show(3)">升级</li>
@@ -47,9 +48,9 @@
     </div>
     
     <div id="page1" align="center">
-        <p><button class="btn" onclick="(function(){if(player.volumes.lt(10)){player.volumes=E(10)}else{window.open('https://www.bilibili.com/video/BV1GJ411x7h7')}})()">出bug了？点击这个按钮</button></p>
-        
+        <button class="btn" onclick="(function(){if(player.volumes.lt(10)){player.volumes=E(10)}else{window.open('https://www.bilibili.com/video/BV1GJ411x7h7')}})()">出bug了？点击这个按钮</button>
         <p id="notice"></p>
+        <div><button class="btn" onclick="gainMM5()">达到<span to-format-4>1e100</span>以获取1 mm<sup>5</sup>体积</button></div>
         <!-- <div id="space_maxt">
 
             在 <span id="space_max"></span> 体积之后， 体积的增加会受到硬上限<button class="btn" onclick="upgrade_space_max()">提高硬上限位置 <span id="spacemax_levelup_need">(0/3)</span></button>
@@ -102,10 +103,15 @@
         </div>
         
         <div align="center" id="page2_about">
-            当前版本: v1.0.0-pre7<br>
+            当前版本: v1.0.0<br>
+            当前Endgame: <span to-format-4>1e110</span><br>
             <del>拿0100000000a7的游戏的CSS改的</del><br>
             <del>绝对没有</del><br>
             <h1>-----更新日志-----</h1>
+            <div>
+                <h3>v1.0.0</h3>
+                <p>添加第五维度</p>
+            </div>
             <div>
                 <h3>v1.0.0-pre7</h3>
                 <p>删除部分文件</p>
@@ -131,19 +137,30 @@
     </div>
     <div id="page3" align="center">
         <div>
-            你有0 mm<sup>5</sup>5维体积<br>
+            <div><button class="btn" onclick="gainMM6()">达到1.000e200 mm<sup>5</sup>以获取1 mm<sup>6</sup>体积</button></div>
+            <div><button class="btn" onclick="gainMM7()">达到1.000e300 mm<sup>6</sup>以获取1 mm<sup>7</sup>体积</button></div>
+            <div><button class="btn" onclick="gainMM8()">达到1.000e400 mm<sup>7</sup>以获取1 mm<sup>8</sup>体积</button></div>
+            你有<span id="_5-dimension-volumes">0</span> mm<sup>5</sup>5维体积<br>
             你有0 mm<sup>6</sup>6维体积<br>
             你有0 mm<sup>7</sup>7维体积<br>
             你有0 mm<sup>8</sup>8维体积<br>
-            <span>升级：移除4维体积的存储硬上限</span>
-            <button class="btn" onclick="buyUpgrade()">价格：1 ly<sup>4</sup></button><br>
 
-            <span>升级：将维度1的软上限推迟9e15%</span>
-            <button class="btn" onclick="buyUpgrade()">价格：1,000 mm<sup>5</sup></button><br>
+            <span>升级1：维度1 倍数增加</span>
+            <button class="btn" onclick="buyUpgrade(1)">价格：<span to-format-4>7.98930938444449e63</span></button><br>
+
+            <span>升级2：维度2 倍数增加</span>
+            <button class="btn" onclick="buyUpgrade(2)">价格：<span to-format-5>1</span></button><br>
+
+            <span>升级3：维度3 倍数增加</span>
+            <button class="btn" onclick="buyUpgrade(3)">价格：<span to-format-5>10</span></button><br>
+
+            <!-- <span>升级<span class="corrupted">???：Super Boosting!</span></span>
+            <button class="btn corrupted" onclick="buyUpgrade(114514)">价格：???</button><br>
+
+            <span>升级<span class="corrupted">???：Hyper Boosting!</span></span>
+            <button class="btn corrupted" onclick="buyUpgrade(114515)">价格：???</button><br>-->
 
 
-            <span>升级：增加5维体积收益</span>
-            <button class="btn" onclick="buyUpgrade()">价格：10,000 mm<sup>6</sup></button><br>
         </div>
     </div>
     <div id="page4" align="center">
@@ -154,9 +171,16 @@
             <table>
                 <tr>
                     <td>
-                        <div class="achive">
-                            啊米诺斯
-                        </div>
+                        <button class="achive">
+                            在哪里开始?<br>
+                            达到10
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            1 四次方千米<br>
+                            达到1e24 mm<sup>4</sup>
+                        </button>
                     </td>
                 </tr>
             </table>
