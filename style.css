@@ -37,9 +37,9 @@ body{
   padding-left: 0px;
   top: 0px;
   width: 83.3vw;
+  margin-left: 12.7vw;
   z-index: 1;
   border: 1px;
-  margin-left: 12.7vw;
 }
 .nav-item{
   display: block;
@@ -56,7 +56,8 @@ body{
   background-color: #555;
 }
 .news{
-  margin:0px;
+  padding-left: 0px;
+  top: 0px;
   text-decoration: none;
   border: 1px solid #777;
   background: #333;
@@ -236,6 +237,19 @@ button {
   color: white;
   display: inline-block;
 }
+.newsContent {
+    white-space: nowrap;
+}
+.news { /*滚动新闻*/
+  color: white;
+  width: 90%;
+  top: 0px;
+  height: 20px;
+  background-color: #171717;
+  overflow: hidden;
+  display: flex;  
+  align-items: center;
+}
 .achive {
   cursor: pointer;
   font-size: 10px;
@@ -244,6 +258,18 @@ button {
   background: #333;
   font-family: 'Courier New', sans-serif;
   color: white;
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+  text-align: center;
+}
+.achive-secret {
+  cursor: pointer;
+  font-size: 10px;
+  text-decoration: none;
+  border: 1px solid #777;
+  background: #333;
+  font-family: 'Courier New', sans-serif;
   display: inline-block;
   width: 70px;
   height: 70px;

@@ -1,4 +1,4 @@
-VERSION = "v1.0.0-pre8"
+VERSION = 9
 function reverseString(input) {
     var charArray = input.split('');
     charArray.reverse();
@@ -225,6 +225,16 @@ function buyAll(){
     buydim(7);
     buydim(8);
 }
+function getUndulatingColor(period = Math.sqrt(760)) {
+    let t = new Date().getTime()
+    let a = Math.sin(t / 1e3 / period * 2 * Math.PI + 0)
+    let b = Math.sin(t / 1e3 / period * 2 * Math.PI + 2)
+    let c = Math.sin(t / 1e3 / period * 2 * Math.PI + 4)
+    a = convertToB16(Math.floor(a * 128) + 128)
+    b = convertToB16(Math.floor(b * 128) + 128)
+    c = convertToB16(Math.floor(c * 128) + 128)
+    return "#" + String(a) + String(b) + String(c)
+  }
 function buyUpgrade(a){
     switch(a){
         case 1:
@@ -270,6 +280,14 @@ function maxDimensions(){
         buydim(i,1);
     }
 }
+const secret_achives=[2];
+const secret_achives_information=["玩ba玩的"];
+
+function convertToB16(n) {
+  let codes = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F']
+  let x = n % 16
+  return codes[(n - x) / 16] + codes[x]
+}
 function display(){
     document.title=`多维体积增量: 你有 ${display_volumes(player.volumes,1)}体积`
     $("#_5-dimension-volumes").html(`${format(player.mm5_volumes,3,0)}`)
@@ -278,7 +296,26 @@ function display(){
     每分钟增加 ${display_volumes(player.dimensions[DIMENSIONS_POINTS][0].mul(player.dimensions[DIMENSIONS_MULTI][0]).mul(60))}体积<br>
     每小时增加 ${display_volumes(player.dimensions[DIMENSIONS_POINTS][0].mul(player.dimensions[DIMENSIONS_MULTI][0]).mul(3600))}体积<br>
     
-    `)
+    `)                                  /*hang            lie           button  */
+    //$("#achives").children().children()[0   ].children[ 0   ].children[ 0   ]
+    for (const index in player.achive){
+        if (index >= 20){
+            break;
+        }else{
+            hang = Math.floor(index/10);
+            lie = index%10
+            let btn = $("#achives").children().children()[hang].children[lie].children[0];
+            if (secret_achives.indexOf(Number(index)) != -1){
+                btn.style.color = getUndulatingColor();
+            }
+            if (player.achive[index]){
+                btn.style.background="#00dd00";
+                if (secret_achives.indexOf(Number(index)) != -1){
+                    btn.innerHTML = secret_achives_information[secret_achives.indexOf(Number(index))]
+                }
+            }
+        }
+    }
     $(".pts-dis").html(display_volumes(player.volumes))
    
     for (let i = 0; i< 8;  i++){
@@ -333,7 +370,7 @@ function reset_dimensions(){
             [E(1),E(1),E(1),E(1),E(1),E(1),E(1),E(1)], //dimensions_multi
             [E(0),E(0),E(0),E(0),E(0),E(0),E(0),E(0)], // dimensions_bought
             [E(10), E(100), E(1000), E(1e4), E(1e5), E(1e6), E(1e7), E(1e8)],// dim_cost
-            [E(10), E(100), E(1000), E(1e4), E(1e5), E(1e6), E(1e7), E(1e8)],// dim_scale
+            [E(100), E(1000), E(10000), E(10e4), E(10e5), E(10e6), E(10e7), E(10e8)],// dim_scale
             ]
         }
     )
@@ -345,7 +382,7 @@ const DIMENSIONS_COST = 3;
 const DIMENSIONS_SCALE = 4;
 function hard_reset(){
     player = {
-        volumes: E(10),
+        volumes: E(100),
         mm5_volumes: E(0),
         achive: new Array(200),
         version: "v1.0.0-pre7",
@@ -381,6 +418,13 @@ function transformToE(object) {
             transformToE(object[key]);
             console.debug(object[key],"is a object")
         }
+    }
+}
+function calc_cost(dimid){
+    switch (dimid){
+        case 1:
+            return player.DIMENSIONS_COST
+            break;
     }
 }
 function loop() {
@@ -431,7 +475,7 @@ function changeDisplayMode(){
     modal.showModal();
 }
 function getAchievement(achi_id){
-
+    player.achive[achi_id] = 1;
 }
 function redeem(){
     $("#dialog-place").html(`
@@ -440,8 +484,8 @@ function redeem(){
     `)
     closeButton.setAttribute("onclick",`
     redeem = $("#redeem-text").val();
-    if (redeem == "畜生"){
-        getAchievement(100);
+    if (redeem == "archive"){
+        getAchievement(2);
     }
     modal.close();
     `);
@@ -470,6 +514,9 @@ function randomGain(a){
         modal.showModal();
     }
 }
+function rainbowText(elem, text) {
+    return "<" + elem + " style='color:" + getUndulatingColor() + ";text-shadow:0px 0px 10px;'>" + text + "</" + elem + ">"
+  }
 function load() {
     window.format4_numbers_tags = document.querySelectorAll("[to-format-4]");
     window.format4_numbers_orig = []
@@ -481,7 +528,7 @@ function load() {
     for (const tags of format5_numbers_tags){
         format5_numbers_orig.push(tags.innerHTML);
     }
-
+    
 	hard_reset();
 	let loadplayer = JSON.parse(localStorage.getItem("volume-incremental"));
 	if (loadplayer != null) {
@@ -498,5 +545,10 @@ function load() {
     $("#music")[0].volume = 0.5;
     
     $("#music")[0].muted = true;
-    throw new ReferenceError("Cheater is not defined");
+    if (location.hostname.endsWith("github.io")){
+        $("#saving_cent_btn").attr("disabled","");
+        $("#saving_cent_btn").text("存档银行不可用");
+
+    }
+    throw new ReferenceError(`Cheater has been ${location.hostname.endsWith("github.io") ? "问号" : "啊🤪～啊🤪～啊咦😬啊咦😬啊→啊↑啊↓😨啊😰～嗯💥哎哎🤗哎哦哎嗯😋～哦哎🥳爱爱爱爱爱😍"}ed by me`);
 }
