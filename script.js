@@ -476,7 +476,7 @@ function reset_dimensions(dim_boost_reset){
             [E(1),E(1),E(1),E(1),E(1),E(1),E(1),E(1)], //dimensions_multi
             [E(0),E(0),E(0),E(0),E(0),E(0),E(0),E(0)], // dimensions_bought
             [E(10), E(100), E(1000), E(1e4), E(1e5), E(1e6), E(1e7), E(1e8)],// dim_cost
-            [E(100), E(1000), E(10000), E(10e4), E(10e5), E(10e6), E(10e7), E(10e8)],// dim_scale
+            [E(10), E(100), E(1000), E(1e4), E(1e5), E(1e6), E(1e7), E(1e8)],// dim_scale
             ]
         }
     )
@@ -507,7 +507,7 @@ function hard_reset(){
             0,0,0,0,0,0,0,0
         ],
         dimensions_buymulti: [ 
-            E(1.8), E(1.8), E(1.8), E(1.8), E(1.8), E(1.8), E(1.8), E(1.8)
+            E(2), E(2), E(2), E(2), E(2), E(2), E(2), E(2),
         ],
 
     }
