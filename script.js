@@ -102,8 +102,8 @@ a.onchange = () => {
     fr.readAsText(a.files[0]);
     }   
 }
-fastly = location.host=="veryrrdefine.github.io"? 0 : 1
-
+//fastly = location.host=="veryrrdefine.github.io"? 0 : 1
+fastly=0
 E = ExpantaNum
 function ENify(a){
     b = new ExpantaNum(0);
@@ -191,7 +191,47 @@ function display_volumes(a,b){
     }
     if (player.display_mode==4){
         return `${to_offsets(a.div("1e12"))} m<sup>4</sup>`
-    }})().replaceAll("<sup>4</sup>",b?"^4":"<sup>4</sup>")
+    }
+    if (player.display_mode==5){
+        window.turn_max = 0
+        return `g<sub>${supsubtransfer(parser(a.floor()))}</sub>(3) mm<sup>4</sup>`
+    }
+
+})().replaceAll("<sup>4</sup>",b?"^4":"<sup>4</sup>")
+}
+window.turn_max = 0
+function parser(a){
+	if (a.lt(3)){
+        return formatWhole(a);
+    }else if (a.lt(7625597484987)){
+        if (turn_max >=5){
+            return "..."
+        }
+        let sup = a.logarithm().div(EN(3).logarithm()).floor();
+        let double_w = true;
+        let sup_parsed = parser(sup);
+        turn_max+= 1
+        if (
+            a.sub(EN(3).pow(sup)) < EN(3).pow(sup)
+        ) double_w = false;
+        if (double_w){
+            if (sup.eq(1)){
+                return "ω2" + (a.mod(EN(3).pow(sup)).eq(0) ? "" : "+"+parser(a.mod(EN(3).pow(sup))))
+            }else{
+                return "ω^{" + sup_parsed + "}2" + (!(a.mod(EN(3).pow(sup)).eq()) ? "+"+parser(a.mod(EN(3).pow(sup))) : "")
+
+            }
+        }else{
+            if (sup.eq(1)){
+                return "ω" + (a.mod(EN(3).pow(sup)).eq(0) ? "" : "+"+parser(a.mod(EN(3).pow(sup))))
+            }else{
+                return "ω^{" + sup_parsed + "}" + (!(a.mod(EN(3).pow(sup)).eq()) ? "+"+parser(a.mod(EN(3).pow(sup))) : "")
+
+            }
+        }
+
+    }
+
 }
 function to_offsets(a){
     return `${format(a.div(E(1000).pow(E.floor(a.logarithm(1000)))),3,true)} ${offsets_1[E.floor(a.logarithm(1000))]}`
@@ -205,12 +245,12 @@ const offsets_1=[
 ]
 const LY = E("7.98930938444449e63")
 function gainMM5(){
-    if (player.volumes.gte("1e100")){
-        player.mm5_volumes = player.mm5_volumes.add(E.floor(player.volumes.div("1e99").logarithm("10")))
+    if (player.volumes.gte("1e500")){
+        player.mm5_volumes = player.mm5_volumes.add(E.floor(player.volumes.div("1e499").logarithm("10")))
         player.upgrades[0]=0;
         player.dimensions_buymulti[0] = E(1.8)
         player.volumes = E(10);
-        reset_dimensions();
+        reset_dimensions(1);
 
 
     }
@@ -280,17 +320,69 @@ function maxDimensions(){
         buydim(i,1);
     }
 }
-const secret_achives=[2];
-const secret_achives_information=["玩ba玩的"];
+const secret_achives=[2,3];
+const secret_achives_information=["玩ba玩的","WOW, 第九维度<br>尝试购买第九维度"];
 
 function convertToB16(n) {
   let codes = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F']
   let x = n % 16
   return codes[(n - x) / 16] + codes[x]
 }
+function dimensionBoost(){
+    
+    if (player.dim_boost.eq(0)){
+        if (player.dimensions[DIMENSIONS_POINTS][3].gte(20)){
+            player.dim_boost = player.dim_boost.add(1);
+            reset_dimensions(false)
+            player.volumes=E(100)
+        }
+    }
+    if (player.dim_boost.eq(1)){
+        if (player.dimensions[DIMENSIONS_POINTS][4].gte(20)){
+            player.dim_boost = player.dim_boost.add(1);
+            reset_dimensions(false)
+            player.volumes=E(100)
+        }
+    }
+    if (player.dim_boost.eq(2)){
+        if (player.dimensions[DIMENSIONS_POINTS][5].gte(20)){
+            player.dim_boost = player.dim_boost.add(1);
+            reset_dimensions(false)
+            player.volumes=E(100)
+        }
+    }
+    if (player.dim_boost.eq(3)){
+        if (player.dimensions[DIMENSIONS_POINTS][6].gte(20)){
+            player.dim_boost = player.dim_boost.add(1);
+            reset_dimensions(false)
+            player.volumes=E(100)
+        }
+    }
+    
+}
+function boost_reward_desc(){
+    if (player.dim_boost.eq(0)){
+        return "解锁维度5<br>需要20 维度4"
+    }
+    if (player.dim_boost.eq(1)){
+        return "解锁维度6<br>需要20 维度5"
+    }
+    if (player.dim_boost.eq(2)){
+        return "解锁维度7<br>需要20 维度6"
+    }
+    if (player.dim_boost.eq(3)){
+        return "解锁维度8<br>需要20 维度7"
+    }
+    if (player.dim_boost.eq(4)){
+        return "解锁第二阶维度提升<br>需要20 维度8"
+    }
+}
 function display(){
+
     document.title=`多维体积增量: 你有 ${display_volumes(player.volumes,1)}体积`
+    $("#boost-reward").html(boost_reward_desc());
     $("#_5-dimension-volumes").html(`${format(player.mm5_volumes,3,0)}`)
+    $("#d-boosts").html(formatWhole(player.dim_boost));
     $("#notice").html(`
     每秒增加 ${display_volumes(player.dimensions[DIMENSIONS_POINTS][0].mul(player.dimensions[DIMENSIONS_MULTI][0]))}体积<br>
     每分钟增加 ${display_volumes(player.dimensions[DIMENSIONS_POINTS][0].mul(player.dimensions[DIMENSIONS_MULTI][0]).mul(60))}体积<br>
@@ -306,10 +398,11 @@ function display(){
             lie = index%10
             let btn = $("#achives").children().children()[hang].children[lie].children[0];
             if (secret_achives.indexOf(Number(index)) != -1){
-                btn.style.color = getUndulatingColor();
+                btn.style.color = getUndulatingColor(period=1);
             }
             if (player.achive[index]){
-                btn.style.background="#00dd00";
+                btn.style.background="#00aa00";
+        
                 if (secret_achives.indexOf(Number(index)) != -1){
                     btn.innerHTML = secret_achives_information[secret_achives.indexOf(Number(index))]
                 }
@@ -319,6 +412,11 @@ function display(){
     $(".pts-dis").html(display_volumes(player.volumes))
    
     for (let i = 0; i< 8;  i++){
+        if (player.dim_boost.add(4).lte(i)){
+            $( `#dim${i+1}`).hide()
+        }else{
+            $( `#dim${i+1}`).show()
+        }
         $(`#d${i+1}`).text(formatWhole(player.dimensions[DIMENSIONS_POINTS][i]));
         $(`#dm${i+1}`).text(formatWhole(player.dimensions[DIMENSIONS_MULTI][i]));
         if ($(`#dbtn${i+1}`).html() != `价格：<span style="color: ${player.volumes.gte(player.dimensions[DIMENSIONS_COST][i]) ? "#00ff00" : "white"}">` +(display_volumes(player.dimensions[DIMENSIONS_COST][i])) + "</span>"){
@@ -341,6 +439,14 @@ class CheatError extends Error{
       }
 }
 function buydim(dim,max2){
+    if (dim == 9){
+        player.achive[3] = true;
+        return;
+    }
+    if (dim>= 5 && player.dim_boost.eq(0)) return ;
+    if (dim>= 6 && player.dim_boost.eq(1)) return ;
+    if (dim>= 7 && player.dim_boost.eq(2)) return ;
+    if (dim>= 8 && player.dim_boost.eq(3)) return ;
     if (player.volumes.gte(player.dimensions[DIMENSIONS_COST][dim-1])){
         player.volumes = player.volumes.sub(player.dimensions[DIMENSIONS_COST][dim-1])
         player.dimensions[DIMENSIONS_BOUGHT][dim-1] = player.dimensions[DIMENSIONS_BOUGHT][dim-1].add(1);
@@ -354,15 +460,15 @@ function buydim(dim,max2){
 function calculate_dim(){
     for (let i = 0; i < 7; i++) {
         if (i != 0){
-            player.dimensions[DIMENSIONS_POINTS][i] = player.dimensions[DIMENSIONS_POINTS][i].add(player.dimensions[DIMENSIONS_POINTS][i+1].mul(player.dimensions[DIMENSIONS_MULTI][i+1]).div(30));
+            player.dimensions[DIMENSIONS_POINTS][i] = player.dimensions[DIMENSIONS_POINTS][i].add(player.dimensions[DIMENSIONS_POINTS][i+1].mul(player.dimensions[DIMENSIONS_MULTI][i+1]).div(10).div(30));
         }
         if (i==0){
-            player.dimensions[DIMENSIONS_POINTS][0] = player.dimensions[DIMENSIONS_POINTS][0].add(player.dimensions[DIMENSIONS_POINTS][1].mul(player.dimensions[DIMENSIONS_MULTI][1]).div(30));
+            player.dimensions[DIMENSIONS_POINTS][0] = player.dimensions[DIMENSIONS_POINTS][0].add(player.dimensions[DIMENSIONS_POINTS][1].mul(player.dimensions[DIMENSIONS_MULTI][1]).div(10).div(30));
 
         }
     }
 }
-function reset_dimensions(){
+function reset_dimensions(dim_boost_reset){
     Object.assign(player,
         {
             dimensions:[
@@ -374,6 +480,12 @@ function reset_dimensions(){
             ]
         }
     )
+    if (dim_boost_reset){
+        Object.assign(player,{
+            dim_boost: E(0)
+        }
+        )
+    }
 }
 const DIMENSIONS_POINTS = 0;
 const DIMENSIONS_MULTI = 1;
@@ -390,6 +502,7 @@ function hard_reset(){
         display_mode: 0,
         notice: "",
         language: "en",
+        dim_boost: E(0),
         upgrades: [
             0,0,0,0,0,0,0,0
         ],
@@ -398,7 +511,7 @@ function hard_reset(){
         ],
 
     }
-    reset_dimensions()
+    reset_dimensions(1)
 }
 var settings = {
 }
@@ -429,8 +542,12 @@ function calc_cost(dimid){
 }
 function loop() {
     player.volumes = player.volumes.add(player.dimensions[DIMENSIONS_POINTS][0].mul(player.dimensions[DIMENSIONS_MULTI][0]).div(30));
-
-    
+    if (player.volumes.gt(100)){
+        player.achive[0] = 1
+    }
+    if (player.volumes.gt("1e24")){
+        player.achive[1] = 1
+    }
     calculate_dim()
     
     for (let i = 0; i< 8;  i++){
@@ -446,6 +563,7 @@ function loop() {
 function fix(){
     player.volumes = ENify(player.volumes);
     player.mm5_volumes = ENify(player.mm5_volumes);
+    player.dim_boost = ENify(player.dim_boost);
    
     for (let i = 0; i< 8;  i++){
         player.dimensions[DIMENSIONS_MULTI][i] = ENify(player.dimensions[DIMENSIONS_MULTI][i])
@@ -465,6 +583,7 @@ function changeDisplayMode(){
         <option value=\"2\">总是以mm^4为单位，使用K,M,B,T,...单位</option>
         <option value=\"3\">对数</option>
         <option value=\"4\">总是以m^4为单位，使用K,M,B,T,...单位</option>
+        <option value=\"5\">总是以m^4为单位，使用Slow growing Hierarchy</option>
     </select>
     `)
     closeButton.setAttribute("onclick",`
@@ -544,11 +663,13 @@ function load() {
     $("#music")[0].loop = true;
     $("#music")[0].volume = 0.5;
     
-    $("#music")[0].muted = true;
+    $("#music")[0].muted = false;
     if (location.hostname.endsWith("github.io")){
         $("#saving_cent_btn").attr("disabled","");
         $("#saving_cent_btn").text("存档银行不可用");
 
     }
+    window.news_text = document.getElementById('newsText');
+    setTimeout(updatenews,1000);
     throw new ReferenceError(`Cheater has been ${location.hostname.endsWith("github.io") ? "问号" : "啊🤪～啊🤪～啊咦😬啊咦😬啊→啊↑啊↓😨啊😰～嗯💥哎哎🤗哎哦哎嗯😋～哦哎🥳爱爱爱爱爱😍"}ed by me`);
 }

@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>多维体积增量</title>
     <link rel="stylesheet" href="style.css">
+    <script src="newsticker.js" defer></script>
+    <script src="ExpantaNum.js" defer></script>
+    <script src="script.js" defer></script>
+    <script src="jquery-3.4.1.min.js" defer></script>
+    <script src="format_expantanum.js" defer></script>
+    <script src="sup_transfer.js" defer></script>
     
-    <script src="ExpantaNum.js"></script>
-    <script src="script.js"></script>
-    <script src="jquery-3.4.1.min.js"></script>
-    <script src="format_expantanum.js"></script>
 </head>
 <body onload="load()" id="app">
-    <audio src="" id="music"></audio>
+    <audio src="laodajiadao.mp3" id="music"></audio>
     <aside class="main-sidebar">
         <div class="titl">多维体积增量</div>
         <menu class="menu">
@@ -38,9 +40,9 @@
     transform: translateX(-176px); transition: transform 4.87s linear 0s;">如果你能看懂啊这段文字，说明新闻被人啊🤪～啊🤪～啊咦😬啊咦😬啊→啊↑啊↓😨啊😰～嗯💥哎哎🤗哎哦哎嗯😋～哦哎🥳爱爱爱爱爱😍了</p>
     -->
     <aside class="right">
-        <!-- <div class="news" style="height: 20px; background-color: #333;">
-            <span id="newsText" >来看看这是什么物业 78物业</span><br>
-        </div> -->
+        <div class="news">
+            <p id="newsText" >来看看这是什么物业 78物业</p><br>
+        </div>
     <div align="center" id="pts">
         你有<div class="pts-dis">114514 mm<sup>4</sup></div>4维体积<br>
     </div>
@@ -50,7 +52,7 @@
     <div id="page1" align="center">
         <button class="btn" onclick="(function(){if(player.volumes.lt(10)){player.volumes=E(10)}else{window.open('https://www.bilibili.com/video/BV1GJ411x7h7')}})()">出bug了？点击这个按钮</button>
         <p id="notice"></p>
-        <div><button class="btn" onclick="gainMM5()">达到<span to-format-4>1e100</span>以获取1 mm<sup>5</sup>体积</button></div>
+        <div><button class="btn" onclick="gainMM5()">达到<span to-format-4>1e500</span>以获取1 mm<sup>5</sup>体积</button></div>
         <!-- <div id="space_maxt">
 
             在 <span id="space_max"></span> 体积之后， 体积的增加会受到硬上限<button class="btn" onclick="upgrade_space_max()">提高硬上限位置 <span id="spacemax_levelup_need">(0/3)</span></button>
@@ -87,9 +89,12 @@
         <span>维度8 </span><span id="d8">114514</span><span> x</span><span id="dm8">1919810</span><span> </span>
         <button class="btn" id="dbtn8" onclick="buydim(8,0)">价格：114514</button>
         </div>
+        <div>
+            <button class="btn" onclick="dimensionBoost()">维度提升(<span id="d-boosts">0</span>/???)<br>重置之前的所有内容<br><span id="boost-reward"></span></button>
+        </div>
     </div>
     <div id="page2" align="center">
-        <button id="square_upgrades" onclick="suboption_ABCD.show(1)" class="btn">存档</button>
+        <button id="square_upgrades" onclick="suboption_ABCD.show(1)" class="btn">设置</button>
         <button id="point^1.5" onclick="suboption_ABCD.show(2)" class="btn">关于</button>
         <button id="square_upgrades" onclick="suboption_ABCD.show(3)" class="btn">显示</button>
         <br><br>
@@ -97,19 +102,26 @@
             <button class="btn" onclick="export_copy()">导出</button>
             <button class="btn" onclick="export_file()">导出为文件</button>
             <button class="btn" onclick="import_save()">导入</button>
-            <button class="btn" onclick="import_file()">以文件导入</button>
+            <button class="btn" onclick="import_file()">以文件导入</button><br>
             <button class="btn" onclick="redeem()">兑换码？</button>
             <!--<button class="btn" onclick="window.open('saving_cent.php')" id="saving_cent_btn">存档银行</button>
             --><button class="btn" onclick="formated_hard_reset()"><del>困难地</del>硬重置</button>
-            
+            <button class="btn" onclick='$("#music")[0].muted = 1-$("#music")[0].muted'>音乐</button>
         </div>
         
         <div align="center" id="page2_about">
-            当前版本: v1.0.0<br>
             当前Endgame: <span to-format-4>1e110</span><br>
+            当前版本：v1.0.0<br>
+            游戏作者：VeryrrDefine<br>
+            本游戏使用了<a href="https://github.com/Naruyoko/ExpantaNum.js" target="_blank">ExpantaNum.js</a> <a href="https://github.com/cloudytheconqueror/letter-notation-format" target="_blank">format-expantanum.js</a>来处理大数字<br>
+            
             <del>拿0100000000a7的游戏的CSS改的</del><br>
             <del>绝对没有</del><br>
             <h1>-----更新日志-----</h1>
+            <div>
+                <h3>v1.0.0-24-6-9</h3>
+                <p>添加维度提升</p>
+            </div>
             <div>
                 <h3>v1.0.0</h3>
                 <p>添加第五维度</p>
@@ -175,18 +187,382 @@
                     <td>
                         <button class="achive">
                             在哪里开始?<br>
-                            达到10
+                            达到100
                         </button>
                     </td>
                     <td>
                         <button class="achive">
                             1 四次方千米<br>
-                            达到1e24 mm<sup>4</sup>
+                            达到<span to-format-4>1e24</span>
                         </button>
                     </td>
                     <td>
                         <button class="achive-secret">
-                            输入achive有惊喜<br>
+                            输入achieve有惊喜<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive-secret">
+                            第九维度<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="achive">
+                            <br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            <br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            <br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="achive">
+                            <br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            <br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            <br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="achive">
+                            <br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            <br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            <br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="achive">
+                            <br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            <br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            <br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="achive">
+                            <br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            <br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            <br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="achive">
+                            <br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            <br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            <br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            6<br>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="achive">
+                            <br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            <br>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="achive">
+                            <br>
                         </button>
                     </td>
                     <td>
@@ -286,6 +662,14 @@
         <button class="btn" data-ok-modal>关闭</button>
         <button class="btn" data-close-modal onclick="$('.dialog')[0].close();">取消</button>
     </dialog>
-    <br><br><span id="d9" class="display:none">114514</span>
+    <br><br><div id="dim9">
+        <span>维度9 </span><span id="d9">0</span><span> x</span><span id="dm9">0</span><span> </span>
+        <button class="btn" id="dbtn9" onclick="buydim(9,0)">价格：0</button>
+        </div>
+        <div id="dim10">
+            <span>维度啊～啊～啊咦～啊咦～啊→啊↑啊↓～啊～嗯～哎哎～哎哦哎嗯～哦哎～爱爱爱爱爱 </span><span id="d9">0</span><span> x</span><span id="dm9">0</span><span> </span>
+            <button class="btn" id="dbtn9" onclick="">价格：<span to-format-4>1e2085</span></button>
+            </div>
+    <script></script>
 </body> 
 </html> 
