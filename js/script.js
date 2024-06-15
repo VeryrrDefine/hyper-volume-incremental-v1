@@ -390,13 +390,9 @@ function load() {
     main_option_ABCD.set_list([$("#page1")[0], $("#page2")[0], $("#page3")[0], $("#page4")[0]]);
     suboption_ABCD.set_list([$("#page2_save")[0], $("#page2_about")[0], $("#page2_visual")[0]]);
 
-    setInterval(loop, fastly ? 1 : 1000 / 30);
+    setInterval(loop, 1000 / 30);
     window.closeButton = document.querySelector("[data-ok-modal]")
     window.modal = document.querySelector("[data-modal]")
-    $("#music")[0].loop = true;
-    $("#music")[0].volume = 0.5;
-
-    $("#music")[0].muted = false;
     setTimeout(updatenews, 1000);
 }
 
