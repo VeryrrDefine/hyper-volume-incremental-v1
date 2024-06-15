@@ -397,7 +397,6 @@ function load() {
     $("#music")[0].volume = 0.5;
 
     $("#music")[0].muted = false;
-    window.news_text = document.getElementById('newsText');
     setTimeout(updatenews, 1000);
 }
 
