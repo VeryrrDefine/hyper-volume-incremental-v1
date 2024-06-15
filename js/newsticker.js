@@ -292,10 +292,8 @@ var verb = ["吃", "吃了", "跳", "睡", "开发", "是", "将写"]
 textslength = Object.keys(texts).length
 
 function updatenews() {
-    if (window.news_text === undefined){
-        window.news_text = document.getElementById('newsText');
+    window.news_text = document.getElementById('newsText');
 
-    }
     do {
         var rand = Math.floor(Math.random() * textslength)
     } while (checkRand(rand))
