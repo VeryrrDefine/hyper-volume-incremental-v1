@@ -62,33 +62,16 @@ function handle_export(save2) {
 }
 
 function import_save() {
-    $("#dialog-place").html(`
-    <p>输入存档:</p>
-    <input type="text" id="redeem-text">
-    `)
-    closeButton.setAttribute("onclick", `
-    redeem = $("#redeem-text").val();
-    handle_export(redeem);
-    modal.close();
-    `);
-    $("[data-ok-modal]").text("确认");
-    modal.showModal();
+    handle_export(prompt("输入存档"));
 
 }
 
 function formated_hard_reset() {
-    $("#dialog-place").html(`
-    <p>您确定要硬重置吗？输入以下文字确认，此操作无法取消!：</p>
-    <p>Did you think i am a sb?</p>
-    <input type="text" id="redeem-text">
-    `)
-    closeButton.setAttribute("onclick", `
-    redeem = $("#redeem-text").val();
+    let redeem = prompt("您确定要硬重置吗？输入以下文字确认，此操作无法取消!："+
+    "Did you think i am a sb?")
     if (redeem == "Did you think i am a sb?"){
         hard_reset()
     }
-    modal.close();
-    `);
     $("[data-ok-modal]").text("确认");
     modal.showModal();
 }
