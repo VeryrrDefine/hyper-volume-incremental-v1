@@ -125,6 +125,12 @@
             <del>绝对没有</del>
             <br>
             <h1>-----更新日志-----</h1>
+            <div v-for="changelog in changelogs">
+                <h2 v-html="changelog.version"></h2>
+
+                <p v-for="text in changelog.changes" v-html="text"></p>
+
+            </div><!--
             <div>
                 <h3>v1.0.1</h3>
 
@@ -206,6 +212,7 @@
                 <p>语言测试</p>
                 <p>添加了黑洞吞噬</p>
             </div>
+            -->
         </div>
     </div>
 

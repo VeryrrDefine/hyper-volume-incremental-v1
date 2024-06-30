@@ -65,17 +65,19 @@ function hard_reset() {
     }
     reset_dimensions(1)
 }
-function getDimBoostResu(dimid){
+
+function getDimBoostResu(dimid) {
     // dimid == 0...7
-    return E.maximum(1,E(2).pow(player.dim_boost.sub(dimid)))
+    return E.maximum(1, E(2).pow(player.dim_boost.sub(dimid)))
 }
+
 function getDimMult(i) {
     let result = E(E('2')
-            .add(player.mm3o5_volumes.points.logarithm("100").div(10).minimum("1.5")))
-            .pow(player.dimensions[DIMENSIONS_BOUGHT][i].div(10).floor())
+        .add(player.mm3o5_volumes.points.logarithm("100").div(10).minimum("1.5")))
+        .pow(player.dimensions[DIMENSIONS_BOUGHT][i].div(10).floor())
         .mul(getDimBoostResu(i))
-     .mul(player.tickspeed_amount.pow(player.tickspeed))
-     ;
+        .mul(player.tickspeed_amount.pow(player.tickspeed))
+    ;
     return result;
 }
 
@@ -178,27 +180,30 @@ function calculate_dim() {
 
     }
 }
-function upgradeTickspeed(){
+
+function upgradeTickspeed() {
     let buycount = E(0);
     // 1e3 * 10**player.tickspeed
-    if (player.volumes.logarithm(10).gte(calc_tickspeed_cost().logarithm(10))){
+    if (player.volumes.logarithm(10).gte(calc_tickspeed_cost().logarithm(10))) {
         buycount = E(1);
 
         buycount = buycount.add(player.volumes.logarithm(10).sub(calc_tickspeed_cost().logarithm(10)).floor())
     }
     player.tickspeed = player.tickspeed.add(buycount);
 }
+
 /*異議あり*/
 function calc_cost(dimid, count) {
     // count before buy
     // 1st dimension dimid = 0
-    if (count.gte("1e4")){
+    if (count.gte("1e4")) {
         return E.POSITIVE_INFINITY
     }
     return dim_base_price[dimid].mul(dim_incre[dimid].pow(count.div(10).floor()))
 }
-function calc_tickspeed_cost(){
-    return E.mul(1e3,E.pow(10,player.tickspeed));
+
+function calc_tickspeed_cost() {
+    return E.mul(1e3, E.pow(10, player.tickspeed));
 }
 
 function loop() {
@@ -210,7 +215,7 @@ function loop() {
 
     if (player.volumes.gte("1e616")) {
         more = E("0");
-        player.volumes=E("10");
+        player.volumes = E("10");
         reset_dimensions(1);
         player.galaxy_count = E("0");
         player.mm3o5_volumes.points = E("1");
@@ -234,7 +239,8 @@ function loop() {
 
     last_frame = this_frame
 }
-function buyAll(){
+
+function buyAll() {
     upgradeTickspeed();
     buydim(1);
     buydim(2);
@@ -245,17 +251,20 @@ function buyAll(){
     buydim(7);
     buydim(8);
 }
-function calc_galaxy_need(){
-    return E.add(80,player.galaxy_count.mul(40))
+
+function calc_galaxy_need() {
+    return E.add(80, player.galaxy_count.mul(40))
 }
-function dimensionGalaxy(){
-    if (player.dimensions[DIMENSIONS_POINTS][7].gte(calc_galaxy_need())){
+
+function dimensionGalaxy() {
+    if (player.dimensions[DIMENSIONS_POINTS][7].gte(calc_galaxy_need())) {
         reset_dimensions(true);
         player.tickspeed = E(0);
         player.volumes = E(10);
         player.galaxy_count = player.galaxy_count.add(1);
     }
 }
+
 function fix() {
     player.volumes = ENify(player.volumes);
     player.mm3_volumes.points = ENify(player.mm3_volumes.points);
@@ -311,7 +320,32 @@ function loadVue() {
             ],
             save: "",
             modalShow: false,
-            modalText: ""
+            modalText: "",
+            changelogs: [
+                {
+                    version: "v1.0.1.1", changes: [
+                        "新闻列表重写"
+                    ]
+                },
+                {
+                    version: "v1.0.1", changes: [
+                        "使用Vue",
+                        "体积菜单分两个",
+                        "添加3.5维度",
+                        "修改维度提升结果",
+                        "添加维度星系",
+                        "维度页面新样式",
+                        "移除了部分新闻",
+                        "添加了tickspeed"
+                    ]
+                },
+                {
+                    version: "v1.0.0", changes: [
+                        "添加第五维度",
+                        "and a lot of..."
+                    ]
+                }
+            ]
         },
         computed: {},
         methods: {
