@@ -323,6 +323,11 @@ function loadVue() {
             modalText: "",
             changelogs: [
                 {
+                    version: "v1.0.1.2", changes: [
+                        "不鸡丢"
+                    ]
+                },
+                {
                     version: "v1.0.1.1", changes: [
                         "新闻列表重写"
                     ]
