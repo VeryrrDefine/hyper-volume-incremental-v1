@@ -1,7 +1,7 @@
 function getvolumecolor(){
-    let r = 255-85*E.min(player.volumes,"1e616").logarithm(10).div("616").toNumber();
-    let g = 255-85*E.min(player.volumes,"1e616").logarithm(10).div("616").toNumber();
-    let b = 255-255*E.min(player.volumes,"1e616").logarithm(10).div("616").toNumber();
+    let r = 255-85*E.min(player.volumes,"1.797e308").logarithm(10).div("308").toNumber();
+    let g = 255-85*E.min(player.volumes,"1.797e308").logarithm(10).div("308").toNumber();
+    let b = 255-255*E.min(player.volumes,"1.797e308").logarithm(10).div("308").toNumber();
     return `color: rgb(${r},${g},${b});`;
 
 }
@@ -22,14 +22,14 @@ function boost_reward_desc() {
         return "维度1-5倍率x2<br><br>需要20 维度8"
     }
     if (player.dim_boost.eq(5)) {
-        return "维度1-6倍率x2<br><br>需要35(40) 维度8"
+        return "维度1-6倍率x2<br><br>需要30 维度8"
     }
     if (player.dim_boost.eq(6)) {
-        return "维度1-7倍率x2<br><br>需要50 维度8"
+        return "维度1-7倍率x2<br><br>需要40 维度8"
     }
     if (player.dim_boost.gt(6)) {
-        let n8d = E.add(20, E.mul(15, player.dim_boost.sub(4)));
-        return `所有维度倍率x2<br><br>需要${formatWhole(n8d)}(${formatWhole(n8d.div(10).ceil().mul(10))})维度8`
+        let n8d = E.add(20, E.mul(10, player.dim_boost.sub(4)));
+        return `所有维度倍率x2<br><br>需要${formatWhole(n8d)}维度8`
     }
 }
 function errorText(length) {
@@ -60,4 +60,15 @@ function convertToB16(n) {
     let codes = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F']
     let x = n % 16
     return codes[(n - x) / 16] + codes[x]
+}
+
+function getOpenClose(bool){
+    return bool ? "开" : "关"
+}
+function toggleNewsTicker(){
+    player.options.showNewsTicker = !player.options.showNewsTicker
+}
+
+function toggleStickyDisplay(){
+    player.options.stickyDisplay = !player.options.stickyDisplay
 }

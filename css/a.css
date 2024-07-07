@@ -1,9 +1,64 @@
 
-.dimension{
+.dimension {
     border: 1px solid #777;
     width: 50vw;
-    transform:translateX(+50%)
+    transform: translateX(+50%)
 }
+
 .locked {
     background: darkred;
+}
+
+.achieve-1 {
+
+    position: relative;
+    display: inline-block;
+    color: white;
+    font-size: 12px;
+}
+#news{
+    :5vw;
+}
+.achieve-2 {
+
+    background-color: black;
+    height: 100px;
+    width: 100px;
+    border: 1px solid white;
+    color: white;
+    font-size: 11px;
+}
+#news{
+    margin: auto;
+}
+.center {
+
+    text-align: center;
+}
+
+.usesticky {
+    position: sticky;
+    top: 0px;
+    z-index: 5;
+}
+.top_1{
+    background: #000;
+}
+
+.mm3_upgrades{
+    width: 25vw;
+    height: 16.3vw;
+    background-color: #000;
+    color: #fff;
+    border: 4px solid #72ac28;
+    border-radius: 8px;
+    font-family: 'Courier New', 'Source Han Sans', sans-serif;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+}
+.mm3_upgrades_bought{
+    color:#000;
+    background:#72ac28;
 }

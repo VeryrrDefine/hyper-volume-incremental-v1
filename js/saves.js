@@ -65,15 +65,22 @@ function import_save() {
     handle_export(prompt("输入存档"));
 
 }
-
+function fast_hard_reset(){
+    hard_reset();
+    save();
+    location.href = location.href;
+}
 function formated_hard_reset() {
     let redeem = prompt("您确定要硬重置吗？输入以下文字确认，此操作无法取消!："+
     "Did you think i am a sb?")
-    if (redeem == "Did you think i am a sb?"){
-        hard_reset()
+    if (redeem === "Did you think i am a sb?"){
+        hard_reset();
+        save();
+        location.href = location.href;
     }
-    $("[data-ok-modal]").text("确认");
-    modal.showModal();
+
+    /*$("[data-ok-modal]").text("确认");
+    modal.showModal();*/
 }
 
 function import_file() {
@@ -96,4 +103,5 @@ function import_file() {
 
 function save() {
     localStorage.setItem("volume-incremental", JSON.stringify(player))
+    localStorage.setItem("developerSettings", JSON.stringify(developer))
 }

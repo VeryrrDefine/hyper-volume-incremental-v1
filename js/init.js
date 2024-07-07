@@ -1,6 +1,9 @@
 "use strict";
 var hasLoaded = {status: false};
 var player = {};
+var developer = {
+    timeboost: 1
+};
 var E = EN;
 ExpantaNum.prototype.formatE = function (){
     return format(this);

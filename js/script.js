@@ -1,6 +1,7 @@
 "use strict";
 var this_frame = Date.now();
 var last_frame = Date.now();
+var diff = 1;
 
 function reset_dimensions(dim_boost_reset) {
     Object.assign(player,
@@ -16,7 +17,7 @@ function reset_dimensions(dim_boost_reset) {
     if (dim_boost_reset) {
         Object.assign(player, {
                 dim_boost: (() => {
-                    if (player.upgrades[0]) {
+                    if (false) { // player.upgrades[0]
                         return E(1)
                     } else {
                         return E(0);
@@ -31,36 +32,57 @@ function reset_dimensions(dim_boost_reset) {
 function hard_reset() {
     window.player = {
         volumes: E(10),
-        mm3_volumes: {
-            unl: false,
-            points: E(0)
-        },
-        mm3o5_volumes: {
-            points: E(1)
-        },
-        multi: {
-            unl: false,
-            points: E(0)
-        },
         version: 10,
-        time: {
-            eter: Date.now()
-        },
         volumeInfinite: false,
         tickspeed: E(0),
         galaxy_count: E(0),
         tickspeed_amount: E(1.15),
         achieve: new Array(200),
-        curpage: 1,
         display_mode: 0,
-        notice: "",
         dim_boost: E(0),
-        upgrades: [
-            0, 0, 0, 0, 0, 0, 0, 0
-        ],
         dimensions_buymulti: [
             E(2), E(2), E(2), E(2), E(2), E(2), E(2), E(2),
         ],
+        options: {
+            showNewsTicker: true,
+            stickyDisplay: false,
+        },
+
+        mm3_volumes: {
+            unl: false,
+            points: E(0),
+            upgrades: {},
+            automation: {
+                "1": false,
+                "2": false,
+                "3": false,
+                "4": false,
+                "5": false,
+                "6": false,
+                "7": false,
+                "8": false,
+            }
+        },
+
+        multi: {
+            unl: false,
+            points: E(0)
+        },
+
+
+        // stats
+        time: {
+            eter: 0,
+            time_now: Date.now()
+        },
+        volume_generated: {
+            mm4: E(0),
+            mm3: E(0)
+        },
+
+        window_show: {
+            first_mm3_reset: false
+        }
 
     }
     reset_dimensions(1)
@@ -70,10 +92,22 @@ function getDimBoostResu(dimid) {
     // dimid == 0...7
     return E.maximum(1, E(2).pow(player.dim_boost.sub(dimid)))
 }
-
+/*
+* player.tickspeed.gte(1000)
+* 1000 1000.50       1001
+* 0      1            2
+* */
+function getTickspeedResu(){
+    if (player.tickspeed.lt(1000)){
+        return player.tickspeed_amount.pow(player.tickspeed)
+    }
+    else{
+        return player.tickspeed_amount.pow(1000).mul(player.tickspeed_amount.pow(player.tickspeed.pow(E(1).div(player.tickspeed.pow(100)))))
+    }
+}
 function getDimMult(i) {
-    let result = E(E('2')
-        .add(player.mm3o5_volumes.points.logarithm("100").div(10).minimum("1.5")))
+    let result = E('2')
+        //.add(player.mm3o5_volumes.points.logarithm("100").div(10).minimum("1.5")))
         .pow(player.dimensions[DIMENSIONS_BOUGHT][i].div(10).floor())
         .mul(getDimBoostResu(i))
         .mul(player.tickspeed_amount.pow(player.tickspeed))
@@ -113,47 +147,53 @@ function buydim(dim) {
 
 }
 
-function dimensionBoost(nBoost) {
-
+function boostable() {
     if (player.dim_boost.eq(0)) {
-        if (player.dimensions[DIMENSIONS_POINTS][3].gte(20) && !nBoost) {
-            player.dim_boost = player.dim_boost.add(1);
-            reset_dimensions(false)
-            player.volumes = E(10)
-            player.tickspeed = E(0)
+        if (player.dimensions[DIMENSIONS_POINTS][3].gte(20)) {
+            return true;
         }
     }
     if (player.dim_boost.eq(1)) {
-        if (player.dimensions[DIMENSIONS_POINTS][4].gte(20) && !nBoost) {
-            player.dim_boost = player.dim_boost.add(1);
-            reset_dimensions(false)
-            player.volumes = E(10)
-            player.tickspeed = E(0)
+        if (player.dimensions[DIMENSIONS_POINTS][4].gte(20)) {
+            return true;
         }
     }
     if (player.dim_boost.eq(2)) {
-        if (player.dimensions[DIMENSIONS_POINTS][5].gte(20) && !nBoost) {
-            player.dim_boost = player.dim_boost.add(1);
-            reset_dimensions(false)
-            player.volumes = E(10)
-            player.tickspeed = E(0)
+        if (player.dimensions[DIMENSIONS_POINTS][5].gte(20)) {
+            return true;
         }
     }
     if (player.dim_boost.eq(3)) {
-        if (player.dimensions[DIMENSIONS_POINTS][6].gte(20) && !nBoost) {
-            player.dim_boost = player.dim_boost.add(1);
-            reset_dimensions(false)
-            player.volumes = E(10)
-            player.tickspeed = E(0)
+        if (player.dimensions[DIMENSIONS_POINTS][6].gte(20)) {
+            return true;
         }
     }
     if (player.dim_boost.gte(4)) {
-        if (player.dimensions[DIMENSIONS_POINTS][7].gte(E.add(20, E.mul(15, player.dim_boost.sub(4)))) && !nBoost) {
-            player.dim_boost = player.dim_boost.add(1);
-            reset_dimensions(false)
-            player.volumes = E(10)
-            player.tickspeed = E(0)
+        if (player.dimensions[DIMENSIONS_POINTS][7].gte(E.add(20, E.mul(10, player.dim_boost.sub(4))))) {
+            return true;
         }
+
+    }
+    return false;
+}
+
+function dimensionBoost(nBoost) {
+    if (!boostable()) {
+        return;
+    }
+    if (player.dim_boost.lte(3)) {
+        player.dim_boost = player.dim_boost.add(1);
+        reset_dimensions(false)
+        player.volumes = E(10)
+        player.tickspeed = E(0)
+        return;
+    }
+    if (player.dim_boost.gte(4)) {
+        player.dim_boost = player.dim_boost.add(1);
+        reset_dimensions(false)
+        player.volumes = E(10)
+        player.tickspeed = E(0)
+        return;
 
     }
 
@@ -175,7 +215,7 @@ function calculate_dim() {
                 player.dimensions[DIMENSIONS_POINTS][i + 1]
                     .mul(player.dimensions[DIMENSIONS_MULTI][i + 1])
 
-                    .mul((this_frame - last_frame) / 1000)
+                    .mul(diff)
             );
 
     }
@@ -208,30 +248,43 @@ function calc_tickspeed_cost() {
 
 function loop() {
     this_frame = Date.now()
+    player.time_now = this_frame;
 
+    window.diff = (this_frame - last_frame) / 1000 * developer.timeboost;
+
+
+    player.time.eter += window.diff;
+    player.tickspeed_amount = E(1.15).add(E(0.1).mul(player.galaxy_count))
     let more = player.dimensions[DIMENSIONS_POINTS][0]
         .mul(player.dimensions[DIMENSIONS_MULTI][0])
-        .mul((this_frame - last_frame) / 1000);
+        .mul(diff);
 
-    if (player.volumes.gte("1e616")) {
+    if (player.volumes.gte("1.797e308")) {
         more = E("0");
         player.volumes = E("10");
         reset_dimensions(1);
         player.galaxy_count = E("0");
-        player.mm3o5_volumes.points = E("1");
+        //player.mm3o5_volumes.points = E("1");
         player.mm3_volumes.unl = true;
         player.tickspeed = E("0");
         player.mm3_volumes.points = player.mm3_volumes.points.add(1);
-        alert("你的体积太多了，被降维")
+        player.volume_generated.mm3 = player.volume_generated.mm3.add(1);
+        if (!player.window_show.first_mm3_reset) {
+            alert("这是第一次mm3重置，每当你的4维体积超过1.797e308(约2^1024) mm4时，" +
+                "你的4维体积就会坍缩成1 mm3 体积");
+        }
     }
-
+    player.volume_generated.mm4 = player.volume_generated.mm4.add(more);
     player.volumes = player.volumes.add(
         more
     );
-    MM35();
+    //MM35();
     calculate_dim();
 
     for (let i = 0; i < 8; i++) {
+        if (player.mm3_volumes.automation[i+1]){
+            buydim(i+1);
+        }
         player.dimensions[DIMENSIONS_MULTI][i] = getDimMult(i);
         player.dimensions[DIMENSIONS_COST][i] = calc_cost(i, player.dimensions[DIMENSIONS_BOUGHT][i])
     }
@@ -253,11 +306,15 @@ function buyAll() {
 }
 
 function calc_galaxy_need() {
-    return E.add(80, player.galaxy_count.mul(40))
+    return E.add(40, player.galaxy_count.mul(20))
+}
+
+function galaxyable() {
+    return player.dimensions[DIMENSIONS_POINTS][7].gte(calc_galaxy_need())
 }
 
 function dimensionGalaxy() {
-    if (player.dimensions[DIMENSIONS_POINTS][7].gte(calc_galaxy_need())) {
+    if (galaxyable()) {
         reset_dimensions(true);
         player.tickspeed = E(0);
         player.volumes = E(10);
@@ -268,13 +325,17 @@ function dimensionGalaxy() {
 function fix() {
     player.volumes = ENify(player.volumes);
     player.mm3_volumes.points = ENify(player.mm3_volumes.points);
-    player.mm3o5_volumes.points = ENify(player.mm3o5_volumes.points);
+    //player.mm3o5_volumes.points = ENify(player.mm3o5_volumes.points);
 
     player.multi.points = ENify(player.multi.points);
     player.dim_boost = ENify(player.dim_boost);
     player.tickspeed = ENify(player.tickspeed);
     player.tickspeed_amount = ENify(player.tickspeed_amount);
     player.galaxy_count = ENify(player.galaxy_count);
+
+    player.volume_generated.mm3 = ENify(player.volume_generated.mm3);
+    //player.volume_generated.mm35 = ENify(player.volume_generated.mm35);
+    player.volume_generated.mm4 = ENify(player.volume_generated.mm4);
     for (let i = 0; i < 8; i++) {
         player.dimensions[DIMENSIONS_MULTI][i] = ENify(player.dimensions[DIMENSIONS_MULTI][i])
         player.dimensions_buymulti[i] = ENify(player.dimensions_buymulti[i])
@@ -288,18 +349,67 @@ function fix() {
 function load() {
     hard_reset();
     let loadplayer = JSON.parse(localStorage.getItem("volume-incremental"));
+    let loaddeveloper = JSON.parse(localStorage.getItem("developerSettings"));
     if (loadplayer != null) {
         if (loadplayer.version != player.version) {
             alert("游戏已更新")
         }
         Object.assign(player, loadplayer)
     }
-
+    if (loadplayer != null) {
+        Object.assign(developer, loaddeveloper)
+    }
+    last_frame = player.time_now;
     fix();
-    setInterval(save, 1000);
+    mm3FixOldSaves();
     loadVue();
     setInterval(loop, 35)
+    setInterval(save, 1000);
 }
+function between(x,y,z){
+    return x <= y && y <= z;
+}
+function getAchieve(id,condition){
+    if (player.achieve[id]){
+        return true;
+    }
+    if (condition){
+        player.achieve[id] = true;
+        return true
+    }
+    return false;
+}
+var achieves = [
+    [
+        {
+            id: 1, label: "从哪里开始？", get unlock() {
+                return getAchieve(1,player.dimensions[DIMENSIONS_POINTS][0].gt(0));
+            }
+        },
+        {
+            id: 2, label: "第四维度？", get unlock() {
+                return getAchieve(2,player.dimensions[DIMENSIONS_POINTS][3].gt(0));
+            }
+        },
+        {
+            id: 3, label: "第六维度？", get unlock() {
+                return getAchieve(3,player.dimensions[DIMENSIONS_POINTS][5].gt(0));
+            }
+        },
+        {
+            id: 4, label: "第八维度？", get unlock() {
+                return getAchieve(4,player.dimensions[DIMENSIONS_POINTS][7].gt(0));
+            }
+        },
+    ],
+    [
+        {
+            id: 11, label: "我是谁？我在那？", get unlock() {
+                return true;
+            }
+        },
+    ],
+]
 
 function loadVue() {
     window.app = new Vue({
@@ -308,6 +418,8 @@ function loadVue() {
             tabShow: '1',
             player: player,
             hasLoaded: hasLoaded,
+            developer_mode: !location.hostname.endsWith("github.io"),
+            developer_get_mm4: "1e100",
             dimensions: [
                 {id: 1, label: '第1维度'},
                 {id: 2, label: '第2维度'},
@@ -322,6 +434,15 @@ function loadVue() {
             modalShow: false,
             modalText: "",
             changelogs: [
+                {
+                    version: "v1.0.2", changes: [
+                        "添加一个mm<sup>3</sup>升级",
+                        "新闻限时回归",
+                        "移除mm<sup>3.5</sup>",
+                        "删除了维度星系",
+                        "<span class='corrupted'>警告，由于游戏的不确定性，维度星系最终可能会回归</span>"
+                    ]
+                },
                 {
                     version: "v1.0.1.2", changes: [
                         "不鸡丢"
@@ -350,7 +471,8 @@ function loadVue() {
                         "and a lot of..."
                     ]
                 }
-            ]
+            ],
+            mm3: mm3_opt,
         },
         computed: {},
         methods: {
@@ -368,7 +490,30 @@ function loadVue() {
 }
 
 // endregion Vue
+function speedrun(a) {
+    alert("Speedrun is not allowed in the release version");
+}
+function get_mm4_vol(a) {
+    alert("Get mm4 volume is not allowed in the release version");
+}
+function dev_reset_vol(){
+    player.volumes = E(10);
+}
+(() => {
+    if (!location.hostname.endsWith("github.io")) {
+        window.speedrun = function (timeBoost) {
+            developer.timeboost = timeBoost;
+            if (isNaN(developer.timeboost)){
+                developer.timeboost = 1;
+            }
+        };
+        window.get_mm4_vol = function () {
+            player.volumes = player.volumes.add(app.developer_get_mm4);
+        };
+    }
+})();
 
 document.addEventListener('DOMContentLoaded', function () {
     load();
 });
+
