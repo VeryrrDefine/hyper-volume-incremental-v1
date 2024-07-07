@@ -195,7 +195,7 @@
             <br>
             <h1>-----更新日志-----</h1>
             <div v-for="changelog in changelogs">
-                <h2 v-html="changelog.version"></h2>
+                <h2><span v-html="changelog.version"></span> <span v-html="changelog.title"></span></h2>
 
                 <p v-for="text in changelog.changes" v-html="text"></p>
 

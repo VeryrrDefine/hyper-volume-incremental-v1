@@ -435,7 +435,13 @@ function loadVue() {
             modalText: "",
             changelogs: [
                 {
-                    version: "v1.0.2", changes: [
+                    version: "v1.0.2.1", title: "等一下，我format_time.js忘记投了",
+                    changes:[
+                        "修复了无法查看统计页面的bug"
+                    ]
+                },
+                {
+                    version: "v1.0.2", title: "mm<sup>3</sup>" , changes: [
                         "添加一个mm<sup>3</sup>升级",
                         "新闻限时回归",
                         "移除mm<sup>3.5</sup>",
@@ -444,17 +450,17 @@ function loadVue() {
                     ]
                 },
                 {
-                    version: "v1.0.1.2", changes: [
+                    version: "v1.0.1.2", title: "" ,changes: [
                         "不鸡丢"
                     ]
                 },
                 {
-                    version: "v1.0.1.1", changes: [
+                    version: "v1.0.1.1",title: "" , changes: [
                         "新闻列表重写"
                     ]
                 },
                 {
-                    version: "v1.0.1", changes: [
+                    version: "v1.0.1", title: "Vue!!!!!!" ,changes: [
                         "使用Vue",
                         "体积菜单分两个",
                         "添加3.5维度",
@@ -466,7 +472,7 @@ function loadVue() {
                     ]
                 },
                 {
-                    version: "v1.0.0", changes: [
+                    version: "v1.0.0", title: "" ,changes: [
                         "添加第五维度",
                         "and a lot of..."
                     ]
