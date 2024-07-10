@@ -10,7 +10,7 @@
             text: '什么?你问我维度提升在哪里?<del>在历史的垃圾堆里</del>就在下面啊'
         },
         {
-            text: '你制造了一mm<sup>4</sup>4维体积！！你知道这意味着什么吗?'
+            text: '你制造了1 mm<sup>4</sup>4维体积！！你知道这意味着什么吗?'
         },
         {
             text: "| '0'''''1'''''2'''''3'''''4'''''4'''''4'''''4'''''4'''''4'''''4 | 是的，这是一把尺子，但<span style='color:red'>(受硬上限限制)</span>"
@@ -40,7 +40,15 @@
             text: `<a href="https://b23.tv/BV1GJ411x7h7" target="_blank">点我立即到达Endgame</a>`
         },
         {
-            text: `大型纪录片《质量增量重制版 0.8天价虫洞卖出了1024 archverses》给他一个时间速度加成，他敢把价格卖到<del>114514 lodeverses</del>114514 archs-metaverse. 近日有网友表示，在某增量游戏新闻播放器上看到一则重要到有时间旅行者提醒的新闻，由于虫洞质量不断扩大，粒子物理学研究员Pollux和粒子超理学研究员天才俱乐部#83黑塔通过虫洞在反物质宇宙相遇，物理学家建议创造更大的虫洞。某一数学家兼物理学家利用伽罗瓦理论庞加莱猜想的庞加莱回归定理和伽马函数算出了天价虫洞已经来到了1024 archverses，不过我们还是不知道他们两个是怎么掉进这么大的虫洞的，可能是被自动幽灵一脚踢进虫洞。据研究员Pollux报告，他先前由于某个由于机密不能披露的异常影响导致视觉能力严重下降，来到反物质宇宙后因为反物质的时间效应迅速恢复，他表示以后天体物理学研究要加紧研究虫洞。为此五星上将麦克阿瑟表示，要是我有这么大的虫洞，我当年的军衔一定不止五星，至少也得有50星，就连SCP-CN-1630都表示，这43年来，我天天被人注射记忆删除药剂，没得睡过一次好觉，要是我有这么大的虫洞一定得进去放个C类通道，然后在里面睡一觉，不仅可以体验相对论时间膨胀，还可以带薪休假。大型纪录片之《质量增量重制版 0.8天价虫洞卖出了1024 archverses》持续为您播放`
+            text: `大型纪录片《质量增量重制版 0.8天价虫洞卖出了1024 archverses》给他一个时间速度加成，他敢把价格卖到<del>11
+4514 lodeverses</del>114514 archs-metaverse. 近日有网友表示，在某增量游戏新闻播放器上看到一则重要到有时间旅行者提醒的新闻，
+由于虫洞质量不断扩大，粒子物理学研究员Pollux和粒子超理学研究员天才俱乐部#83黑塔通过虫洞在反物质宇宙相遇，物理学家建议创造更大的虫洞
+。某一数学家兼物理学家利用伽罗瓦理论庞加莱猜想的庞加莱回归定理和伽马函数算出了天价虫洞已经来到了1024 archverses，不过我们还是不知道
+他们两个是怎么掉进这么大的虫洞的，可能是被自动幽灵一脚踢进虫洞。据研究员Pollux报告，他先前由于某个由于机密不能披露的异常影响导致视觉
+能力严重下降，来到反物质宇宙后因为反物质的时间效应迅速恢复，他表示以后天体物理学研究要加紧研究虫洞。为此五星上将麦克阿瑟表示，要是我有
+这么大的虫洞，我当年的军衔一定不止五星，至少也得有50星，就连SCP-CN-1630都表示，这43年来，我天天被人注射记忆删除药剂，没得睡过一次好
+觉，要是我有这么大的虫洞一定得进去放个C类通道，然后在里面睡一觉，不仅可以体验相对论时间膨胀，还可以带薪休假。大型纪录片之《质量增量重制
+版 0.8天价虫洞卖出了1024 archverses》持续为您播放`
         },
         {
             text: `0+0是宇宙万法的那个源头`
@@ -52,11 +60,6 @@
             text: `点击此新闻后什么也不会发生`
         },
         {
-            get text() {
-                return `难不成我是傻逼？`
-            }
-        },
-        {
             text: '你看到这条新闻的概率是其它新闻的概率的1%',
             get unlocked() {
                 return (Math.random() < 0.01)
@@ -64,9 +67,6 @@
         },
         {
             text: 'Uncaught ReferenceError: Cheater is not defined'
-        },
-        {
-            text: '听说有人把我给？？？了'
         },
         {
             text: '更新进度：0/K9e15小时'
@@ -98,7 +98,12 @@
             text: '增量的反义词是减魖'
         },
         {
-            text: '1+1=3，这显然是错的'
+            get text(){
+                let a = Math.floor(Math.random()*10)
+                let b = Math.floor(Math.random()*10)
+                let c = a+b+Math.floor(Math.random()*10)
+                return `${a}+${b}=${c}，这显然是错误的`
+            }
         },
         {
             text: "<span style='background: yellow;color: black'>要警惕新黄色新闻</span>"
@@ -116,16 +121,10 @@
             text: "谁问你了?"
         },
         {
-            text: "这是本游戏的第40条新闻"
-        },
-        {
             text: "这一切有什么意义？没有什么意义？没有没什么意义？"
         },
         {
             text: "汉化版打开游戏就能找到句号。"
-        },
-        {
-            text: "你可能注意到，本游戏的表示法在H之后直接跳到了J，这是因为I被我<span class='corrupted'>???</span>了"
         },
         {
             text: '游戏有bug怎么办?只有我们把代码删完，就没有bug了'
@@ -170,6 +169,9 @@
             text: "那好吧，既然主人不爽，喵喵就勉为其难地踢他一脚好了（；′⌒`） @白露猫[AI] 再交给你一个任务：把清蒸羊头踢出群 好的主人，喵喵这就去把清蒸羊头踢出群！(*｀･∀･´*)ﾉ"
         },
         {
+            text: "\u7070羊到底是谁？"
+        },
+        {
             text: "曾经有一位流浪者在后室误入<a href=\"https://backrooms.fandom.com/zh/wiki/User:VeryRRDefine/Level_ZH_736\">Level ZH 736</a>，3月27日晚上9点左右Level ZH 736突然毁灭，原因不明，流浪者推测已死亡"
         },
         {
@@ -179,7 +181,8 @@
             text: "i tsu mo na↑ n↓ do demo yumeo i ka kou"
         },
         {
-            text: "/es ke kə ʒə pø paʁle a/"
+            text: "/es ke kə ʒə pø paʁle a/",
+            get unlocked(){return false}
         },
         {
             text: "在2222年，风灵作成有高达1000个成就，6308个维度，75个阶层，并以5小时后更新的速度恒定更新"
@@ -197,16 +200,7 @@
             text: 'g<sub>0</sub>(2) g<sub>1</sub>(2) g<sub>ω</sub>(2) g<sub>ω+1</sub>(2) g<sub>ε<sub>0</sub></sub>(2) g<sub>ε<sub>0</sub>+1</sub>(2) g<sub>ε<sub>0</sub>+ω</sub>(2) g<sub>ε<sub>0</sub>+ω+1</sub>(2) g<sub>ε<sub>0</sub>ω</sub>(2)'//ε
         },
         {
-            text: "不管前方的路有多苦，只要走的方向正确。不管多么崎岖不平，都比站在原地更接近幸福。"
-        },
-        {
-            text: "我真是个初"
-        },
-        {
             text: "When i was 114514 years old, i'm 114514 years old."
-        },
-        {
-            text: "不是哥们"
         },
         {
             text: "宇宙学部在此提醒：实验千万条，安全第一条，操作不规范，亲人两行"
@@ -219,21 +213,70 @@
             text: "我一个鸡砸，wtf"
         },
         {
-            text: "热知识，由于我不知道的怎么个回事，所以ψ<sub>0</sub>(Ω<sub>ω</sub>)是FGH和SGH的第一个交点。 所以第二个交点是什么呢？"
+            text: "热知识，由于我不知道的怎么个回事，所以ψ<sub>0</sub>(Ω<sub>ω</sub>)是FGH和SGH的第一个交点。 第二个交点是什么呢？"
         },
         {
             text: "网传的\"TREE(3)的“Φ”的个数多达187196个\"经计算是假的，增长率只有ω3+1，然而目前TREE(3)确定的lowerbound的增长率有ψ<sub>0</sub>(Ω<sup>Ω<sup>ω</sup>+3</sup>)"
         },
         {
-            text: "达到g<sub>φ(78125,φ(1024,φ(100,10<sup>308</sup>)))<sup>η<sub>4682564986934</sub></sup></sub>(10)点数以进行下114514层重置"
+            text: "达到g<sub>φ(φ(5,407),φ(φ(7,5),φ(100,φ(5,2))))<sup>η<sub>ε<sub>ζ<sub>0</sub>+1</sub></sub></sup></sub>(10)点数以进行下114514层重置"
         },
         {
             text: "Coming s1.79e308n"
         },
         {
             text: "<span onclick='toggleNewsTicker()'>如果你不想显示新闻的话，你可以按下这个文字关闭。</span>"
+        },
+        {
+            text: `紧急ψ(K)级事故！<span class='corrupted'>${"?".repeat(100)}! We're trying to ??? to make ??? to be ??????????????????????????????!</span>`
+        },
+        {
+            text: `紧急ω<sub>1</sub><sup>CK</sup>级事故！ !%^#&&$!&$#$&#$&#@$&!&$#*#%*^&*#!*^%&*^*^%*#%$^&*@!^&#^`
+        },
+        {
+            text: "Translating English to Chinese: bluearchive -> 蓝韭菜 Translated 100% 虽然我不知道蓝韭菜有什么好玩的 且很奇怪 但我还是尊重你 哈哈哈"
+        },
+        {
+            text: "如果你想达到Endgame拍拍手！ （啪）（啪） （咚咚 咚咚咚 C#~ D#~ G# D#~ F~ G#F#FC# C#~ D#~ G#~）"
+        },
+        {
+            text: "新版7禁和11禁：先通过EC7和EC11再发言吧 新人：拦精灵"
+        },
+        {
+            text: "dygm到底是谁？"
+        },
+        {
+            text: "风灵作成共有7个基本的声望层：<span style='color:#ff0000'>扩散</span>、<span style='color:#ffff00'>扪敤</span>、<span style='color:#00ff00'>扫敥</span>、<span style='color:#00ffff'>扬敦</span>、<span style='color:#0000ff'>扭敧</span>、<span style='color:#ff00ff'>扮敨</span>、扯"
+        },
+        {
+            text: "<span  style='color:rgb(154,119,169)'>怀旧空吟闻笛赋</span>，到乡翻似烂柯人，other times <span style='color: rgb(208 ,121 ,49)'>await,</span> " +
+                "<span style='color:rgb(154,119,169)'>I</span> need <span style='color:rgb(154,119,169)'>to</span> become eternal"
+        },
+        {
+            text: "你有1复制器，每一秒×2。（114514小时后）你有" +
+                format(E(2).pow(114514*3600)) + "复制器"
+        },
+        {
+            text:"D'autres temps attendent, j'ai besoin d'être éternel"
+        },
+        {
+            text: "/dot ʁ tɑ(n) atɑ(n)d  ʒe bə zwɛ(n) dɛt ʁe tɛʁ nɛl/ ",
+            get unlocked() {
+                return false;
+            }
+        },
+        {
+            text: "Pelle偷走了重要的Infinity Points x2 Multiplier"
+        },
+        {
+            text: "We will fly a-way, far a-way, huoxu hui pang huang, huoxu hui shou shang,fly a-way far a-way-from-sli-ence! Biebeishi-jianyiwang sing a song, search for truth, xunhuina-guang-mao, xunhuina-sheng-xiang",
+            get unlocked() {
+                return player.volumes.gte(E(10).expansion(150))
+            }
+        },
+        {
+            text: "<span style=\"font-family: Wingdings\">other times await, I need to become eternal</span>"
         }
-
         /*ωεζηφΓψΩ*/
     ];
     let s;
@@ -259,9 +302,6 @@
     function r(t) {
         return void 0 !== e[t].unlocked && !e[t].unlocked
     }
-    var adj = ["狂笑的", "开心的", "伤心的", "生气的", "悲伤的", ""];
-    var noun = ["我", "你", "鸟", "别人", "床", "蛇", "散文"];
-    var verb = ["吃", "吃了", "跳", "睡", "开发", "是", "将写"];
     Vue.component("newsticker", {
         get template() {
             return '<div id="news"><p id="newsText">{{ msg }}</p></div>'

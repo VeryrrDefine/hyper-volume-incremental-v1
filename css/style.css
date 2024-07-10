@@ -320,7 +320,7 @@ h3 {
 }
 
 #notify {
-    z-index: 9999;
+    z-index: 400;
     position: fixed;
     left: 50%;
     top: 20px;
@@ -540,7 +540,7 @@ spoiler {
     max-height: 75%;
     overflow: auto;
     font-size: 16px;
-    z-index: 114514;
+    z-index: 5000;
 }
 
 .popup>input {
