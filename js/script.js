@@ -101,7 +101,13 @@ function hard_reset() {
 function buyable(dim) {
     return player.volumes.gte(player.dimensions[DIMENSIONS_COST][dim - 1])
 }
-
+function import_str(pl){
+    let importing_player = JSON.parse(pl);
+    Object.assign(player, importing_player)
+    fix();
+    save();
+    location.href = location.href;
+}
 function buydim(dim) {
     if (dim >= 5 && player.dim_boost.eq(0)) return false;
     if (dim >= 6 && player.dim_boost.eq(1)) return false;
@@ -114,7 +120,7 @@ function buydim(dim) {
             , player.volumes.div(cost)).floor();
 
         //console.log(dim-1,player.dimensions[DIMENSIONS_BOUGHT][dim - 1])
-        player.volumes = player.volumes.sub(E.mul(player.dimensions[DIMENSIONS_COST][dim - 1],times))
+        player.volumes = player.volumes.sub(E.mul(player.dimensions[DIMENSIONS_COST][dim - 1], times))
         player.dimensions[DIMENSIONS_BOUGHT][dim - 1] = player.dimensions[DIMENSIONS_BOUGHT][dim - 1].add(times);
         player.dimensions[DIMENSIONS_POINTS][dim - 1] = player.dimensions[DIMENSIONS_POINTS][dim - 1].add(times);
 
@@ -130,7 +136,6 @@ function buydim(dim) {
 
 
 }
-
 
 
 function dimensionBoost(nBoost) {
@@ -166,17 +171,17 @@ const dim_incre = [
 function calculate_dim() {
 
     for (let i = 0; i < 7; i++) {
-        if (i== 0 && player.dimensions[DIMENSIONS_POINTS][0] && player.volumes.lt(10)){
+        if (i == 0 && player.dimensions[DIMENSIONS_POINTS][0] && player.volumes.lt(10)) {
             player.volumes = E(10);
         }
-            player.dimensions[DIMENSIONS_POINTS][i] = player.dimensions[DIMENSIONS_POINTS][i]
+        player.dimensions[DIMENSIONS_POINTS][i] = player.dimensions[DIMENSIONS_POINTS][i]
             .add(
                 player.dimensions[DIMENSIONS_POINTS][i + 1]
                     .mul(player.dimensions[DIMENSIONS_MULTI][i + 1])
 
                     .mul(diff)
             );
-        if (player.dimensions[DIMENSIONS_POINTS][i].isNaN()){
+        if (player.dimensions[DIMENSIONS_POINTS][i].isNaN()) {
             player.dimensions[DIMENSIONS_POINTS][i] = E(0);
         }
     }
@@ -197,7 +202,7 @@ function upgradeTickspeed() {
 function calc_cost(dimid, count) {
     // count before buy
     // 1st dimension dimid = 0
-    if (count.gte("1e3")) {
+    if (count.gte("1e4")) {
         return E.POSITIVE_INFINITY
     }
     return dim_base_price[dimid].mul(dim_incre[dimid].pow(count.div(10).floor()))
@@ -206,78 +211,102 @@ function calc_cost(dimid, count) {
 function calc_tickspeed_cost() {
     return E.mul(1e3, E.pow(10, player.tickspeed));
 }
+function exportErrorLog(){
+    let str = `An error log happening at ${getCurrentBeijingTime()}
+traceback:
+${app.errortext.replaceAll("<br>","\n")}
 
+save:
+${JSON.stringify(player)}
+`
+    navigator.clipboard.writeText(str);
+}
 function loop() {
-    this_frame = Date.now()
-    player.time_now = this_frame;
+    try {
+        this_frame = Date.now()
+        player.time_now = this_frame;
 
-    window.diff = (this_frame - last_frame) / 1000 * developer.timeboost;
+        window.diff = (this_frame - last_frame) / 1000 * developer.timeboost;
 
-
-    player.time.eter += window.diff;
-    player.tickspeed_amount = E(1.15).add(E(0.05).mul(player.galaxy_count))
-   /* if (player.volumes.isNaN()){
-        player.volumes = E(10);
-    }*/
-    let more = player.dimensions[DIMENSIONS_POINTS][0]
-        .mul(player.dimensions[DIMENSIONS_MULTI][0])
-        .mul(diff);
-
-
-    player.volume_generated.mm4 = player.volume_generated.mm4.add(more);
-    player.volumes = player.volumes.add(
-        more
-    );
-    //MM35();
-    calculate_dim();
-
-    for (let i = 0; i < 8; i++) {
-        if (player.mm3_volumes.automation[i+1]){
-            buydim(i+1);
+        if (!player.dimensions[DIMENSIONS_POINTS][0].mul) {
+            fix();
         }
-        player.dimensions[DIMENSIONS_MULTI][i] = tmp.dimension.getDimMultiplier(i+1);
-        player.dimensions[DIMENSIONS_COST][i] = calc_cost(i, player.dimensions[DIMENSIONS_BOUGHT][i])
-    }
-    if (player.mm3_volumes.automation[9] && tmp.dimensionBoost.boostable){
-        dimensionBoost();
-    }
-    if (player.mm3_volumes.automation[10] && player.volumes.gte(calc_tickspeed_cost())){
-        upgradeTickspeed();
-    }
+        player.time.eter += window.diff;
+        player.tickspeed_amount = E(1.15).add(E(0.05).mul(player.galaxy_count))
+        /* if (player.volumes.isNaN()){
+             player.volumes = E(10);
+         }*/
+        let more = player.dimensions[DIMENSIONS_POINTS][0]
+            .mul(player.dimensions[DIMENSIONS_MULTI][0])
+            .mul(diff);
 
 
-    last_frame = this_frame
+        player.volume_generated.mm4 = player.volume_generated.mm4.add(more);
+        player.volumes = player.volumes.add(
+            more
+        );
+        //MM35();
+        calculate_dim();
+
+        for (let i = 0; i < 8; i++) {
+            if (player.mm3_volumes.automation[i + 1]) {
+                buydim(i + 1);
+            }
+            player.dimensions[DIMENSIONS_MULTI][i] = tmp.dimension.getDimMultiplier(i + 1);
+            player.dimensions[DIMENSIONS_COST][i] = calc_cost(i, player.dimensions[DIMENSIONS_BOUGHT][i])
+        }
+        if (player.mm3_volumes.automation[9] && tmp.dimensionBoost.boostable) {
+            dimensionBoost();
+        }
+        if (player.mm3_volumes.automation[10] && player.volumes.gte(calc_tickspeed_cost())) {
+            upgradeTickspeed();
+        }
+
+
+        last_frame = this_frame
+    }catch (e){
+        clearInterval(window.qqq);
+        clearInterval(window.www);
+        setErrorDial(e);
+        window.errorMessage = e;
+        console.log(e);
+    }
 }
 
-function toggleAutobuyer(i){
-    if (between(5,i,10) && !player.mm3_volumes.unl){
+function setErrorDial(q){
+    app.hasError = true;
+    app.errortext = q.stack.replaceAll("\n","<br>");
+}
+function toggleAutobuyer(i) {
+    if (between(5, i, 10) && !player.mm3_volumes.unl) {
         alert("Automator error: ???")
         return;
     }
-    if (between(5,i,8) && !hasMM3upgrade(12)){
+    if (between(5, i, 8) && !hasMM3upgrade(12)) {
         alert("你需要购买mm3 #12升级来切换")
     }
-    if (i=== 9 && !hasMM3upgrade(13)){
+    if (i === 9 && !hasMM3upgrade(13)) {
         alert("你需要购买mm3 #13升级来切换")
     }
-    if (i=== 10 && !hasMM3upgrade(21)){
+    if (i === 10 && !hasMM3upgrade(21)) {
         alert("你需要购买mm3 #21升级来切换")
     }
 
 
-    if (between(1,i,4)){
+    if (between(1, i, 4)) {
         player.mm3_volumes.automation[i] = !player.mm3_volumes.automation[i];
     }
-    if (between(5,i,8) && hasMM3upgrade(12)){
+    if (between(5, i, 8) && hasMM3upgrade(12)) {
         player.mm3_volumes.automation[i] = !player.mm3_volumes.automation[i];
     }
-    if (between(9,i,9) && hasMM3upgrade(13)){
+    if (between(9, i, 9) && hasMM3upgrade(13)) {
         player.mm3_volumes.automation[i] = !player.mm3_volumes.automation[i];
     }
-    if (between(10,i,10) && hasMM3upgrade(21)){
+    if (between(10, i, 10) && hasMM3upgrade(21)) {
         player.mm3_volumes.automation[i] = !player.mm3_volumes.automation[i];
     }
 }
+
 function buyAll() {
     upgradeTickspeed();
     buydim(1);
@@ -289,7 +318,6 @@ function buyAll() {
     buydim(7);
     buydim(8);
 }
-
 
 
 function dimensionGalaxy() {
@@ -346,16 +374,19 @@ function load() {
     window.www = setInterval(save, 1000);
     hasLoaded.status = true
 }
+
 var qqq;
 var www;
-function between(x,y,z){
+
+function between(x, y, z) {
     return x <= y && y <= z;
 }
-function getAchieve(id,condition){
-    if (player.achieve[id]){
+
+function getAchieve(id, condition) {
+    if (player.achieve[id]) {
         return true;
     }
-    if (condition){
+    if (condition) {
         player.achieve[id] = true;
         return true
     }
@@ -384,15 +415,17 @@ function loadVue() {
             ],
             save: "",
             isShowingPopup: false,
+            hasError:false,
+            errortext:"",
             changelogs: [
                 {
                     version: "v1.0.2.1", title: "等一下，我format_time.js忘记投了",
-                    changes:[
+                    changes: [
                         "修复了无法查看统计页面的bug"
                     ]
                 },
                 {
-                    version: "v1.0.2", title: "mm<sup>3</sup>" , changes: [
+                    version: "v1.0.2", title: "mm<sup>3</sup>", changes: [
                         "添加一个mm<sup>3</sup>升级",
                         "新闻限时回归",
                         "移除mm<sup>3.5</sup>",
@@ -401,17 +434,17 @@ function loadVue() {
                     ]
                 },
                 {
-                    version: "v1.0.1.2", title: "" ,changes: [
+                    version: "v1.0.1.2", title: "", changes: [
                         "不鸡丢"
                     ]
                 },
                 {
-                    version: "v1.0.1.1",title: "" , changes: [
+                    version: "v1.0.1.1", title: "", changes: [
                         "新闻列表重写"
                     ]
                 },
                 {
-                    version: "v1.0.1", title: "Vue!!!!!!" ,changes: [
+                    version: "v1.0.1", title: "Vue!!!!!!", changes: [
                         "使用Vue",
                         "体积菜单分两个",
                         "添加3.5维度",
@@ -423,7 +456,7 @@ function loadVue() {
                     ]
                 },
                 {
-                    version: "v1.0.0", title: "" ,changes: [
+                    version: "v1.0.0", title: "", changes: [
                         "添加第五维度",
                         "and a lot of..."
                     ]
@@ -450,17 +483,20 @@ function loadVue() {
 function speedrun(a) {
     alert("Speedrun is not allowed in the release version");
 }
+
 function get_mm4_vol(a) {
     alert("Get mm4 volume is not allowed in the release version");
 }
-function dev_reset_vol(){
+
+function dev_reset_vol() {
     player.volumes = E(10);
 }
+
 (() => {
     if (!location.hostname.endsWith("github.io")) {
         window.speedrun = function (timeBoost) {
             developer.timeboost = timeBoost;
-            if (isNaN(developer.timeboost)){
+            if (isNaN(developer.timeboost)) {
                 developer.timeboost = 1;
             }
         };

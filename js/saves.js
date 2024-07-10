@@ -67,13 +67,13 @@ function decodeBase64(input) {
     return decodeURIComponent(escape(atob(encoded)));
 }
 
-function export_copy() {
+function export_copy(pure) {
     return navigator.clipboard.writeText(formatsave.encode(player))
 
 }
 
 function export_file() {
-    let str = reverseString(encodeBase64(JSON.stringify(player)))
+    let str = formatsave.encode(player)
     let file = new Blob([str], {type: "text/plain"})
     window.URL = window.URL || window.webkitURL;
     let a = document.createElement("a")

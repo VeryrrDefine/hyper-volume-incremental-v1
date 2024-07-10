@@ -81,5 +81,6 @@ var tmp = {
         get gain(){
             return player.volumes.logarithm(10).sub(208.3).div(100).floor().max(0);
         },
+        confirm: 0
     }
 }

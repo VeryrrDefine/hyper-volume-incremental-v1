@@ -3,9 +3,9 @@ var mm3_opt = {
         [
             {
                 id: 10,
-                name: "自动化购买维度1-4",
-                cost: E(1),
-                unlock: true
+                name: "没啥用",
+                cost: E(0),
+                unlock: false
             },
             {
                 id: 11,
@@ -87,7 +87,12 @@ function hasMM3upgrade(i) {
 }
 
 function doMM3reset(){
+
     if (player.volumes.gte("1.797e308")) {
+        if (!player.mm3_volumes.unl && tmp.mm3.confirm<4){
+            tmp.mm3.confirm++
+            return;
+        }
         player.mm3_volumes.points = player.mm3_volumes.points.add(tmp.mm3.gain);
         player.volume_generated.mm3 = player.volume_generated.mm3.add(tmp.mm3.gain);
         more = E("0");
@@ -96,6 +101,7 @@ function doMM3reset(){
         player.galaxy_count = E("0");
         player.mm3_volumes.unl = true;
         player.tickspeed = E("0");
+        tmp.mm3.confirm = 0;
     }
 }
 function mm3FixOldSaves(){

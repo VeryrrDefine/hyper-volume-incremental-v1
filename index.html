@@ -24,228 +24,274 @@
     <script src="js/hotkey.js" defer></script>
     <script src="js/newsticker.js" defer></script>
     <script src="js/achievements.js" defer></script>
+    <script src="js/tooltip.js" defer></script>
 </head>
 <body>
 <div align="center">
     <div id="notify" class="hide"></div>
 </div>
+<div id="ap" style="display:none ">
+    <button @click="export_copy()">daochu</button>
+</div>
 <div id="app">
 
-    <div id="loader-overlay" v-if="!hasLoaded.status">
+    <!-- <div id="loader-overlay" v-if="!hasLoaded.status">
         <div class="loader-text" align="center">游戏加载中......<br><span
                 style='font-size: 18px'>这可能需要一些时间</span><br>
             <noscript>本游戏无法运行于无javacript的环境下！</noscript>
         </div>
-    </div>
-    <div class="popup center" v-if="isShowingPopup == 1">请输入存档<br>
-        <input v-model="save" placeholder="在此处键入存档"><br>
-        <button @click="importFromApp()" class="btn">导入</button>
-        <button @click="openPopup(0)" class="btn">close</button>
-    </div>
-    <div class="popup center" v-if="isShowingPopup == 2">请输入存档<br>
-        <input v-model="save" placeholder="在此处键入存档"><br>
-        <button @click="importFromApp()" class="btn">导入</button>
-        <button @click="openPopup(0)" class="btn">close</button>
-    </div>
-
-    <div class="center" :class="{top_1: true,usesticky: player.options.stickyDisplay}">
-        <newsticker v-if="player.options.showNewsTicker"></newsticker>
-        <div id="pts">
-            你有
-            <div class="pts-dis">{{ format(player.volumes) }} mm<sup>4</sup></div>
-            4维体积<br>
+    </div> -->
+    <div v-if="!hasError">
+        <div class="popup center" v-if="isShowingPopup == 1">请输入存档<br>
+            <input v-model="save" placeholder="在此处键入存档"><br>
+            <button @click="importFromApp()" class="btn">导入</button>
+            <button @click="openPopup(0)" class="btn">close</button>
         </div>
-        <div v-if="developer_mode">
-            <p class="center">距离上一次永恒已经过去了{{formatTime.fromSeconds(player.time.eter)}}</p>
-            <p class="center">游戏速度: {{developer.timeboost}}x</p>
-            <p class="center " v-if="tmp.dimensionBoost.boostable">你可以进行一次维度提升！</p>
+        <div class="popup center" v-if="isShowingPopup == 2">请输入存档<br>
+            <input v-model="save" placeholder="在此处键入存档"><br>
+            <button @click="importFromApp()" class="btn">导入</button>
+            <button @click="openPopup(0)" class="btn">close</button>
         </div>
-    </div>
-    <p class="center">
-        {{navigator.userAgent.includes("iPad") ? "iOS系统自带的浏览器可能不支持本游戏和PIR的新闻" : ""}}</p>
 
- 
-    <div v-if="developer_mode">
+        <div class="center" :class="{top_1: true,usesticky: player.options.stickyDisplay}">
+            <newsticker v-if="player.options.showNewsTicker"></newsticker>
+            <div id="pts">
+                你有
+                <div class="pts-dis">{{ format(player.volumes) }} mm<sup>4</sup></div>
+                4维体积<br>
+            </div>
+            <div v-if="developer_mode">
+                <p class="center">距离上一次永恒已经过去了{{formatTime.fromSeconds(player.time.eter)}}</p>
+                <p class="center">游戏速度: {{developer.timeboost}}x</p>
+                <p class="center " v-if="tmp.dimensionBoost.boostable">你可以进行一次维度提升！</p>
+            </div>
+        </div>
         <p class="center">
-            <del>本游戏内置了MathJax，\(g_{\omega}(10)=f_0(9)\)，但是这无关紧要</del>
-        </p>
-    </div>
-    <div class="center">
-        <button class="btn" @click="tabShow = '1'" :disabled="inTab(1)">主要</button>
-        <button class="btn" @click="tabShow = '11'" :disabled="inTab(2)" v-if="player.mm3_volumes.unl">3维体积</button>
-        <button class="btn" @click="tabShow = '21'" :disabled="inTab(3)">选项</button>
-        <button class="btn" :style="{background: getUndulatingColor(1)}" v-if='developer_mode'
-                @click="tabShow = '114511'" :disabled="inTab(11451)">debug
-        </button>
+            {{navigator.userAgent.includes("iPad") ? "iOS系统自带的浏览器可能不支持本游戏和PIR的新闻" : ""}}</p>
 
-    </div>
 
-    <br>
-    <div class="center">
-        <button class="btn" v-if="inTab(1)" @click="tabShow = '1'" :disabled="tabShow==='1'">4维</button>
-        <button class="btn" v-if="inTab(1)" @click="tabShow = '4'" :disabled="tabShow==='4'">成就</button>
-        <button class="btn" v-if="inTab(1)" @click="tabShow = '5'" :disabled="tabShow==='5'">自动化</button>
-        <button class="btn" v-if="inTab(2)" @click="tabShow = '11'" :disabled="tabShow==='11'">升级</button>
-        <button class="btn" v-if="inTab(3)" @click="tabShow = '21'" :disabled="tabShow==='21'">保存</button>
-        <button class="btn" v-if="inTab(3)" @click="tabShow = '22'" :disabled="tabShow==='22'">关于</button>
-        <button class="btn" v-if="inTab(3)" @click="tabShow = '23'" :disabled="tabShow==='23'">统计</button>
-        <button class="btn" v-if="inTab(3)" @click="tabShow = '24'" :disabled="tabShow==='24'">显示</button>
-        <!--            <button class="btn" @click="tabShow = '3'" :disabled="tabShow==='3'">3.5维</button>-->
-
-    </div>
-    <br>
-    <div class="center" v-if="tabShow==='1'">
-        <p>Tickspeed 速度: x{{format(player.tickspeed_amount)}}每一个Tickspeed升级</p>
-        <p>Tickspeed使维度使维度x{{format(tmp.tickspeed.effect)}}<span class="soft"
-                                                                       v-if="player.tickspeed.gte(1000)">(受软上限限制)</span>
-        </p>
-        <button class="btn" :disabled="player.volumes.lt(calc_tickspeed_cost())" @click="upgradeTickspeed()">
-            Tickspeed: {{ formatWhole(player.tickspeed)}}<br>需要{{ formatWhole(calc_tickspeed_cost())}}
-            mm<sup>4</sup></button>
-        <button class="btn" @click="buyAll()">全部最大 (M)</button>
-        <div v-for="dim in dimensions" :key="dim.id">
-            <div class="dimension" v-if="!(player.dim_boost.add(4).lte(dim.id-1))">
-                {{ dim.label }}{{ dim.id }}
-                <span>{{ format(player.dimensions[DIMENSIONS_POINTS][dim.id - 1]) }}</span>
-                x<span>{{ format(player.dimensions[DIMENSIONS_MULTI][dim.id - 1]) }}</span>
-                <span>{{ format(player.dimensions[DIMENSIONS_BOUGHT][dim.id - 1]) }}</span>
-                <br>
-                <span>价格：{{ format(player.dimensions[DIMENSIONS_COST][dim.id - 1]) }} mm<sup>4</sup></span>
-                <button class="btn" :disabled="!buyable(dim.id)" @click="buydim(dim.id)">购买</button>
-            </div>
-            <div class="dimension locked" v-else-if="player.dim_boost.add(4).lte(dim.id-1)">
-                需要维度提升
-            </div>
-            <br>
+        <div v-if="developer_mode">
+            <p class="center">
+                <del>本游戏内置了MathJax，\(g_{\omega}(10)=f_0(9)\)，但是这无关紧要</del>
+            </p>
         </div>
-        <button class="btn"
-                :disabled="!tmp.dimensionBoost.boostable" @click="dimensionBoost()">
-            <span v-if="tmp.dimensionBoost.softcapped">折算|</span>维度提升(<span
-        >{{ formatWhole(player.dim_boost) }}</span>)<br>重置维度，tickspeed<br><span
-                v-html="boost_reward_desc()"></span>
-        </button>
-        <button class="btn" :disabled="!tmp.galaxy.galaxyable"
-                @click="dimensionGalaxy()" v-html="getGalaxyText()">
-        </button>
-        <br>
-        <button class="btn" @click="doMM3reset()"
-
-                :disabled="player.volumes.lt('1.797e308')" v-html="getMM3resetButton()">???
-        </button>
-        <br>
-    </div>
-    <div class="center" v-if="tabShow==='5'">
-        <div v-for="dim in dimensions" :key="dim.id">
-            <button class="btn" @click="toggleAutobuyer(dim.id)">
-                {{dim.label}}
-                自动化: {{getOpenClose(player.mm3_volumes.automation[dim.id])}}
+        <div class="center">
+            <button class="btn" @click="tabShow = '1'" :disabled="inTab(1)">主要</button>
+            <button class="btn" @click="tabShow = '11'" :disabled="inTab(2)" v-if="player.mm3_volumes.unl">3维体积</button>
+            <button class="btn" @click="tabShow = '21'" :disabled="inTab(3)">选项</button>
+            <button class="btn" :style="{background: getUndulatingColor(1)}" v-if='developer_mode'
+                    @click="tabShow = '114511'" :disabled="inTab(11451)">debug
             </button>
 
         </div>
-        <button class="btn" @click="toggleAutobuyer(9)">维度提升
-            自动化：{{getOpenClose(player.mm3_volumes.automation[9])}}
-        </button>
-        <button class="btn" @click="toggleAutobuyer(10)">tickspeed
-            自动化：{{getOpenClose(player.mm3_volumes.automation[10])}}
-        </button>
 
-    </div>
-    <!--<div v-if="tabShow==='3'">
-        <p>你有 <span>{{format(player.mm3o5_volumes.points)}}</span> mm<sup>3.5</sup>
-            3.5维体积(每秒x<span>{{format(getMM3o5speed())}}</span>)</p>
-        <p>达到<span to-format-4>1e120</span> 4维体积后，你的3.5维体积将开始自我复制！</p>
-        <p>
-            你的3.5维体积使购买10个的倍率+<span>{{format(player.mm3o5_volumes.points.logarithm("100").div(10).minimum("1.5"))}}</span>
-        </p>
-        <p class="corrupted">ERROR: 由于小数维度，无法推测单位换算关系</p>
-    </div>-->
-    <div class="center" v-if="tabShow==='4'">
-        <div>
-            <div v-for="achieve_list in achieves">
-                <div v-for="achieve in achieve_list">
-                    {{achieve.id}}
-                    {{achieve.label}}
-                    <span v-if="achieve.unlock">已完成</span>
+        <br>
+        <div class="center">
+            <button class="btn" v-if="inTab(1)" @click="tabShow = '1'" :disabled="tabShow==='1'">4维</button>
+            <button class="btn" v-if="inTab(1)" @click="tabShow = '4'" :disabled="tabShow==='4'">成就</button>
+            <button class="btn" v-if="inTab(1)" @click="tabShow = '5'" :disabled="tabShow==='5'">自动化</button>
+            <button class="btn" v-if="inTab(2)" @click="tabShow = '11'" :disabled="tabShow==='11'">升级</button>
+            <button class="btn" v-if="inTab(3)" @click="tabShow = '21'" :disabled="tabShow==='21'">保存</button>
+            <button class="btn" v-if="inTab(3)" @click="tabShow = '22'" :disabled="tabShow==='22'">关于</button>
+            <button class="btn" v-if="inTab(3)" @click="tabShow = '23'" :disabled="tabShow==='23'">统计</button>
+            <button class="btn" v-if="inTab(3)" @click="tabShow = '24'" :disabled="tabShow==='24'">显示</button>
+            <!--            <button class="btn" @click="tabShow = '3'" :disabled="tabShow==='3'">3.5维</button>-->
 
+        </div>
+        <br>
+        <div class="center" v-if="tabShow==='1'">
+            <p>Tickspeed 速度: x{{format(player.tickspeed_amount)}}每一个Tickspeed升级</p>
+            <p>Tickspeed使维度使维度x{{format(tmp.tickspeed.effect)}}<span class="soft"
+                                                                           v-if="player.tickspeed.gte(1000)">(受软上限限制)</span>
+            </p>
+            <button class="btn" v-if="tmp.mm3.confirm<4" :disabled="player.volumes.lt(calc_tickspeed_cost())" @click="upgradeTickspeed()">
+                Tickspeed: {{ formatWhole(player.tickspeed)}}<br>需要{{ formatWhole(calc_tickspeed_cost())}}
+                mm<sup>4</sup></button>
+            <button class="btn" @click="buyAll()">全部最大 (M)</button>
+            <div v-for="dim in dimensions" v-if="tmp.mm3.confirm<3" :key="dim.id">
+                <div class="dimension" v-if="!(player.dim_boost.add(4).lte(dim.id-1))">
+                    {{ dim.label }}{{ dim.id }}
+                    <span>{{ format(player.dimensions[DIMENSIONS_POINTS][dim.id - 1]) }}</span>
+                    x<span>{{ format(player.dimensions[DIMENSIONS_MULTI][dim.id - 1]) }}</span>
+                    <span>{{ format(player.dimensions[DIMENSIONS_BOUGHT][dim.id - 1]) }}</span>
+                    <br>
+                    <span>价格：{{ format(player.dimensions[DIMENSIONS_COST][dim.id - 1]) }} mm<sup>4</sup></span>
+                    <button class="btn" :disabled="!buyable(dim.id)" @click="buydim(dim.id)">购买</button>
+                </div>
+                <div class="dimension locked" v-else-if="player.dim_boost.add(4).lte(dim.id-1)">
+                    需要维度提升
+                </div>
+                <br>
+            </div>
+            <button class="btn" v-if="tmp.mm3.confirm<2"
+                    :disabled="!tmp.dimensionBoost.boostable" @click="dimensionBoost()">
+                <span v-if="tmp.dimensionBoost.softcapped">折算|</span>维度提升(<span
+            >{{ formatWhole(player.dim_boost) }}</span>)<br>重置维度，tickspeed<br><span
+                    v-html="boost_reward_desc()"></span>
+            </button>
+            <button class="btn" :disabled="!tmp.galaxy.galaxyable" v-if="tmp.mm3.confirm<1"
+                    @click="dimensionGalaxy()" v-html="getGalaxyText()">
+            </button>
+            <br>
+            <button class="btn" @click="doMM3reset()"
+
+                    :disabled="player.volumes.lt('1.797e308')" v-html="getMM3resetButton()">???
+            </button>
+            <br>
+            <div style="color:red">
+                <p v-if="tmp.mm3.confirm===1">
+                    The button will reset your mm<sup>4</sup> volumes, Dim. boosts, Dim. galaxies, and tickspeed.
+                </p>
+                <p v-if="tmp.mm3.confirm===2">
+                    But it'll give you <span style="color: #ff0">{{format(tmp.mm3.gain)}} mm<sup>3</sup></span> volumes.
+                </p>
+                <p v-if="tmp.mm3.confirm===3" class="corrupted">
+                    Do you want to reset?<br>
+                    <button @click="tmp.mm3.confirm=0" class="btn">---</button>
+                </p>
+                <div v-if="tmp.mm3.confirm===4" class="corrupted">
+                    <div style="font-family: Wingdings">
+                        ARE YOU SURE<br>
+                        ARE YOU SURE<br>
+                        ARE YOU SURE<br>
+                        ARE YOU SURE<br>
+                        ARE YOU SURE<br>
+                        ARE YOU SURE<br>
+                        ARE YOU SURE<br>
+                        ARE YOU SURE<br>
+                        ARE YOU SURE<br>
+                        ARE YOU SURE<br>
+                        ARE YOU SURE<br>
+                        ARE YOU SURE<br>
+                        ARE YOU SURE<br>
+                        ARE YOU SURE<br>
+                        ARE YOU SURE<br>
+                        ARE YOU SURE<br>
+                        ARE YOU SURE<br>
+                        ARE YOU SURE<br>
+                        ARE YOU SURE<br>
+                        ARE YOU SURE<br>
+                        ARE YOU SURE<br>
+                        ARE YOU SURE<br>
+                    </div>
+                    <br>
+                    <button @click="tmp.mm3.confirm=0" class="btn">---</button>
                 </div>
             </div>
         </div>
+        <div class="center" v-if="tabShow==='5'">
+            <div v-for="dim in dimensions" :key="dim.id">
+                <button class="btn" @click="toggleAutobuyer(dim.id)">
+                    {{dim.label}}
+                    自动化: {{getOpenClose(player.mm3_volumes.automation[dim.id])}}
+                </button>
 
-    </div>
-    <div v-if="['11','12','13'].includes(tabShow)" class="center">
-        <span>你有{{format(player.mm3_volumes.points)}} mm<sup>3</sup> 3维空间</span>
-        <div v-if="tabShow=='11'">
-            <table class="center">
-                <tr v-for="upgrade_hang in mm3.upgrades">
-                    <td v-for="upgrade in upgrade_hang">
-                        <button :class="{mm3_upgrades:true,mm3_upgrades_bought: hasMM3upgrade(upgrade.id)}"
-                                @click="buyMM3upgrade(upgrade.id)" v-if="upgrade.unlock">
+            </div>
+            <button class="btn" @click="toggleAutobuyer(9)">维度提升
+                自动化：{{getOpenClose(player.mm3_volumes.automation[9])}}
+            </button>
 
-                            #<span v-html="upgrade.id"></span><br><span v-html="upgrade.name"></span><br>
-                            价格：{{format(upgrade.cost)}} mm<sup>3</sup><br>
-                        </button>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-    <div v-if="['21','22','23','24'].includes(tabShow)" class="center">
-
-        <div v-if="tabShow=='21'">
-            <button class="btn" @click="export_copy()">导出</button>
-
-            <button class="btn" @click="export_file()">导出为文件</button>
-
-            <button class="btn" @click="import_save()">导入</button>
-
-            <button class="btn" @click="import_file()">以文件导入</button>
-
-            <button class="btn" @click="formated_hard_reset()">
-                硬重置
+            <button class="btn" @click="toggleAutobuyer(10)">tickspeed
+                自动化：{{getOpenClose(player.mm3_volumes.automation[10])}}
             </button>
 
         </div>
-        <div v-if="tabShow=='23'">
-            距离上一次永恒已经过去了{{formatTime.fromSeconds(player.time.eter)}}<br>
-            你总共制造了{{format(player.volume_generated.mm4)}} mm<sup>4</sup> 4维体积;<br>
-        </div>
-        <div v-if="tabShow=='22'">
-            <!--<button class="btn" onclick="window.open('saving_center.php')" id="saving_cent_btn">存档银行</button>
-    -->
-            <div style="color:red">
-                快捷键:<br>
-                M: 最大化<br>
-                D: 进行一次维度提升<br>
+        <!--<div v-if="tabShow==='3'">
+            <p>你有 <span>{{format(player.mm3o5_volumes.points)}}</span> mm<sup>3.5</sup>
+                3.5维体积(每秒x<span>{{format(getMM3o5speed())}}</span>)</p>
+            <p>达到<span to-format-4>1e120</span> 4维体积后，你的3.5维体积将开始自我复制！</p>
+            <p>
+                你的3.5维体积使购买10个的倍率+<span>{{format(player.mm3o5_volumes.points.logarithm("100").div(10).minimum("1.5"))}}</span>
+            </p>
+            <p class="corrupted">ERROR: 由于小数维度，无法推测单位换算关系</p>
+        </div>-->
+        <div class="center" v-if="tabShow==='4'">
+            <div>
+                <div v-for="achieve_list in achieves">
+                    <div v-for="achieve in achieve_list">
+                        {{achieve.id}}
+                        {{achieve.label}}
+                        <span v-if="achieve.unlock">已完成</span>
+
+                    </div>
+                </div>
             </div>
-            当前版本：v1.0.3<br>
-            游戏作者：VeryrrDefine<br>
-            本游戏使用了<a href="https://github.com/Naruyoko/ExpantaNum.js" target="_blank">Naruyoko/ExpantaNum.js</a>
-            <a
-                    href="https://github.com/cloudytheconqueror/letter-notation-format"
-                    target="_blank">cloudytheconqueror/letter-notation-format</a>来处理大数字<br>
 
-            支持所有序数增量吧吧友，你可以点击链接来游玩吧友们自制的增量游戏：<br>
-            <a href="https://seanxlx2011.github.io/" target="_blank" style="color: #00ff80;">数据增量重制版IDR</a>、
-            <a href="https://0i00000000a7.github.io/points-incremental-rewritten/" target="_blank"
-               style="color: #00ff80;">点数增量重制版PIR</a>、
-            <a href="https://aster131072.github.io/incremental_evolution/" target="_blank"
-               style="color: #00ff80;">增量进化IE</a>、
-            <a href="https://dlsdl.github.io/wind_spirit_creation/" target="_blank"
-               style="color: #00ff80;">风灵作成WSC</a>、
-            <a href="https://qqqe308.github.io/The-Rhythm-Game-Tree/" target="_blank"
-               style="color: #00ff80;">音乐游戏树TRGT</a>
-            <br>
-            <del>拿0100000000a7的游戏的CSS改的</del>
-            <br>
-            <del>绝对没有</del>
-            <br>
-            <h1>-----更新日志-----</h1>
-            <div v-for="changelog in changelogs">
-                <h2><span v-html="changelog.version"></span> <span v-html="changelog.title"></span></h2>
+        </div>
+        <div v-if="['11','12','13'].includes(tabShow)" class="center">
+            <span>你有{{format(player.mm3_volumes.points)}} mm<sup>3</sup> 3维空间</span>
+            <div v-if="tabShow=='11'">
+                <table class="center">
+                    <tr v-for="upgrade_hang in mm3.upgrades">
+                        <td v-for="upgrade in upgrade_hang">
+                            <button :class="{mm3_upgrades:true,mm3_upgrades_bought: hasMM3upgrade(upgrade.id)}"
+                                    @click="buyMM3upgrade(upgrade.id)" v-if="upgrade.unlock">
 
-                <p v-for="text in changelog.changes" v-html="text"></p>
+                                #<span v-html="upgrade.id"></span><br><span v-html="upgrade.name"></span><br>
+                                价格：{{format(upgrade.cost)}} mm<sup>3</sup><br>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div v-if="['21','22','23','24'].includes(tabShow)" class="center">
 
-            </div><!--
+            <div v-if="tabShow=='21'">
+                <button class="btn" @click="export_copy()">导出</button>
+
+                <button class="btn" @click="export_file()">导出为文件</button>
+
+                <button class="btn" @click="import_save()">导入</button>
+
+                <button class="btn" @click="import_file()">以文件导入</button>
+
+                <button class="btn" @click="formated_hard_reset()">
+                    硬重置
+                </button>
+
+            </div>
+            <div v-if="tabShow=='23'">
+                距离上一次永恒已经过去了{{formatTime.fromSeconds(player.time.eter)}}<br>
+                你总共制造了{{format(player.volume_generated.mm4)}} mm<sup>4</sup> 4维体积;<br>
+            </div>
+            <div v-if="tabShow=='22'">
+                <!--<button class="btn" onclick="window.open('saving_center.php')" id="saving_cent_btn">存档银行</button>
+        -->
+                <div style="color:red">
+                    快捷键:<br>
+                    M: 最大化<br>
+                    D: 进行一次维度提升<br>
+                </div>
+                当前版本：v1.0.3<br>
+                游戏作者：VeryrrDefine<br>
+                本游戏使用了<a href="https://github.com/Naruyoko/ExpantaNum.js" target="_blank">Naruyoko/ExpantaNum.js</a>
+                <a
+                        href="https://github.com/cloudytheconqueror/letter-notation-format"
+                        target="_blank">cloudytheconqueror/letter-notation-format</a>来处理大数字<br>
+
+                支持所有序数增量吧吧友，你可以点击链接来游玩吧友们自制的增量游戏：<br>
+                <a href="https://seanxlx2011.github.io/" target="_blank" style="color: #00ff80;">数据增量重制版IDR</a>、
+                <a href="https://0i00000000a7.github.io/points-incremental-rewritten/" target="_blank"
+                   style="color: #00ff80;">点数增量重制版PIR</a>、
+                <a href="https://aster131072.github.io/incremental_evolution/" target="_blank"
+                   style="color: #00ff80;">增量进化IE</a>、
+                <a href="https://dlsdl.github.io/wind_spirit_creation/" target="_blank"
+                   style="color: #00ff80;">风灵作成WSC</a>、
+                <a href="https://qqqe308.github.io/The-Rhythm-Game-Tree/" target="_blank"
+                   style="color: #00ff80;">音乐游戏树TRGT</a>
+                <br>
+                <del>拿0100000000a7的游戏的CSS改的</del>
+                <br>
+                <del>绝对没有</del>
+                <br>
+                <h1>-----更新日志-----</h1>
+                <div v-for="changelog in changelogs">
+                    <h2><span v-html="changelog.version"></span> <span v-html="changelog.title"></span></h2>
+
+                    <p v-for="text in changelog.changes" v-html="text"></p>
+
+                </div><!--
             <div>
                 <h3>v1.0.1</h3>
 
@@ -328,36 +374,50 @@
                 <p>添加了黑洞吞噬</p>
             </div>
             -->
+            </div>
+            <div v-if="tabShow=='24'">
+                <button @click="toggleNewsTicker()" class="btn">开启新闻： {{getOpenClose(player.options.showNewsTicker)}}
+                </button>
+                <button @click="toggleStickyDisplay()" class="btn">开启粘性定位：
+                    {{getOpenClose(player.options.stickyDisplay)}}
+                </button>
+            </div>
         </div>
-        <div v-if="tabShow=='24'">
-            <button @click="toggleNewsTicker()" class="btn">开启新闻： {{getOpenClose(player.options.showNewsTicker)}}
-            </button>
-            <button @click="toggleStickyDisplay()" class="btn">开启粘性定位：
-                {{getOpenClose(player.options.stickyDisplay)}}
+        <div v-if="['114511'].includes(tabShow)" class="center">
+            <button class="btn" @click="speedrun(1)">游戏速度 1x</button>
+            <button class="btn" @click="speedrun(10)">游戏速度 10x</button>
+            <button class="btn" @click="speedrun(50)">游戏速度 50x</button>
+            <button class="btn" @click="speedrun(100)">游戏速度 100x</button>
+            <button class="btn" @click="speedrun(1000)">游戏速度 1000x</button>
+            <br>
+
+            <button class="btn" @click="fast_hard_reset()">快速硬重置</button>
+            <br>
+            <button class="btn" @click="dev_reset_vol()">重置体积</button>
+            <br>
+            <button class="btn" @click="player.mm3_volumes.unl = true">解锁mm<sup>3</sup></button>
+            <br>
+            <button class="btn" @click="addNotify('test notify')">show notify</button>
+            <label>
+                <button class="btn" @click="get_mm4_vol()">获取<span v-html="developer_get_mm4"></span> mm<sup>4</sup>4维体积如果可以：
+                </button>
+                <input type="text" v-model:value="developer_get_mm4">
+            </label>
+            <button class="square tooltipBox" @click="buyPMP(1)">
+                <div class="tooltip">
+                    对你的点数<sup>2</sup>进行因式分解以获取1点数×点数
+                </div>
+                获取1点数×点数<br>要求：点数<sup>2</sup>
             </button>
         </div>
+
     </div>
-    <div v-if="['114511'].includes(tabShow)" class="center">
-        <button class="btn" @click="speedrun(1)">游戏速度 1x</button>
-        <button class="btn" @click="speedrun(10)">游戏速度 10x</button>
-        <button class="btn" @click="speedrun(50)">游戏速度 50x</button>
-        <button class="btn" @click="speedrun(100)">游戏速度 100x</button>
-        <button class="btn" @click="speedrun(1000)">游戏速度 1000x</button>
-        <br>
-
-        <button class="btn" @click="fast_hard_reset()">快速硬重置</button>
-        <br>
-        <button class="btn" @click="dev_reset_vol()">重置体积</button>
-        <br>
-        <button class="btn" @click="player.mm3_volumes.unl = true">解锁mm<sup>3</sup></button>
-        <br>
-        <button class="btn" @click="addNotify('test notify')">show notify</button>
-        <label>
-            <button class="btn" @click="get_mm4_vol()">获取<span v-html="developer_get_mm4"></span> mm<sup>4</sup>4维体积如果可以：
-            </button>
-            <input type="text" v-model:value="developer_get_mm4">
-        </label>
-
+    <div v-else>
+        <h1 style="color: red">There was a error!</h1>
+        <div v-html="errortext"></div><br>
+        <button @click="exportErrorLog()" class="btn">Export error log</button>
+        <button @click="location.replace('https://tieba.baidu.com/p/9046407432')" class="btn">Report to the Developer(tieba)</button>
+        <button @click="import_str(prompt('import:'))" class="btn">Import save using pure JSON</button>
     </div>
 
 </div>
