@@ -1,425 +1,80 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/a.css">
-    <title>多维体积增量 - Page Rewritten</title>
-    <script src="js/technical/hotkeys.js" defer></script>
-    <script src="js/technical/ExpantaNum.js" defer></script>
-    <script src="js/technical/format_expantanum.js" defer></script>
-    <script src="js/technical/pako.js" defer></script>
-    <script src="js/technical/vue.js" defer></script>
-    <script src="js/temp.js" defer></script>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src data:; connect-src 'self'">
+    <title>Site not found &middot; #&$*%# Pages</title>
+    <style type="text/css" media="screen">
+        body {
+            background-color: #f1f1f1;
+            margin: 0;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
 
-    <script src="js/init.js" defer></script>
-    <script src="js/display.js" defer></script>
-    <script src="js/mm3.js" defer></script>
-    <script id="MathJax-script" src="https://cdn.bootcss.com/mathjax/3.0.5/es5/tex-mml-chtml.js"></script>
+        .container { margin: 50px auto 40px auto; width: 600px; text-align: center; }
 
-    <script src="js/script.js" defer></script>
-    <script src="js/format_time.js" defer></script>
-    <script src="js/saves.js" defer></script>
-    <script src="js/hotkey.js" defer></script>
-    <script src="js/newsticker.js" defer></script>
-    <script src="js/achievements.js" defer></script>
-    <script src="js/tooltip.js" defer></script>
+        a { color: #4183c4; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        h1 { width: 800px; position:relative; left: -100px; letter-spacing: -1px; line-height: 60px; font-size: 60px; font-weight: 100; margin: 0px 0 50px 0; text-shadow: 0 1px 0 #fff; }
+        p { color: rgba(0, 0, 0, 0.5); margin: 20px 0; line-height: 1.6; }
+
+        ul { list-style: none; margin: 25px 0; padding: 0; }
+        li { display: table-cell; font-weight: bold; width: 1%; }
+
+        .logo { display: inline-block; margin-top: 35px; }
+        .logo-img-2x { display: none; }
+        @media
+        only screen and (-webkit-min-device-pixel-ratio: 2),
+        only screen and (   min--moz-device-pixel-ratio: 2),
+        only screen and (     -o-min-device-pixel-ratio: 2/1),
+        only screen and (        min-device-pixel-ratio: 2),
+        only screen and (                min-resolution: 192dpi),
+        only screen and (                min-resolution: 2dppx) {
+            .logo-img-1x { display: none; }
+            .logo-img-2x { display: inline-block; }
+        }
+
+        #suggestions {
+            margin-top: 35px;
+            color: #ccc;
+        }
+        #suggestions a {
+            color: #666666;
+            font-weight: 200;
+            font-size: 14px;
+            margin: 0 10px;
+        }
+
+    </style>
 </head>
 <body>
-<div align="center">
-    <div id="notify" class="hide"></div>
-</div>
-<div id="ap" style="display:none ">
-    <button @click="export_copy()">daochu</button>
-</div>
-<div id="app">
 
-    <!-- <div id="loader-overlay" v-if="!hasLoaded.status">
-        <div class="loader-text" align="center">游戏加载中......<br><span
-                style='font-size: 18px'>这可能需要一些时间</span><br>
-            <noscript>本游戏无法运行于无javacript的环境下！</noscript>
-        </div>
-    </div> -->
-    <div v-if="!hasError">
-        <div class="popup center" v-if="isShowingPopup == 1">请输入存档<br>
-            <input v-model="save" placeholder="在此处键入存档"><br>
-            <button @click="importFromApp()" class="btn">导入</button>
-            <button @click="openPopup(0)" class="btn">close</button>
-        </div>
-        <div class="popup center" v-if="isShowingPopup == 2">请输入存档<br>
-            <input v-model="save" placeholder="在此处键入存档"><br>
-            <button @click="importFromApp()" class="btn">导入</button>
-            <button @click="openPopup(0)" class="btn">close</button>
-        </div>
+<div class="container">
 
-        <div class="center" :class="{top_1: true,usesticky: player.options.stickyDisplay}">
-            <newsticker v-if="player.options.showNewsTicker"></newsticker>
-            <div id="pts">
-                你有
-                <div class="pts-dis">{{ format(player.volumes) }} mm<sup>4</sup></div>
-                4维体积<br>
-            </div>
-            <div v-if="developer_mode">
-                <p class="center">距离上一次永恒已经过去了{{formatTime.fromSeconds(player.time.eter)}}</p>
-                <p class="center">游戏速度: {{developer.timeboost}}x</p>
-                <p class="center " v-if="tmp.dimensionBoost.boostable">你可以进行一次维度提升！</p>
-            </div>
-        </div>
-        <p class="center">
-            {{navigator.userAgent.includes("iPad") ? "iOS系统自带的浏览器可能不支持本游戏和PIR的新闻" : ""}}</p>
+    <h1>404</h1>
+    <p><strong>There was a #&$*%# Pages site here but now it isn't.</strong></p>
 
+    <p>
+        $& @*$'#$ @*$(%* @( )$*%(#* #*$,
+        <a href="https://help.github.com/pages/">read the full #&$*#&$*#*$(@</a>
+        to learn how to set up <strong>#&$*%# Pages</strong>
+        for your #&$*$(#*$(, #&$*@(#)$*#(, or #$($ $#($*$(.
+    </p>
 
-        <div v-if="developer_mode">
-            <p class="center">
-                <del>本游戏内置了MathJax，\(g_{\omega}(10)=f_0(9)\)，但是这无关紧要</del>
-            </p>
-        </div>
-        <div class="center">
-            <button class="btn" @click="tabShow = '1'" :disabled="inTab(1)">主要</button>
-            <button class="btn" @click="tabShow = '11'" :disabled="inTab(2)" v-if="player.mm3_volumes.unl">3维体积</button>
-            <button class="btn" @click="tabShow = '21'" :disabled="inTab(3)">选项</button>
-            <button class="btn" :style="{background: getUndulatingColor(1)}" v-if='developer_mode'
-                    @click="tabShow = '114511'" :disabled="inTab(11451)">debug
-            </button>
-
-        </div>
-
-        <br>
-        <div class="center">
-            <button class="btn" v-if="inTab(1)" @click="tabShow = '1'" :disabled="tabShow==='1'">4维</button>
-            <button class="btn" v-if="inTab(1)" @click="tabShow = '4'" :disabled="tabShow==='4'">成就</button>
-            <button class="btn" v-if="inTab(1)" @click="tabShow = '5'" :disabled="tabShow==='5'">自动化</button>
-            <button class="btn" v-if="inTab(2)" @click="tabShow = '11'" :disabled="tabShow==='11'">升级</button>
-            <button class="btn" v-if="inTab(3)" @click="tabShow = '21'" :disabled="tabShow==='21'">保存</button>
-            <button class="btn" v-if="inTab(3)" @click="tabShow = '22'" :disabled="tabShow==='22'">关于</button>
-            <button class="btn" v-if="inTab(3)" @click="tabShow = '23'" :disabled="tabShow==='23'">统计</button>
-            <button class="btn" v-if="inTab(3)" @click="tabShow = '24'" :disabled="tabShow==='24'">显示</button>
-            <!--            <button class="btn" @click="tabShow = '3'" :disabled="tabShow==='3'">3.5维</button>-->
-
-        </div>
-        <br>
-        <div class="center" v-if="tabShow==='1'">
-            <p>Tickspeed 速度: x{{format(player.tickspeed_amount)}}每一个Tickspeed升级</p>
-            <p>Tickspeed使维度使维度x{{format(tmp.tickspeed.effect)}}<span class="soft"
-                                                                           v-if="player.tickspeed.gte(1000)">(受软上限限制)</span>
-            </p>
-            <button class="btn" v-if="tmp.mm3.confirm<4" :disabled="player.volumes.lt(calc_tickspeed_cost())" @click="upgradeTickspeed()">
-                Tickspeed: {{ formatWhole(player.tickspeed)}}<br>需要{{ formatWhole(calc_tickspeed_cost())}}
-                mm<sup>4</sup></button>
-            <button class="btn" @click="buyAll()">全部最大 (M)</button>
-            <div v-for="dim in dimensions" v-if="tmp.mm3.confirm<3" :key="dim.id">
-                <div class="dimension" v-if="!(player.dim_boost.add(4).lte(dim.id-1))">
-                    {{ dim.label }}{{ dim.id }}
-                    <span>{{ format(player.dimensions[DIMENSIONS_POINTS][dim.id - 1]) }}</span>
-                    x<span>{{ format(player.dimensions[DIMENSIONS_MULTI][dim.id - 1]) }}</span>
-                    <span>{{ format(player.dimensions[DIMENSIONS_BOUGHT][dim.id - 1]) }}</span>
-                    <br>
-                    <span>价格：{{ format(player.dimensions[DIMENSIONS_COST][dim.id - 1]) }} mm<sup>4</sup></span>
-                    <button class="btn" :disabled="!buyable(dim.id)" @click="buydim(dim.id)">购买</button>
-                </div>
-                <div class="dimension locked" v-else-if="player.dim_boost.add(4).lte(dim.id-1)">
-                    需要维度提升
-                </div>
-                <br>
-            </div>
-            <button class="btn" v-if="tmp.mm3.confirm<2"
-                    :disabled="!tmp.dimensionBoost.boostable" @click="dimensionBoost()">
-                <span v-if="tmp.dimensionBoost.softcapped">折算|</span>维度提升(<span
-            >{{ formatWhole(player.dim_boost) }}</span>)<br>重置维度，tickspeed<br><span
-                    v-html="boost_reward_desc()"></span>
-            </button>
-            <button class="btn" :disabled="!tmp.galaxy.galaxyable" v-if="tmp.mm3.confirm<1"
-                    @click="dimensionGalaxy()" v-html="getGalaxyText()">
-            </button>
-            <br>
-            <button class="btn" @click="doMM3reset()"
-
-                    :disabled="player.volumes.lt('1.797e308')" v-html="getMM3resetButton()">???
-            </button>
-            <br>
-            <div style="color:red">
-                <p v-if="tmp.mm3.confirm===1">
-                    The button will reset your mm<sup>4</sup> volumes, Dim. boosts, Dim. galaxies, and tickspeed.
-                </p>
-                <p v-if="tmp.mm3.confirm===2">
-                    But it'll give you <span style="color: #ff0">{{format(tmp.mm3.gain)}} mm<sup>3</sup></span> volumes.
-                </p>
-                <p v-if="tmp.mm3.confirm===3" class="corrupted">
-                    Do you want to reset?<br>
-                    <button @click="tmp.mm3.confirm=0" class="btn">---</button>
-                </p>
-                <div v-if="tmp.mm3.confirm===4" class="corrupted">
-                    <div style="font-family: Wingdings">
-                        ARE YOU SURE<br>
-                        ARE YOU SURE<br>
-                        ARE YOU SURE<br>
-                        ARE YOU SURE<br>
-                        ARE YOU SURE<br>
-                        ARE YOU SURE<br>
-                        ARE YOU SURE<br>
-                        ARE YOU SURE<br>
-                        ARE YOU SURE<br>
-                        ARE YOU SURE<br>
-                        ARE YOU SURE<br>
-                        ARE YOU SURE<br>
-                        ARE YOU SURE<br>
-                        ARE YOU SURE<br>
-                        ARE YOU SURE<br>
-                        ARE YOU SURE<br>
-                        ARE YOU SURE<br>
-                        ARE YOU SURE<br>
-                        ARE YOU SURE<br>
-                        ARE YOU SURE<br>
-                        ARE YOU SURE<br>
-                        ARE YOU SURE<br>
-                    </div>
-                    <br>
-                    <button @click="tmp.mm3.confirm=0" class="btn">---</button>
-                </div>
-            </div>
-        </div>
-        <div class="center" v-if="tabShow==='5'">
-            <div v-for="dim in dimensions" :key="dim.id">
-                <button class="btn" @click="toggleAutobuyer(dim.id)">
-                    {{dim.label}}
-                    自动化: {{getOpenClose(player.mm3_volumes.automation[dim.id])}}
-                </button>
-
-            </div>
-            <button class="btn" @click="toggleAutobuyer(9)">维度提升
-                自动化：{{getOpenClose(player.mm3_volumes.automation[9])}}
-            </button>
-
-            <button class="btn" @click="toggleAutobuyer(10)">tickspeed
-                自动化：{{getOpenClose(player.mm3_volumes.automation[10])}}
-            </button>
-
-        </div>
-        <!--<div v-if="tabShow==='3'">
-            <p>你有 <span>{{format(player.mm3o5_volumes.points)}}</span> mm<sup>3.5</sup>
-                3.5维体积(每秒x<span>{{format(getMM3o5speed())}}</span>)</p>
-            <p>达到<span to-format-4>1e120</span> 4维体积后，你的3.5维体积将开始自我复制！</p>
-            <p>
-                你的3.5维体积使购买10个的倍率+<span>{{format(player.mm3o5_volumes.points.logarithm("100").div(10).minimum("1.5"))}}</span>
-            </p>
-            <p class="corrupted">ERROR: 由于小数维度，无法推测单位换算关系</p>
-        </div>-->
-        <div class="center" v-if="tabShow==='4'">
-            <div>
-                <div v-for="achieve_list in achieves">
-                    <div v-for="achieve in achieve_list">
-                        {{achieve.id}}
-                        {{achieve.label}}
-                        <span v-if="achieve.unlock">已完成</span>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <div v-if="['11','12','13'].includes(tabShow)" class="center">
-            <span>你有{{format(player.mm3_volumes.points)}} mm<sup>3</sup> 3维空间</span>
-            <div v-if="tabShow=='11'">
-                <table class="center">
-                    <tr v-for="upgrade_hang in mm3.upgrades">
-                        <td v-for="upgrade in upgrade_hang">
-                            <button :class="{mm3_upgrades:true,mm3_upgrades_bought: hasMM3upgrade(upgrade.id)}"
-                                    @click="buyMM3upgrade(upgrade.id)" v-if="upgrade.unlock">
-
-                                #<span v-html="upgrade.id"></span><br><span v-html="upgrade.name"></span><br>
-                                价格：{{format(upgrade.cost)}} mm<sup>3</sup><br>
-                            </button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div v-if="['21','22','23','24'].includes(tabShow)" class="center">
-
-            <div v-if="tabShow=='21'">
-                <button class="btn" @click="export_copy()">导出</button>
-
-                <button class="btn" @click="export_file()">导出为文件</button>
-
-                <button class="btn" @click="import_save()">导入</button>
-
-                <button class="btn" @click="import_file()">以文件导入</button>
-
-                <button class="btn" @click="formated_hard_reset()">
-                    硬重置
-                </button>
-
-            </div>
-            <div v-if="tabShow=='23'">
-                距离上一次永恒已经过去了{{formatTime.fromSeconds(player.time.eter)}}<br>
-                你总共制造了{{format(player.volume_generated.mm4)}} mm<sup>4</sup> 4维体积;<br>
-            </div>
-            <div v-if="tabShow=='22'">
-                <!--<button class="btn" onclick="window.open('saving_center.php')" id="saving_cent_btn">存档银行</button>
-        -->
-                <div style="color:red">
-                    快捷键:<br>
-                    M: 最大化<br>
-                    D: 进行一次维度提升<br>
-                </div>
-                当前版本：v1.0.3<br>
-                游戏作者：VeryrrDefine<br>
-                本游戏使用了<a href="https://github.com/Naruyoko/ExpantaNum.js" target="_blank">Naruyoko/ExpantaNum.js</a>
-                <a
-                        href="https://github.com/cloudytheconqueror/letter-notation-format"
-                        target="_blank">cloudytheconqueror/letter-notation-format</a>来处理大数字<br>
-
-                支持所有序数增量吧吧友，你可以点击链接来游玩吧友们自制的增量游戏：<br>
-                <a href="https://seanxlx2011.github.io/" target="_blank" style="color: #00ff80;">数据增量重制版IDR</a>、
-                <a href="https://0i00000000a7.github.io/points-incremental-rewritten/" target="_blank"
-                   style="color: #00ff80;">点数增量重制版PIR</a>、
-                <a href="https://aster131072.github.io/incremental_evolution/" target="_blank"
-                   style="color: #00ff80;">增量进化IE</a>、
-                <a href="https://dlsdl.github.io/wind_spirit_creation/" target="_blank"
-                   style="color: #00ff80;">风灵作成WSC</a>、
-                <a href="https://qqqe308.github.io/The-Rhythm-Game-Tree/" target="_blank"
-                   style="color: #00ff80;">音乐游戏树TRGT</a>
-                <br>
-                <del>拿0100000000a7的游戏的CSS改的</del>
-                <br>
-                <del>绝对没有</del>
-                <br>
-                <h1>-----更新日志-----</h1>
-                <div v-for="changelog in changelogs">
-                    <h2><span v-html="changelog.version"></span> <span v-html="changelog.title"></span></h2>
-
-                    <p v-for="text in changelog.changes" v-html="text"></p>
-
-                </div><!--
-            <div>
-                <h3>v1.0.1</h3>
-
-                <p>使用Vue</p>
-                <p>移除菜单</p>
-                <p>体积菜单分两个</p>
-                <p>添加3.5维度</p>
-                <p>添加软上限</p>
-                <p>取消音乐切换</p>
-                <p>取消无javascript提示</p>
-                <p>
-                    <del>移除第9,2085维度</del>
-                </p>
-                <p>
-                    <del>把"shoot 114514 shots"改成"shoot 1919810 shots"</del>
-                </p>
-                <p>修改维度提升结果</p>
-                <p>添加维度星系</p>
-                <p>维度页面新样式</p>
-                <p>移除了部分新闻</p>
-                <p>添加了tickspeed</p>
-
-            </div>
-            <div>
-                <h3>v1.0.0-24-6-16</h3>
-                <p>移除菜单栏</p>
-            </div>
-            <div>
-                <h3>v1.0.0-24-6-15-1-3</h3>
-                <p>修复修复修复修复新闻不能显示的bug失败的bug失败的bug失败的bug</p>
-            </div>
-            <div>
-                <h3>v1.0.0-24-6-15-1-2</h3>
-                <p>修复修复修复新闻不能显示的bug失败的bug失败的bug</p>
-            </div>
-            <div>
-                <h3>v1.0.0-24-6-15-1-1</h3>
-                <p>修复修复新闻不能显示的bug失败的bug</p>
-            </div>
-            <div>
-                <h3>v1.0.0-24-6-15-1</h3>
-                <p>修复新闻不能显示的bug</p>
-            </div>
-            <div>
-                <h3>v1.0.0-24-6-15</h3>
-                <p>格式化代码</p>
-                <p>严格化代码</p>
-                <p>移除第五维度</p>
-                <p>添加第三维度</p>
-            </div>
-            <div>
-                <h3>v1.0.0-24-6-9-1</h3>
-                <p>提高维度增加速度</p>
-                <p>维度倍数设置为x2</p>
-            </div>
-            <div>
-                <h3>v1.0.0-24-6-9</h3>
-                <p>添加维度提升</p>
-            </div>
-            <div>
-                <h3>v1.0.0</h3>
-                <p>添加第五维度</p>
-            </div>
-            <div>
-                <h3>v1.0.0-pre7</h3>
-                <p>删除部分文件</p>
-            </div>
-            <div>
-                <h3>v1.0.0-pre6</h3>
-                <p>移除了存储硬上限</p>
-                <p>修复了维度8显示0的bug</p>
-            </div>
-            <div>
-                <h3>v1.0.0-pre3~5</h3>
-                <p>移除了黑洞吞噬</p>
-            </div>
-            <div>
-                <h3>v1.0.0-pre2</h3>
-                <p>语言测试</p>
-                <p>添加了黑洞吞噬</p>
-            </div>
-            -->
-            </div>
-            <div v-if="tabShow=='24'">
-                <button @click="toggleNewsTicker()" class="btn">开启新闻： {{getOpenClose(player.options.showNewsTicker)}}
-                </button>
-                <button @click="toggleStickyDisplay()" class="btn">开启粘性定位：
-                    {{getOpenClose(player.options.stickyDisplay)}}
-                </button>
-            </div>
-        </div>
-        <div v-if="['114511'].includes(tabShow)" class="center">
-            <button class="btn" @click="speedrun(1)">游戏速度 1x</button>
-            <button class="btn" @click="speedrun(10)">游戏速度 10x</button>
-            <button class="btn" @click="speedrun(50)">游戏速度 50x</button>
-            <button class="btn" @click="speedrun(100)">游戏速度 100x</button>
-            <button class="btn" @click="speedrun(1000)">游戏速度 1000x</button>
-            <br>
-
-            <button class="btn" @click="fast_hard_reset()">快速硬重置</button>
-            <br>
-            <button class="btn" @click="dev_reset_vol()">重置体积</button>
-            <br>
-            <button class="btn" @click="player.mm3_volumes.unl = true">解锁mm<sup>3</sup></button>
-            <br>
-            <button class="btn" @click="addNotify('test notify')">show notify</button>
-            <label>
-                <button class="btn" @click="get_mm4_vol()">获取<span v-html="developer_get_mm4"></span> mm<sup>4</sup>4维体积如果可以：
-                </button>
-                <input type="text" v-model:value="developer_get_mm4">
-            </label>
-            <button class="square tooltipBox" @click="buyPMP(1)">
-                <div class="tooltip">
-                    对你的点数<sup>2</sup>进行因式分解以获取1点数×点数
-                </div>
-                获取1点数×点数<br>要求：点数<sup>2</sup>
-            </button>
-        </div>
-
-    </div>
-    <div v-else>
-        <h1 style="color: red">There was a error!</h1>
-        <div v-html="errortext"></div><br>
-        <button @click="exportErrorLog()" class="btn">Export error log</button>
-        <button @click="location.replace('https://tieba.baidu.com/p/9046407432')" class="btn">Report to the Developer(tieba)</button>
-        <button @click="import_str(prompt('import:'))" class="btn">Import save using pure JSON</button>
+    <div id="suggestions">
+        <a href="https://www.bilibili.com/video/BV1GJ411x7h7">#&$*%# Status</a> &mdash;
+        <a href="https://www.bilibili.com/video/BV1GJ411x7h7">@#&$*%#status</a>
     </div>
 
+    <a href="/" class="logo logo-img-1x">
+        <img width="32" height="32" title="" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpFMTZCRDY3REIzRjAxMUUyQUQzREIxQzRENUFFNUM5NiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpFMTZCRDY3RUIzRjAxMUUyQUQzREIxQzRENUFFNUM5NiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkUxNkJENjdCQjNGMDExRTJBRDNEQjFDNEQ1QUU1Qzk2IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkUxNkJENjdDQjNGMDExRTJBRDNEQjFDNEQ1QUU1Qzk2Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+SM9MCAAAA+5JREFUeNrEV11Ik1EY3s4+ddOp29Q5b0opCgKFsoKoi5Kg6CIhuwi6zLJLoYLopq4qsKKgi4i6CYIoU/q5iDAKs6syoS76IRWtyJ+p7cdt7sf1PGOD+e0c3dygAx/67ZzzPM95/877GYdHRg3ZjMXFxepQKNS6sLCwJxqNNuFpiMfjVs4ZjUa/pmmjeD6VlJS8NpvNT4QQ7mxwjSsJiEQim/1+/9lgMHgIr5ohuxG1WCw9Vqv1clFR0dCqBODElV6v90ogEDjGdYbVjXhpaendioqK07CIR7ZAqE49PT09BPL2PMgTByQGsYiZlQD4uMXtdr+JxWINhgINYhGT2MsKgMrm2dnZXgRXhaHAg5jEJodUAHxux4LudHJE9RdEdA+i3Juz7bGHe4mhE9FNrgwBCLirMFV9Okh5eflFh8PR5nK5nDabrR2BNJlKO0T35+Li4n4+/J+/JQCxhmu5h3uJoXNHPbmWZAHMshWB8l5/ipqammaAf0zPDDx1ONV3vurdidqwAQL+pEc8sLcAe1CCvQ3YHxIW8Pl85xSWNC1hADDIv0rIE/o4J0k3kww4xSlwIhcq3EFFOm7KN/hUGOQkt0CFa5WpNJlMvxBEz/IVQAxg/ZRZl9wiHA63yDYieM7DnLP5CiAGsC7I5sgtYKJGWe2A8seFqgFJrJjEPY1Cn3pJ8/9W1e5VWsFDTEmFrBcoDhZJEQkXuhICMyKpjhahqN21hRYATKfUOlDmkygrR4o4C0VOLGJKrOITKB4jijzdXygBKixyC5TDQdnk/Pz8qRw6oOWGlsTKGOQW6OH6FBWsyePxdOXLTgxiyebILZCjz+GLgMIKnXNzc49YMlcRdHXcSwxFVgTInQhC9G33UhNoJLuqq6t345p9y3eUy8OTk5PjAHuI9uo4b07FBaOhsu0A4Unc+T1TU1Nj3KsSSE5yJ65jqF2DDd8QqWYmAZrIM2VlZTdnZmb6AbpdV9V6ec9znf5Q7HjYumdRE0JOp3MjitO4SFa+cZz8Umqe3TCbSLvdfkR/kWDdNQl5InuTcysOcpFT35ZrbBxx4p3JAHlZVVW1D/634VRt+FvLBgK/v5LV9WS+10xMTEwtRw7XvqOL+e2Q8V3AYIOIAXQ26/heWVnZCVfcyKHg2CBgTpmPmjYM8l24GyaUHyaIh7XwfR9ErE8qHoDfn2LTNAVC0HX6MFcBIP8Bi+6F6cdW/DICkANRfx99fEYFQ7Nph5i/uQiA214gno7K+guhaiKg9gC62+M8eR7XsBsYJ4ilam60Fb7r7uAj8wFyuwM1oIOWgfmDy6RXEEQzJMPe23DXrVS7rtyD3Df8z/FPgAEAzWU5Ku59ZAUAAAAASUVORK5CYII=">
+    </a>
+
+    <a href="/" class="logo logo-img-2x">
+        <img width="32" height="32" title="" alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpEQUM1QkUxRUI0MUMxMUUyQUQzREIxQzRENUFFNUM5NiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpEQUM1QkUxRkI0MUMxMUUyQUQzREIxQzRENUFFNUM5NiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkUxNkJENjdGQjNGMDExRTJBRDNEQjFDNEQ1QUU1Qzk2IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkUxNkJENjgwQjNGMDExRTJBRDNEQjFDNEQ1QUU1Qzk2Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+hfPRaQAAB6lJREFUeNrsW2mME2UYbodtt+2222u35QheoCCYGBQligIJgkZJNPzgigoaTEj8AdFEMfADfyABkgWiiWcieK4S+QOiHAYUj2hMNKgYlEujpNttu9vttbvdw+chU1K6M535pt3ubHCSyezR+b73eb73+t7vrfXsufOW4bz6+vom9/b23ovnNNw34b5xYGAgODg46Mbt4mesVmsWd1qSpHhdXd2fuP/Afcput5/A88xwymcdBgLqenp6FuRyuWV4zu/v759QyWBjxoz5t76+/gun09mK5xFyakoCAPSaTCazNpvNPoYVbh6O1YKGRF0u13sNDQ27QMzfpiAAKj0lnU6/gBVfAZW2WWpwwVzy0IgP3G73FpjI6REhAGA9qVRqA1b9mVoBVyIC2tDi8Xg24+dUzQiAbS/s7Ox8G2o/3mKCC+Zw0efzPQEfcVjYrARX3dbV1bUtHo8fMgt42f+Mp0yUTVQbdWsAHVsikdiHkHaPxcQXQufXgUBgMRxme9U0AAxfH4vFvjM7eF6UkbJS5qoQwEQGA57Ac5JllFyUVZZ5ckUEgMVxsK2jlSYzI+QXJsiyjzNEAJyJAzb/KQa41jJKL8pODMQiTEAymXw5n8/P0IjD3bh7Rgog59aanxiIRTVvV/oj0tnHca/WMrVwODwB3raTGxzkBg/gnZVapFV62Wy2n5AO70HM/5wbJ0QnXyQSaVPDIuNZzY0V3ntHMwxiwHA0Gj2Np7ecIBDgaDAYXKCQJM1DhrgJ3nhulcPbl8j4NmHe46X/g60fwbz3aewjkqFQaAqebWU1AOqyQwt8Id6qEHMc97zu7u7FGGsn7HAiVuosVw7P35C1nccdgSCxop1dHeZswmfHMnxBo6ZTk+jN8dl/vF7vWofDsa+MLN9oEUBMxOb3+1eoEsBVw6Zmua49r8YmhAKDiEPcMwBsxMiqQ+ixzPFxZyqRpXARG/YOr1ObFJ0gUskXBbamcR1OKmMUvDxHRAu8/LmY3jFLMUpFqz9HxG65smYJdyKyECOxDiEAe/p1gjF2oonivZAsxVgl2daa4EQWCW6J55qFAFFZiJWYLxNQy2qOSUzGRsyXCUDIeliwAHEO4WSlWQBRFoZakXcKmCXmyXAKs0Ve9vl8q42WoIYpJU4hV3hKcNs8m9gl7p/xQ73eF5kB4j5mNrWmTJRNwAzqiV1CxjVTZCIkEq+Z1bZFZSN2CenmVAFVy4Plz8xKAGWjjAKFk6lCBMDR/MJjLLMSQNm43xAiQKTaA+9/wewhDjL+JVI1kkTSSOTcKbMTwPqESAot6dn6Fr1gHwVJju6IRuyiByPuUUBAg5DGkAgBmxlvdgIEK9gDkohdY/BJo4CAG0R8miRSsGABkgVQs4KXu098IgUXSSRsFAoKZiVAVDY2WUiiPTjYRi41KwGisrGsLtlsth8Fiwnz2fBkQvWfRtlE3iF2yW63/yCacXZ1dW02GwGyTFaRd4idJnCKHRaCxYRHoG5LTKT6SyiToP1fJHbmAYPYRR0UnZQtMnA6s0zg+GZBlt0Gdo7EPHgpE3Q6nZ8YyLhc8Xj8MJh/aKTAY+5FPAKHLE7RdwuYJZmNwzyCMkBCYyKROJBMJl9B/PXXCjjmCmDOVzH3fiPpObEWGqoKe4EBl8v1hlqsdLvd23mkxHM9pc9kMpmno9HoeTii7ewbHEZPPx1ztLS1tV3AnGuMjiNjvbQFuHw6zDo5By7dTPAQNBgMLrRarTkSls1mnwT7uwp9virx9QzbW/HuV/j5d/b+6jniKlllP8lkeONJDk+dq9GsQTnC4fB1heO0K47Hwe7WdDr9nAKgXwOBwHI+C45Htj1d6sd429TUNEcmUdc+PRaLHcvn87dXW4ugzdsaGxufL94NFv9zi1J7GVbhlvb2dnaJ3SVrxfc+n2+NTsZ7/H7/Mr3g5XdSIHyJSH1PZ+7fToyl2+ErqilgZ4NaLYB9goVGaHjR93Hv1ZrU4XDsFT20kH3PObzbWk0CgG1jacVIUnAQb9F+VexyLMzkpcLv0IJV7AHQIOCAUYHx7v5qgScmYHtTqSAyZLEJTK22Bie4iq3xsqpm4SAf9Hq9a2DnJ4uLK3SEULcdRvp3i3zHySqpficxEdsQc1NrlYXXvR+O7qASSezXB+h1SuUomgg9LL8BUoV4749EIolKh+EiqWmqVEZlDgHks2pxHw7xTqUQw9J5NcAXOK10AGIoZ6Zli6JY6Z1Q461KoZ4NiKLHarW+KDsxlDUPHZ5zPQZqUVDPJsTqb5n9malbpAh8C2XXDLl62+WZIDFRUlNVOiwencnNU3aQEkL+cDMSoLvZo2fQB7AJssNAuFuvorlDVVkkg2I87+jo2K2QAVphDrfyViK5VqtO34OkaxXCp+7drdDBCAdubm6eidX+2WwqT5komwh4YQLk+H4aE93h8Xg2gvHekQZOGSgLZTLyDTLJ4Lx9/KZWKBSainT4Iy3FqQBfnUZR42PKQFksBr9QKVXCPusD3OiA/RkQ5kP8qV/Jl1WywAp/6+dcmPM2zL1UrUahe4JqfnWWKXIul3uUbfP8njAFLW1OFr3gdFtZ72cNH+PtQT7/brW+NXqJAHh0y9V8/U/A1U7AfwIMAD7mS3pCbuWJAAAAAElFTkSuQmCC">
+    </a>
 </div>
 </body>
 </html>
