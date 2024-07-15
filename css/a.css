@@ -1,32 +1,11 @@
 
-.dimension {
-    border: 1px solid #777;
-    width: 50vw;
-    transform: translateX(+50%)
-}
 
 .locked {
     background: darkred;
 }
 
-.achieve-1 {
-
-    position: relative;
-    display: inline-block;
-    color: var(--color-text);
-    font-size: 12px;
-}
 #news{
-    :5vw;
-}
-.achieve-2 {
-
-    background-color: var(--color-text-inverted);
-    height: 100px;
-    width: 100px;
-    border: 1px solid var(--color-text);
-    color: var(--color-text);
-    font-size: 11px;
+    height:5vw;
 }
 #news{
     margin: auto;
@@ -40,29 +19,25 @@
 .usesticky {
     position: sticky;
     top: 0px;
-    z-index: 5;
-}
-.top_1{
-    background: var(--color-text-inverted);
-}
-
-.mm3_upgrades{
-    width: 23.5vw;
-    height: 16.3vw;
-    background-color: var(--color-text-inverted);
-    color: #fff;
-    border: 4px solid #72ac28;
-    border-radius: 8px;
-    font-family: 'Courier New', 'Source Han Sans', sans-serif;
-    font-size: 2.3vw;
-    text-decoration: none;
-    cursor: pointer;
-    display: inline-block;
-}
-.mm3_upgrades_bought{
-    color:var(--color-text-inverted);
-    background:#72ac28;
-}
+    z-index: 5;}
+/*}*/
+/*.mm3_upgrades{*/
+/*    width: 23.5vw;*/
+/*    height: 16.3vw;*/
+/*    background-color: black;*/
+/*    color: #fff;*/
+/*    border: 4px solid #72ac28;*/
+/*    border-radius: 8px;*/
+/*    font-family: 'Courier New', 'Source Han Sans', sans-serif;*/
+/*    font-size: 2.3vw;*/
+/*    text-decoration: none;*/
+/*    cursor: pointer;*/
+/*    display: inline-block;*/
+/*}*/
+/*.mm3_upgrades_bought{*/
+/*    color:black;*/
+/*    background:#72ac28;*/
+/*}*/
 
 .tooltip { 
     pointer-events: none;
@@ -85,7 +60,7 @@
     z-index: 20000;
   
     background-color: rgba(0, 0, 0, 0.75);
-    color: var(--color-text);
+    color: white;
     content: attr(tooltip);
     font-size:14px;
 
@@ -113,21 +88,42 @@
 
 @keyframes a-existence-glow {
     0% {
-        color: var(--color-text-inverted);
-        text-shadow: 0.1rem 0.1rem 0.2rem var(--color-text);
+        color: black;
+        text-shadow: 0.1rem 0.1rem 0.2rem white ;
     }
 
     50% {
-        color: var(--color-text-inverted);
-        text-shadow: 0.1rem 0.1rem 0.8rem var(--color-text);
+        color: black;
+        text-shadow: 0.1rem 0.1rem 0.8rem white;
     }
 
     100% {
-        color: var(--color-text-inverted);
-        text-shadow: 0.1rem 0.1rem 0.2rem var(--color-text);
+        color: black;
+        text-shadow: 0.1rem 0.1rem 0.2rem white;
     }
 }
-
+.charged_text {
+    color: cyan;
+    text-shadow: -1px -1px 3px lightskyblue, 0px 0px 5px #878ffa, 1px 1px 3px blue;
+}
 .existence {
-    animation: a-existence-glow 3s infinite; color: white; line-height: 0;
+    animation: a-existence-glow 3s infinite; color: black; line-height: 0;
+}
+
+h1{
+    font-family: 'Noto Sans SC', sans-serif;
+}
+h2{
+    font-family: 'Noto Sans SC', sans-serif;
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/notosanssc/v36/k3kCo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaG9_FnYw.ttf) format('truetype');
+}
+
+.game-link{
+    color: #008040;
 }

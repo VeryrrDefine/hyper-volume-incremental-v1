@@ -15,68 +15,6 @@
             width: 600px;
         }
 
-        a {
-            color: #4183c4;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        h1 {
-            width: 800px;
-            position: relative;
-            left: -100px;
-            letter-spacing: -1px;
-            line-height: 60px;
-            font-size: 60px;
-            font-weight: 100;
-            margin: 0px 0 50px 0;
-            text-shadow: 0 1px 0 #fff;
-        }
-
-        p {
-            color: rgba(0, 0, 0, 0.5);
-            margin: 20px 0;
-            line-height: 1.6;
-        }
-
-        ul {
-            list-style: none;
-            margin: 25px 0;
-            padding: 0;
-        }
-
-        li {
-            display: table-cell;
-            font-weight: bold;
-            width: 1%;
-        }
-
-        .logo {
-            display: inline-block;
-            margin-top: 35px;
-        }
-
-        .logo-img-2x {
-            display: none;
-        }
-
-        @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (   min--moz-device-pixel-ratio: 2), only screen and (     -o-min-device-pixel-ratio: 2/1), only screen and (        min-device-pixel-ratio: 2), only screen and (                min-resolution: 192dpi), only screen and (                min-resolution: 2dppx) {
-            .logo-img-1x {
-                display: none;
-            }
-
-            .logo-img-2x {
-                display: inline-block;
-            }
-        }
-
-        #suggestions {
-            margin-top: 35px;
-            color: #ccc;
-        }
 
         #suggestions a {
             color: #666666;
@@ -89,7 +27,14 @@
             text-align: center;
         }
 
+        .pts-dis {
+            margin: 4px 4px;
+            font-size: 48px;
+            display: inline-block;
+            white-space: nowrap;
+        }
     </style>
+    <link href="css/a.css" rel="stylesheet">
     <script src="js/technical/hotkeys.js" defer></script>
     <script src="js/technical/ExpantaNum.js" defer></script>
     <script src="js/technical/format_expantanum.js" defer></script>
@@ -112,29 +57,12 @@
 <body>
 
 <div class="container">
-
-    <h1 class="center">404</h1>
-    <p class="center"><strong>There was a #&$*%# Pages site here but now it isn't.</strong></p>
-
-    <p class="center">
-        $& @*$'#$ @*$(%* @( )$*%(#* #*$,
-        <a href="https://help.github.com/pages/">read the full #&$*#&$*#*$(@</a>
-        to learn how to set up <strong>#&$*%# Pages</strong>
-        for your #&$*$(#*$(, #&$*@(#)$*#(, or #$($ $#($*$(.e
-    </p>
-
-    <div id="suggestions" class="center">
-        <a href="https://www.bilibili.com/video/BV1GJ411x7h7">#&$*%# Status</a> &mdash;
-        <a href="https://www.bilibili.com/video/BV1GJ411x7h7">@#&$*%#status</a>
-    </div>
-
-
-
     <div id="app">
-        <p class="center">Fix the page need 1.000e1.000e9.000e15 mm<sup>4</sup> volumes. You have {{ format(player.volumes) }} mm<sup>4</sup>.</p>
+        <p class="center">You have <span class="pts-dis">{{format(player.volumes, 4)}}</span> mm<sup>4</sup>.</p>
         <div class="center">
             <button class="btn" @click="tabShow = '1'" :disabled="inTab(1)">Main</button>
-            <button class="btn" @click="tabShow = '41'" :disabled="inTab(4)" v-if="player.mm3_volumes.unl">Reset</button>
+            <button class="btn" @click="tabShow = '41'" :disabled="inTab(4)" v-if="player.mm3_volumes.unl">Reset
+            </button>
             <button class="btn" @click="tabShow = '11'" :disabled="inTab(2)" v-if="player.mm3_volumes.unl">3D Volumes
             </button>
             <button class="btn" @click="tabShow = '21'" :disabled="inTab(3)">Options</button>
@@ -159,6 +87,7 @@
         </div>
         <br>
         <div v-if="tabShow=='1'" class="center">
+            <button @click="buyAll()">Max all</button>
             <div v-for="dim in dimensions" v-if="tmp.mm3.confirm<3" :key="dim.id">
                 <div>
                     {{ dim.label }}
@@ -174,7 +103,7 @@
             </div>
             <div style="color:red">
                 <p v-if="tmp.mm3.confirm===1">
-                    The button will reset your mm<sup>4</sup> volumes, Dim. boosts, Dim. galaxies, and tickspeed.
+                    The button will reset your mm<sup>4</sup> volumes.
                 </p>
                 <p v-if="tmp.mm3.confirm===2">
                     But it'll give you <span style="color: #ff0">{{format(tmp.mm3.gain)}} mm<sup>3</sup></span>
@@ -208,6 +137,53 @@
                 Hard Reset
             </button>
 
+        </div>
+
+        <div v-if="tabShow=='22'" class="center">
+            <div>
+                <p>Multi-dimensional Volume Incremental by VeryrrDefine</p>
+
+            </div>
+            <!--<button class="btn" onclick="window.open('saving_center.php')" id="saving_cent_btn">存档银行</button>
+    -->
+            <div style="color:red">
+                Hotkeys:<br>
+                M: Max All<br>
+            </div>
+            Version: v1.0.3<br>
+            This game uses <a href="https://github.com/Naruyoko/ExpantaNum.js" target="_blank">Naruyoko/ExpantaNum.js</a>
+            <a
+                    href="https://github.com/cloudytheconqueror/letter-notation-format"
+                    target="_blank">cloudytheconqueror/letter-notation-format</a> to handle very, very big number<br>
+            This game uses <a href="https://github.com/nodeca/pako">nodeca/pako</a> to handle save.<br>
+            <p>Support All 序数增量吧 bar-friends, you can click these link to play increment-games by bar-friends</p>
+            <a href="https://seanxlx2011.github.io/" target="_blank" class="game-link">Incremental Data
+                Rewritten</a>,<br>
+            <a href="https://0i00000000a7.github.io/points-incremental-rewritten/" target="_blank" class="game-link"
+            >Points Incremental Rewritten</a>,<br>
+            <a href="https://aster131072.github.io/incremental_evolution/" target="_blank" class="game-link"
+            >Incremental Evolution</a>,<br>
+            <a href="https://dlsdl.github.io/wind_spirit_creation/" target="_blank" class="game-link"
+            >Wind spirit creation</a>,<br>
+            <a href="https://qqqe308.github.io/The-Rhythm-Game-Tree/" target="_blank" class="game-link tooltipBox">The
+                Rhythm Game Tree
+                <span class="tooltip">
+                        I was played Ar<span></span>caea for sometime before.<br>
+                        <del>PPT</del>PTT is measure of the player's strength，My PTT is 10.0±0.05。<del>Can you reach me?</del></span></a><br>
+            <br>
+            <p>You can also play other increment-games!</p>
+            <a href="https://ivark.github.io/AntimatterDimensions" target="_blank" class="game-link">Antimatter Dimensions</a>,<br>
+            <a href="https://seanxlx2011.github.io/" target="_blank" class="game-link"><del>Infinity Dimension Rewritten</del></a>,<br>
+
+            <p>Nobody knows I broke <span class="existence">Void</span> in <span class="existence">Void</span>,
+                broke <span class="charged_text">myself</span> in <span class="charged_text">myself</span>.</p>
+            <h1>-----Changelog-----</h1>
+            <div v-for="changelog in changelogs">
+                <h2><span v-html="changelog.version"></span> <span v-html="changelog.title"></span></h2>
+
+                <p v-for="text in changelog.changes" v-html="text"></p>
+
+            </div>
         </div>
     </div>
 </div>

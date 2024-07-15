@@ -34,9 +34,6 @@ function hard_reset() {
         volumes: E(10),
         version: 10,
         volumeInfinite: false,
-        tickspeed: E(0),
-        galaxy_count: E(0),
-        tickspeed_amount: E(1.15),
         achieve: new Array(200),
         display_mode: 0,
         dim_boost: E(0),
@@ -61,8 +58,6 @@ function hard_reset() {
                 "6": false,
                 "7": false,
                 "8": false,
-                "9": false, //dimension boost
-                "10": false
             }
         },
 
@@ -484,6 +479,13 @@ function loadVue() {
             pianyi1: 0,
             developer_code: "",
             changelogs: [
+                {
+                    version: "v1.0.3", title: "...",
+                    changes: [
+                        "...",
+                        "切换了"
+                    ]
+                },
                 {
                     version: "v1.0.2.1", title: "等一下，我format_time.js忘记投了",
                     changes: [
