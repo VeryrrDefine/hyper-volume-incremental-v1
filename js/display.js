@@ -12,13 +12,13 @@ function boost_reward_desc() {
         return "解锁维度8<br>维度1-4倍率x" + ((hasMM3upgrade(22) ? "4" : "2")) + "<br><br>需要20 维度7"
     }
     if (player.dim_boost.eq(4)) {
-        return "维度1-5倍率x" + (hasMM3upgrade(22) ? "4" : "2") + "<br><br>需要20 维度8"
+        return "维度1-5倍率x" + (hasMM3upgrade(22) ? "4" : "2") + "<br><br>需要"+format(tmp.dimensionBoost.need_aft_4)+" 维度8"
     }
     if (player.dim_boost.eq(5)) {
-        return "维度1-6倍率x" + (hasMM3upgrade(22) ? "4" : "2") + "<br><br>需要30 维度8"
+        return "维度1-6倍率x" + (hasMM3upgrade(22) ? "4" : "2") + "<br><br>需要"+format(tmp.dimensionBoost.need_aft_4)+" 维度8"
     }
     if (player.dim_boost.eq(6)) {
-        return "维度1-7倍率x" + (hasMM3upgrade(22) ? "4" : "2") + "<br><br>需要40 维度8"
+        return "维度1-7倍率x" + (hasMM3upgrade(22) ? "4" : "2") + "<br><br>需要"+format(tmp.dimensionBoost.need_aft_4)+" 维度8"
     }
     if (player.dim_boost.gt(6)) {
         let n8d = tmp.dimensionBoost.need_aft_4;
@@ -98,7 +98,7 @@ function addNotify(str) {
 }
 
 function getMM3resetButton() {
-    return player.mm3_volumes.unl ? ('重置维度，tickspeed，维度提升和维度星系获得' +
+    return player.mm3_volumes.unl ? ('达到1.797e308 mm<sup>4</sup>进行一次mm<sup>3</sup>重置，重置维度，tickspeed，维度提升和维度星系获得' +
         format(tmp.mm3.gain)
         + 'mm<sup>3</sup> 体积') : '???'
 }

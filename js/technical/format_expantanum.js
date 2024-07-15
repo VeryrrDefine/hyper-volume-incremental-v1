@@ -41,7 +41,7 @@ function regularFormat(num, precision) {
 function polarize(array, smallTop=false) {
     if (FORMAT_DEBUG >= 1) console.log("Begin polarize: "+JSON.stringify(array)+", smallTop "+smallTop)
     if (array.length == 0) array = [[0,0]]
-    
+
     let bottom = array[0][0] == 0 ? array[0][1] : 10, top = 0, height = 0
     if (!Number.isFinite(bottom)) {}
     else if (array.length <= 1 && array[0][0] == 0) {
@@ -73,14 +73,14 @@ function polarize(array, smallTop=false) {
                     for (i=2;i<height;i++) bottom = Math.log10(bottom) + 1
                 }
                 else bottom = 1 // The increment result is indistinguishable from 1
-                
+
                 top += 1
                 if (FORMAT_DEBUG >= 1) console.log("Bottom mode: bottom "+bottom+", top "+top+", height "+height+", elem "+elem)
             }
             else { // Top mode: height is increased by one, or until the next nonzero value
                 // Prevent running top mode more times than necessary
                 if (elem == array.length-1 && array[elem][0] == height && !(smallTop && top >= 10)) break
-                
+
                 bottom = Math.log10(bottom) + top
                 height += 1
                 if (elem < array.length && height > array[elem][0]) elem += 1
@@ -102,7 +102,7 @@ function polarize(array, smallTop=false) {
             }
         }
     }
-    
+
     if (FORMAT_DEBUG >= 1) console.log("Polarize result: bottom "+bottom+", top "+top+", height "+height)
     return {bottom: bottom, top: top, height: height}
 }
@@ -143,7 +143,7 @@ function format(num, precision=2, small=false) {
     else if (num.lt("10^^5")) { // 1e9 ~ 1F5
         let bottom = arraySearch(array, 0)
         let rep = arraySearch(array, 1)-1
-        if (bottom >= 1e6) {
+        if (bottom >= 1e9) {
             bottom = Math.log10(bottom)
             rep += 1
         }
@@ -151,12 +151,12 @@ function format(num, precision=2, small=false) {
         let e = Math.floor(bottom)
         let p
         if (bottom<1000) {
-          p = precision2
+            p = precision2
         }else {
-          p = precision2-Math.log10(bottom)+3
+            p = precision2-Math.log10(bottom)+3
         }
         if (p<0) {
-          p = 0
+            p = 0
         }
         return "e".repeat(rep) + regularFormat(m, p) + "e" + commaFormat(e)
     }
@@ -266,6 +266,6 @@ function formatWhole(num) {
     return format(num, 0)
 }
 
-function formatSmall(num, precision=2) { 
-    return format(num, precision, true)    
+function formatSmall(num, precision=2) {
+    return format(num, precision, true)
 }

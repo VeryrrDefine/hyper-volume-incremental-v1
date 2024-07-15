@@ -5,3 +5,7 @@ function isValidBase64EncodedJson(enc_json){
         return false
     }
 }
+
+function selfplus(q,b){
+    return q.clone.add(b);
+}

@@ -84,7 +84,8 @@ function hard_reset() {
 
         window_show: {
             first_mm3_reset: false
-        }
+        },
+        lastTab: '1'
 
     }
     reset_dimensions(1)
@@ -101,18 +102,16 @@ function hard_reset() {
 function buyable(dim) {
     return player.volumes.gte(player.dimensions[DIMENSIONS_COST][dim - 1])
 }
-function import_str(pl){
+
+function import_str(pl) {
     let importing_player = JSON.parse(pl);
     Object.assign(player, importing_player)
     fix();
     save();
     location.href = location.href;
 }
+
 function buydim(dim) {
-    if (dim >= 5 && player.dim_boost.eq(0)) return false;
-    if (dim >= 6 && player.dim_boost.eq(1)) return false;
-    if (dim >= 7 && player.dim_boost.eq(2)) return false;
-    if (dim >= 8 && player.dim_boost.eq(3)) return false;
     if (player.volumes.gte(player.dimensions[DIMENSIONS_COST][dim - 1])) {
         let cost = player.dimensions[DIMENSIONS_COST][dim - 1];
         let times = E.minimum(
@@ -165,15 +164,12 @@ const dim_base_price = [
     E(10), E(100), E(1E4), E(1E6), E(1E9), E(1E13), E(1E18), E(1E24)
 ]
 const dim_incre = [
-    E(1e3), E(1e4), E(1E5), E(1E6), E(1E8), E(1E10), E(1E12), E(1E15)
+    E(1e2), E(1e3), E(1E4), E(1E5), E(1E6), E(1E8), E(1E10), E(1E12)
 ];
 
 function calculate_dim() {
 
     for (let i = 0; i < 7; i++) {
-        if (i == 0 && player.dimensions[DIMENSIONS_POINTS][0] && player.volumes.lt(10)) {
-            player.volumes = E(10);
-        }
         player.dimensions[DIMENSIONS_POINTS][i] = player.dimensions[DIMENSIONS_POINTS][i]
             .add(
                 player.dimensions[DIMENSIONS_POINTS][i + 1]
@@ -190,37 +186,100 @@ function calculate_dim() {
 function upgradeTickspeed() {
     let buycount = E(0);
     // 1e3 * 10**player.tickspeed
-    if (player.volumes.logarithm(10).gte(calc_tickspeed_cost().logarithm(10))) {
-        buycount = E(1);
+    let temp1 = player.volumes
 
-        buycount = buycount.add(player.volumes.logarithm(10).sub(calc_tickspeed_cost().logarithm(10)).floor())
+    if (player.volumes.logarithm(10).gte("308")) {
+        let temp1 = E("1e308")
     }
-    player.tickspeed = player.tickspeed.add(buycount);
+    if (temp1.logarithm(10).gte(tmp.tickspeed.cost.logarithm(10))) {
+        buycount = E(1);
+        buycount = buycount.add(player.volumes.logarithm(10).sub(tmp.tickspeed.cost.logarithm(10)).floor())
+    }
+    if (temp1.lte("1e308")) {
+        player.tickspeed = player.tickspeed.add(buycount);
+        if (player.tickspeed.gte("1e10")) {
+            player.tickspeed = E("1e10")
+        }
+
+    } else {
+        // handle cost add
+        let temp = player.volumes.logarithm(10).sub(308-1.301029995663981).div(1.301029995663981) /*1e308 * 2e10^temp */
+        let temp2 = tmp.tickspeed.cost.logarithm(10).sub(308-1.301029995663981).div(1.301029995663981)
+        let temp3 = temp.sub(temp2)
+
+        buycount = buycount.add(temp3);
+        if (buycount.gte(0)){
+            player.tickspeed=player.tickspeed.add(buycount);
+
+        }
+        /*
+        * 0-305: 1
+        * 306-inf: log_10(20)=1.301029995663981
+        * 305 1e308
+        * 306 1e309*2
+        * */
+    }
 }
 
 /*異議あり*/
 function calc_cost(dimid, count) {
     // count before buy
     // 1st dimension dimid = 0
-    if (count.gte("1e4")) {
-        return E.POSITIVE_INFINITY
+    if (count.gte("10100")) {
+        return E.expansion(10,"9007199254740991");
     }
-    return dim_base_price[dimid].mul(dim_incre[dimid].pow(count.div(10).floor()))
+    if (count.gte("10090")) {
+        return E.expansion(10,"1e14");
+    }
+    if (count.gte("10080")) {
+        return E.expansion(10,"1e11");
+    }
+    if (count.gte("10070")) {
+        return E.expansion(10,"1e8");
+    }
+    if (count.gte("10060")) {
+        return E.expansion(10,"1e5");
+    }
+    if (count.gte("10050")) {
+        return E.expansion(10,"1.7e4");
+    }
+    if (count.gte("10040")) {
+        return E.expansion(10,8192);
+    }
+    if (count.gte("10030")) {
+        return E.expansion(10,2048);
+    }
+    if (count.gte("10020")) {
+        return E.expansion(10,824);
+    }
+    if (count.gte("10010")) {
+        return E.expansion(10,78);
+    }
+    if (count.gte("1e4")) {
+        return E.GRAHAMS_NUMBER;
+    }
+    return dim_base_price[dimid]
+        .mul(dim_incre[dimid].pow(count.div(10).floor()))
+        .div(hasMM3upgrade(10) ? 2 : 1)
 }
 
-function calc_tickspeed_cost() {
-    return E.mul(1e3, E.pow(10, player.tickspeed));
-}
-function exportErrorLog(){
+function exportErrorLog() {
     let str = `An error log happening at ${getCurrentBeijingTime()}
 traceback:
-${app.errortext.replaceAll("<br>","\n")}
+${app.errortext.replaceAll("<br>", "\n")}
 
 save:
 ${JSON.stringify(player)}
 `
     navigator.clipboard.writeText(str);
 }
+
+function exportPurePlayerJson(){
+    if (app.developer_mode){
+        navigator.clipboard.writeText(JSON.stringify(player));
+    }
+}
+
 function loop() {
     try {
         this_frame = Date.now()
@@ -232,7 +291,6 @@ function loop() {
             fix();
         }
         player.time.eter += window.diff;
-        player.tickspeed_amount = E(1.15).add(E(0.05).mul(player.galaxy_count))
         /* if (player.volumes.isNaN()){
              player.volumes = E(10);
          }*/
@@ -240,6 +298,10 @@ function loop() {
             .mul(player.dimensions[DIMENSIONS_MULTI][0])
             .mul(diff);
 
+        if (player.volumes.gte("e9007199254740991")){
+            player.volumes = EN("e9007199254740991");
+            more = EN("0");
+        }
 
         player.volume_generated.mm4 = player.volume_generated.mm4.add(more);
         player.volumes = player.volumes.add(
@@ -255,16 +317,12 @@ function loop() {
             player.dimensions[DIMENSIONS_MULTI][i] = tmp.dimension.getDimMultiplier(i + 1);
             player.dimensions[DIMENSIONS_COST][i] = calc_cost(i, player.dimensions[DIMENSIONS_BOUGHT][i])
         }
-        if (player.mm3_volumes.automation[9] && tmp.dimensionBoost.boostable) {
-            dimensionBoost();
+        if (player.error !== void 0){
+            throw new Error("you throw a error!");
         }
-        if (player.mm3_volumes.automation[10] && player.volumes.gte(calc_tickspeed_cost())) {
-            upgradeTickspeed();
-        }
-
-
+        player.lastTab = app.tabShow
         last_frame = this_frame
-    }catch (e){
+    } catch (e) {
         clearInterval(window.qqq);
         clearInterval(window.www);
         setErrorDial(e);
@@ -273,10 +331,11 @@ function loop() {
     }
 }
 
-function setErrorDial(q){
+function setErrorDial(q) {
     app.hasError = true;
-    app.errortext = q.stack.replaceAll("\n","<br>");
+    app.errortext = q.stack.replaceAll("\n", "<br>");
 }
+
 function toggleAutobuyer(i) {
     if (between(5, i, 10) && !player.mm3_volumes.unl) {
         alert("Automator error: ???")
@@ -308,7 +367,6 @@ function toggleAutobuyer(i) {
 }
 
 function buyAll() {
-    upgradeTickspeed();
     buydim(1);
     buydim(2);
     buydim(3);
@@ -319,26 +377,12 @@ function buyAll() {
     buydim(8);
 }
 
-
-function dimensionGalaxy() {
-    if (tmp.galaxy.galaxyable) {
-        reset_dimensions(true);
-        player.tickspeed = E(0);
-        player.volumes = E(10);
-        player.galaxy_count = player.galaxy_count.add(1);
-    }
-}
-
 function fix() {
     player.volumes = ENify(player.volumes);
     player.mm3_volumes.points = ENify(player.mm3_volumes.points);
     //player.mm3o5_volumes.points = ENify(player.mm3o5_volumes.points);
 
     player.multi.points = ENify(player.multi.points);
-    player.dim_boost = ENify(player.dim_boost);
-    player.tickspeed = ENify(player.tickspeed);
-    player.tickspeed_amount = ENify(player.tickspeed_amount);
-    player.galaxy_count = ENify(player.galaxy_count);
 
     player.volume_generated.mm3 = ENify(player.volume_generated.mm3);
     //player.volume_generated.mm35 = ENify(player.volume_generated.mm35);
@@ -354,25 +398,43 @@ function fix() {
 }
 
 function load() {
-    hard_reset();
-    let loadplayer = JSON.parse(localStorage.getItem("volume-incremental"));
-    let loaddeveloper = JSON.parse(localStorage.getItem("developerSettings"));
-    if (loadplayer != null) {
-        if (loadplayer.version != player.version) {
-            alert("游戏已更新")
+    try {
+        hard_reset();
+        let loadplayer = JSON.parse(localStorage.getItem("volume-incremental"));
+        let loaddeveloper = JSON.parse(localStorage.getItem("developerSettings"));
+        if (loadplayer != null) {
+            if (loadplayer.version != player.version) {
+                alert("游戏已更新")
+                alert("游戏已更新")
+            }
+            Object.assign(player, loadplayer)
         }
-        Object.assign(player, loadplayer)
+        if (loadplayer != null) {
+            Object.assign(developer, loaddeveloper)
+        }
+        last_frame = player.time_now;
+        fix();
+        /*
+        mm3FixOldSaves();
+        delete player.error*/
+        loadVue();
+        app.tabShow = player.lastTab
+
+        window.qqq = setInterval(loop, 35)
+        window.www = setInterval(save, 1000);
+        if (window.newsTickerError !== undefined){
+            app.hasNewsTickerError = true;
+        }
+        hasLoaded.status = true
+    }catch (e){
+        document.getElementById("ithinksomeone").style.display = "block";
+        document.getElementById("error").innerText= e.stack;
+
+        // document.querySelectorAll("[if-not-fatal-error]").forEach((value, key, parent)=>{
+        //     value.style.display="none";
+        // })
+
     }
-    if (loadplayer != null) {
-        Object.assign(developer, loaddeveloper)
-    }
-    last_frame = player.time_now;
-    fix();
-    mm3FixOldSaves();
-    loadVue();
-    window.qqq = setInterval(loop, 35)
-    window.www = setInterval(save, 1000);
-    hasLoaded.status = true
 }
 
 var qqq;
@@ -399,24 +461,28 @@ function loadVue() {
         el: "#app",
         data: {
             tabShow: '1',
+            hasNewsTickerError: false,
             player: player,
             hasLoaded: hasLoaded,
             developer_mode: !location.hostname.endsWith("github.io"),
             developer_get_mm4: "1e100",
             dimensions: [
-                {id: 1, label: '第1维度'},
-                {id: 2, label: '第2维度'},
-                {id: 3, label: '第3维度'},
-                {id: 4, label: '第4维度'},
-                {id: 5, label: '第5维度'},
-                {id: 6, label: '第6维度'},
-                {id: 7, label: '第7维度'},
-                {id: 8, label: '第8维度'},
+                {id: 1, label: '1st Dimension'},
+                {id: 2, label: '2nd Dimension'},
+                {id: 3, label: '3rd Dimension'},
+                {id: 4, label: '4th Dimension'},
+                {id: 5, label: '5th Dimension'},
+                {id: 6, label: '6th Dimension'},
+                {id: 7, label: '7th Dimension'},
+                {id: 8, label: '8th Dimension'},
             ],
             save: "",
             isShowingPopup: false,
-            hasError:false,
-            errortext:"",
+            hasError: false,
+            errortext: "",
+            pianyi0: "aa",
+            pianyi1: 0,
+            developer_code: "",
             changelogs: [
                 {
                     version: "v1.0.2.1", title: "等一下，我format_time.js忘记投了",
@@ -516,3 +582,10 @@ var openPopup = function (option) {
     app.isShowingPopup = option
 }
 
+function db_pianyi() {
+    var q = "";
+    for (let i = 0; i < app.pianyi0.length; i++) {
+        q = q.concat(String.fromCharCode(app.pianyi0[i].charCodeAt(0) + Number(app.pianyi1)));
+    }
+    return q;
+}
