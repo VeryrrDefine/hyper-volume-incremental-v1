@@ -94,7 +94,7 @@
                 text: 'Add this new, please.'
             },
             {
-                text: 'What bug? Isn't this a feature?'
+                text: "What bug? Isn't this a feature?"
             },
             {
                 text: 'All numbers in this game are in scientific notation. If you have any questions, please call 1.341e10.'
@@ -305,12 +305,7 @@
     但是还有两个表示整数的方式是int和long。int(unsigned)可以表示到4294967295(2<sup>32</sup>-1)这样大的数字，而long (unsigned)可以表示到18446744073709551616(2<sup>64</sup>-1)这样大的数字。这两个类型没有误差，但缺点就是能表示的数也很小。
     然而有部分游戏突破了1e308的上限：反物质维度，质量增量重制版……<del>等</del>。但这些游戏表示的数字上限有不同。反物质维度数字上限为1.000e9.000e15(更严谨来说是1.000e9.007e15)；质量增量重制版上限不明；最大的，无尽的楼梯间上限K1e15，比葛立恒数(~3K64)还大，真的是不可思议！`
             },
-            {
-                text: "ω<sub>119</sub><sup>CK</sup>级事故！有两位人污蔑我朋友的一个游戏，导致我朋友被带来不可逆转的心理伤害，其中一位人以开我朋友户\\u7c4d为由威胁我朋友。如果他户\\u7c4d真被开了就不是ω<sub>119</sub><sup>CK</sup>级事故了，得叫ψ<sub>I</sub>(5)级事故了"
-            },
-            {
-                text: "@veryrrdefine 再叫给你户\\u7c4d开了 （先提醒一下，不是说给0i00000000a7听的，也不是说给序数增量吧吧友听的，也不是说给所有人听的，是说给我听的）"
-            }
+
             /*ωεζηφΓψΩ*/
         ];
         window.special_news_state = 0;
