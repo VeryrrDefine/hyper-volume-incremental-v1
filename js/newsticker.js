@@ -2,51 +2,58 @@
     try{
         var t, e = [
             {
-                text: '为什么没有第九维度?',
+                text: 'Why is there no ninth dimension?',
             },
             {
-                text: '距离下一次更新只有114514小时了！',
+                text: '114514 hours until next update！',
             },
             {
-                text: '什么?你问我维度提升在哪里?在历史的垃圾堆里'
+                text: 'What? You ask me where the Dimension Boost is? In the garbage dump of history.'
             },
             {
-                text: "| '0'''''1'''''2'''''3'''''4'''''4'''''4'''''4'''''4'''''4'''''4 | 是的，这是一把尺子，但<span style='color:red'>(受硬上限限制)</span>"
+                text: "| '0'''''1'''''2'''''3'''''4'''''4'''''4'''''4'''''4'''''4'''''4 | Yes, this is a ruler, but<span style='color:red'>(hardcapped)</span>"
             },
             {
-                text: "到底要不要购买最大，这是一个问题"
+                text: "Should I buy max? That is the question."
             },
             {
-                text: `玩序数增量玩的 ————eferygrt`
+                text: `Blaming negatives on excessive Ordinal Markup play. ————eferygrt`
             },
             {
-                text: `不会还有人认为${2n ** 128n}是无限吧`
+                text: `Does anyone still think that ${2n ** 128n} is infinite?`
             },
             {
-                text: `新闻播放顺序完全随机，你可能会一次看到两个一样的新闻`
+                text: `The order of news broadcast is completely random, you may see two identical news at once.`
             },
             {
-                text: `这条新闻是由第一新闻维度生产的`
+                text: `This news is produced by First News Dimension.`
             },
             {
-                text: `如何评价 ————eferygrt`
+                text: `How to evaluate. ————eferygrt`
             },
             {
-                text: `这个游戏没有任何错误，它们是另类的成功`
+                text: `There is nothing wrong with this game, they are a different kind of success.`
             },
             {
-                text: `<a href="https://b23.tv/BV1GJ411x7h7" target="_blank">点我立即到达Endgame</a>`
+                text: `<a href="https://youtu.be/dQw4w9WgXcQ?si=dZBa-3LFHwKC8D9S" target="_blank">Click me to reach Endgame immediately.</a>`
             },
             {
-                text: `大型纪录片《质量增量重制版 0.8天价虫洞卖出了1024 archverses》给他一个时间速度加成，他敢把价格卖到<del>11
-    4514 lodeverses</del>114514 archs-metaverse. 近日有网友表示，在某增量游戏新闻播放器上看到一则重要到有时间旅行者提醒的新闻，
-    由于虫洞质量不断扩大，粒子物理学研究员Pollux和粒子超理学研究员天才俱乐部#83黑塔通过虫洞在反物质宇宙相遇，物理学家建议创造更大的虫洞
-    。某一位数学家兼物理学家利用伽罗瓦理论庞加莱猜想的庞加莱回归定理和伽马函数算出了天价虫洞已经来到了1024 archverses，不过我们还是不知道
-    他们两个是怎么掉进这么大的虫洞的，可能是被自动幽灵一脚踢进虫洞。据研究员Pollux报告，他先前由于某个由于机密不能披露的异常影响导致视觉
-    能力严重下降，来到反物质宇宙后因为反物质的时间效应迅速恢复，他表示以后天体物理学研究要加紧研究虫洞。为此五星上将麦克阿瑟表示，要是我有
-    这么大的虫洞，我当年的军衔一定不止五星，至少也得有50星，就连SCP-CN-1630都表示，这43年来，我天天被人注射记忆删除药剂，没得睡过一次好
-    觉，要是我有这么大的虫洞一定得进去放个C类通道，然后在里面睡一觉，不仅可以体验相对论时间膨胀，还可以带薪休假。大型纪录片之《质量增量重制
-    版 0.8天价虫洞卖出了1024 archverses》持续为您播放`
+                text: `The large-scale documentary "Incremental Mass Rewritten 0.8 Expensive Wormhole Sold 1024 Archverses".`+
+                      ` Gave it a tickspeed bonus, and it dared to sell it at a price of <del>114514 lodeverses</del>114514 archs-metaverse.`+
+                      ` Recently, a netizen said that he saw a piece of news on a certain incremental game news player that was so important `+
+                      `that a time traveler reminded him. Due to the continuous expansion of the wormhole mass, particle physics researcher `+
+                      `Pollux and particle superphysics researcher Genius Club #83 Black Tower met in the antimatter universe through the wormhole.`+
+                      ` Physicists suggested creating a larger wormhole. A mathematician and physicist used the Poincare Recurrence Theorem and the `+
+                      `gamma function of the Galois Theory Poincare Conjecture to calculate that the expensive wormhole has reached 1024 archverses, `+
+                      `but we still don't know how did the two of them fall into such a large wormhole? They might have been kicked into the wormhole `+
+                      `by the automatic ghost. According to the report of researcher Pollux, his visual ability was seriously reduced due to an abnormal`+
+                      ` influence that cannot be disclosed due to confidentiality. After coming to the antimatter universe, the time effect of antimatter`+
+                      ` quickly restored his vision. He said that in the future, astrophysics research should step up the study of wormholes. For this reason,`+
+                      ` five-star General MacArthur said that if I had such a large wormhole, my military rank would definitely be more than five stars, `+
+                      `at least 50 stars. Even SCP-CN-1630 said that in the past 43 years, I have been injected with amnestics every day and have not had `+
+                      `a good sleep. If I had such a large wormhole, I would definitely put a Class C channel in it and sleep in it. Not only can I experience`+
+                      ` relativistic time dilation, but I can also take a paid vacation. The large-scale documentary "Incremental Mass Rewritten 0.8 Expensive`+
+                      ` Wormhole Sold 1024 Archverses" continues to play for you.`
             },
             {
                 text: `0+0是宇宙万法的那个源头`
