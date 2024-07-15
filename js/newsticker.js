@@ -42,7 +42,7 @@
                       ` Gave it a tickspeed bonus, and it dared to sell it at a price of <del>114514 lodeverses</del>114514 archs-metaverse.`+
                       ` Recently, a netizen said that he saw a piece of news on a certain incremental game news player that was so important `+
                       `that a time traveler reminded him. Due to the continuous expansion of the wormhole mass, particle physics researcher `+
-                      `Pollux and particle superphysics researcher Genius Club #83 Black Tower met in the antimatter universe through the wormhole.`+
+                      `Pollux and particle superphysics researcher Genius Club #83 Herta met in the antimatter universe through the wormhole.`+
                       ` Physicists suggested creating a larger wormhole. A mathematician and physicist used the Poincare Recurrence Theorem and the `+
                       `gamma function of the Galois Theory Poincare Conjecture to calculate that the expensive wormhole has reached 1024 archverses, `+
                       `but we still don't know how did the two of them fall into such a large wormhole? They might have been kicked into the wormhole `+
