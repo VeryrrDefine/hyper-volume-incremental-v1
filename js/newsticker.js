@@ -56,16 +56,16 @@
                       ` Wormhole Sold 1024 Archverses" continues to play for you.`
             },
             {
-                text: `0+0是宇宙万法的那个源头`
+                text: `0+0 is the source of the universe.`
             },
             {
-                text: `削一下维度提升，谢谢`
+                text: `Nerf the Dimension Boost, thanks.`
             },
             {
-                text: `点击此新闻后什么也不会发生`
+                text: `Nothing will happen after clicking this news.`
             },
             {
-                text: '你看到这条新闻的概率是其它新闻的概率的1%',
+                text: 'This new is 100x rather than others.',
                 get unlocked() {
                     return (Math.random() < 0.01)
                 }
@@ -74,40 +74,40 @@
                 text: 'Uncaught ReferenceError: Cheater is not defined'
             },
             {
-                text: '更新进度：0/K9e15小时'
+                text: 'Update progress: 0/K9e15 hours'
             },
             {
-                text: '错误404：未找到新闻'
+                text: 'Error 404：No news found.'
             },
             {
-                text: '当你看这条新闻时，你就看过这条新闻了'
+                text: 'When you watch this new, you watched this new.'
             },
             {
-                text: '这是一条无意义的新闻'
+                text: 'This is meaningless news.'
             },
             {
                 get text() {
-                    return `你说得对，但是我也不知道谁说的对`
+                    return `You are right, but I don't know who is right too.`
                 }
             },
             {
-                text: '请添加这一条新闻'
+                text: 'Add this new, please.'
             },
             {
-                text: '什么bug? 这不是特性吗'
+                text: 'What bug? Isn't this a feature?'
             },
             {
-                text: '本游戏中的数字全部采用科学计数法，如果有任何问题请拨打电话1.341e10'
+                text: 'All numbers in this game are in scientific notation. If you have any questions, please call 1.341e10.'
             },
             {
-                text: '增量的反义词是减魖'
+                text: 'The antonym of "increment" is "decrement".'
             },
             {
                 get text(){
                     let a = Math.floor(Math.random()*10)
                     let b = Math.floor(Math.random()*10)
                     let c = a+b+Math.floor(Math.random()*10)
-                    return `${a}+${b}=${c}，这显然是错误的`
+                    return `${a}+${b}=${c},this is obviously wrong.`
                 }
             },/*
             {
@@ -115,33 +115,33 @@
             },
             {
                 text: "男人的账号在星期四更容易被封，因为猫一杯的法文名是Thurman"
-            },*/
+            },*///哦，注释啊，工作量-2
             {
-                text: "16-9，6-9不够，借一当十，16-9"
+                text: "16-9, 6-9 is not enough, borrow one to get ten, 16-9......"
             },
             {
-                text: "最新的break_reality.js已在f<sub>Ω<sub>0</sub></sub>(114514)年发行，可以表示大小为BB(1.798e308)那么大的数字"
+                text: "The latest break_reality.js was released in f<sub>Ω<sub>0</sub></sub>(114514) and can represent numbers as large as BB(1.798e308)."
             },
             {
-                text: "这不是一条非滚动新闻"
+                text: "This is not a piece of non-news."
             },
             {
-                text: "谁问你了?"
+                text: "Who asked?"
             },
             {
-                text: "这一切有什么意义？没有什么意义？没有没什么意义？"
+                text: "What's the meaning of all this? There's no meaning? No meaning?"
             },
             {
-                text: "汉化版打开游戏就能找到句号。"
+                text: "You can find the period by opening the English version of the game."
             },
             {
-                text: '游戏有bug怎么办?只有我们把代码删完，就没有bug了'
+                text: 'What to do if the game has bugs? Only if we delete all the code, there will be no bugs.'
             },
             {
-                text: '可以搞个bug增量'
+                text: 'We can make a Bug Incremental.'
             },
             {
-                text: 'ExpantaNum最大支持10{{1}}9e15那么大的数，本游戏使用了ExpantaNum，那么本游戏的数值上限为10{{1}}1e15也很正常吧'
+                text: 'ExpantaNum supports a maximum of 10{{1}}9e15. This game uses ExpantaNum, so it is normal that the upper limit of the value of this game is 10{{1}}1e15.'
             },
             {
                 text: "我不睡了，我滿腦子都是嗯嗯👿滴嘚滴嘚😈"
