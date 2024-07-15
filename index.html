@@ -53,11 +53,13 @@
     <script src="js/hotkey.js" defer></script>
     <script src="js/achievements.js" defer></script>
     <script src="js/tooltip.js" defer></script>
+    <script src="js/newsticker.js" defer></script>
 </head>
 <body>
 
 <div class="container">
     <div id="app">
+        <newsticker></newsticker>
         <p class="center">You have <span class="pts-dis">{{format(player.volumes, 4)}}</span> mm<sup>4</sup>.</p>
         <div class="center">
             <button class="btn" @click="tabShow = '1'" :disabled="inTab(1)">Main</button>
