@@ -231,9 +231,8 @@
             },
             {
                 text: "Who is dygm?"
-            },
-            {
-                text: "There are 7 basic prestige layers in Wind Spirit Creation: <span style='color:#ff0000'>swirl</span>、<span style='color:#ffff00'>txjsm</span>、<span style='color:#00ff00'>uyktn</span>、<span style='color:#00ffff'>vzluo</span>、<span style='color:#0000ff'>wamvp</span>、<span style='color:#ff00ff'>xbnwq</span>,anemoity"
+            },{
+                text: "There are 7 prestige layers in Wind Spirit Creation:<span style='color:#ff0000'>swirl</span>、<span style='color:#ffff00'>txosm</span>、<span style='color:#00ff00'>vyutn</span>、<span style='color:#00ffff'>wzavp</span>、<span style='color:#0000ff'>xbewq</span>、<span style='color:#ff00ff'>ycixr</span>、zdoys, anemoity."
 
             },
             {
