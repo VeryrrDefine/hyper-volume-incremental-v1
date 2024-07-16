@@ -1,5 +1,6 @@
 var mm3_opt = {
     upgrades: [
+        // todo: upgrades
         [
             {
                 id: 10,

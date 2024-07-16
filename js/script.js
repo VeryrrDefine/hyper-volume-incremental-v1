@@ -204,7 +204,6 @@ function upgradeTickspeed() {
         if (player.tickspeed.gte("1e10")) {
             player.tickspeed = E("1e10")
         }
-
     } else {
         // handle cost add
         let temp = player.volumes.logarithm(10).sub(308 - 1.301029995663981).div(1.301029995663981) /*1e308 * 2e10^temp */

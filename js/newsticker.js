@@ -240,8 +240,8 @@
                     "<span style='color:rgb(154,119,169)'>I</span> need <span style='color:rgb(154,119,169)'>to</span> become eternal"
             },
             {
-                text: "你有1复制器，每一秒×2。（114514小时后）你有" +
-                    format(E(2).pow(114514*3600)) + "复制器"
+                text: "You have 1 replicanti，每一秒×2。（114514小时后）you have " +
+                    format(E(2).pow(114514*3600)) + " replicanti"
             },
             {
                 text:"D'autres temps attendent, j'ai besoin d'être éternel"
@@ -269,7 +269,7 @@
             },
             {
                 get text() {
-                    return "I am a special news. .sʍəu lɐɪɔəds ɐ ɯɐ I"
+                    return "I am a special news. .sʍəu lɐᴉɔəds ɐ ɯɐ I"
                 }
             },
             {
