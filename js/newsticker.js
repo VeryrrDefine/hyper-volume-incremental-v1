@@ -193,55 +193,55 @@
                 text: "When i was 114514 years old, i'm 114514 years old."
             },
             {
-                text: "宇宙学部在此提醒：ten million experiments, safety first，Non-standard operation, relatives two lines of t"
+                text: "The Department of Cosmology reminds：There are thousands of roads, but safety is the first. Irregular driving makes loved ones cry."
             },
             {
-                text: "如果一个大数js库可以表示到f<sub>ε<sub>0</sub></sub>(10)的话，那么说明这个大数js库可以表示到g<sub>ψ<sub>0</sub>(Ω<sub>2</sub>)</sub>(10)"
+                text: "If a large number js library can represent f<sub>ε<sub>0</sub></sub>(10), this large number js library can represent g<sub>ψ<sub>0</sub>(Ω<sub>2</sub>)</sub>(10)."
             },
 
             {
                 text: "我一个鸡砸，wtf"
             },
             {
-                text: "热知识，由于我不知道的怎么个回事，所以ψ<sub>0</sub>(Ω<sub>ω</sub>)是FGH和SGH的第一个交点。 第二个交点是什么呢？"
+                text: "Hot knowledge, because I don't know what's going on, so ψ<sub>0</sub>(Ω<sub>ω</sub>) is the first intersection point of FGH and SGH. What is the second intersection point?"
             },
             {
-                text: "网传的\"TREE(3)的“Φ”的个数多达187196个\"经计算是假的，增长率只有ω3+1，然而目前TREE(3)确定的lowerbound的增长率有ψ<sub>0</sub>(Ω<sup>Ω<sup>ω</sup>+3</sup>)"
+                text: "The rumor that \"the number of \"Φ\" in TREE(3) is as many as 187196\" is false after calculation. The growth rate is only ω3+1. However, the growth rate of the lowerbound determined by TREE(3) is ψ<sub>0</sub>(Ω<sup>Ω<sup>ω</sup>+3</sup>)"
             },
             {
-                text: "达到g<sub>φ(φ(5,φ(7,5)),φ(φ(7,5),φ(8,φ(5,2))))<sup>η<sub>ε<sub>ζ<sub>8</sub>+1</sub></sub></sup></sub>(10)点数以进行下114514层重置"
+                text: "Reach g<sub>φ(φ(5,φ(7,5)),φ(φ(7,5),φ(8,φ(5,2))))<sup>η<sub>ε<sub>ζ<sub>8</sub>+1</sub></sub></sup></sub>(10) points to reset the next 114514 layers."
             },
             {
                 text: "Coming s1.79e308n"
             },
             {
-                text: "<span onclick='toggleNewsTicker()'>如果你不想显示新闻的话，你可以按下这个文字关闭。</span>"
+                text: "<span onclick='toggleNewsTicker()'>If you don't want to display the news, you can click this text to turn it off.</span>"
             },
             {
-                text: `紧急ψ(K)级事故！<span class='corrupted'>${"?".repeat(100)}! We're trying to ??? to make ??? to be ??????????????????????????????!</span>`
+                text: `Emergency ψ(K) level accident! <span class='corrupted'>${"?".repeat(100)}! We're trying to ??? to make ??? to be ??????????????????????????????!</span>`
             },
             {
-                text: `紧急ω<sub>1</sub><sup>CK</sup>级事故！ !%^#&&$!&$#$&#$&#@$&!&$#*#%*^&*#!*^%&*^*^%*#%$^&*@!^&#^`
+                text: `Emergency ω<sub>1</sub><sup>CK</sup>level accident！ !%^#&&$!&$#$&#$&#@$&!&$#*#%*^&*#!*^%&*^*^%*#%$^&*@!^&#^`
             },
             {
-                text: "Translating English to Chinese: bluearchive -> 蓝韭菜 Translated 100% 虽然我不知道蓝韭菜有什么好玩的 且很奇怪 但我还是尊重你 哈哈哈"
+                text: "Translating English to Chinese: bluearchive -> 蓝韭菜 Translated 100% Although I don't know what's so fun about bluearchive and they're weird, I still respect you, hahahaha."
             },
             {
-                text: "新版7禁和11禁：先通过EC7和EC11再发言吧 新人：(  )场"
+                text: "New version 7 ban and 11 ban: Pass EC7 and EC11 first before speaking. Newcomer: ( )"
             },
             {
-                text: "dygm到底是谁？"
+                text: "Who is dygm?"
             },
             {
-                text: "风灵作成共有7个基本的声望层：<span style='color:#ff0000'>swirl</span>、<span style='color:#ffff00'>txosm</span>、<span style='color:#00ff00'>vyutn</span>、<span style='color:#00ffff'>wzavp</span>、<span style='color:#0000ff'>xbewq</span>、<span style='color:#ff00ff'>ycixr</span>、zdoys, anemoity "
+                text: "There are 7 basic prestige layers in Wind Spirit Creation: <span style='color:#ff0000'>swirl</span>、<span style='color:#ffff00'>txjsm</span>、<span style='color:#00ff00'>uyktn</span>、<span style='color:#00ffff'>vzluo</span>、<span style='color:#0000ff'>wamvp</span>、<span style='color:#ff00ff'>xbnwq</span>、扯"
             },
             {
                 text: "<span  style='color:rgb(154,119,169)'>怀旧空吟闻笛赋</span>，到乡翻似烂柯人，other times <span style='color: rgb(208 ,121 ,49)'>await,</span> " +
                     "<span style='color:rgb(154,119,169)'>I</span> need <span style='color:rgb(154,119,169)'>to</span> become eternal"
             },
             {
-                text: "You have 1 replicanti，每一秒×2。（114514小时后）you have " +
-                    format(E(2).pow(114514*3600)) + " replicanti"
+                text: "You have 1 replicanti, it multplies by 2 per second. (114514 hours later) You have" +
+                    format(E(2).pow(114514*3600)) + "replicanti."
             },
             {
                 text:"D'autres temps attendent, j'ai besoin d'être éternel"
@@ -253,19 +253,25 @@
                 }
             },
             {
-                text: "Oh, I appear to have run out of <span style='animation: a-existence-glow 3s infinite; color: white; line-height: 0;'>Existence</span>"
+                text: "Oh, I appear to have run out of <span style='animation: a-existence-glow 3s infinite; color: white; line-height: 0;'>Existence</span>."
+            },
+            {
+                text: "We will fly a-way, far a-way, huo xu hui pang huang, huo xu hui shou shang,fly a-way far a-way-from-silence! Bie bei shi-jian yi wang sing a song, search for truth, xun hui na-guang-mao, xun hui na-sheng-xiang.",
+                get unlocked() {
+                    return player.volumes.gte(E(10).expansion(150))
+                }
             },
             {
                 text: "do t喝 dan a-dand <del>u</del>s<del>ually</del>e b额 zweee-en det 喝e te喝 ne了"
             },
             {
-                text: "If there is a bug in a incremental game，你的数值可能会从1.0000F136变成F1.005e114514"
+                text: "一个增量游戏如果出了bug，你的数值可能会从1.0000F136变成F1.005e114514"
             },
             {
-                text: "有的人认为13.80% < 13.11%，我们可以把百分比去掉，13.80 < 13.11, 两边同时乘以100，138 < 1311，可是138除以100=1.38，由此可知13.80=1.38，两边同时除以1.38得10=1"
+                text: "Some people think that 13.80% < 13.11%. We can remove the percentage sign, 13.80 < 13.11, multiply both sides by 100, 138 < 1311, but 138 divided by 100 = 1.38, so 13.80 = 1.38, and both sides divided by 1.38 get 10 = 1"
             },
             {
-                text: "现在，你们甩开了一大波僵尸，但前方只有一条路————横跨峡谷的跳桥。你们面临最大的困境出现了，那就是一大堆时间墙"
+                text: "Now, you have shaken off a large wave of zombies, but there is only one way forward - a jumping bridge across the canyon. The biggest dilemma you face is a bunch of timewalls."
             },
             {
                 get text() {
@@ -285,10 +291,7 @@
                 text: "Bonour Ce n'est pas une faute de frappe. L'inventeur du français a causé cette faute de frappe."
             },
             {
-                text: `部分大数js的上限出现的\"9e15\" \"1.79e308\"这两个数值确切来说是2<sup>53</sup>-1和2<sup>1024</sup>。这是因为如果超过了2<sup>53</sup>之后就只有偶数了，所以会出现2<sup>53</sup>+1=2<sup>53</sup>的情况，2<sup>53</sup>+1=2<sup>53</sup>显然是错误的。
-    但有一点要注意的是，这个是双精度浮点数可以表示的最大的安全整数。在\"单\"精度浮点数又有不同。单精度浮点数的最大的安全整数和最大可表示的数是2<sup>24</sup>-1和2<sup>128</sup>，使用单精度浮点数同样会出现类似2<sup>24</sup>+1=2<sup>24</sup>的情况。
-    但是还有两个表示整数的方式是int和long。int(unsigned)可以表示到4294967295(2<sup>32</sup>-1)这样大的数字，而long (unsigned)可以表示到18446744073709551616(2<sup>64</sup>-1)这样大的数字。这两个类型没有误差，但缺点就是能表示的数也很小。
-    然而有部分游戏突破了1e308的上限：反物质维度，质量增量重制版……<del>等</del>。但这些游戏表示的数字上限有不同。反物质维度数字上限为1.000e9.000e15(更严谨来说是1.000e9.007e15)；质量增量重制版理论上限F1.797e308(10^^1.797e308)；最大的，无尽的楼梯间上限K1e15，比葛立恒数(~3K64)还大，真的是不可思议！`
+                text: `The two values ​​\"9e15\" \"1.79e308\" that appear in the upper limit of some large numbers js are actually 2<sup>53</sup>-1 and 2<sup>1024</sup>-2<sup>971</sup>. This is because if it exceeds 2<sup>53</sup>, there will only be even numbers, so 2<sup>53</sup>+1=2<sup>53</sup> will appear, and 2<sup>53</sup>+1=2<sup>53</sup> is obviously wrong. But one thing to note is that this is the largest safe integer that can be represented by a double-precision floating point number. It is different in \"single\" precision floating point numbers. The largest safe integer and the largest representable number of single-precision floating-point numbers are 2<sup>24</sup>-1 and 2<sup>128</sup>. Using single-precision floating-point numbers will also result in situations like 2<sup>24</sup>+1=2<sup>24</sup>. However, there are two other ways to represent integers: int and long. int (unsigned) can represent numbers as large as 4294967295 (2<sup>32</sup>-1), while long (unsigned) can represent numbers as large as 18446744073709551616 (2<sup>64</sup>-1). These two types have no error, but the disadvantage is that the numbers they can represent are also very small. However, some games have exceeded the upper limit of 1e308: Antimatter Dimension, Mass Increment Remake...<del>etc.</del>. But the upper limits of the numbers represented by these games are different. The upper limit of the antimatter dimension number is 1.000e9.000e15 (to be more precise, it is 1.000e9.007e15); the upper limit of the Incremental Mass Rewritten is F1.798e308; the largest, the Endless Stairwell has a maximum limit of K1e14, which is larger than the Graham's number (~3K64), which is really incredible!`
             },
             {
                 text: "Lain said: All of Meter<sup>4</sup> 4D space is interconnected in any time, any place."
