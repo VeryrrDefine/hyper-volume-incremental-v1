@@ -144,37 +144,31 @@
                 text: 'ExpantaNum supports a maximum of 10{{1}}9e15. This game uses ExpantaNum, so it is normal that the upper limit of the value of this game is 10{{1}}1e15.'
             },
             {
-                text: "我不睡了，我滿腦子都是嗯嗯👿滴嘚滴嘚😈"
+                text: "I can't sleep because they're a lot of Ai-ai👿Dide-dide😈 in my brain"
             },
             {
-                text: "Tendou Arisu是谁？ 我怎么不知道"
+                text: "Who is Tendou Arisu? I don't know"
             },
             {
-                text: "与众不同",
+                text: "different from news",
             },
             {
-                text: "来看看这是什么物业 78物业"
+                text: "How is the property managementer? Be-nis PM!"
             },
             {
-                text: "我是geizong霸王，nein可以叫我kei王!"
+                text: "Woshi geizong bawang，nein keyi jiaowo kei wang!"
             },
             {
-                text: "我与其他新闻与~~~~~~~众~~~~~~~不~~~~~~~同~~~~~~~",
+                text: "I'm di~~~~~~~fferent~~~~~~~from~~~~~~~nes~~~~~~~",
             },
             {
-                text: "为什么第9维度不存在？因为 seven eight nine",
+                text: "Why is there no ninth dimension? because seven eight nine",
             },
             {
                 text: "Est-ce que je peux parler à...?", //
             },
             {
-                text: "如果我是bug的话那我写出的多维体积增量是什么，bug中之bug吗",
-            },
-            {
-                text: "那好吧，既然主人不爽，喵喵就勉为其难地踢他一脚好了（；′⌒`） @白露猫[AI] 再交给你一个任务：把清蒸羊头踢出群 好的主人，喵喵这就去把清蒸羊头踢出群！(*｀･∀･´*)ﾉ"
-            },
-            {
-                text: "曾经有一位流浪者在后室误入<a href=\"https://backrooms.fandom.com/zh/wiki/User:VeryRRDefine/Level_ZH_736\">Level ZH 736</a>，3月27日晚上9点左右Level ZH 736突然毁灭，原因不明，流浪者推测已死亡"
+                text: "There was a wanderer go <a href=\"https://backrooms.fandom.com/zh/wiki/User:VeryRRDefine/Level_ZH_736\">Level ZH 736</a> by mistake,Level ZH 736 has been destructed at 9 P.M. on 27<sup>th</sup> March because an unknown reason.The wanderer may be died."
             },
             {
                 text: "i tsu mo na↑ n↓ do demo yumeo i ka kou"
@@ -184,16 +178,13 @@
                 get unlocked(){return false}
             },
             {
-                text: "在2222年，风灵作成有高达1000个成就，6308个维度，75个阶层，并以5小时后更新的速度恒定更新"
+                text: "In 2222, Wind-spirit-creation has least 1000 achievements, 6308 dimensions，75 layers and updates per five hours."
             },
             {
-                text: "你说的对，但是《风灵作成》是由 6左爷6自主研发的一款全新开放世界增量游戏。游戏发生在一个被称作「风灵仙境」的幻想世界，在这里，被 6左爷6 选中的人将被授予「风元素」，导引扩散之力。你将扮演一位名为「砂糖」的神秘角色，在漫长的硬挂中邂逅条件各异、加成独特的升级们，和他们一起击败挑战，找回失散的朋友——同时，逐步发掘「生物炼金」的真相。"
+                text: "You're right , but<i>Wind-spirit-creation</i> is a new open-world incremental game developed by dlsdl by himself. 游戏发生在一个被称作「风灵仙境」的幻想世界，在这里，被 6左爷6 选中的人将被授予「风元素」，导引扩散之力。你将扮演一位名为「砂糖」的神秘角色，在漫长的硬挂中邂逅条件各异、加成独特的升级们，和他们一起击败挑战，找回失散的朋友——同时，逐步发掘「生物炼金」的真相。"
             },
             {
-                text: "授人以鱼，不如授人以渔，不如授人以氵渔，不如授人以氵氵渔，不如授人以氵氵氵渔，不如授人以氵氵氵氵渔，不如授人以氵氵氵氵氵渔，…………"
-            },
-            {
-                text: "有些人成分复杂，比如我，总是要......一会再"
+                text: "Giving people fish is not as good as giving people the first fish dimension is not as good as giving people the second fish dimension……"
             },
             {
                 text: 'g<sub>0</sub>(2) g<sub>1</sub>(2) g<sub>ω</sub>(2) g<sub>ω+1</sub>(2) g<sub>ε<sub>0</sub></sub>(2) g<sub>ε<sub>0</sub>+1</sub>(2) g<sub>ε<sub>0</sub>+ω</sub>(2) g<sub>ε<sub>0</sub>+ω+1</sub>(2) g<sub>ε<sub>0</sub>ω</sub>(2)'//ε
@@ -202,7 +193,7 @@
                 text: "When i was 114514 years old, i'm 114514 years old."
             },
             {
-                text: "宇宙学部在此提醒：实验千万条，安全第一条，操作不规范，亲人两行"
+                text: "宇宙学部在此提醒：ten million experiments, safety first，Non-standard operation, relatives two lines of t"
             },
             {
                 text: "如果一个大数js库可以表示到f<sub>ε<sub>0</sub></sub>(10)的话，那么说明这个大数js库可以表示到g<sub>ψ<sub>0</sub>(Ω<sub>2</sub>)</sub>(10)"
@@ -305,7 +296,15 @@
     但是还有两个表示整数的方式是int和long。int(unsigned)可以表示到4294967295(2<sup>32</sup>-1)这样大的数字，而long (unsigned)可以表示到18446744073709551616(2<sup>64</sup>-1)这样大的数字。这两个类型没有误差，但缺点就是能表示的数也很小。
     然而有部分游戏突破了1e308的上限：反物质维度，质量增量重制版……<del>等</del>。但这些游戏表示的数字上限有不同。反物质维度数字上限为1.000e9.000e15(更严谨来说是1.000e9.007e15)；质量增量重制版上限不明；最大的，无尽的楼梯间上限K1e15，比葛立恒数(~3K64)还大，真的是不可思议！`
             },
-
+            {
+                text: "Lain said: All of Meter<sup>4</sup> 4D space is interconnected in any time, any place."
+            },
+            {
+                text: "Can the girl eat 4D rice dumplings in the Wired?"
+            },
+            {
+                text: "There were two neutron star. The volumes of them are 1500km<sup>3</sup> and 2000km<sup>3</sup>.What is the sum of the volumes of the neutron stars?"
+            }
             /*ωεζηφΓψΩ*/
         ];
         window.special_news_state = 0;

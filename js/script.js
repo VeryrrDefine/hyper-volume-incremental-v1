@@ -31,7 +31,7 @@ function reset_dimensions(dim_boost_reset) {
 
 function hard_reset() {
     window.player = {
-        volumes: E(10),
+        volumes: E(11),
         version: 10,
         volumeInfinite: false,
         achieve: new Array(200),
@@ -95,7 +95,8 @@ function hard_reset() {
 
 
 function buyable(dim) {
-    return player.volumes.gte(player.dimensions[DIMENSIONS_COST][dim - 1])
+    let temp1 = player.dimensions[DIMENSIONS_COST][dim - 1]
+    return player.volumes.gte(temp1) && temp1.lt("1.797e308")
 }
 
 function import_str(pl) {
@@ -108,7 +109,25 @@ function import_str(pl) {
 
 function buydim(dim) {
     if (player.volumes.gte(player.dimensions[DIMENSIONS_COST][dim - 1])) {
-        let cost = player.dimensions[DIMENSIONS_COST][dim - 1];
+        /*     1.????
+        * a : 11
+        *      1
+        *      10
+        *
+        * 1.?? > 1
+        *
+        * minus 10^1
+        *
+        *
+        * */
+        let temp1 = player.volumes.logarithm(10).div(dim)
+        let temp2 = (player.dimensions[DIMENSIONS_COST][dim - 1]).logarithm(10).div(dim)
+        player.volumes = player.volumes.sub(E.pow(10, temp2.mul(dim)))
+        player.dimensions[DIMENSIONS_BOUGHT][dim - 1] = player.dimensions[DIMENSIONS_BOUGHT][dim - 1].add(temp1.sub(temp2).ceil());
+        player.dimensions[DIMENSIONS_POINTS][dim - 1] = player.dimensions[DIMENSIONS_POINTS][dim - 1].add(temp1.sub(temp2).ceil().mul(10)); //     player.volumes = player.volumes.sub(E.pow(10,temp1.mul(dim).ceil()))
+        //
+        //     player.dimensions[DIMENSIONS_BOUGHT][dim-1].add(temp3.ceil());
+        /*let cost = player.dimensions[DIMENSIONS_COST][dim - 1];
         let times = E.minimum(
             player.dimensions[DIMENSIONS_BOUGHT][dim - 1].modular(10).neg().add(10)
             , player.volumes.div(cost)).floor();
@@ -122,7 +141,7 @@ function buydim(dim) {
         player.dimensions[DIMENSIONS_COST][dim - 1] = calc_cost(dim - 1, player.dimensions[DIMENSIONS_BOUGHT][dim - 1])//recalc cost
         if (player.volumes.gte(player.dimensions[DIMENSIONS_COST][dim - 1])) { // if volumes >= cost, buydim
             return buydim(dim);
-        }
+        }*/
 
         return true
     }
@@ -156,10 +175,10 @@ function dimensionBoost(nBoost) {
 
 
 const dim_base_price = [
-    E(10), E(100), E(1E4), E(1E6), E(1E9), E(1E13), E(1E18), E(1E24)
+    E(10), E(100), E(1E3), E(1E4), E(1E5), E(1E6), E(1E7), E(1E8)
 ]
 const dim_incre = [
-    E(1e2), E(1e3), E(1E4), E(1E5), E(1E6), E(1E8), E(1E10), E(1E12)
+    E(1e1), E(1e2), E(1E3), E(1E4), E(1E5), E(1E6), E(1E7), E(1E8)
 ];
 
 function calculate_dim() {
@@ -198,13 +217,13 @@ function upgradeTickspeed() {
 
     } else {
         // handle cost add
-        let temp = player.volumes.logarithm(10).sub(308-1.301029995663981).div(1.301029995663981) /*1e308 * 2e10^temp */
-        let temp2 = tmp.tickspeed.cost.logarithm(10).sub(308-1.301029995663981).div(1.301029995663981)
+        let temp = player.volumes.logarithm(10).sub(308 - 1.301029995663981).div(1.301029995663981) /*1e308 * 2e10^temp */
+        let temp2 = tmp.tickspeed.cost.logarithm(10).sub(308 - 1.301029995663981).div(1.301029995663981)
         let temp3 = temp.sub(temp2)
 
         buycount = buycount.add(temp3);
-        if (buycount.gte(0)){
-            player.tickspeed=player.tickspeed.add(buycount);
+        if (buycount.gte(0)) {
+            player.tickspeed = player.tickspeed.add(buycount);
 
         }
         /*
@@ -220,42 +239,10 @@ function upgradeTickspeed() {
 function calc_cost(dimid, count) {
     // count before buy
     // 1st dimension dimid = 0
-    if (count.gte("10100")) {
-        return E.expansion(10,"9007199254740991");
-    }
-    if (count.gte("10090")) {
-        return E.expansion(10,"1e14");
-    }
-    if (count.gte("10080")) {
-        return E.expansion(10,"1e11");
-    }
-    if (count.gte("10070")) {
-        return E.expansion(10,"1e8");
-    }
-    if (count.gte("10060")) {
-        return E.expansion(10,"1e5");
-    }
-    if (count.gte("10050")) {
-        return E.expansion(10,"1.7e4");
-    }
-    if (count.gte("10040")) {
-        return E.expansion(10,8192);
-    }
-    if (count.gte("10030")) {
-        return E.expansion(10,2048);
-    }
-    if (count.gte("10020")) {
-        return E.expansion(10,824);
-    }
-    if (count.gte("10010")) {
-        return E.expansion(10,78);
-    }
-    if (count.gte("1e4")) {
-        return E.GRAHAMS_NUMBER;
-    }
-    return dim_base_price[dimid]
-        .mul(dim_incre[dimid].pow(count.div(10).floor()))
-        .div(hasMM3upgrade(10) ? 2 : 1)
+    let temp1 = dim_base_price[dimid]
+        .mul(dim_incre[dimid].pow(count.floor()));
+
+    return temp1;
 }
 
 function exportErrorLog() {
@@ -269,8 +256,8 @@ ${JSON.stringify(player)}
     navigator.clipboard.writeText(str);
 }
 
-function exportPurePlayerJson(){
-    if (app.developer_mode){
+function exportPurePlayerJson() {
+    if (app.developer_mode) {
         navigator.clipboard.writeText(JSON.stringify(player));
     }
 }
@@ -281,6 +268,7 @@ function loop() {
         player.time_now = this_frame;
 
         window.diff = (this_frame - last_frame) / 1000 * developer.timeboost;
+
 
         if (!player.dimensions[DIMENSIONS_POINTS][0].mul) {
             fix();
@@ -293,7 +281,7 @@ function loop() {
             .mul(player.dimensions[DIMENSIONS_MULTI][0])
             .mul(diff);
 
-        if (player.volumes.gte("e9007199254740991")){
+        if (player.volumes.gte("e9007199254740991")) {
             player.volumes = EN("e9007199254740991");
             more = EN("0");
         }
@@ -312,7 +300,7 @@ function loop() {
             player.dimensions[DIMENSIONS_MULTI][i] = tmp.dimension.getDimMultiplier(i + 1);
             player.dimensions[DIMENSIONS_COST][i] = calc_cost(i, player.dimensions[DIMENSIONS_BOUGHT][i])
         }
-        if (player.error !== void 0){
+        if (player.error !== void 0) {
             throw new Error("you throw a error!");
         }
         player.lastTab = app.tabShow
@@ -417,13 +405,13 @@ function load() {
 
         window.qqq = setInterval(loop, 35)
         window.www = setInterval(save, 1000);
-        if (window.newsTickerError !== undefined){
+        if (window.newsTickerError !== undefined) {
             app.hasNewsTickerError = true;
         }
         hasLoaded.status = true
-    }catch (e){
+    } catch (e) {
         document.getElementById("ithinksomeone").style.display = "block";
-        document.getElementById("error").innerText= e.stack;
+        document.getElementById("error").innerText = e.stack;
 
         // document.querySelectorAll("[if-not-fatal-error]").forEach((value, key, parent)=>{
         //     value.style.display="none";
@@ -482,51 +470,8 @@ function loadVue() {
                 {
                     version: "v1.0.3", title: "...",
                     changes: [
-                        "...",
-                        "切换了"
-                    ]
-                },
-                {
-                    version: "v1.0.2.1", title: "等一下，我format_time.js忘记投了",
-                    changes: [
-                        "修复了无法查看统计页面的bug"
-                    ]
-                },
-                {
-                    version: "v1.0.2", title: "mm<sup>3</sup>", changes: [
-                        "添加一个mm<sup>3</sup>升级",
-                        "新闻限时回归",
-                        "移除mm<sup>3.5</sup>",
-                        "删除了维度星系",
-                        "<span class='corrupted'>警告，由于游戏的不确定性，维度星系最终可能会回归</span>"
-                    ]
-                },
-                {
-                    version: "v1.0.1.2", title: "", changes: [
-                        "不鸡丢"
-                    ]
-                },
-                {
-                    version: "v1.0.1.1", title: "", changes: [
-                        "新闻列表重写"
-                    ]
-                },
-                {
-                    version: "v1.0.1", title: "Vue!!!!!!", changes: [
-                        "使用Vue",
-                        "体积菜单分两个",
-                        "添加3.5维度",
-                        "修改维度提升结果",
-                        "添加维度星系",
-                        "维度页面新样式",
-                        "移除了部分新闻",
-                        "添加了tickspeed"
-                    ]
-                },
-                {
-                    version: "v1.0.0", title: "", changes: [
-                        "添加第五维度",
-                        "and a lot of..."
+                        "Language -> English",
+                        "Change Style"
                     ]
                 }
             ],
