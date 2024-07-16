@@ -11,7 +11,7 @@
                 text: 'What? You ask me where the Dimension Boost is? In the garbage dump of history.'
             },
             {
-                text: "| '0'''''1'''''2'''''3'''''4'''''4'''''4'''''4'''''4'''''4'''''4 | Yes, this is a ruler, but<span style='color:red'>(hardcapped)</span>"
+                text: "| '0'''''1'''''2'''''3'''''4'''''4'''''4'''''4'''''4'''''4'''''4' | Yes, this is a ruler, but<span style='color:red'>(hardcapped)</span>"
             },
             {
                 text: "Should I buy max? That is the question."
@@ -74,7 +74,7 @@
                 text: 'Uncaught ReferenceError: Cheater is not defined'
             },
             {
-                text: 'Update progress: 0/K9e15 hours'
+                text: 'Update progress: (5-<sup>1</sup>/<sub>K9.000e15</sub>)/5 hours'
             },
             {
                 text: 'Error 404：No news found.'
@@ -227,7 +227,7 @@
                 text: "Translating English to Chinese: bluearchive -> 蓝韭菜 Translated 100% Although I don't know what's so fun about bluearchive and they're weird, I still respect you, hahahaha."
             },
             {
-                text: "New version 7 ban and 11 ban: Pass EC7 and EC11 first before speaking. Newcomer: ( )"
+                text: "New version 7 ban and 11 ban: Pass EC7 and EC11 first before speaking. Newcomer: truck, duck, pluck, ( )uck"
             },
             {
                 text: "Who is dygm?"
@@ -279,7 +279,13 @@
                     return "I am a special news. .sʍəu lɐᴉɔəds ɐ ɯɐ I"
                 }
             },
+            // āāúǐīáì èíāáììē
             {
+
+                text: "巴山楚水凄凉地(bā shān chú shuǐ qī liáng dì)，<del>二十三年弃置身</del>Kju deng-eu si-em delta T"
+            },
+            {
+
                 text: "巴山楚水凄凉地，<del>二十三年弃置身</del>Kju deng-eu si-em delta T"
             },
             {

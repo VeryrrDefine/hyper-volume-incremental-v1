@@ -150,3 +150,30 @@ h2{
 .btn{
     border-color: rgb(235,235,235);
 }
+
+.mm4_upg,
+.mm4_upg_bought,
+.mm4_upg_buyable {
+    width: 40px;
+    height: 40px;
+    border: solid 2px #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.mm4_upg_buyable {
+    background: #999;
+}
+
+.mm4_upg_bought {
+    background: #00f000;
+}
+.upg_text_box {
+    width: 100%;
+    height: 100px;
+}
+.green{
+    color: #00f000
+}

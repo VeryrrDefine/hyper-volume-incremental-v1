@@ -61,6 +61,10 @@
     <div id="app">
         <newsticker></newsticker>
         <p class="center">You have <span class="pts-dis">{{format(player.volumes, 4)}}</span> mm<sup>4</sup>.</p>
+        <p class="center">You're getting {{formatGain(player.volumes,tmp.mm4.gain)}} mm<sup>4</sup> per second</p>
+        <p class="center">
+        <small >(+{{formatGain(player.volumes,tmp.mm4.gain,"",0)}}/s)</small>
+        </p>
         <div class="center">
             <button class="btn" @click="tabShow = '1'" :disabled="inTab(1)">Main</button>
             <button class="btn" @click="tabShow = '41'" :disabled="inTab(4)" v-if="player.mm3_volumes.unl">Reset
@@ -76,9 +80,7 @@
         <br>
         <div class="center">
             <button class="btn" v-if="inTab(1)" @click="tabShow = '1'" :disabled="tabShow==='1'">4D</button>
-            <button class="btn" v-if="inTab(1)" @click="tabShow = '4'" :disabled="tabShow==='4'">Achievements</button>
-            <button class="btn" v-if="inTab(1)" @click="tabShow = '5'" :disabled="tabShow==='5'">Auto</button>
-            <button class="btn" v-if="inTab(2)" @click="tabShow = '11'" :disabled="tabShow==='11'">Upgrades</button>
+            <button class="btn" v-if="inTab(1)" @click="tabShow = '2'" :disabled="tabShow==='2'">Upgrades</button>
             <button class="btn" v-if="inTab(2)" @click="tabShow = '12'" :disabled="tabShow==='12'"></button>
             <button class="btn" v-if="inTab(3)" @click="tabShow = '21'" :disabled="tabShow==='21'">Save</button>
             <button class="btn" v-if="inTab(3)" @click="tabShow = '22'" :disabled="tabShow==='22'">About</button>
@@ -127,6 +129,27 @@
             </div>
         </div>
 
+        <div v-if="tabShow=='2'" >
+            <div class="upg_text_box center">
+                <span v-html="getMM4UpgText()"></span>
+            </div>
+            <div>
+                <table class="center" style="margin: auto">
+                    <tr v-for="row in mm4_upg" key="row.id">
+                        <td v-for="upg in mm4_upg[row.id]" key="upg.id">
+                            {{row.id}} {{upg.id}}
+                            <div :class="getMM4UpgClassName(upg.id)"
+                                 @touchstart="hover_upg = upg.id"
+                                 @touchend="hover_upg = 0"
+                                 @mouseover="hover_upg = upg.id"
+                                 @mouseleave="hover_upg = 0"
+                                 @click="buyMM4Upg(upg.id)"
+                                 v-if="mm4_upgrades[upg.id-1].unlocked"><span>{{ upg.id }}</span></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
         <div v-if="tabShow=='21'" class="center">
             <button class="btn" @click="export_copy()">Export</button>
 
@@ -153,7 +176,7 @@
                 Hotkeys:<br>
                 M: Max All<br>
             </div>
-            Version: v1.0.3<br>
+            Version: {{changelogs[0].version}}<br>
             This game uses <a href="https://github.com/Naruyoko/ExpantaNum.js"
                               target="_blank">Naruyoko/ExpantaNum.js</a>
             <a

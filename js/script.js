@@ -3,6 +3,79 @@ var this_frame = Date.now();
 var last_frame = Date.now();
 var diff = 1;
 
+var mm4_upgrades = [
+    {
+        desc: "1<sup>st</sup> Dimensions multiplier add based on mm<sup>4</sup> Volumes",
+        get effect() {
+            let a = player.volumes.log(3).mul(0.5);
+            if (a.gte("1e5")){
+                a = E("1e5")
+            }
+            return a
+        },
+        cost: E("1e100"),
+        get effectDisplay() {
+            return `×${this.effect.format()}`
+        },
+        unlocked: true,
+    },
+    {
+        desc: "Coming s∞n",
+        cost: E("10^^10^114514"),
+        unlocked: true,
+    },
+    {
+        desc: "Coming s∞n",
+        cost: E("10^^10^114514"),
+        unlocked: true,
+    },
+    {
+        desc: "Coming s∞n",
+        cost: E("10^^10^114514"),
+        unlocked: true,
+    },
+    {
+        desc: "Coming s∞n",
+        cost: E("10^^10^114514"),
+        unlocked: true,
+    },
+    {
+        desc: "Coming s∞n",
+        cost: E("10^^10^114514"),
+        unlocked: true,
+    },
+    {
+        desc: "Coming s∞n",
+        cost: E("10^^10^114514"),
+        unlocked: true,
+    },
+    {
+        desc: "Coming s∞n",
+        cost: E("10^^10^114514"),
+        unlocked: true,
+    },
+    {
+        desc: "Coming s∞n",
+        cost: E("10^^10^114514"),
+        unlocked: true,
+    },
+    {
+        desc: "Coming s∞n",
+        cost: E("10^^10^114514"),
+        unlocked: true,
+    }
+]
+
+function buyMM4Upg(id){
+    if (player.volumes.gte(mm4_upgrades[id-1].cost)){
+        player.volumes = player.volumes.sub(mm4_upgrades[id-1].cost)
+        player.upgrades.push(id)
+    }
+}
+
+function hasMM4Upg(id){
+    return player.upgrades.includes(id);
+}
 function reset_dimensions(dim_boost_reset) {
     Object.assign(player,
         {
@@ -56,7 +129,7 @@ function hard_reset() {
             points: E(0)
         },
 
-
+        upgrades: [],
         // stats
         time: {
             eter: 0,
@@ -266,9 +339,7 @@ function loop() {
         /* if (player.volumes.isNaN()){
              player.volumes = E(10);
          }*/
-        let more = player.dimensions[DIMENSIONS_POINTS][0]
-            .mul(player.dimensions[DIMENSIONS_MULTI][0])
-            .mul(diff);
+        let more = tmp.mm4.gain.mul(diff);
 
         if (player.volumes.gte("e9007199254740991")) {
             player.volumes = EN("e9007199254740991");
@@ -283,9 +354,7 @@ function loop() {
         calculate_dim();
 
         for (let i = 0; i < 8; i++) {
-            if (player.mm3_volumes.automation[i + 1]) {
-                buydim(i + 1);
-            }
+
             player.dimensions[DIMENSIONS_MULTI][i] = tmp.dimension.getDimMultiplier(i + 1);
             player.dimensions[DIMENSIONS_COST][i] = calc_cost(i, player.dimensions[DIMENSIONS_BOUGHT][i])
         }
@@ -449,13 +518,21 @@ function loadVue() {
                 {id: 8, label: '8th Dimension'},
             ],
             save: "",
+            mm4_upg: chunkArrayIntoGroupsOfTen(mm4_upgrades),
             isShowingPopup: false,
             hasError: false,
             errortext: "",
             pianyi0: "aa",
             pianyi1: 0,
+            hover_upg: 0,
             developer_code: "",
             changelogs: [
+                {
+                    version: "v1.0.4", title: "mm4升级",
+                    changes: [
+                        "Add 1 mm<sup>4</sup> Upgrade"
+                    ]
+                },
                 {
                     version: "v1.0.3", title: "...",
                     changes: [

@@ -5,9 +5,10 @@ var developer = {
     timeboost: 1
 };
 var E = EN;
-ExpantaNum.prototype.formatE = function (){
+ExpantaNum.prototype.format = function (){
     return format(this);
 }
+
 const DIMENSIONS_POINTS = 0;
 const DIMENSIONS_MULTI = 1;
 const DIMENSIONS_BOUGHT = 2;

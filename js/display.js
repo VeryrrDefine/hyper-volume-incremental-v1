@@ -133,3 +133,32 @@ function display_volumes(a){
         return `${formatWhole(a.logarithm(10).div("1e9"))} mlt<sup>4</sup>`
     }
 }
+
+function getMM4UpgClassName(id) {
+    let upgradeClassName = 'mm4_upg';
+    if(hasMM4Upg(id)) {
+        upgradeClassName += '_bought';
+    }
+    if(player.volumes.gte(mm4_upgrades[id - 1].cost) && !hasMM4Upg(id)) {
+        upgradeClassName += '_buyable';
+    }
+        //if (typeof (mm4_upgrades[id-1].disableInChal5) == "boolean") upgradeClassName = "mm4_upg_disabled"
+
+    return upgradeClassName
+}
+function getMM4UpgText(){
+    if (app.hover_upg === 0) return;
+    let a = "[mm<sup>4</sup> Upgrade "
+    a = a.concat(app.hover_upg)
+    a = a.concat("]<br>")
+    a = a.concat(mm4_upgrades[app.hover_upg-1].desc)
+    a = a.concat("<br>")
+    a = a.concat("Cost: ")
+    a = a.concat(mm4_upgrades[app.hover_upg-1].cost.format())
+    a = a.concat(" mm<sup>4</sup>")
+    if (mm4_upgrades[app.hover_upg-1].effectDisplay !== void 0){
+        a = a.concat("<br>")
+        a = a.concat(`<span class="green">Currently: ${mm4_upgrades[app.hover_upg-1].effectDisplay}</span>`)
+    }
+    return a
+}
