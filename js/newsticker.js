@@ -231,8 +231,9 @@
             },
             {
                 text: "Who is dygm?"
-            },
+            },{
                 text: "There are 7 prestige layers in Wind Spirit Creation:<span style='color:#ff0000'>swirl</span>、<span style='color:#ffff00'>txosm</span>、<span style='color:#00ff00'>vyutn</span>、<span style='color:#00ffff'>wzavp</span>、<span style='color:#0000ff'>xbewq</span>、<span style='color:#ff00ff'>ycixr</span>、zdoys, anemoity."
+
             },
             {
                 text: "<span  style='color:rgb(154,119,169)'>怀旧空吟闻笛赋</span>，到乡翻似烂柯人，other times <span style='color: rgb(208 ,121 ,49)'>await,</span> " +
@@ -265,6 +266,7 @@
             },
             {
                 text: "If an incremental game has a bug, its value may change from 1.0000F136 to F1.005e114514."
+
             },
             {
                 text: "Some people think that 13.80% < 13.11%. We can remove the percentage sign, 13.80 < 13.11, multiply both sides by 100, 138 < 1311, but 138 divided by 100 = 1.38, so 13.80 = 1.38, and both sides divided by 1.38 get 10 = 1"
