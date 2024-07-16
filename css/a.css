@@ -147,3 +147,6 @@ h2{
 #newsText {
     white-space: nowrap;
 }
+.btn{
+    border-color: rgb(235,235,235);
+}

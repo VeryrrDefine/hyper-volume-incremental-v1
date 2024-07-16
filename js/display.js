@@ -103,3 +103,33 @@ function getMM3resetButton() {
         + 'mm<sup>3</sup> 体积') : '???'
 }
 
+
+
+function display_volumes(a){
+
+    if (a.lt("1e4")){
+        return `${formatWhole(a)} mm<sup>4</sup>`
+    }else if (a.lt("1e8")){
+        return `${formatWhole(a.div("1e4"))} cm<sup>4</sup>`
+    }else if (a.lt("1e12")){
+        return `${formatWhole(a.div("1e8"))} dm<sup>4</sup>`
+    }else if (a.lt("1e16")){
+        return `${formatWhole(a.div("1e12"))} m<sup>4</sup>`
+    }else if (a.lt("1e20")){
+        return `${formatWhole(a.div("1e16"))} Dem<sup>4</sup>`
+    }else if (a.lt("1e24")){
+        return `${formatWhole(a.div("1e20"))} hm<sup>4</sup>`
+    }else if (a.lt("1e36")){
+        return `${format(a.div("1e24"),5,false)} km<sup>4</sup>`
+    }else if (a.lt("1e48")){
+        return `${format(a.div("1e36"),5,false)} Mm<sup>4</sup>`
+    }else if (a.lt("1e60")){
+        return `${format(a.div("1e48"),5,false)} Gm<sup>4</sup>`
+    }else if (a.lt("1e63")){
+        return `${format(a.div("1e60"),5,false)} Tm<sup>4</sup>`
+    }else if (a.lt("ee8")){
+        return `${formatWhole(a.div("7.98930938444449e63"),5,false)} ly<sup>4</sup>`
+    }else if (a.lt("ee15")){
+        return `${formatWhole(a.logarithm(10).div("1e9"))} mlt<sup>4</sup>`
+    }
+}
