@@ -60,14 +60,14 @@ class formatTime {
         return ExpantaNum.floor(this.totalMilliseconds.sub(this.totalMilliseconds.div(1e3).floor().times(1e3)));
     }
     toString() {
-        if (this.totalMilliseconds.eq(0)) return '0毫秒'
+        if (this.totalMilliseconds.lt(1)) return '0 ms'
         let string = ''
-        if (this.years.neq(0)) string = string + (formatWhole(this.years) + '年')
-        if (this.days.neq(0) && this.years.lt(4e14)) string = string + (formatWhole(this.days) + '天')
-        if (this.hours.neq(0) && this.years.lt(4e12)) string = string + (formatWhole(this.hours) + '时')
-        if (this.minutes.neq(0) && this.years.lt(5e10)) string = string + (formatWhole(this.minutes) + '分')
-        if (this.seconds.neq(0) && this.years.lt(1e9)) string = string + (formatWhole(this.seconds) + '秒')
-        if (this.milliseconds.neq(0) &&  this.years.lt(4e7)) string = string + (formatWhole(this.milliseconds) + '毫秒')
+        if (this.years.neq(0)) string = string + (formatWhole(this.years) + ' years ')
+        if (this.days.neq(0) && this.years.lt(4e14)) string = string + (formatWhole(this.days) + ' days ')
+        if (this.hours.neq(0) && this.years.lt(4e12)) string = string + (formatWhole(this.hours) + ' hours ')
+        if (this.minutes.neq(0) && this.years.lt(5e10)) string = string + (formatWhole(this.minutes) + ' minutes ')
+        if (this.seconds.neq(0) && this.years.lt(1e9)) string = string + (formatWhole(this.seconds) + ' seconds ')
+        if (this.milliseconds.neq(0) &&  this.years.lt(4e7)) string = string + (formatWhole(this.milliseconds) + ' ms ')
         return string
     }
     toJSON() {
