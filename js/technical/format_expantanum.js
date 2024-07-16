@@ -192,7 +192,7 @@ function format(num, precision=2, small=false) {
         let pol = polarize(array)
         return regularFormat(pol.bottom, precision3) + "H" + commaFormat(pol.top)
     }
-    else if (num.lt("10^^^^^5")) { // H1,000,000 ~ 5J4
+    else if (num.lt("10^^^^^5")) { // H1,000,000 ~ I5
         let rep = arraySearch(array, 4)
         if (rep >= 1) {
             setToZero(array, 4)
@@ -202,11 +202,11 @@ function format(num, precision=2, small=false) {
         if (num.gte("10^^^^" + (n + 1))) n += 1
         return "H" + format(n, precision)
     }
-    else if (num.lt("10^^^^^1000000")) { // 1H5 ~ H1,000,000
+    else if (num.lt("10^^^^^1000000")) { // 1I5 ~ I1,000,000
         let pol = polarize(array)
         return regularFormat(pol.bottom, precision3) + "I" + commaFormat(pol.top)
     }
-    else if (num.lt("10^^^^^^5")) { // H1,000,000 ~ 5J4
+    else if (num.lt("10^^^^^^5")) { // I1,000,000 ~ 5J5
         let rep = arraySearch(array, 5)
         if (rep >= 1) {
             setToZero(array, 5)

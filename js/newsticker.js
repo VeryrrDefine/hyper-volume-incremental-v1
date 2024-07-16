@@ -233,7 +233,7 @@
                 text: "dygm到底是谁？"
             },
             {
-                text: "风灵作成共有7个基本的声望层：<span style='color:#ff0000'>扩散</span>、<span style='color:#ffff00'>扪敤</span>、<span style='color:#00ff00'>扫敥</span>、<span style='color:#00ffff'>扬敦</span>、<span style='color:#0000ff'>扭敧</span>、<span style='color:#ff00ff'>扮敨</span>、扯"
+                text: "风灵作成共有7个基本的声望层：<span style='color:#ff0000'>swirl</span>、<span style='color:#ffff00'>txosm</span>、<span style='color:#00ff00'>vyutn</span>、<span style='color:#00ffff'>wzavp</span>、<span style='color:#0000ff'>xbewq</span>、<span style='color:#ff00ff'>ycixr</span>、zdoys, anemoity "
             },
             {
                 text: "<span  style='color:rgb(154,119,169)'>怀旧空吟闻笛赋</span>，到乡翻似烂柯人，other times <span style='color: rgb(208 ,121 ,49)'>await,</span> " +
@@ -256,16 +256,10 @@
                 text: "Oh, I appear to have run out of <span style='animation: a-existence-glow 3s infinite; color: white; line-height: 0;'>Existence</span>"
             },
             {
-                text: "We will fly a-way, far a-way, huo xu hui pang huang, huo xu hui shou shang,fly a-way far a-way-from-silence! Bie bei shi-jian yi wang sing a song, search for truth, xun hui na-guang-mao, xun hui na-sheng-xiang",
-                get unlocked() {
-                    return player.volumes.gte(E(10).expansion(150))
-                }
-            },
-            {
                 text: "do t喝 dan a-dand <del>u</del>s<del>ually</del>e b额 zweee-en det 喝e te喝 ne了"
             },
             {
-                text: "一个增量游戏如果出了bug，你的数值可能会从1.0000F136变成F1.005e114514"
+                text: "If there is a bug in a incremental game，你的数值可能会从1.0000F136变成F1.005e114514"
             },
             {
                 text: "有的人认为13.80% < 13.11%，我们可以把百分比去掉，13.80 < 13.11, 两边同时乘以100，138 < 1311，可是138除以100=1.38，由此可知13.80=1.38，两边同时除以1.38得10=1"
@@ -275,7 +269,7 @@
             },
             {
                 get text() {
-                    return "a special news. .sʍəu lɐɪɔəds ɐ"
+                    return "I am a special news. .sʍəu lɐɪɔəds ɐ ɯɐ I"
                 }
             },
             {
@@ -294,7 +288,7 @@
                 text: `部分大数js的上限出现的\"9e15\" \"1.79e308\"这两个数值确切来说是2<sup>53</sup>-1和2<sup>1024</sup>。这是因为如果超过了2<sup>53</sup>之后就只有偶数了，所以会出现2<sup>53</sup>+1=2<sup>53</sup>的情况，2<sup>53</sup>+1=2<sup>53</sup>显然是错误的。
     但有一点要注意的是，这个是双精度浮点数可以表示的最大的安全整数。在\"单\"精度浮点数又有不同。单精度浮点数的最大的安全整数和最大可表示的数是2<sup>24</sup>-1和2<sup>128</sup>，使用单精度浮点数同样会出现类似2<sup>24</sup>+1=2<sup>24</sup>的情况。
     但是还有两个表示整数的方式是int和long。int(unsigned)可以表示到4294967295(2<sup>32</sup>-1)这样大的数字，而long (unsigned)可以表示到18446744073709551616(2<sup>64</sup>-1)这样大的数字。这两个类型没有误差，但缺点就是能表示的数也很小。
-    然而有部分游戏突破了1e308的上限：反物质维度，质量增量重制版……<del>等</del>。但这些游戏表示的数字上限有不同。反物质维度数字上限为1.000e9.000e15(更严谨来说是1.000e9.007e15)；质量增量重制版上限不明；最大的，无尽的楼梯间上限K1e15，比葛立恒数(~3K64)还大，真的是不可思议！`
+    然而有部分游戏突破了1e308的上限：反物质维度，质量增量重制版……<del>等</del>。但这些游戏表示的数字上限有不同。反物质维度数字上限为1.000e9.000e15(更严谨来说是1.000e9.007e15)；质量增量重制版理论上限F1.797e308(10^^1.797e308)；最大的，无尽的楼梯间上限K1e15，比葛立恒数(~3K64)还大，真的是不可思议！`
             },
             {
                 text: "Lain said: All of Meter<sup>4</sup> 4D space is interconnected in any time, any place."
@@ -304,6 +298,9 @@
             },
             {
                 text: "There were two neutron star. The volumes of them are 1500km<sup>3</sup> and 2000km<sup>3</sup>.What is the sum of the volumes of the neutron stars?"
+            },
+            {
+                text: "Q=cmΔt"
             }
             /*ωεζηφΓψΩ*/
         ];

@@ -89,7 +89,7 @@
         </div>
         <br>
         <div v-if="tabShow=='1'" class="center">
-            <button @click="buyAll()">Max all</button>
+            <button @click="buyAll()" class="btn">Max all</button>
             <div v-for="dim in dimensions" v-if="tmp.mm3.confirm<3" :key="dim.id">
                 <div>
                     {{ dim.label }}
@@ -154,7 +154,8 @@
                 M: Max All<br>
             </div>
             Version: v1.0.3<br>
-            This game uses <a href="https://github.com/Naruyoko/ExpantaNum.js" target="_blank">Naruyoko/ExpantaNum.js</a>
+            This game uses <a href="https://github.com/Naruyoko/ExpantaNum.js"
+                              target="_blank">Naruyoko/ExpantaNum.js</a>
             <a
                     href="https://github.com/cloudytheconqueror/letter-notation-format"
                     target="_blank">cloudytheconqueror/letter-notation-format</a> to handle very, very big number<br>
@@ -175,8 +176,11 @@
                         <del>PPT</del>PTT is measure of the player's strength，My PTT is 10.0±0.05。<del>Can you reach me?</del></span></a><br>
             <br>
             <p>You can play other increment-games!</p>
-            <a href="https://ivark.github.io/AntimatterDimensions" target="_blank" class="game-link">Antimatter Dimensions</a>,<br>
-            <a href="https://seanxlx2011.github.io/" target="_blank" class="game-link"><del>Infinity Dimension Rewritten</del></a>,<br>
+            <a href="https://ivark.github.io/AntimatterDimensions" target="_blank" class="game-link">Antimatter
+                Dimensions</a>,<br>
+            <a href="https://seanxlx2011.github.io/" target="_blank" class="game-link">
+                <del>Infinity Dimension Rewritten</del>
+            </a>,<br>
 
             <p>Nobody knows I broke <span class="existence">Void</span> in <span class="existence">Void</span>,
                 broke <span class="charged_text">myself</span> in <span class="charged_text">myself</span>.</p>
@@ -187,6 +191,20 @@
                 <p v-for="text in changelog.changes" v-html="text"></p>
 
             </div>
+        </div>
+
+        <div v-if="tabShow=='23'" class="center">
+            <p>你总共制造了{{format(player.volume_generated.mm4)}} mm<sup>4</sup> 4维体积;</p>
+            <p>如果对体积进行单位换算，You can get <span v-html="display_volumes(player.volume_generated.mm4)"></span></p>
+        </div>
+
+        <div v-if="tabShow=='24'" class="center">
+
+            <button @click="toggleNewsTicker()" class="btn">开启新闻： {{getOpenClose(player.options.showNewsTicker)}}
+            </button>
+            <button @click="toggleStickyDisplay()" class="btn">开启粘性定位：
+                {{getOpenClose(player.options.stickyDisplay)}}
+            </button>
         </div>
     </div>
 </div>
