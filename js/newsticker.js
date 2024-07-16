@@ -233,7 +233,8 @@
                 text: "Who is dygm?"
             },
             {
-                text: "There are 7 basic prestige layers in Wind Spirit Creation: <span style='color:#ff0000'>swirl</span>、<span style='color:#ffff00'>txjsm</span>、<span style='color:#00ff00'>uyktn</span>、<span style='color:#00ffff'>vzluo</span>、<span style='color:#0000ff'>wamvp</span>、<span style='color:#ff00ff'>xbnwq</span>、扯"
+                text: "There are 7 basic prestige layers in Wind Spirit Creation: <span style='color:#ff0000'>swirl</span>、<span style='color:#ffff00'>txjsm</span>、<span style='color:#00ff00'>uyktn</span>、<span style='color:#00ffff'>vzluo</span>、<span style='color:#0000ff'>wamvp</span>、<span style='color:#ff00ff'>xbnwq</span>,anemoity"
+
             },
             {
                 text: "<span  style='color:rgb(154,119,169)'>怀旧空吟闻笛赋</span>，到乡翻似烂柯人，other times <span style='color: rgb(208 ,121 ,49)'>await,</span> " +
@@ -244,7 +245,7 @@
                     format(E(2).pow(114514*3600)) + "replicanti."
             },
             {
-                text:"D'autres temps attendent, j'ai besoin d'être éternel"
+                text:"D'autres temps attendent, j'ai besoin d'être éternel."
             },
             {
                 text: "/dot ʁ tɑ(n) atɑ(n)d  ʒe bə zwɛ(n) dɛt ʁe tɛʁ nɛl/ ",
@@ -265,7 +266,8 @@
                 text: "do t喝 dan a-dand <del>u</del>s<del>ually</del>e b额 zweee-en det 喝e te喝 ne了"
             },
             {
-                text: "一个增量游戏如果出了bug，你的数值可能会从1.0000F136变成F1.005e114514"
+                text: "If an incremental game has a bug, its value may change from 1.0000F136 to F1.005e114514."
+
             },
             {
                 text: "Some people think that 13.80% < 13.11%. We can remove the percentage sign, 13.80 < 13.11, multiply both sides by 100, 138 < 1311, but 138 divided by 100 = 1.38, so 13.80 = 1.38, and both sides divided by 1.38 get 10 = 1"
@@ -291,7 +293,8 @@
                 text: "Bonour Ce n'est pas une faute de frappe. L'inventeur du français a causé cette faute de frappe."
             },
             {
-                text: `The two values ​​\"9e15\" \"1.79e308\" that appear in the upper limit of some large numbers js are actually 2<sup>53</sup>-1 and 2<sup>1024</sup>-2<sup>971</sup>. This is because if it exceeds 2<sup>53</sup>, there will only be even numbers, so 2<sup>53</sup>+1=2<sup>53</sup> will appear, and 2<sup>53</sup>+1=2<sup>53</sup> is obviously wrong. But one thing to note is that this is the largest safe integer that can be represented by a double-precision floating point number. It is different in \"single\" precision floating point numbers. The largest safe integer and the largest representable number of single-precision floating-point numbers are 2<sup>24</sup>-1 and 2<sup>128</sup>. Using single-precision floating-point numbers will also result in situations like 2<sup>24</sup>+1=2<sup>24</sup>. However, there are two other ways to represent integers: int and long. int (unsigned) can represent numbers as large as 4294967295 (2<sup>32</sup>-1), while long (unsigned) can represent numbers as large as 18446744073709551616 (2<sup>64</sup>-1). These two types have no error, but the disadvantage is that the numbers they can represent are also very small. However, some games have exceeded the upper limit of 1e308: Antimatter Dimension, Mass Increment Remake...<del>etc.</del>. But the upper limits of the numbers represented by these games are different. The upper limit of the antimatter dimension number is 1.000e9.000e15 (to be more precise, it is 1.000e9.007e15); the upper limit of the Incremental Mass Rewritten is F1.798e308; the largest, the Endless Stairwell has a maximum limit of K1e14, which is larger than the Graham's number (~3K64), which is really incredible!`
+                text: `The two values \"9e15\" \"1.79e308\" that appear in the upper limit of some large numbers js are actually 2<sup>53</sup>-1 and 2<sup>1024</sup>-2<sup>971</sup>. This is because if it exceeds 2<sup>53</sup>, there will only be even numbers, so 2<sup>53</sup>+1=2<sup>53</sup> will appear, and 2<sup>53</sup>+1=2<sup>53</sup> is obviously wrong. But one thing to note is that this is the largest safe integer that can be represented by a double-precision floating point number. It is different in \"single\" precision floating point numbers. The largest safe integer and the largest representable number of single-precision floating-point numbers are 2<sup>24</sup>-1 and 2<sup>128</sup>. Using single-precision floating-point numbers will also result in situations like 2<sup>24</sup>+1=2<sup>24</sup>. However, there are two other ways to represent integers: int and long. int (unsigned) can represent numbers as large as 4294967295 (2<sup>32</sup>-1), while long (unsigned) can represent numbers as large as 18446744073709551616 (2<sup>64</sup>-1). These two types have no error, but the disadvantage is that the numbers they can represent are also very small. However, some games have exceeded the upper limit of 1e308: Antimatter Dimensions, Incremental Mass Rewritten...<del>etc.</del>. But the upper limits of the numbers represented by these games are different. The upper limit of the antimatter dimension number is 1.000e9.000e15 (to be more precise, it is 1.000e9.007e15); the theorical upper limit of the Incremental Mass Rewritten is F1.797e308(10^^1.797e308); the largest, the Endless Stairwell has a maximum limit of K1e14, which is larger than the Graham's number (~3K64), which is really incredible!`
+            
             },
             {
                 text: "Lain said: All of Meter<sup>4</sup> 4D space is interconnected in any time, any place."
