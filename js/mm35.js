@@ -1,0 +1,27 @@
+function toggleMM35Copying(){
+    player.mm35_volumes.machineState = !player.mm35_volumes.machineState
+}
+
+function displayMachineState(){
+    return player.mm35_volumes.machineState ? "End Copying" : "Start Copying"
+}
+
+function mm35_loop(){
+    if (player.mm35_volumes.machineState){
+        player.mm35_volumes.points = player.mm35_volumes.points.mul(tmp.mm35.replicatePerTick);
+    }
+
+    if (player.mm35_volumes.points.gte("1e100") && !player.mm3_volumes.unl){
+        for (let i=0;i<8;i++){
+            player.dimensions[DIMENSIONS_POINTS][i] = player.dimensions[DIMENSIONS_POINTS][i].div(tmp.mm35.san_xiang_bo_decrease.max(1))
+
+        }
+        player.volumes = player.volumes.div(tmp.mm35.san_xiang_bo_decrease.max(1))
+
+        player.mm35_volumes.san_xiang_bo_points = player.mm35_volumes.san_xiang_bo_points.add(diff/10);
+        if (player.volumes.lt("11")){
+            no_reward_mm3_reset()
+            player.mm3_volumes.points =player.mm3_volumes.points.add(1);
+        }
+    }
+}

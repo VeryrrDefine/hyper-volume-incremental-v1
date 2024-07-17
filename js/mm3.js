@@ -1,52 +1,38 @@
 var mm3_opt = {
     upgrades: [
         // todo: upgrades
-        [
-            {
-                id: 10,
-                name: "Coming s∞n",
-                cost: E("10^^10"),
-                unlock: true
+        {
+            desc: "Coming s∞n",
+            cost: E("10^^10"),
+            get unlocked() {
+                return player.mm3_volumes.unl;
             }
-        ],
-        [
-            {
-                id: 20,
-                name: "Coming s∞n",
-                cost: E("10^^10"),
-                unlock: true
+        },
+        {
+            desc: "Coming s∞n",
+            cost: E("10^^10"),
+            get unlocked() {
+                return false;
             }
-        ]
+        }
     ]
 }
 
-function hasMM3upgrade(i) {
-    try {
-        return player.mm3_volumes.upgrades[i].bought
-    } catch {
-        player.mm3_volumes.upgrades = {};
-        player.mm3_volumes.upgrades[i] = {
-            bought: false
-        }
-        return false
-    }
+function hasMM3Upg(id) {
+    return player.mm3_volumes.upgrades.includes(id)
+
 }
 
-function getMM3upgradeEffect(i,default_=1) {
-    let upgrade = mm3_opt.upgrades[Math.floor(i / 10) - 1][i % 10]
-    try{
-        return hasMM3upgrade(i) ? upgrade.effect : upgrade.effectbefore;
-    }catch{
-        return E(default_);
-    }
-}
 
 function no_reward_mm3_reset() {
 
-    player.volumes = E("10");
+    player.volumes = E("11");
     reset_dimensions(1);
     player.galaxy_count = E("0");
+    player.mm35_volumes.points = E("1")
+    player.mm35_volumes.san_xiang_bo_points = E("0")
     player.mm3_volumes.unl = true;
+
     player.tickspeed = E("0");
 }
 
@@ -64,14 +50,39 @@ function doMM3reset() {
     }
 }
 
-function buyMM3upgrade(i) {
-    console.log(i)
-    let upgrade = mm3_opt.upgrades[Math.floor(i / 10) - 1][i % 10]
-    if (upgrade.cost.lte(player.mm3_volumes.points) && !hasMM3upgrade(i)) {
-        let newObject = {}
-        newObject[i] = {}
-        newObject[i].bought = true;
-        player.mm3_volumes.points = player.mm3_volumes.points.sub(upgrade.cost);
-        Object.assign(player.mm3_volumes.upgrades, newObject);
+function buyMM3Upg(i) {
+    if (player.mm3_volumes.points.gte(mm3_opt.upgrades[id - 1].cost)) {
+        player.mm3_volumes.points = player.mm3_volumes.points.sub(mm3_opt.upgrades[id - 1].cost)
+        player.mm3_volumes.upgrades.push(id)
     }
+}
+
+function getMM3UpgText(){
+    if (app.hover_3upg === 0) return;
+    let a = "[mm<sup>3</sup> Upgrade "
+    a = a.concat(app.hover_3upg)
+    a = a.concat("]<br>")
+    a = a.concat(mm3_opt.upgrades[app.hover_3upg-1].desc)
+    a = a.concat("<br>")
+    a = a.concat("Cost: ")
+    a = a.concat(mm3_opt.upgrades[app.hover_3upg-1].cost.format())
+    a = a.concat(" mm<sup>3</sup>")
+    if (mm3_opt.upgrades[app.hover_3upg-1].effectDisplay !== void 0){
+        a = a.concat("<br>")
+        a = a.concat(`<span class="green">Currently: ${mm3_opt.upgrades[app.hover_3upg-1].effectDisplay}</span>`)
+    }
+    return a
+}
+
+function getMM3UpgClassName(id) {
+    let upgradeClassName = 'mm3_upg';
+    if(hasMM3Upg(id)) {
+        upgradeClassName += '_bought';
+    }
+    if(player.volumes.gte(mm3_opt.upgrades[id - 1].cost) && !hasMM3Upg(id)) {
+        upgradeClassName += '_buyable';
+    }
+    //if (typeof (mm4_upgrades[id-1].disableInChal5) == "boolean") upgradeClassName = "mm4_upg_disabled"
+
+    return upgradeClassName
 }

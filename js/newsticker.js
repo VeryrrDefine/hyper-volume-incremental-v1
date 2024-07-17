@@ -312,7 +312,16 @@
             },
             {
                 text: "Q=cmΔt"
+            },
+            {
+                text: 'Don\'t drink car when you drive alcohol, Don\'t drive alcohol when you drink car.'
+            },
+            {
+                text: "How is Time Dilation? If you have 1.000e9.000e15 antimatter, when you run time dilation, you have only 1.000e9.240e11"
             }
+
+
+            // Don't drink car when you drive alcohol, Don't drive alcohol when you drink car.
             /*ωεζηφΓψΩ*/
         ];
         window.special_news_state = 0;

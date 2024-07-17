@@ -46,6 +46,7 @@
     <script src="js/init.js" defer></script>
     <script src="js/display.js" defer></script>
     <script src="js/mm3.js" defer></script>
+    <script src="js/mm35.js" defer></script>
 
     <script src="js/script.js" defer></script>
     <script src="js/format_time.js" defer></script>
@@ -54,16 +55,21 @@
     <script src="js/achievements.js" defer></script>
     <script src="js/tooltip.js" defer></script>
     <script src="js/newsticker.js" defer></script>
+    <script src="js/components.js" defer></script>
 </head>
 <body>
-
+<audio src="" id="music" loop></audio>
+<div align="center">
+    <div id="notify" class="hide"></div>
+</div>
 <div class="container">
     <div id="app">
         <newsticker></newsticker>
         <p class="center">You have <span class="pts-dis">{{format(player.volumes, 4)}}</span> mm<sup>4</sup>.</p>
         <p class="center">You're getting {{formatGain(player.volumes,tmp.mm4.gain)}} mm<sup>4</sup> per second</p>
+        <p class="center" v-if="player.mm3_volumes.unl"><small>You have {{format(player.mm3_volumes.points)}} mm<sup>3</sup>.</small></p>
+        <p class="center"><small v-html="getGameSpeedText()">Game speed is altered: 1 second -> 114514 years</small></p>
         <p class="center">
-        <small >(+{{formatGain(player.volumes,tmp.mm4.gain,"",0)}}/s)</small>
         </p>
         <div class="center">
             <button class="btn" @click="tabShow = '1'" :disabled="inTab(1)">Main</button>
@@ -76,16 +82,20 @@
                     @click="tabShow = '114511'" :disabled="inTab(11451)">debug
             </button>
 
+
         </div>
         <br>
         <div class="center">
             <button class="btn" v-if="inTab(1)" @click="tabShow = '1'" :disabled="tabShow==='1'">4D</button>
             <button class="btn" v-if="inTab(1)" @click="tabShow = '2'" :disabled="tabShow==='2'">Upgrades</button>
-            <button class="btn" v-if="inTab(2)" @click="tabShow = '12'" :disabled="tabShow==='12'"></button>
+            <button class="btn" v-if="inTab(1) && player.mm35_volumes.unl" @click="tabShow = '3'" :disabled="tabShow==='3'">3.5D</button>
+
+            <button class="btn" v-if="inTab(2)" @click="tabShow = '11'" :disabled="tabShow==='11'">mm<sup>3</sup> Upgrades</button>
             <button class="btn" v-if="inTab(3)" @click="tabShow = '21'" :disabled="tabShow==='21'">Save</button>
             <button class="btn" v-if="inTab(3)" @click="tabShow = '22'" :disabled="tabShow==='22'">About</button>
             <button class="btn" v-if="inTab(3)" @click="tabShow = '23'" :disabled="tabShow==='23'">Stat</button>
             <button class="btn" v-if="inTab(3)" @click="tabShow = '24'" :disabled="tabShow==='24'">Visual</button>
+            <button class="btn" v-if="inTab(3)" @click="tabShow = '25'" :disabled="tabShow==='25'">Offline Time</button>
             <!--            <button class="btn" @click="tabShow = '3'" :disabled="tabShow==='3'">3.5维</button>-->
 
         </div>
@@ -94,6 +104,7 @@
             <button @click="buyAll()" class="btn">Max all</button>
             <div v-for="dim in dimensions" v-if="tmp.mm3.confirm<3" :key="dim.id">
                 <div>
+                    {{ player.dimensions[DIMENSIONS_BOUGHT][dim.id-1].gte(costmore_position[dim.id-1]) ? "Super " : "" }}
                     {{ dim.label }}
                     <span>{{ format(player.dimensions[DIMENSIONS_POINTS][dim.id - 1]) }}</span>
                     x<span>{{ format(player.dimensions[DIMENSIONS_MULTI][dim.id - 1]) }}</span>
@@ -101,6 +112,7 @@
 
                     <button class="btn" :disabled="!buyable(dim.id)" @click="buydim(dim.id)">Cost:
                         {{ format(player.dimensions[DIMENSIONS_COST][dim.id - 1]) }} mm<sup>4</sup></button>
+                    <button class="btn" v-if="hasMM4Upg(5)" @click="toggleAutobuyer(dim.id)">Auto: {{player.auto.includes(dim.id)? "ON" : "OFF"}}</button>
                 </div>
                 <br>
 
@@ -136,15 +148,53 @@
             <div>
                 <table class="center" style="margin: auto">
                     <tr v-for="row in mm4_upg" key="row.id">
-                        <td v-for="upg in mm4_upg[row.id]" key="upg.id">
-                            {{row.id}} {{upg.id}}
+                        <td v-for="upg in mm4_upg[row.id]" key="upg.id" v-if="mm4_upgrades[upg.id-1].unlocked">
+<!--                            {{row.id}} {{upg.id}}-->
                             <div :class="getMM4UpgClassName(upg.id)"
                                  @touchstart="hover_upg = upg.id"
                                  @touchend="hover_upg = 0"
                                  @mouseover="hover_upg = upg.id"
                                  @mouseleave="hover_upg = 0"
                                  @click="buyMM4Upg(upg.id)"
-                                 v-if="mm4_upgrades[upg.id-1].unlocked"><span>{{ upg.id }}</span></div>
+
+                                 >
+                                <!--                                <span>{{ upg.id }}</span>-->
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div v-if="tabShow=='3'" class="center">
+            <p>You have {{player.mm35_volumes.points.format()}} mm<sup>3.5</sup></p>
+            <p v-if="player.mm35_volumes.san_xiang_bo_points.gt(0) && !player.mm3_volumes.unl">You have {{player.mm35_volumes.san_xiang_bo_points.format()}} {{errorText(10)}}</p>
+            <p v-if="player.mm35_volumes.san_xiang_bo_points.gt(0) && !player.mm3_volumes.unl">Decrease your 4D dimensions points / {{tmp.mm35.san_xiang_bo_decrease.pow(E(1).div(diff)).format()}} per second!</p>
+            <p><small>×{{tmp.mm35.replicatePerTick.pow(E(1).div(diff))}} per second</small></p>
+            <p><small>to a ×{{tmp.mm35.effect_to_dimensions.format()}} multiplier to 4D dimensions</small></p>
+            <p><small v-if="!player.mm3_volumes.unl">Reach 1.000e100 mm<sup>3.5</sup> will {{errorText(6)}} {{errorText(10)}}</small></p>
+            <button class="btn" @click="toggleMM35Copying()" v-html="displayMachineState()">Start Copying</button>
+        </div>
+
+        <div v-if="tabShow=='11'" >
+            hello
+            <div class="upg_text_box center">
+                <span v-html="getMM3UpgText()"></span>
+            </div>
+            <div>
+                <table class="center" style="margin: auto">
+                    <tr v-for="row in mm3_upg" key="row.id">
+                        <td v-for="upg in mm3_upg[row.id]" key="upg.id" v-if="mm3_opt.upgrades[upg.id-1].unlocked">
+                            <!--                            {{row.id}} {{upg.id}}-->
+                            <div :class="getMM3UpgClassName(upg.id)"
+                                 @touchstart="hover_3upg = upg.id"
+                                 @touchend="hover_3upg = 0"
+                                 @mouseover="hover_3upg = upg.id"
+                                 @mouseleave="hover_3upg = 0"
+                                 @click="buyMM3Upg(upg.id)"
+
+                            >
+                                                                <span>{{ upg.id }}</span>
+                            </div>
                         </td>
                     </tr>
                 </table>
@@ -197,6 +247,10 @@
                 <span class="tooltip">
                         I was played Ar<span></span>caea for sometime before.<br>
                         <del>PPT</del>PTT is measure of the player's strength，My PTT is 10.0±0.05。<del>Can you reach me?</del></span></a><br>
+
+            <a href="https://a262537412640768744.github.io/homework-incremental/main.html" target="_blank" class="game-link">
+                Zuoye Incremental
+            </a><br>,
             <br>
             <p>You can play other increment-games!</p>
             <a href="https://ivark.github.io/AntimatterDimensions" target="_blank" class="game-link">Antimatter
@@ -219,6 +273,8 @@
         <div v-if="tabShow=='23'" class="center">
             <p>你总共制造了{{format(player.volume_generated.mm4)}} mm<sup>4</sup> 4维体积;</p>
             <p>如果对体积进行单位换算，You can get <span v-html="display_volumes(player.volume_generated.mm4)"></span></p>
+            <p>You spent {{formatTime.fromSeconds(player.time.eter)}} (game time) in this Eternity</p>
+            <p>You spent {{formatTime.fromSeconds(player.time.real_eter)}} (real time) in this Eternity</p>
         </div>
 
         <div v-if="tabShow=='24'" class="center">
@@ -227,7 +283,64 @@
             </button>
             <button @click="toggleStickyDisplay()" class="btn">开启粘性定位：
                 {{getOpenClose(player.options.stickyDisplay)}}
+            </button><br>
+            <button @click="toggleMusic()" class="btn">Sound: {{musics[player.options.music]}}</button><br>
+            <input type="range" min="0" max="1" step="0.01" style="width: 150px" v-model.number="player.sound_volume">
+        </div>
+
+        <div v-if="tabShow=='41'" class="center">
+            <button class="btn" @click="doMM3reset()"
+
+                    :disabled="player.volumes.lt('1.797e308')" v-html="getMM3resetButton()">
             </button>
+        </div>
+        <div v-if="tabShow=='25'" class="center">
+            <p style="color: #aaa">You have offlined {{ formatTime.fromMilliseconds(player.offlinedTime) }}</p>
+            <button @click="addNotify('Wow, are you trying to do it?')" class="btn showhide">x-1</button>
+            <button @click="player.options.gamespeed=0"  class="btn">x0</button>
+            <button @click="player.options.gamespeed=1"  class="btn">x1</button>
+            <button @click="player.options.gamespeed=2"  class="btn">x2</button>
+            <button @click="player.options.gamespeed=5"  class="btn">x5</button>
+            <button @click="player.options.gamespeed=10"  class="btn">x10</button>
+            <input type="range" min="0" max="10" step="0.01" style="width: 150px" v-model.number="player.options.gamespeed">
+
+        <!-- 游戏{{ player.isOffline? "已" : "未" }}暂停</span><br>
+            <span style="font-size: 14px;color: #aaa">当游戏处于暂停状态时，你将获取离线时间</span><br>
+            <i style="font-size: 12px; animation: warn 10s linear infinite">警告⚠️：如果您从未来“穿越”了回来，将强行暂停此游戏</i><br>
+            <button class="btn" @click="switchGameState">切换游戏运行状态</button>
+            <main-line></main-line>
+            <h3>时间超频</h3><br>
+            <input type="range" min="0" max="6" step="0.001" style="width: 300px" v-model.number="player.offlinePower"><br>
+            当时间超频激活时，游戏速度将被加快至原来的{{ format(2**player.offlinePower) }}倍，但代价是离线时间每秒减少{{ format(2**player.offlinePower-1) }}秒<br>
+            <button class="btn" @click="switchTimeOverpower">{{ player.timeOverpower? "关闭" : "激活" }}时间超频</button> -->
+        </div>
+        <div v-if="tabShow=='114511'" class="center">
+            <button class="btn" @click="speedrun(1)">游戏速度 1x</button>
+            <button class="btn" @click="speedrun(10)">游戏速度 10x</button>
+            <button class="btn" @click="speedrun(50)">游戏速度 50x</button>
+            <button class="btn" @click="speedrun(100)">游戏速度 100x</button>
+            <button class="btn" @click="speedrun(1000)">游戏速度 1000x</button>
+            <br>
+
+            <button class="btn" @click="fast_hard_reset()">快速硬重置</button>
+            <br>
+            <button class="btn" @click="dev_reset_vol()">重置体积</button>
+            <br>
+            <button class="btn" @click="player.mm3_volumes.unl = true">解锁mm<sup>3</sup></button>
+            <br>
+            <button class="btn" @click="addNotify('test notify')">show notify</button>
+            <label>
+                <button class="btn" @click="get_mm4_vol()">获取<span v-html="developer_get_mm4"></span> mm<sup>4</sup>4维体积如果可以：
+                </button>
+                <input type="text" v-model:value="developer_get_mm4">
+            </label>
+            <button class="square tooltipBox" @click="buyPMP(1)">
+                <div class="tooltip">
+                    对你的点数<sup>2</sup>进行因式分解以获取1点数×点数
+                </div>
+                获取1点数×点数<br>要求：点数<sup>2</sup>
+            </button>
+
         </div>
     </div>
 </div>
