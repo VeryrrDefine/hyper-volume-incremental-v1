@@ -2,17 +2,17 @@ var mm3_opt = {
     upgrades: [
         // todo: upgrades
         {
-            desc: "Coming s∞n",
-            cost: E("10^^10"),
+            desc: "mm<sup>3</sup> gain ×5",
+            cost: E("1"),
             get unlocked() {
                 return player.mm3_volumes.unl;
             }
         },
         {
-            desc: "Coming s∞n",
-            cost: E("10^^10"),
+            desc: "mm<sup>4</sup> gain ×1.000e5",
+            cost: E("2"),
             get unlocked() {
-                return false;
+                return hasMM4Upg(7)
             }
         }
     ]
@@ -50,7 +50,7 @@ function doMM3reset() {
     }
 }
 
-function buyMM3Upg(i) {
+function buyMM3Upg(id) {
     if (player.mm3_volumes.points.gte(mm3_opt.upgrades[id - 1].cost)) {
         player.mm3_volumes.points = player.mm3_volumes.points.sub(mm3_opt.upgrades[id - 1].cost)
         player.mm3_volumes.upgrades.push(id)
@@ -79,7 +79,7 @@ function getMM3UpgClassName(id) {
     if(hasMM3Upg(id)) {
         upgradeClassName += '_bought';
     }
-    if(player.volumes.gte(mm3_opt.upgrades[id - 1].cost) && !hasMM3Upg(id)) {
+    if(player.mm3_volumes.points.gte(mm3_opt.upgrades[id - 1].cost) && !hasMM3Upg(id)) {
         upgradeClassName += '_buyable';
     }
     //if (typeof (mm4_upgrades[id-1].disableInChal5) == "boolean") upgradeClassName = "mm4_upg_disabled"

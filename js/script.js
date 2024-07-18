@@ -1,4 +1,4 @@
-"use strict";
+﻿"use strict";
 var this_frame = Date.now();
 var last_frame = Date.now();
 var diff = 1;
@@ -23,7 +23,7 @@ var mm4_upgrades = [
     },
     {//2
         desc: "7<sup>th</sup> Dimension multiplier add based on 8<th>th</th> Dimension Point",
-        cost: E("1e115"),
+        cost: E("1e95"),
         get effect() {
             let a = player.dimensions[DIMENSIONS_POINTS][8 - 1].mul(0.1).max(1);
             return a
@@ -78,8 +78,10 @@ var mm4_upgrades = [
     },
     {//7
         desc: "Unlock Second 3D Upgrades",
-        cost: E("1e420"),
-        unlocked: false,
+        cost: E("1e210"),
+        get unlocked() {
+            return hasMM4Upg(6);
+        },
     },
     {
         desc: "Coming s∞n",
@@ -342,7 +344,7 @@ function loop() {
         window.diff = window.global_diff * player.options.gamespeed;
 
         let temp1 = (player.options.gamespeed-1) * window.global_diff * 1000
-        if (temp1 <player.offlinedTime){
+        if (temp1 <=player.offlinedTime){
             player.offlinedTime -= temp1
         }else{
             player.options.gamespeed = 1
@@ -529,7 +531,7 @@ function load() {
         if (loadplayer != null) {
             Object.assign(developer, loaddeveloper)
         }
-        last_frame = player.time_now;
+        last_frame = Date.now();
         player.offlinedTime += this_frame - last_frame
         fix();
         /*

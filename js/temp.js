@@ -25,7 +25,8 @@ var tmp = {
     },
     mm3: {
         get gain() {
-            return player.volumes.logarithm(10).sub(258.3).div(50).floor().max(0);
+            return player.volumes.logarithm(10).sub(258.3).div(50).floor().max(0)
+                .mul(hasMM3Upg(1) ? 5 : 1);
         },
         confirm: 0
     },
@@ -33,6 +34,7 @@ var tmp = {
         get gain(){ // gain per second
             return player.dimensions[DIMENSIONS_POINTS][0]
                 .mul(player.dimensions[DIMENSIONS_MULTI][0])
+                .mul(hasMM3Upg(2) ? 1e5 : 1);
         }
     },
     mm35: {

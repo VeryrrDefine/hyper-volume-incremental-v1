@@ -186,7 +186,7 @@ h2{
 }
 
 .mm3_upg_buyable {
-    background: #333;
+    background: #aaa;
 }
 
 .mm3_upg_bought {
@@ -258,4 +258,32 @@ h2{
     opacity: 1;
     transition: 2s;
 
+}
+.corrupted{
+
+    animation: corrupted_text 4s cubic-bezier(0.37, 0, 0.63, 1) infinite
+}
+
+@keyframes corrupted_text {
+
+    0%,
+    100% {
+        text-shadow: -4px -4px 4px #5555ff, 4px 4px 4px #ff5555;
+        color: var(--color-text);
+    }
+
+    25% {
+        text-shadow: -4px 4px 4px #5555ff, 4px -4px 4px #ff5555;
+        color: #eeddff;
+    }
+
+    50% {
+        text-shadow: 4px 4px 4px #5555ff, -4px -4px 4px #ff5555;
+        color: var(--color-text);
+    }
+
+    75% {
+        text-shadow: 4px -4px 4px #5555ff, -4px 4px 4px #ff5555;
+        color: #ffddee;
+    }
 }
