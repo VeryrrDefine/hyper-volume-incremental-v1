@@ -1,4 +1,8 @@
 ﻿"use strict";
+
+
+
+
 var this_frame = Date.now();
 var last_frame = Date.now();
 var diff = 1;
@@ -7,9 +11,9 @@ var mm4_upgrades = [
     {//1
         desc: "1<sup>st</sup> Dimension multiplier add based on mm<sup>4</sup> Volumes",
         get effect() {
-            let a = player.volumes.log(3).mul(0.5);
-            if (a.gte("1e5")) {
-                a = E("1e5")
+            let a = player.volumes.root(90);
+            if (a.gte("1000")) {
+                a = softcap(a,1000,0.5,"pow",false);
             }
             return a.max(1)
         },
@@ -22,7 +26,7 @@ var mm4_upgrades = [
         }
     },
     {//2
-        desc: "7<sup>th</sup> Dimension multiplier add based on 8<th>th</th> Dimension Point",
+        desc: "7<sup>th</sup> Dimension multiplier add based on 8<sup>th</sup> Dimension Point",
         cost: E("1e95"),
         get effect() {
             let a = player.dimensions[DIMENSIONS_POINTS][8 - 1].mul(0.1).max(1);
@@ -36,14 +40,9 @@ var mm4_upgrades = [
         },
     },
     {//3
-        get desc() {
-            if (!player.mm3_volumes.unl) {
-                return "Unlock 3.5D"
-            } else {
-                return "<del>Unlock 3.5D</del>"
-            }
-        },
-        cost: E("1e120"),
+        desc :"Unlock 3.5D",
+
+        cost: E("1e105"),
         get unlocked() {
             return hasMM4Upg(2)
         },
@@ -57,6 +56,7 @@ var mm4_upgrades = [
         },
         get effect() {
             return player.mm3_volumes.points.add(1).mul(10)
+
         },
         get effectDisplay() {
             return `×${this.effect.format()}`
@@ -99,7 +99,6 @@ var mm4_upgrades = [
         unlocked: false,
     }
 ]
-
 function buyMM4Upg(id) {
     if (player.volumes.gte(mm4_upgrades[id - 1].cost)) {
         player.volumes = player.volumes.sub(mm4_upgrades[id - 1].cost)
@@ -138,6 +137,10 @@ function reset_dimensions(dim_boost_reset) {
 
 
 function hard_reset() {
+    if (player.options !== void undefined){
+        var b = player.options;
+    }
+
     window.player = {
         volumes: E(11),
         version: 10,
@@ -193,6 +196,10 @@ function hard_reset() {
 
     }
     reset_dimensions(1)
+
+    if (b !== void undefined){
+        player.options = b;
+    }
 }
 
 
@@ -344,10 +351,15 @@ function loop() {
         window.diff = window.global_diff * player.options.gamespeed;
 
         let temp1 = (player.options.gamespeed-1) * window.global_diff * 1000
+        if (player.offlinedTime < 1){
+            player.offlinedTime = 0
+        }
         if (temp1 <=player.offlinedTime){
             player.offlinedTime -= temp1
         }else{
-            player.options.gamespeed = 1
+            if (player.options.gamespeed > 1){
+                player.options.gamespeed = 1
+            }
         }
 
         mm35_loop();
@@ -358,11 +370,8 @@ function loop() {
         if (player.dimensions[DIMENSIONS_POINTS][0]) {
             fix();
         }
-        if (!player.mm35_volumes.unl && hasMM4Upg(3) && !player.mm3_volumes.unl) {
+        if (!player.mm35_volumes.unl && hasMM4Upg(3)) {
             player.mm35_volumes.unl = true
-        }
-        if (player.mm3_volumes.unl) {
-            player.mm35_volumes.unl = false
         }
         if (player.mm35_volumes.points.lt(1)) {
             player.mm35_volumes.points = E(1);
@@ -547,8 +556,7 @@ function load() {
         }
         hasLoaded.status = true
     } catch (e) {
-        document.getElementById("ithinksomeone").style.display = "block";
-        document.getElementById("error").innerText = e.stack;
+        alert(e.stack);
 
         // document.querySelectorAll("[if-not-fatal-error]").forEach((value, key, parent)=>{
         //     value.style.display="none";

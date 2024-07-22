@@ -139,9 +139,9 @@ h2{
     padding-top: 4px;
     padding-bottom: 4px;
     font-size: 16px;
-    overflow: hidden;
     display: flex;
     align-items: center;
+    overflow: hidden;
 }
 
 #newsText {
@@ -234,7 +234,6 @@ h2{
     left: 50%;
     top: 20px;
     transform: translate(-50%, 0);
-    width: 400px;
     min-height: 10px;
     color: var(--color-text);
     border: solid 2px rgb(150,150,150);
@@ -242,6 +241,7 @@ h2{
     background-color: rgb(241,241,241);
     padding: 7px 25px;
     transition-duration: 0.75s;
+    width: fit-content;
 }
 
 #notify.hide {
@@ -286,4 +286,8 @@ h2{
         text-shadow: 4px -4px 4px #5555ff, -4px 4px 4px #ff5555;
         color: #ffddee;
     }
+}
+.newsticker-image{
+    width: 10vw;
+    height: 10vw;
 }

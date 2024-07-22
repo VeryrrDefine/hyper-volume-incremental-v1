@@ -135,7 +135,7 @@ function importFromApp(){
     handle_import(app.save)
 }
 function import_save() {
-    openPopup(1)
+    handle_import(prompt("Enter:"))
 
 }
 function fast_hard_reset(){

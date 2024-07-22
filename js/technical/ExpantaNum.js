@@ -135,6 +135,8 @@
   R.EE_MAX_SAFE_INTEGER="ee"+MAX_SAFE_INTEGER;
   R.TETRATED_MAX_SAFE_INTEGER="10^^"+MAX_SAFE_INTEGER;
   R.GRAHAMS_NUMBER="J^63 10^^^(10^)^7625597484984 3638334640023.7783";
+
+
   P.absoluteValue=P.abs=function(){
     var x=this.clone();
     x.sign=1;

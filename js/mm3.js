@@ -2,17 +2,24 @@ var mm3_opt = {
     upgrades: [
         // todo: upgrades
         {
-            desc: "mm<sup>3</sup> gain ×5",
+            desc: "mm<sup>4</sup> gain ×1.000e5",
             cost: E("1"),
             get unlocked() {
                 return player.mm3_volumes.unl;
             }
         },
         {
-            desc: "mm<sup>4</sup> gain ×1.000e5",
+            desc: "mm<sup>3</sup> gain ×5",
             cost: E("2"),
             get unlocked() {
                 return hasMM4Upg(7)
+            }
+        },
+        {
+            desc: "",
+            cost: E("1e4"),
+            get unlocked() {
+                return hasMM3Upg(2)
             }
         }
     ]
@@ -38,11 +45,7 @@ function no_reward_mm3_reset() {
 
 function doMM3reset() {
 
-    if (player.volumes.gte("1.797e308")) {
-        if (!player.mm3_volumes.unl && tmp.mm3.confirm < 4) {
-            tmp.mm3.confirm++
-            return;
-        }
+    if (tmp.mm3.gain.gte("1")) {
         player.mm3_volumes.points = player.mm3_volumes.points.add(tmp.mm3.gain);
         player.volume_generated.mm3 = player.volume_generated.mm3.add(tmp.mm3.gain);
         no_reward_mm3_reset()

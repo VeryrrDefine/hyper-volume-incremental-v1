@@ -101,7 +101,7 @@ function addNotify(str) {
 }
 
 function getMM3resetButton() {
-    return player.mm3_volumes.unl ? ('Reach 1.797e308 mm<sup>4</sup>to do a mm<sup>3</sup>reset, get ' +
+    return player.mm3_volumes.unl ? ('Reach 1.797e308 mm<sup>4</sup> to do a mm<sup>3</sup>reset, get ' +
         format(tmp.mm3.gain)
         + 'mm<sup>3</sup> volumes') : '???'
 }
