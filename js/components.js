@@ -21,6 +21,9 @@ function loadVue() {
             save: "",
             mm4_upg: chunkArrayIntoGroupsOfTen(mm4_upgrades),
             mm3_upg: chunkArrayIntoGroupsOfTen(mm3_opt.upgrades),
+
+            mm3_chal: chunkArrayIntoGroupsOfTen(mm3_challenges),
+            
             isShowingPopup: false,
             hasError: false,
             errortext: "",
@@ -31,10 +34,20 @@ function loadVue() {
             developer_code: "",
             changelogs: [
                 {
+                    version: "v1.0.7", title: "",
+                    changes: [
+                        "软上限推迟至1.000e1.000e5",
+                        "No 折算",
+                        "Add 1 mm<sup>4</sup> Upgrade",
+                        "Add 1 mm<sup>3</sup> Upgrade",
+                        "Add 1 mm<sup>3</sup> Challenge"
+                    ]
+                },
+                {
                     version: "v1.0.6", title: "",
                     changes: [
-                        "Add 1 mm<sup>4</sup> Upgrades",
-                        "Add 2 mm<sup>3</sup> Upgrade"
+                        "Add 1 mm<sup>4</sup> Upgrade",
+                        "Add 2 mm<sup>3</sup> Upgrades"
                     ]
                 },
                 {

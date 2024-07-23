@@ -42,7 +42,7 @@ var mm4_upgrades = [
     {//3
         desc :"Unlock 3.5D",
 
-        cost: E("1e105"),
+        cost: E("1.14514e102"),
         get unlocked() {
             return hasMM4Upg(2)
         },
@@ -64,13 +64,13 @@ var mm4_upgrades = [
     },
     {//5
         desc: "You can buy dimensions automatically",
-        cost: E("1e70"),
+        cost: E("1e50"),
         get unlocked() {
-            return player.mm3_volumes.unl;
+            return true
         },
     },
     {//6
-        desc: "You gain a 1.01x multiplier to this dimension when you buy 10 this dimension",
+        desc: "You gain a 1.001x multiplier to this dimension when you buy 10 this dimension",
         cost: E("1e120"),
         get unlocked() {
             return hasMM4Upg(4);
@@ -83,10 +83,12 @@ var mm4_upgrades = [
             return hasMM4Upg(6);
         },
     },
-    {
-        desc: "Coming s∞n",
-        cost: E("10^^10^114514"),
-        unlocked: false,
+    {//8
+        desc: "Your mm<sup>3.5</sup> volumes doesn't reset on doing mm<sup>3</sup> reset.<br>Unlock mm<sup>3</sup> Challenge",
+        cost: E("e830"),
+        get unlocked(){
+            return hasMM3Upg(3);
+        }
     },
     {
         desc: "Coming s∞n",
@@ -162,7 +164,8 @@ function hard_reset() {
         mm3_volumes: {
             unl: false,
             points: E(0),
-            upgrades: []
+            upgrades: [],
+            challenges: [],
         },
 
         mm35_volumes: {
@@ -192,6 +195,8 @@ function hard_reset() {
         window_show: {
             first_mm3_reset: false
         },
+        selectedMM3Challenge: 0,
+        inMM3Challenge: 0,
         lastTab: '1'
 
     }
@@ -230,18 +235,6 @@ function buydim(dim) {
         let bought_now = player.dimensions[DIMENSIONS_BOUGHT][dim - 1];
         let buycount = temp1.sub(temp2).ceil();
         let temp3 = buycount.clone();
-        if (bought_now.lt(costmore_position[dim - 1])) {
-            let buycount = temp1.sub(temp2).ceil();
-            if (bought_now.add(buycount).gte(costmore_position[dim - 1] + 1)) {
-                /*                     \
-                * |||||||||||||| |||||||||||||
-                *                      {  x   }
-                * */
-                buycount = buycount.sub(E.sub(costmore_position[dim - 1] + 1, bought_now))
-
-            }
-        }
-
 
         player.volumes = player.volumes.sub(E.pow(10, temp2.mul(dim)))
         player.dimensions[DIMENSIONS_BOUGHT][dim - 1] = player.dimensions[DIMENSIONS_BOUGHT][dim - 1].add(buycount);
@@ -302,23 +295,13 @@ function calculate_dim() {
     }
 }
 
-const costmore_position = [
-    308, 154, 102, 77,
-    61, 51, 44, 38
-]
-const LOG10_60 = Math.log10(60);
-
 /*異議あり*/
 function calc_cost(dimid, count) {
     // count before buy
     // 1st dimension dimid = 0
     let temp1 = dim_base_price[dimid]
         .mul(dim_incre[dimid].pow(count.floor()));
-    if (count.gte(costmore_position[dimid])) {
-        temp1 = temp1.mul(E.pow(
-            6, count.sub(costmore_position[dimid] - 1)
-        ))
-    }
+    
     return temp1;
 }
 
@@ -347,7 +330,9 @@ function loop() {
         window.global_diff = (this_frame - last_frame) / 1000 * developer.timeboost ;
 
         sound_element.volume = player.sound_volume;
-
+        if (player.lastTab!="12"){
+            player.selectedMM3Challenge = 0
+        }
         window.diff = window.global_diff * player.options.gamespeed;
 
         let temp1 = (player.options.gamespeed-1) * window.global_diff * 1000
@@ -505,6 +490,9 @@ function fix() {
     if (player.options.gamespeed === void 0) {
         player.options.gamespeed = 1;
     }
+    if (player.mm3_volumes.challenges === void 0) {
+        player.mm3_volumes.challenges = [];
+    }
     if (player.mm3_volumes.upgrades.toString() === "[object Object]"){
         player.mm3_volumes.upgrades = []
     }
@@ -628,4 +616,8 @@ function db_pianyi() {
         q = q.concat(String.fromCharCode(app.pianyi0[i].charCodeAt(0) + Number(app.pianyi1)));
     }
     return q;
+}
+
+function changeTabShow(a,b){
+    app.tabShow = a.toString();
 }

@@ -41,6 +41,13 @@
                 text: `<a href="https://youtu.be/dQw4w9WgXcQ?si=dZBa-3LFHwKC8D9S" target="_blank">Click me to reach Endgame immediately.</a>`
             },
             {
+                text: "今天是3月9日，是arc周年庆，转发这条消息到十个群光光和对立会在早晨八点来你家门口敲门，我试过了，是假的，还会被人说是玩源神玩的，但今天真的是arc周年庆",
+                get unlocked(){
+                    let a = new Date();
+                    return a.getMonth()-2 === 0 && a.getDate() === 9
+                }
+            },
+            {
                 text: ``,
                 get unlocked() {
                     return false;
@@ -265,7 +272,7 @@
             },
             {
                 text: "You have 1 replicanti, it multiplies by 2 per second. (114514 hours later) You have" +
-                    format(E(2).pow(114514 * 3600)) + "replicanti."
+                    format(E(2).pow(114514 * 3600)) + " replicanti."
             },
             {
                 text: "D'autres temps attendent, j'ai besoin d'être éternel."
@@ -336,7 +343,7 @@
    as 18446744073709551616 (2<sup>64</sup>-1). These two types have no error, but the disadvantage is that the numbers
     they can represent are also very small. However, some games have exceeded the upper limit of 1e308: Antimatter 
     Dimensions, Incremental Mass Rewritten...<del>etc.</del>. But the upper limits of the numbers represented by these 
-    games are different. The upper limit of the antimatter dimension number is 1.000e9.000e15 (to be more precise, it is 
+    games are different. The upper limit of Antimatter Dimensions number is 1.000e9.000e15 (to be more precise, it is 
     1.000e9.007e15); the theorical upper limit of the Incremental Mass Rewritten is F1.797e308(10^^1.797e308); the largest,
      the Endless Stairwell has a maximum limit of K1e14, which is larger than the Graham's number (~3K64), which is really 
      incredible!`
@@ -391,14 +398,38 @@
                 text: `<img class="newsticker-image" src="/image/kanlile.gif" alt="A girl was ↑ ↓↓ ↑ ↓↑ ↓↓↓ ↑↓↑↓ing">`
             },
             {
-                text: `Let me <span style="background: black; color: black;">fuck</span> you: F - fall in love with you; U - understand you; C - call you beautiful; K - keep in touch with you`
+                text: `Let me <span class='redacted'>fuck</span> you: F - fall in love with you; U - understand you; C - call you beautiful; K - keep in touch with you`
             },
             {
                 text: "I, Qin Shi huang, da Money"
             },
             {
                 text: "<a href=\"www.tiktok.com/@meifen4/video/7028891038186097922\">这个神奇的鸡蛋纺纱机会将白色和蛋黄融为一体，这不神奇吗，点击的链接我简历，获取一个获取一个获取一个获取一个获取一个啊啊啊啊啊！每次都想装作很倔强～但是每次见面却缴械投降～</a>"
+            },
+            {
+                text: "深圳地铁 深圳地圳"
+            },
+            {
+                text: "!曲扭重八将度速取获数点，后数点 JJ1.000J5 过超"
+            },
+            {
+                text: "You're gaining 114514 OoMs OoMs OoMs OoMs OoMs OoMs OoMs OoMs "+"OoMs ".repeat(50)+" mm<sup>114514</sup> per second"
+            },
+            {
+                text: `给他一个Minecraft中的operator管理员权限，他可以开creative模式对着别人劈雷。
+                近期，有一个名叫<span class='redacted'>[REDACTED]</span><sup>1</sup>的人说，他在某个名叫
+                <span class='redacted'>[REDACTED]</span><sup>2</sup>的服务器中遭受到了管理员<span class='redacted'>[REDACTED]</span><sup>3</sup>的骚扰
+                随后<span class='redacted'>[REDACTED]</span><sup>1</sup>报告给了这个服务器的腐竹。<span class='redacted'>[REDACTED]</span><sup>1</sup>在向我说明
+                此事件的时候遭到了<span class='redacted'>[REDACTED]</span><sup>3</sup>的威胁。大型纪录片之《<span class='redacted'>[REDACTED]</span><sup>3</sup>》
+                正在持续为您播出...`
+            },
+            {
+                text: "Why doesn't this game have softcaps? Because it's 善",
+                get unlocked(){
+                    return player.volumes.lt(tmp.mm4.softcap1_start)
+                }
             }
+            // 2.11
 
 
             // Don't drink car when you drive alcohol, Don't drive alcohol when you drink car.

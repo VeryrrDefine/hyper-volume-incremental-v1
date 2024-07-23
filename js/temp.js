@@ -20,13 +20,25 @@ var tmp = {
             if (hasMM4Upg(6)) {
                 result = result.mul(E.pow(1.001, player.dimensions[DIMENSIONS_BOUGHT][i].div(10).floor()));
             }
+            if (hasMM3Upg(2)){
+                result = result.mul("1e10")
+            }
             return result;
         },
     },
     mm3: {
         get gain() {
             return player.volumes.div("1e8").root(300).div(10)
-                .mul(hasMM3Upg(2) ? 5 : 1).floor().max(0);
+                
+        },
+        get resetable(){
+            if (player.inMM3Challenge){
+                return player.volumes.gte(
+                    mm3_challenges[player.inMM3Challenge-1].complete_requirement
+                )
+            }else{
+                return player.volumes.gte('1.797e308')
+            }
         },
         confirm: 0
     },
@@ -44,7 +56,7 @@ var tmp = {
             return 0.1
         },
         get softcap1_start() {
-            return E("1.797e308")
+            return E("ee4")
         }
     },
     mm35: {
@@ -54,8 +66,21 @@ var tmp = {
             return mult
         },
         get effect_to_dimensions() {
-            let a = player.mm35_volumes.points.logarithm(10).pow(2).div(10).max(1)
+
+            let a = E("1")
+            if (hasMM3Upg(3)){
+                a = player.mm35_volumes.points.logarithm(1.001).pow(2).div(10).max(1)
+            }else{
+                a = player.mm35_volumes.points.logarithm(10).pow(2).div(10).max(1)
+            }
             a = softcap(a, 150, 0.2, "pow")
+
+            if (player.inMM3Challenge==1){
+                a = E(1)
+            }
+            if (hasMM3Chal(1)){
+                a = a.mul("1e4")
+            }
             return a
         },
         get san_xiang_bo_decrease() {

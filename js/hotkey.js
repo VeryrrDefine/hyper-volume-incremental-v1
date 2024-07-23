@@ -1,6 +1,9 @@
-
+const today = new Date();
 hotkeys("*",function (event,handler){
     event.preventDefault();
+    /*if (today.getMonth()-1===0){
+        console.log("神金")
+    }*/
 })
 hotkeys("m",function (event,handler){
     event.preventDefault();

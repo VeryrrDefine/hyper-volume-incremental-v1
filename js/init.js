@@ -59,3 +59,7 @@ function ENify(a) {
     return b
 }
 
+const EE5 = E("ee5");
+const EE10 = E("ee10");
+const EE1000 = E("ee1000");
+const EEE8 = E("eee8");

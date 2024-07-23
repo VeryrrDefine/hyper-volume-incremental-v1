@@ -62,6 +62,8 @@
         <script src="js/tooltip.js" defer></script>
         <script src="js/newsticker.js" defer></script>
         <script src="js/components.js" defer></script>
+        
+        <script src="js/challenges/mm3_chal.js" defer></script>
     </head>
     <body>
         <audio src="" id="music" loop></audio>
@@ -86,7 +88,7 @@
                     <button class="btn" @click="tabShow= '1'"
                         :disabled="inTab(1)">Main</button>
                     <button class="btn" @click="tabShow= '41'"
-                        :disabled="inTab(4)" v-if="player.mm3_volumes.unl">Reset
+                        :disabled="inTab(5)" v-if="player.mm3_volumes.unl">Reset
                     </button>
                     <button class="btn" @click="tabShow= '11'"
                         :disabled="inTab(2)" v-if="player.mm3_volumes.unl">3D
@@ -96,7 +98,7 @@
                         :disabled="inTab(3)">Options</button>
                     <button class="btn" :style="{background:
                         getUndulatingColor(1)}" v-if='developer_mode'
-                        @click="tabShow= '114511'" :disabled="inTab(11451)">debug
+                        @click="tabShow= '114511'" :disabled="inTab(11452)">debug
                     </button>
 
 
@@ -107,6 +109,7 @@
                         :disabled="tabShow==='1'">4D</button>
                     <button class="btn" v-if="inTab(1)" @click="tabShow= '2'"
                         :disabled="tabShow==='2'">Upgrades</button>
+
                     <button class="btn" v-if="inTab(1) &&
                         player.mm35_volumes.unl" @click="tabShow= '3'"
                         :disabled="tabShow==='3'">3.5D
@@ -115,6 +118,10 @@
                     <button class="btn" v-if="inTab(2)" @click="tabShow= '11'"
                         :disabled="tabShow==='11'">mm<sup>3</sup>
                         Upgrades
+                    </button>
+                    <button class="btn" v-if="inTab(2) && hasMM4Upg(8)" @click="tabShow= '12'"
+                        :disabled="tabShow==='12'">mm<sup>3</sup>
+                        Challenges
                     </button>
                     <button class="btn" v-if="inTab(3)" @click="tabShow= '21'"
                         :disabled="tabShow==='21'">Save</button>
@@ -134,10 +141,6 @@
                     <div v-for="dim in dimensions" v-if="tmp.mm3.confirm<3"
                         :key="dim.id">
                         <div>
-                            {{ player.dimensions[DIMENSIONS_BOUGHT][dim.id -
-                            1].gte(costmore_position[dim.id - 1]) ? "Super " :
-                            ""
-                            }}
                             {{ dim.label }}
                             <span>{{
                                 format(player.dimensions[DIMENSIONS_POINTS][dim.id
@@ -237,7 +240,6 @@
                 </div>
 
                 <div v-if="tabShow=='11'">
-                    hello
                     <div class="upg_text_box center">
                         <span v-html="getMM3UpgText()"></span>
                     </div>
@@ -258,6 +260,24 @@
                                 </td>
                             </tr>
                         </table>
+                    </div>
+                </div>
+                <div v-if="tabShow=='12'">
+                    <p class="center">Select a challenge and enter</p>
+                    <p class="center"><button class="btn" v-html="mm3doChalText()" @click="mm3HandleChallenge()"></button></p>
+                    <table style="margin:auto">
+                        <tr v-for="row in mm3_chal" ley="row.id">
+                            <td v-for="chal in mm3_chal[row.id]" key="chal.id"
+                            v-if="chal.unlocked">
+                            <button :class="getMM3ChalClass(chal.id)" @click="mm3ShowChallenge(chal.id)">C{{chal.id}}</button>
+                            </td>
+                            
+
+                        </tr>
+                            
+                    </table>
+                    <div class="center">
+                        <span v-html="mm3ChallengeText()"></span>
                     </div>
                 </div>
                 <div v-if="tabShow=='21'" class="center">
@@ -383,8 +403,8 @@
                 </div>
 
                 <div v-if="tabShow=='41'" class="center">
-                    <button class="btn" @click="doMM3reset()"
-                        :disabled="player.volumes.lt('1.797e308')"
+                    <button class="btn" @click="doMM3resetManmade()"
+                        :disabled="!tmp.mm3.resetable"
                         v-html="getMM3resetButton()">
                     </button>
                 </div>
@@ -449,70 +469,64 @@
                         超过 e100,000,000 点数后，点数获取速度将被三重软上限限制!</span><br>
                     <span style="color: rgb(255, 94, 0)">
                         超过 e1.00e13 点数后，点数获取速度将被四重软上限限制!</span><br>
-                    <span style="color: rgb(255, 238, 0)">
-                        超过 e1.00e21 点数后，点数获取速度将被五重软上限限制!</span><br>
-                    <span style="color: rgb(166, 255, 0)">
-                        超过 e1.00e31 点数后，点数获取速度将被六重软上限限制!</span><br>
-                    <span style="color: rgb(0, 255, 149)">
-                        超过 e1.00e48 点数后，点数获取速度将被七重软上限限制!</span><br>
-                    <span style="color: rgb(0, 255, 255)">
-                        超过 e1.00e58 点数后，点数获取速度将被八重软上限限制!</span><br>
-                    <span style="color: rgb(255, 255, 255)">
-                        超过 e1.00e69 点数后，点数获取速度将溢出!</span><br>
+                    <span style="color: hsl(56,100%,25%)">
+                        超过 e1.00e50 点数后，点数获取速度将被五重软上限限制!</span><br>
+                    <span style="color: hsl(80.941,100%,25%)">
+                        超过 e1.00e89 点数后，点数获取速度将被六重软上限限制!</span><br>
+                    <span style="color: hsl(155.059,100%,25%)">
+                        超过 e1.00e203 点数后，点数获取速度将被七重软上限限制!</span><br>
+                    <span style="color: hsl(180,100%,25%)">
+                        超过 e1.00e409 点数后，点数获取速度将被八重软上限限制!</span><br>
+                    <span style="color: hsl(0,0%,50%)">
+                        超过 e1.00e1,073 点数后，点数获取速度将溢出!</span><br>
                     <span style="color: rgb(255, 197, 215)">
-                        超过 e1.00e279 点数后，点数获取速度将二重溢出!</span><br>
-                    <span style="color: #99F739">
+                        超过 e1.0e20,598 点数后，点数获取速度将二重溢出!</span><br>
+                    <span style="color: hsl(89.684,92.233%,29.804%)">
                         超过 ee1,000,000 点数后，点数获取速度将三重溢出!</span><br>
                     <span style="color: #FF4444">
                         超过 ee1.00e10 点数后，点数获取速度将四重溢出!</span><br>
                     <span style="color: rgb(194, 177, 255)">
                         超过 ee1.00e100 点数后，点数获取速度将淤积!</span><br>
                     <span class="corrupted">
-                        超过 10^^5 点数后，点数获取速度将二重淤积!</span><br>
+                        超过 1.000F5 点数后，点数获取速度将二重淤积!</span><br>
                     <span class="charged_text">
-                        超过 10^^10 点数后，点数获取速度将三重淤积!</span><br>
+                        超过 1.000F10 点数后，点数获取速度将三重淤积!</span><br>
                     <span class="saved_text">
-                        超过 10^^1000 点数后，点数获取速度将四重淤积!</span><br>
+                        超过 F1.000e15 点数后，点数获取速度将四重淤积!</span><br>
                     <span class="quark_color">
-                        超过 10^^1.00e10 点数后，点数获取速度将五重淤积!</span><br>
+                        超过 F1.797e308 点数后，点数获取速度将五重淤积!</span><br>
                     <span class="f_quark_color">
-                        超过 10^^1.00e25 点数后，点数获取速度将六重淤积!</span><br>
+                        超过 Fe5.9e204 点数后，点数获取速度将六重淤积!</span><br>
                     <span class="ff_quark_color">
-                        趆迈 10^^1.00e100 為敱吏，為敱莸变造座將七重淥称!</span><br>
+                        趆迈 Fee1.55e309 為敱吏，為敱莸变造座將七重淥称!</span><br>
                     <span>
-                        趆迈 10^^10^^10 為敱吏，為敱莸变造座將扭曲!</span><br>
-                    <span style="color:#aaa">
-                        !曲扭重二将度速取获数点，后数点 10^^^10000 过超</span><br>
-                    <span style="color:#777">
-                        !曲扭重三将度速取获数点，后数点 10^^^10^10 过超</span><br>
-                    <span style="color:#444">
-                        !曲扭重四将度速取获数点，后数点 10^^^10^50 过超</span><br>
-                    <span style="color:#222">
-                        !曲扭重五将度速取获数点，后数点 10^^^10^200 过超</span><br>
-                    <span style="color:#111;text-shadow: 1px 1px 2px #222, -1px
-                        -1px 2px #444, 0 0 24px #666">
-                        !曲扭重六将度速取获数点，后数点 10^^^10^1,000,000 过超</span><br>
-                    <span>
-                        点数在达到K1e19后将锁定为K1e19!</span><br>
+                        趆迈 F1.000F10 為敱吏，為敱莸变造座將扭曲!</span><br>
+                    <span style="color:#555">
+                        !曲扭重二将度速取获数点，后数点 1.000G5 过超</span><br>
+                    <span style="color:#888">
+                        !曲扭重三将度速取获数点，后数点 1.000H5 过超</span><br>
+                    <span style="color:#bbb">
+                        !曲扭重四将度速取获数点，后数点 5.000J4 过超
+                    </span><br>
+                    <span style="color:#ddd">
+                        !曲扭重五将度速取获数点，后数点 5.000J8 过超
+                    </span><br>
+                    <span style="color:#dedede">
+                        !曲扭重六将度速取获数点，后数点 5.000J500 过超
+                    </span><br>
+                    <span style="color:#dfdfdf">
+                        !曲扭重七将度速取获数点，后数点 J1.000e90 过超
+                    </span><br>
+                    <span style="color:#e0e0e0">
+                        !曲扭重八将度速取获数点，后数点 J1.000J5 过超
+                    </span><br>
+                    <span style="color:#e6e6e6">
+                        !曲扭重八将度速取获数点，后数点 JJ1.000J5 过超
+                    </span><br>
+                    点数在达到K9e15后将锁定为K9e15!</span><br>
                 </div>
 
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <div class="center">
-                    <img src="image/kanlile.gif" class="newsticker-image">
-                </div>
+                
             </div>
         </div>
         <div style="position:absolute; left:-999999px; top: -999999px;">

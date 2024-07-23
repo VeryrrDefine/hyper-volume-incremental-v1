@@ -9,15 +9,15 @@ var mm3_opt = {
             }
         },
         {
-            desc: "mm<sup>3</sup> gain ×5",
+            desc: "All dimensions multiplier ×1.000e10",
             cost: E("2"),
             get unlocked() {
                 return hasMM4Upg(7)
             }
         },
         {
-            desc: "",
-            cost: E("1e4"),
+            desc: "mm<sup>3.5</sup> multiplier to mm<sup>4</sup>'s formula be better<br>Before:log<sub>10</sub>(x)<sup>2</sup>÷10<br>After:log<sub>1.001</sub>(x)<sup>2</sup>÷10",
+            cost: E("150"),
             get unlocked() {
                 return hasMM3Upg(2)
             }
@@ -36,7 +36,10 @@ function no_reward_mm3_reset() {
     player.volumes = E("11");
     reset_dimensions(1);
     player.galaxy_count = E("0");
-    player.mm35_volumes.points = E("1")
+
+    if (!hasMM4Upg(8)){
+        player.mm35_volumes.points = E("1")
+    }
     player.mm35_volumes.san_xiang_bo_points = E("0")
     player.mm3_volumes.unl = true;
 
@@ -50,6 +53,15 @@ function doMM3reset() {
         player.volume_generated.mm3 = player.volume_generated.mm3.add(tmp.mm3.gain);
         no_reward_mm3_reset()
         tmp.mm3.confirm = 0;
+    }
+}
+function doMM3resetManmade(){
+    if (player.inMM3Challenge){
+        if (player.volumes.gte(mm3_challenges[player.inMM3Challenge-1].complete_requirement)){
+            mm3HandleChallenge()
+        }
+    }else if (player.volumes.gte("1.797e308")){
+        doMM3reset();
     }
 }
 
@@ -88,4 +100,13 @@ function getMM3UpgClassName(id) {
     //if (typeof (mm4_upgrades[id-1].disableInChal5) == "boolean") upgradeClassName = "mm4_upg_disabled"
 
     return upgradeClassName
+}
+
+function getMM3resetButton() {
+    if (player.inMM3Challenge){
+        return  'Reach ' + mm3_challenges[player.inMM3Challenge-1].complete_requirement.format()+' mm<sup>4</sup> to do a mm<sup>3</sup>reset, get ' +format(tmp.mm3.gain)+ 'mm<sup>3</sup> volumes'
+    
+    }else{
+        return  'Reach 1.797e308 mm<sup>4</sup> to do a mm<sup>3</sup>reset, get ' +format(tmp.mm3.gain)+ 'mm<sup>3</sup> volumes'
+    }
 }
