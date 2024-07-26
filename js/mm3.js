@@ -1,31 +1,62 @@
 var mm3_opt = {
     upgrades: [
         // todo: upgrades
-        {
+        {//1
             desc: "mm<sup>4</sup> gain ×1.000e5",
             cost: E("1"),
             get unlocked() {
                 return player.mm3_volumes.unl;
             }
         },
-        {
+        {//2
             desc: "All dimensions multiplier ×1.000e10",
             cost: E("2"),
             get unlocked() {
                 return hasMM4Upg(7)
             }
         },
-        {
-            desc: "mm<sup>3.5</sup> multiplier to mm<sup>4</sup>'s formula be better<br>Before:log<sub>10</sub>(x)<sup>2</sup>÷10<br>After:log<sub>1.001</sub>(x)<sup>2</sup>÷10",
-            cost: E("150"),
+        {//3
+            desc: "mm<sup>3.5</sup> multiplier to mm<sup>4</sup>'s formula be better<br>Before:log<sub>10</sub>(x)<sup>2</sup>÷10<br>After:log<sub>10</sub>(x)<sup>2.01</sup>÷10",
+            cost: E("200"),
             get unlocked() {
                 return hasMM3Upg(2)
+            }
+        },
+        {//4
+            desc: "mm<sup>3.5</sup> replicante speed ×10 (2x per second -> 2^10x per second)<br>When you buy mm<sup>3</sup> upgrades, you didn't cost your mm<sup>3</sup> volumes.",
+            cost: E("2e6"),
+            get unlocked() {
+                return hasMM3Chal(3)
+            }
+        },
+        {//5
+            desc: "WAITING FOR UPDATE!<br>WAITING FOR UPDATE!<br>WAITING FOR UPDATE!<br>WAITING FOR UPDATE!<br>Unlock 4<sup>th</sup> mm<sup>3</sup> challenge.",
+            cost: E("5.2e10").expansion(114514),
+            get unlocked() {
+                return hasMM3Upg(4)
+            }
+        },
+        {//6
+            desc: "Buy 1 times dimensions multiplier become ×2.1",
+            cost: E("230000000000"),
+            get unlocked() {
+                return hasMM3Upg(5)
+            }
+        },
+        {//7
+            desc: "Buy 1 times dimensions multiplier become ×2.105",
+            cost: E("1e300"),
+            get unlocked(){
+                return hasMM3Upg(6)
             }
         }
     ]
 }
 
 function hasMM3Upg(id) {
+    if (id===2 && player.inMM3Challenge === 2){
+        return false;
+    }
     return player.mm3_volumes.upgrades.includes(id)
 
 }
@@ -44,16 +75,16 @@ function no_reward_mm3_reset() {
     player.mm3_volumes.unl = true;
 
     player.tickspeed = E("0");
+    player.time.real_mm3 = 0;
+    player.time.mm3 = 0;
 }
 
 function doMM3reset() {
 
-    if (tmp.mm3.gain.gte("1")) {
-        player.mm3_volumes.points = player.mm3_volumes.points.add(tmp.mm3.gain);
-        player.volume_generated.mm3 = player.volume_generated.mm3.add(tmp.mm3.gain);
-        no_reward_mm3_reset()
-        tmp.mm3.confirm = 0;
-    }
+    player.mm3_volumes.points = player.mm3_volumes.points.add(tmp.mm3.gain);
+    player.volume_generated.mm3 = player.volume_generated.mm3.add(tmp.mm3.gain);
+    no_reward_mm3_reset()
+    tmp.mm3.confirm = 0;
 }
 function doMM3resetManmade(){
     if (player.inMM3Challenge){
@@ -67,7 +98,9 @@ function doMM3resetManmade(){
 
 function buyMM3Upg(id) {
     if (player.mm3_volumes.points.gte(mm3_opt.upgrades[id - 1].cost)) {
-        player.mm3_volumes.points = player.mm3_volumes.points.sub(mm3_opt.upgrades[id - 1].cost)
+        if (!hasMM3Upg(4)){
+            player.mm3_volumes.points = player.mm3_volumes.points.sub(mm3_opt.upgrades[id - 1].cost)
+        }
         player.mm3_volumes.upgrades.push(id)
     }
 }
@@ -79,7 +112,11 @@ function getMM3UpgText(){
     a = a.concat("]<br>")
     a = a.concat(mm3_opt.upgrades[app.hover_3upg-1].desc)
     a = a.concat("<br>")
-    a = a.concat("Cost: ")
+    if (!hasMM3Upg(4)){
+        a = a.concat("Cost: ")
+    }else{
+        a = a.concat("Requirements: ")
+    }
     a = a.concat(mm3_opt.upgrades[app.hover_3upg-1].cost.format())
     a = a.concat(" mm<sup>3</sup>")
     if (mm3_opt.upgrades[app.hover_3upg-1].effectDisplay !== void 0){
@@ -104,9 +141,12 @@ function getMM3UpgClassName(id) {
 
 function getMM3resetButton() {
     if (player.inMM3Challenge){
-        return  'Reach ' + mm3_challenges[player.inMM3Challenge-1].complete_requirement.format()+' mm<sup>4</sup> to do a mm<sup>3</sup>reset, get ' +format(tmp.mm3.gain)+ 'mm<sup>3</sup> volumes'
+        let req = mm3_challenges[player.inMM3Challenge-1].complete_requirement;
+        return  'Reach ' + req.format()+' mm<sup>4</sup> to do a mm<sup>3</sup>reset, get ' +format(tmp.mm3.gain)+ 'mm<sup>3</sup> volumes'
+        + (player.options.percentUpg ?("(" + player.volumes.logarithm(10).div(req.logarithm(10)).mul(100).min(100).format() + "%)" ): "")
     
     }else{
         return  'Reach 1.797e308 mm<sup>4</sup> to do a mm<sup>3</sup>reset, get ' +format(tmp.mm3.gain)+ 'mm<sup>3</sup> volumes'
+        + (player.options.percentUpg ?("(" + player.volumes.logarithm(10).div("308.2547155599167").mul(100).min(100).format() + "%)" ): "")
     }
 }

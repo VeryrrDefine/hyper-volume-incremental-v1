@@ -1,4 +1,4 @@
-!function () {
+﻿!function () {
     try {
         var t, e = [
             {
@@ -11,7 +11,7 @@
                 text: 'What? You ask me where the Dimension Boost is? In the garbage dump of history.'
             },
             {
-                text: "| '0'''''1'''''2'''''3'''''4'''''4'''''4'''''4'''''4'''''4'''''4' | Yes, this is a ruler, but<span style='color:red'>(capped)</span>"
+                text: "| '0'''''1'''''2'''''3'''''4'''''4'''''4'''''4'''''4'''''4'''''4' | Yes, this is a ruler, but <span style='color:red'>(capped)</span>"
             },
             {
                 text: "| '0'''''1'''''2'''''3'''''3.46'''''3.87'''''4.24'''''4.58'''''4.89'''''5.19'''''5.47' | Yes, this is a ruler, but (softcapped)"
@@ -23,7 +23,7 @@
                 text: `Blaming negatives on excessive Ordinal Markup play. ————eferygrt`
             },
             {
-                text: `Does anyone still think that ${2n ** 128n} is infinite?`
+                text: `Does anyone still think that 340282366920938463463374607431768211456 is infinite?`
             },
             {
                 text: `The order of news broadcast is completely random, you may see two identical news at once.`
@@ -59,7 +59,7 @@
                     ` Recently, a netizen said that he saw a piece of news on a certain incremental game news player that was so important ` +
                     `that a time traveler reminded him. Due to the continuous expansion of the wormhole mass, particle physics researcher ` +
                     `Pollux and particle superphysics researcher Genius Club #83 Herta met in the antimatter universe through the wormhole.` +
-                    ` Physicists suggested creating a larger wormhole. A mathematician and physicist used the Poincare Recurrence Theorem and the ` +
+                    ` Physicists suggested creating a larger wormhole. A mathematician and physicist used the Poincaré Recurrence Theorem and the ` +
                     `gamma function of the Galois Theory Poincaré conjecture to calculate that the expensive wormhole has reached 1024 archverses, ` +
                     `but we still don't know how did the two of them fall into such a large wormhole? They might have been kicked into the wormhole ` +
                     `by the automatic ghost. According to the report of researcher Pollux, his visual ability was seriously reduced due to an abnormal` +
@@ -79,12 +79,6 @@
             },
             {
                 text: `Nothing will happen after clicking this news.`
-            },
-            {
-                text: 'This new is 100x rather than others.',
-                get unlocked() {
-                    return (Math.random() < 0.01)
-                }
             },
             {
                 text: 'Uncaught ReferenceError: Cheater is not defined'
@@ -150,7 +144,7 @@
             },
             {
                 text: 'ExpantaNum supports a maximum of 10{{1}}9e15. This game uses ExpantaNum, so it is normal that ' +
-                    'the upper limit of the value of this game is 10{{1}}1e15.'
+                    'the upper limit of the value of this game is 10{{1}}1e15 all right.'
             },
             {
                 text: "I can't sleep because they're a lot of Ai-ai👿Dide-dide😈 in my brain"
@@ -165,7 +159,7 @@
                 text: "How is the property managementer? Pe-nis PM!"
             },
             {
-                text: "Woshi geizong bawang，nein keyi jiaowo kei wang!"
+                text: "Woshi geizong bawang, nein keyi jiaowo kei wang!"
             },
             {
                 text: "I'm di~~~~~~~fferent~~~~~~~from~~~~~~~news~~~~~~~",
@@ -183,13 +177,13 @@
             },
             {
                 text: "i tsu mo na↑ n↓ do demo yumeo i ka kou"
-            },
+            },/*
             {
                 text: "/es ke kə ʒə pø paʁle a/",
                 get unlocked() {
                     return false
                 }
-            },
+            },*/
             {
                 text: "In 2222, Wind-spirit-creation has least 1000 achievements, 6308 dimensions，75 layers and updates per five hours."
             },
@@ -219,7 +213,7 @@
                     "library can represent g<sub>ψ<sub>0</sub>(Ω<sub>2</sub>)</sub>(10)."
             },
             {
-                text: "Can we reach e9.000e15 like in this video????"
+                text: "Can we reach e9.000e15 likes in this video????"
             },
             //ΓΩεζηωψφ
             {
@@ -254,11 +248,17 @@
                 text: "Translating English to Chinese: bluearchive -> 蓝韭菜 Translated 100% Although I don't know what's so fun about bluearchive and they're weird, I still respect you, hahahaha."
             },
             {
-                text: "New version 7 ban and 11 ban: Pass EC7 and EC11 first before speaking. Newcomer: truck, duck, pluck, ( )uck"
-            },
+                text: "New version 6 ban, 7 ban and 11 ban: Pass EC6, EC7 and EC11 first before speaking. Newcomer: truck, duck, pluck, ( )uck"
+            },/*
             {
-                text: "Who is dygm?"
-            }, {
+                text: "Who is dygm?",
+                unlocked: false
+            }, 
+            {
+                text: "Who is Takanashi Hoshino?",
+                unlocked: false
+            },*/
+            {
                 text: "There are 9 prestige layers in Wind Spirit Creation:" +
                     "<span style='color:#ff0000'>swirl</span>,<span style='color:#ffff00'>txosm</span>" +
                     ",<span style='color:#00ff00'>vyutn</span>,<span style='color:#00ffff'>wzavp</span>," +
@@ -276,17 +276,17 @@
             },
             {
                 text: "D'autres temps attendent, j'ai besoin d'être éternel."
-            },
+            },/*
             {
                 text: "/dot ʁ tɑ(n) atɑ(n)d  ʒe bə zwɛ(n) dɛt ʁe tɛʁ nɛl/ ",
                 get unlocked() {
                     return false;
                 }
-            },
+            },*/
             {
                 text: "Oh, I appear to have run out of <span style='animation: a-existence-glow 3s infinite; color: " +
                     "white; line-height: 0;'>Existence</span>."
-            },
+            },/*
             {
                 text: "We will fly a-way, far a-way, huo xu hui pang huang, huo xu hui shou shang,fly a-way far " +
                     "a-way-from-silence! Bie bei shi-jian yi wang sing a song, search for truth, xun hui na-guang-mao, " +
@@ -294,7 +294,7 @@
                 get unlocked() {
                     return player.volumes.gte(E(10).expansion(150))
                 }
-            },
+            },*/
             {
                 text: "do t喝 dan a-dand <del>u</del>s<del>ually</del>e b额 zweee-en det 喝e te喝 ne了"
             },
@@ -343,7 +343,7 @@
    as 18446744073709551616 (2<sup>64</sup>-1). These two types have no error, but the disadvantage is that the numbers
     they can represent are also very small. However, some games have exceeded the upper limit of 1e308: Antimatter 
     Dimensions, Incremental Mass Rewritten...<del>etc.</del>. But the upper limits of the numbers represented by these 
-    games are different. The upper limit of Antimatter Dimensions number is 1.000e9.000e15 (to be more precise, it is 
+    games are different. The upper limit of Antimatter Dimensions number is 1.000e9.000e15 (maybe more,to be more precise, it is 
     1.000e9.007e15); the theorical upper limit of the Incremental Mass Rewritten is F1.797e308(10^^1.797e308); the largest,
      the Endless Stairwell has a maximum limit of K1e14, which is larger than the Graham's number (~3K64), which is really 
      incredible!`
@@ -418,16 +418,113 @@
             {
                 text: `给他一个Minecraft中的operator管理员权限，他可以开creative模式对着别人劈雷。
                 近期，有一个名叫<span class='redacted'>[REDACTED]</span><sup>1</sup>的人说，他在某个名叫
-                <span class='redacted'>[REDACTED]</span><sup>2</sup>的服务器中遭受到了管理员<span class='redacted'>[REDACTED]</span><sup>3</sup>的骚扰
-                随后<span class='redacted'>[REDACTED]</span><sup>1</sup>报告给了这个服务器的腐竹。<span class='redacted'>[REDACTED]</span><sup>1</sup>在向我说明
-                此事件的时候遭到了<span class='redacted'>[REDACTED]</span><sup>3</sup>的威胁。大型纪录片之《<span class='redacted'>[REDACTED]</span><sup>3</sup>》
+                <span class='redacted'>[REDACTED]</span><sup>2</sup>的服务器中遭受到了管理员<span class=
+                'redacted'>[REDACTED]</span><sup>3</sup>的骚扰
+                随后<span class='redacted'>[REDACTED]</span><sup>1</sup>报告给了这个服务器的腐竹。
+                <span class='redacted'>[REDACTED]</span><sup>1</sup>在向我说明
+                此事件的时候遭到了<span class='redacted'>[REDACTED]</span><sup>3</sup>的威胁
+                在<span class='redacted'>[REDACTED]</span><sup>1</sup>被
+                <span class='redacted'>[REDACTED]</span><sup>3</sup>踢后，我
+                火速询问<span class='redacted'>[REDACTED]</span><sup>1</sup>为何被踢的原因。
+                随后<span class='redacted'>[REDACTED]</span><sup>1</sup>的回答是：“被神权”。
+                对此，五星上将MacArthur说： 有管理员的身份并不意味着高人一等，如果我当时有这个玩意，我早就统治世界了。
+                大型纪录片之《<span class='redacted'>[REDACTED]</span><sup>3</sup>》
                 正在持续为您播出...`
             },
+            
             {
-                text: "Why doesn't this game have softcaps? Because it's 善",
-                get unlocked(){
-                    return player.volumes.lt(tmp.mm4.softcap1_start)
-                }
+                text: "孩子们，这是真的, 我在制作客户端时留了后门, 玩游戏时只需按下alt+f4, 就可以到达Endgame, 快去试吧！"
+            },
+            {
+                text: `For Mid-Autumn Festival and National Day(Oct 1<sup>st</sup> in China) holidays, 
+                Department of Cosmology conduct experiments: creating black holes within research facilities.
+                The goal is to accelerate time to 180 times.
+                Because improper operation, so black hole reverse become slow down time.
+                While they were struggling to figure out how to solve the problem, the 
+                outside of the facility was in chaos.The staff outside the facility noticed that 
+                there was no response from the people inside for four hours, thinking that the 
+                people inside had launched a rebellion and were preparing to directly use force
+                to break through the facility.But this time, The time anomaly department supervisor 
+                SCP-5616 on the side keenly sensed the problem.SCP-5616 used time anomaly devices to
+                detect that the time flow inside the facility is rapidly slowing down. It has now reached 
+                a point where the time inside the facility is thousands of times slower than outside.
+                If this continues, the entire facility's time will come to a halt, trapping everyone
+                inside forever like the previous SCP-5616. 
+                The Department of Cosmology reminds: There are thousands of roads, but driving  is the 
+                first.Irregular safety makes loved ones cr
+            `
+            },
+            {
+                text: "THE EVERYTHING FINAL OF Ω OF FINAL EVERYTHING THE"
+            },
+            {
+                text: "(I) has been chaos by the chaos reset"
+            },
+            {
+                text: "<span class=\"redacted\">REDACTED</span><sup>2</sup> 在吗？ 你怎么退了？ 是有什么问题吗？ 有问题我会尽力为你解决的 <span class=\"redacted\">REDACTED</span><sup>1000001</sup>: <span class=\"redacted\">REDACTED</span><sup>1000002</sup>不让玩"
+            },
+            {
+                text: "I can say a little French, just like this: Je suis chien, 啊呸呸呸"
+            },
+            {
+                text: "Eliny put her feet in my mouth when she was sleeping, so I died because suffocate."
+            },
+            {
+                text: "Eternal".repeat(10)
+            },
+            {
+                text: "仪表信息： 网络应力 过载 (5.49376e100002%) 剩余应力量 (-5.49376e100000su / 0su)"
+            },
+            {
+                text: "Possible doesn't mean must, 0.000000000000000(There are 1.79e308 zero's)000001%"
+            },
+            {
+                text: "本来我焯！的东西就很有限"
+            },
+            {
+                text: "dans le <sup>0i00000000a7</sup> a proximité"
+            },
+            {
+                text: `在某平行反物质宇宙中，反物质在生产出来后的0.18308秒后将会坍缩为永恒符文碎片或者有概率湮灭为虚无。
+集齐100个永恒符文碎片可以兑换永恒符文。有1.8e308名玩家表示：我们都卡在了99个永恒符文碎片，之后所有反物质都没能变为最后那个碎片。
+虽然不知道符文是什么，我们仍然希望为此奋斗。与此同时，Pelle，在幕后操控着所有反物质的结局。
+即使有2人试图分享他们的碎片，也会被Pelle在无形中阻止。现实，便是如此。这一切，终将被打破。
+为传说中的永恒符文，一名英雄站了出来！他将毕生积攒的1e4000永恒点，升华为了一个现实机器。
+“这是什么资源？”“我闻所未闻！”其他人这样评论。这真是一个伟大的发现！在开辟了这条道路后，众多玩家纷纷跟随。
+这件事很快被Teresa知晓。Teresa思索，认为玩家们对天神绝不会产生任何威胁，于是向他们开放了自己的现实。
+Teresa的现实在公开开放后的1/1e300秒内立刻崩溃了。(Error: Server Offline.)
+在发现Teresa后，它们找到一条神秘路径，直接向前遇到了Ra，接着是Lai'tela。
+试图继续往前时，Lai'tela禁用了所有试图继续向前的玩家所拥有的所有维度。
+“前方封路，请掉头。”然而，Lai'tela似乎忘了一件事。玩家们请来隔壁的Universal Paperclips制造者，超级AI，来生产通用回形针，获得了回形针维度。
+数值膨胀下，回形针硬生生冲开封锁，直逼Pelle。情急之下，Pelle动用了他全部的反物质，极速消灭了回形针。
+这产生了一场史无前例的爆炸。[REDACTED]`
+            },
+            {
+                text: "Go back to Mars"
+            },
+            {
+                text: "星野(Takanashi Hoshino)是什么，就是你一边玩去"
+            },
+            {
+                text: "这个游戏的新闻对于我来说就是草文字聚集地"
+            },
+            {
+                text: "遇事不决，先ExpantaNum.js"
+            },
+            {
+                text: `【潜水】 dans le wlgyizhixiaomao a proximité 2024/7/25 星期四 23:53:12
+                星野是什么
+                
+                【老玩家】还是PVP大佬 2024/7/25 星期四 23:53:22
+                dans le wlgyizhixiaomao a proximité  
+                星野是什么
+                @dans le wlgyizhixiaomao a proximité 你一边玩去
+                
+                `,
+                unlocked: false
+            },
+            {
+                text: "Put my heart to develop my game, don't think that 傻逼 dygm"
             }
             // 2.11
 
@@ -436,9 +533,12 @@
             /*ωεζηφΓψΩ*/
         ];
         window.special_news_state = 0;
-        window.texts = t;
         let s;
-        t = e.length, console.log(t), msg = "", updatenews = (() => {
+        t = e.length;
+        console.log(t);
+        console.log(e);
+        msg = "";
+        updatenews = (() => {
             let a = document.getElementById("newsText");
             if (!player.options.showNewsTicker) return;
             do {

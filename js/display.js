@@ -145,9 +145,7 @@ function getMM4UpgClassName(id) {
     return upgradeClassName
 }
 function getMM4UpgText(){
-    if (!mm4_upgrades[0].unlocked){
-        return "Reach 1.000e50 mm<sup>4</sup> of total volumes to unlock first upgrade."
-    }
+    let b;
     if (app.hover_upg === 0) return;
     let a = "[mm<sup>4</sup> Upgrade "
     a = a.concat(app.hover_upg)
@@ -157,18 +155,57 @@ function getMM4UpgText(){
     a = a.concat("Cost: ")
     a = a.concat(mm4_upgrades[app.hover_upg-1].cost.format())
     a = a.concat(" mm<sup>4</sup>")
+    if (player.options.percentUpg && !hasMM4Upg(app.hover_upg)){
+        b = player.volumes.logarithm(10).div(mm4_upgrades[app.hover_upg-1].cost.logarithm(10)).mul(100);
+        a = a.concat(" (")
+        if (b.lt("100")){
+            a = a.concat(b.format())
+            a = a.concat("%")
+        }else{
+            a = a.concat("<span class='green'>Buyable</span>")
+        }
+
+        a = a.concat(")")
+    }
     if (mm4_upgrades[app.hover_upg-1].effectDisplay !== void 0){
         a = a.concat("<br>")
         a = a.concat(`<span class="green">Currently: ${mm4_upgrades[app.hover_upg-1].effectDisplay}</span>`)
     }
     return a
 }
+function e114e514(){
+    ExpantaNum.prototype.format = function (){
+        if (this.gte("ee3") && this.lt("ee8")){
+            let a = this.logarithm(10)
+            let b = a.logarithm(10).floor()
+            let c = a.div(E(10).pow(b));
+            
+            return `e${format(c)}e${format(b)}`;
+        }else{
+            return format(this)
+        }
+    }
+    ExpantaNum.prototype.formatA = function (){
+        if (this.gte("ee3") && this.lt("ee8")){
+            let a = this.logarithm(10)
+            let b = a.logarithm(10).floor()
+            let c = a.div(E(10).pow(b));
+            return `e${format(c)}e${format(b)}`;
+        }else{
+            return format(this)
+        }
+    }
+}
 function getGameSpeedText(){
-    let temp = developer.timeboost * player.options.gamespeed;
+    let temp = developer.timeboost * player.options.gamespeed * (player.inMM3Challenge===7 ? 0.001 : 1);
     if (temp===1){
         return "Game speed is unaltered: 1 second -> 1 second"
     }else{
         return `Game speed is altered: 1 second -> ${formatTime.fromSeconds(temp)}`
     }
 
+}
+
+function togglePercentUpg(){
+    player.options.percentUpg = !player.options.percentUpg
 }

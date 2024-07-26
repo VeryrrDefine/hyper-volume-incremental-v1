@@ -4,8 +4,6 @@
     --color-text: white;
 }
 body {
-    background-color: var(--color-text-inverted);
-    color: var(--color-text);
     font-family: 'Courier New', sans-serif;
     position: relative;
     -webkit-touch-callout: none;

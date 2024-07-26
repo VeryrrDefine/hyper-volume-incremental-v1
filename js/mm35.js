@@ -10,6 +10,9 @@ function mm35_loop(){
     player.mm35_volumes.machineState=true
     if (player.mm35_volumes.machineState &&player.mm35_volumes.unl){
         player.mm35_volumes.points = player.mm35_volumes.points.mul(tmp.mm35.replicatePerTick);
+        if (player.mm35_volumes.points.gte(tmp.mm35.cap)){
+            player.mm35_volumes.points = tmp.mm35.cap
+        }
     }
     if (!player.mm35_volumes.unl){
         player.mm35_volumes.points = E(1)

@@ -1,18 +1,74 @@
 var mm3_challenges = [
     {
-        name: "",
+        name: "Useless mm3.5",
         unlocked: true,
         desc: "mm<sup>3.5</sup> to mm<sup>4</sup>'s multiplier is always ×1",
-        complete_requirement: E("1e720"),
-        reward: "mm<sup>3.5</sup> to mm<sup>4</sup>'s multiplier ×1.000e4"
+        complete_requirement: E("1e730"),
+        reward: "mm<sup>3.5</sup> to mm<sup>4</sup>'s multiplier ×1.000e3"
     },
     {
-        name: "I don't know",
-        unlocked: false,
-        desc: "I don't know",
-        complete_requirement: E("1e1919810"),
-        reward: "mm<sup>3.5</sup> to mm<sup>4</sup>'s multiplier ×1.000e4"
+        name: "Useless upgrades",
+        get unlocked(){
+            return hasMM3Chal(1)
+        },
+        desc: "1~2, 4~8 mm<sup>4</sup>, 2<sup>nd</sup> mm<sup>3</sup> Upgrades are useless.",
+        complete_requirement: E("1e350"),
+        reward: "All dimensions multiplier ×1.000e3"
     },
+    {
+        name: "Dilated 8 times Dimensions",
+        get unlocked(){
+            return hasMM3Chal(2)
+        },
+        desc: "All dimension multiplier ^0.1",
+        complete_requirement: E("1e42"),
+        reward: "All dimension multiplier ^1.1, Unlock 4<sup>th</sup> mm<sup>3</sup> Upgrade"
+    },
+    {
+        name: "<del>Dilated END times</del><ins>Unusable</ins> mm<sup>3.5</sup>",
+        get unlocked(){
+            return hasMM3Upg(5)
+        },
+        desc: "mm<sup>3.5</sup> replicante ×1 per second.<br>Enter this challenge will reset your mm<sup>3.5</sup> volumes.",
+        complete_requirement: E("e2700"),
+        reward: "the cap of mm<sup>3.5</sup> volume become higher based of mm<sup>3</sup> volumes.",
+        get reward_effect(){
+            return player.mm3_volumes.points.pow(100)
+        },
+        get effectDisplay(){
+            return "×" + this.reward_effect.format() + " later"
+        }
+    },
+    {
+        name: "Unbuyable seven-eight",
+        get unlocked(){
+            return hasMM4Upg(10)
+        },
+        desc: "The cost of 7~8<sup>th</sup> Dimensions are K1.000e15 mm<sup>4</sup>(人话：不能买)",
+        complete_requirement: E("e3850"),
+        reward: "8<sup>th</sup> Dimensions multiplier ×1.000e200",
+        
+    },
+    {
+        name: "Decay Dimensions",
+        get unlocked() {
+            return player.volume_generated.mm4.gte("e3.6e4")
+        },
+        desc: "All 4D Dimensions' multiplier decays.",
+        complete_requirement: E("e26000"),
+        reward: "mm<sup>4</sup> gain ×1.000e500."
+    },
+    {
+        name: "FINAL",
+        get unlocked() {
+            return player.volume_generated.mm4.gte("e5.2e4") && hasMM3Chal(6)
+        },
+        desc: "Game runs 1.000e3 slower and run 3<sup>rd</sup> mm<sup>3</sup> challenge",
+        complete_requirement: E("e700"),
+        get reward(){
+            return ""
+        }
+    }
 ]
 
 function mm3doChalText(){
@@ -63,8 +119,13 @@ function mm3ChallengeText(){
         b = b.concat(chal.desc)
         b = b.concat("<br>Complete Requirement: ")
         b = b.concat(chal.complete_requirement.format())
-        b = b.concat("<br>Reward:")
+        b = b.concat(" mm<sup>4</sup><br>Reward:")
         b = b.concat(chal.reward)
+
+        if (chal.effectDisplay !== void 0){
+            b = b.concat("<br>")
+            b = b.concat(`<span class="green">Currently: ${chal.effectDisplay}</span>`)
+        }
         return b
     }
 
@@ -72,6 +133,9 @@ function mm3ChallengeText(){
 function mm3HandleChallenge(){
     if (player.selectedMM3Challenge != 0 && !player.inMM3Challenge){
         doMM3reset();
+        if (player.selectedMM3Challenge==4){
+            player.mm35_volumes.points = E(1);
+        }
         player.inMM3Challenge = player.selectedMM3Challenge
         return;
     }

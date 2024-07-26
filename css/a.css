@@ -93,7 +93,9 @@
 .usesticky {
     position: sticky;
     top: 0px;
-    z-index: 5;}
+    z-index: 5;
+    background-color: rgba(241,241,241,75%);
+}
 /*}*/
 /*.mm3_upgrades{*/
 /*    width: 23.5vw;*/
@@ -343,7 +345,7 @@ h2{
     0%,
     100% {
         text-shadow: -4px -4px 4px #5555ff, 4px 4px 4px #ff5555;
-        color: #ffffff;
+        color: white;
     }
 
     25% {
@@ -353,7 +355,7 @@ h2{
 
     50% {
         text-shadow: 4px 4px 4px #5555ff, -4px -4px 4px #ff5555;
-        color: #ffffff;
+        color: white;
     }
 
     75% {

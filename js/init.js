@@ -4,11 +4,21 @@ var player = {};
 var developer = {
     timeboost: 1
 };
-var E = EN;
 ExpantaNum.prototype.format = function (){
     return format(this);
 }
-
+ExpantaNum.prototype.formatA = function (){
+    return formatA(this);
+}
+function formatA(...args){
+    return format(...args)
+}
+function formatWholeA(...args){
+    return formatWhole(...args)
+}
+function formatGainA(...args){
+    return formatGain(...args)
+}
 function softcap(value,start,power,mode,dis=false){
     var x = value.clone()
     if (!dis&&x.gte(start)) {
@@ -63,3 +73,5 @@ const EE5 = E("ee5");
 const EE10 = E("ee10");
 const EE1000 = E("ee1000");
 const EEE8 = E("eee8");
+
+const ENDGAME= E("e8.3e4")

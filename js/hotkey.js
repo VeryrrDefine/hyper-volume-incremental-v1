@@ -10,9 +10,11 @@ hotkeys("m",function (event,handler){
     buyAll();
 })
 
-hotkeys("d",function (event,handler){
+hotkeys("n",function (event,handler){
     event.preventDefault();
-    if (tmp.dimensionBoost.boostable) dimensionBoost()
+    if (tmp.mm3.resetable){
+        doMM3resetManmade();
+    }
 })
 
 hotkeys("ctrl+shift+c",function (event,handler){
