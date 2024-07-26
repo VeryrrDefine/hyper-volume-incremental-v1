@@ -1,6 +1,12 @@
-# 多模态体积量维曾化
+# 多维体积增量
 
 项目发起者: [VeryrrDefine](https://github.com/VeryrrDefine)
+
+项目贡献者:
+
+-   [VeryrrDefine](https://github.com/VeryrrDefine)
+-   [0i00000000a7](https://github.com/0i00000000a7)
+-   [AImixAE](https://github.com/AImixAE)
 
 ---
 
