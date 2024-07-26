@@ -30,24 +30,31 @@ var mm3_opt = {
             }
         },
         {//5
-            desc: "WAITING FOR UPDATE!<br>WAITING FOR UPDATE!<br>WAITING FOR UPDATE!<br>WAITING FOR UPDATE!<br>Unlock 4<sup>th</sup> mm<sup>3</sup> challenge.",
-            cost: E("5.2e10").expansion(114514),
+            desc: "Unlock 4<sup>th</sup> mm<sup>3</sup> challenge.",
+            cost: E("1.2e8"),
             get unlocked() {
                 return hasMM3Upg(4)
             }
         },
         {//6
-            desc: "Buy 1 times dimensions multiplier become ×2.1",
-            cost: E("230000000000"),
+            desc: "弱化1<sup>st</sup> Softcap 50%",
+            cost: E("230000000"),
             get unlocked() {
                 return hasMM3Upg(5)
             }
         },
         {//7
+            desc: "Buy 1 times dimensions multiplier become ×2.1",
+            cost: E("230000000"),
+            get unlocked() {
+                return hasMM3Upg(6)
+            }
+        },
+        {//8
             desc: "Buy 1 times dimensions multiplier become ×2.105",
             cost: E("1e300"),
             get unlocked(){
-                return hasMM3Upg(6)
+                return hasMM3Upg(7)
             }
         }
     ]
@@ -149,4 +156,36 @@ function getMM3resetButton() {
         return  'Reach 1.797e308 mm<sup>4</sup> to do a mm<sup>3</sup>reset, get ' +format(tmp.mm3.gain)+ 'mm<sup>3</sup> volumes'
         + (player.options.percentUpg ?("(" + player.volumes.logarithm(10).div("308.2547155599167").mul(100).min(100).format() + "%)" ): "")
     }
+}
+
+function sacrif(id){
+    if (!player.mm3_volumes.in_sacrifice){
+        player.mm3_volumes.in_sacrifice=true
+        player.mm3_volumes.sacrifice_time = tmp.mm45.sacrifice_time
+
+    }
+}
+function mm45BuyCost(id){
+    if (id===1){
+        return E(10).mul(player.mm3_volumes.mm45buyables[0]+1)
+    }
+    if (id===2){
+        return E(1).mul(player.mm3_volumes.mm45buyables[1]+1)
+
+    }
+    if (id===3){
+        return E(2).mul(player.mm3_volumes.mm45buyables[2]+1)
+
+    }
+}
+function mm45Buy(id){
+    if (player.mm3_volumes.mm45_points.gte(mm45BuyCost(id))){
+        player.mm3_volumes.mm45_points=player.mm3_volumes.mm45_points.sub(mm45BuyCost(id))
+        player.mm3_volumes.mm45buyables[id-1]++
+    }
+}
+function mm45resetopt(){
+    player.mm3_volumes.mm45buyables = [0,0,0]
+    player.mm3_volumes.mm45_points=E(0)
+    player.mm3_volumes.sacrifice_dim1_log10=E(0)
 }

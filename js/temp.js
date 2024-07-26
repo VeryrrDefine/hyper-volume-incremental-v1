@@ -4,10 +4,10 @@ var tmp = {
         getDimMultiplier(dimid,softcapped=true) {
             i = dimid - 1;
             let result = E('2')
-            if (hasMM3Upg(6)){
+            if (hasMM3Upg(7)){
                 result = E("2.1")
             }
-            if (hasMM3Upg(7)){
+            if (hasMM3Upg(8)){
                 result = E("2.105")
             }
 
@@ -39,15 +39,48 @@ var tmp = {
             if (hasMM3Chal(5) && i === 7) {
                 result = result.mul("1e200");
             }
-            if (player.inMM3Challenge === 3 || player.inMM3Challenge === 7){
+            if (player.inMM3Challenge === 3 || player.inMM3Challenge === 8){
                 result = result.pow(0.1);
             }
-            if (player.inMM3Challenge === 6){
+            if (player.inMM3Challenge === 7){
                 result = result.div(E.pow("1e5",player.time.mm3));
             }
-            result = softcap(result,"e308",0.9,"pow",dis=!softcapped) 
+            if (dimid==1){
+                result = result.div(E.pow("10",player.mm3_volumes.sacrifice_dim1_log10))
+            }else{
+                result = result.mul(E("ee3").pow(player.mm3_volumes.mm45buyables[2]));
+            }
+            result = softcap(result,tmp.dimension.softcap,hasMM3Upg(6)? 0.95 : 0.9,"pow",dis=!softcapped) 
             return result;
         },
+        get softcap(){
+            let a = E("e308")
+            if (hasMM4Upg(11)){
+                a = E("e400")
+            }
+            if (hasMM4Upg(12)){
+                a = E("e700")
+            }
+            if (hasMM4Upg(13)){
+                a = E("e800")
+            }
+            if (hasMM3Chal(6)){
+                a = E("1e1000")
+            }
+            if (hasMM4Upg(16)){
+                a = E("e12500")
+            }
+            if (player.inMM3Challenge===6){
+                a = E("1e100")
+            }
+            a = a.mul(E("ee3").pow(player.mm3_volumes.mm45buyables[0]))
+            return a
+        }
+    },
+    mm45: {
+        get sacrifice_time(){
+            return E(10)
+        }
     },
     mm3: {
         get gain() {
@@ -75,7 +108,7 @@ var tmp = {
                 .mul(player.dimensions[DIMENSIONS_MULTI][0])
                 .mul(hasMM3Upg(1) ? 1e5 : 1)
                 .softcap(tmp.mm4.softcap1_start, tmp.mm4.softcap1_power, 'pow')
-                .mul(hasMM3Chal(6) ? "1e500" : 1);
+                .mul(hasMM3Chal(7) ? "1e500" : 1);
         },
         get softcapped1() {
             return tmp.mm4.gain.gte(tmp.mm4.softcap1_start)

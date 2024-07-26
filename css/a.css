@@ -1,5 +1,14 @@
+:root{
+    --color-text-inverted: black;
+    --color-text: white;
+}
 
 
+body{
+    font-family: 'Noto Sans SC', sans-serif;
+    background: var(--color-text-inverted);
+    color: var(--color-text);
+}
 .locked {
     background: darkred;
 }
@@ -17,6 +26,34 @@
 
 .ff_quark_color {
     animation: s_quark_color 0.8s cubic-bezier(0.37, 0, 0.63, 1) infinite
+}
+
+.center {
+    text-align: center;
+}
+
+.btn {
+    cursor: pointer;
+    font-size: 12px;
+    max-width: 250px;
+    padding: 7px 25px;
+    text-decoration: none;
+    border: 1px solid #777;
+    background: #333;
+    font-family: 'Noto Sans SC', sans-serif;
+    color: var(--color-text);
+    display: inline-block;
+}
+
+.btn:hover {
+    border: 1px solid #999;
+    background: #555;
+}
+.pts-dis {
+    margin: 4px 4px;
+    font-size: 48px;
+    display: inline-block;
+    white-space: nowrap;
 }
 @keyframes quark_color {
 
@@ -80,8 +117,6 @@
   }
 #news{
     height:5vw;
-}
-#news{
     margin: auto;
     border-radius: 5px;
 }
@@ -94,13 +129,13 @@
     position: sticky;
     top: 0px;
     z-index: 5;
-    background-color: rgba(241,241,241,75%);
+    background-color: rgba(14,14,14,75%);
 }
 /*}*/
 /*.mm3_upgrades{*/
 /*    width: 23.5vw;*/
 /*    height: 16.3vw;*/
-/*    background-color: black;*/
+/*    background-color: var(--color-text-inverted);*/
 /*    color: #fff;*/
 /*    border: 4px solid #72ac28;*/
 /*    border-radius: 8px;*/
@@ -111,7 +146,7 @@
 /*    display: inline-block;*/
 /*}*/
 /*.mm3_upgrades_bought{*/
-/*    color:black;*/
+/*    color:var(--color-text-inverted);*/
 /*    background:#72ac28;*/
 /*}*/
 
@@ -136,7 +171,7 @@
     z-index: 20000;
   
     background-color: rgba(0, 0, 0, 0.75);
-    color: white;
+    color: var(--color-text);
     content: attr(tooltip);
     font-size:14px;
 
@@ -152,7 +187,7 @@
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;
-    border-color: white transparent transparent transparent;
+    border-color: var(--color-text) transparent transparent transparent;
 }
 .tooltipBox { 
 	position: relative;
@@ -164,18 +199,18 @@
 
 @keyframes a-existence-glow {
     0% {
-        color: black;
-        text-shadow: 0.1rem 0.1rem 0.2rem white ;
+        color: var(--color-text-inverted);
+        text-shadow: 0.1rem 0.1rem 0.2rem var(--color-text) ;
     }
 
     50% {
-        color: black;
-        text-shadow: 0.1rem 0.1rem 0.8rem white;
+        color: var(--color-text-inverted);
+        text-shadow: 0.1rem 0.1rem 0.8rem var(--color-text);
     }
 
     100% {
-        color: black;
-        text-shadow: 0.1rem 0.1rem 0.2rem white;
+        color: var(--color-text-inverted);
+        text-shadow: 0.1rem 0.1rem 0.2rem var(--color-text);
     }
 }
 .charged_text {
@@ -183,7 +218,7 @@
     text-shadow: -1px -1px 3px lightskyblue, 0px 0px 5px #878ffa, 1px 1px 3px blue;
 }
 .existence {
-    animation: a-existence-glow 3s infinite; color: black; line-height: 0;
+    animation: a-existence-glow 3s infinite; color: var(--color-text-inverted); line-height: 0;
 }
 
 h1{
@@ -197,7 +232,7 @@ h2{
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url(https://fonts.gstatic.com/s/notosanssc/v36/k3kCo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaG9_FnYw.ttf) format('truetype');
+    src: url('/Noto\ Sans\ SC.ttf') format('truetype');
 }
 
 .game-link{
@@ -206,12 +241,12 @@ h2{
 
 
 #news {
-    color: black;
+    background-color: var(--color-text-inverted);
+    color: var(--color-text);
     width: 90%;
     top: 0px;
     height: 20px;
     border: solid 2px #222;
-    background-color: rgb(217,217,217);
     padding-top: 4px;
     padding-bottom: 4px;
     font-size: 16px;
@@ -223,8 +258,15 @@ h2{
 #newsText {
     white-space: nowrap;
 }
-.btn{
-    border-color: rgb(235,235,235);
+
+button {
+  border: solid 2px #444;
+  background-color: #1b1b1b;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition-property: background-color, border, transform, box-shadow;
+  transition-duration: 0.15s;
 }
 
 .mm4_upg,
@@ -276,33 +318,6 @@ h2{
     color: #00d000
 }
 
-.mm4_upg_1 {
-    background-image: url("/image/mm4_upg_1.png");
-
-}
-
-.mm4_upg_2 {
-    background-image: url("/image/mm4_upg_2.png");
-
-}
-
-
-.mm4_upg_3 {
-    background-image: url("/image/mm4_upg_3.png");
-
-}
-.mm4_upg_4 {
-    background-image: url("/image/mm4_upg_4.png");
-
-}
-.mm4_upg_5 {
-    background-image: url("/image/mm4_upg_5.png");
-
-}
-.mm4_upg_6 {
-    background-image: url("/image/mm4_upg_6.png");
-
-}
 
 #notify {
     z-index: 400;
@@ -311,7 +326,7 @@ h2{
     top: 20px;
     transform: translate(-50%, 0);
     min-height: 10px;
-    color: var(--color-text);
+    color: var(--color-text-inverted);
     border: solid 2px rgb(150,150,150);
     border-radius: 5px;
     background-color: rgb(241,241,241);
@@ -345,7 +360,7 @@ h2{
     0%,
     100% {
         text-shadow: -4px -4px 4px #5555ff, 4px 4px 4px #ff5555;
-        color: white;
+        color: var(--color-text);
     }
 
     25% {
@@ -355,7 +370,7 @@ h2{
 
     50% {
         text-shadow: 4px 4px 4px #5555ff, -4px -4px 4px #ff5555;
-        color: white;
+        color: var(--color-text);
     }
 
     75% {
@@ -368,8 +383,8 @@ h2{
     height: 10vw;
 }
 .redacted{
-    background: black; 
-    color: black;
+    background: var(--color-text); 
+    color: var(--color-text);
 }
 .mm3_chal{
     width:60px;

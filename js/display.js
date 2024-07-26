@@ -197,7 +197,7 @@ function e114e514(){
     }
 }
 function getGameSpeedText(){
-    let temp = developer.timeboost * player.options.gamespeed * (player.inMM3Challenge===7 ? 0.001 : 1);
+    let temp = developer.timeboost * player.options.gamespeed * (player.inMM3Challenge===8 ? 0.001 : 1);
     if (temp===1){
         return "Game speed is unaltered: 1 second -> 1 second"
     }else{

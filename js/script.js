@@ -12,6 +12,9 @@ var mm4_upgrades = [
         desc: "1<sup>st</sup> Dimension multiplier add based on mm<sup>4</sup> Volumes",
         get effect() {
             let a = player.volumes.root(90);
+            if (hasMM4Upg(14)){
+                a = player.volumes.root(40);
+            }
             if (a.gte("1000")) {
                 a = softcap(a,1000,0.5,"pow",false);
             }
@@ -93,18 +96,67 @@ var mm4_upgrades = [
     },
     {//9
         desc: "mm<sup>3</sup> volumes gain formula be better",
-        cost: E("ee4"),
+        cost: E("e5.802e3"),
         get unlocked(){
-            return player.volumes.gte("ee4") || hasMM4Upg(9)
+            return player.volumes.gte("e5.8e3") || hasMM4Upg(9)
         }
     },
     {//10
         desc: "Unlock 5<sup>th</sup> mm<sup>3</sup> challenge",
-        cost: E("1.14514e20820"),
+        cost: E("e6.05e3"),
         get unlocked(){
-            return player.volumes.gte("e2e4") || hasMM4Upg(10)
+            return hasMM4Upg(9)
         }
     },
+    {//11
+        desc: "1<sup>st</sup> Softcap starts at 1.000e400",
+        cost: E("e9.2e3"),
+        get unlocked(){
+            return hasMM4Upg(10)
+        }
+    },
+    {//12
+        desc: "1<sup>st</sup> Softcap starts at 1.000e700",
+        cost: E("e9.7e3"),
+        get unlocked(){
+            return hasMM4Upg(11)
+        }
+    },
+    {//13
+        desc: "1<sup>st</sup> Softcap starts at 1.000e800",
+        cost: E("e1.155e4"),
+        get unlocked(){
+            return hasMM4Upg(12)
+        }
+    },
+    {//14
+        desc: "Make mm<sup>4</sup> Upgrade 1 formula be better",
+        cost: E("e1.2222222e4"),
+        get unlocked(){
+            return hasMM4Upg(13)
+        }
+    },
+    {//15
+        desc: "Unlock 6<sup>th</sup> mm<sup>3</sup> Challenge",
+        cost: E("e1.3888888888e4"),
+        get unlocked(){
+            return hasMM4Upg(14)
+        }
+    },
+    {//16
+        desc: "1<sup>st</sup> Softcap starts at 1.000e12500",
+        cost: E("e1.50505050505050505050e4"),
+        get unlocked(){
+            return hasMM3Chal(6)
+        }
+    },
+    {//17
+        desc: "Unlock mm<sup>4.5</sup>",
+        cost: E("e1.50505050505050505050e4"),
+        get unlocked(){
+            return hasMM4Upg(16)
+        }
+    }
 ]
 function buyMM4Upg(id) {
     if (player.volumes.gte(mm4_upgrades[id - 1].cost) && !player.upgrades.includes(id)) {
@@ -177,7 +229,12 @@ function hard_reset() {
             points: E(0),
             upgrades: [],
             challenges: [],
-            buyable1: 0
+            buyable1: 0,
+            in_sacrifice: false,
+            mm45_points: E(0),
+            sacrifice_time: E(0),
+            sacrifice_dim1_log10: E(0),
+            mm45buyables: [0,0,0]
         },
 
         mm35_volumes: {
@@ -356,7 +413,7 @@ function loop() {
         if (player.lastTab!="12"){
             player.selectedMM3Challenge = 0
         }
-        window.diff = window.global_diff * player.options.gamespeed * (player.inMM3Challenge===7 ? 0.001 : 1);
+        window.diff = window.global_diff * player.options.gamespeed * (player.inMM3Challenge===8 ? 0.001 : 1);
 
         let temp1 = (player.options.gamespeed-1) * window.global_diff * 1000
         if (player.offlinedTime < 1){
@@ -369,7 +426,16 @@ function loop() {
                 player.options.gamespeed = 1
             }
         }
-
+        if (player.mm3_volumes.in_sacrifice){
+            player.mm3_volumes.sacrifice_dim1_log10 = player.mm3_volumes.sacrifice_dim1_log10.add(window.diff *(player.mm3_volumes.mm45buyables[1]+1))
+            player.mm3_volumes.mm45_points = player.mm3_volumes.mm45_points.add(window.diff *(player.mm3_volumes.mm45buyables[1]+1))
+            player.mm3_volumes.sacrifice_time = player.mm3_volumes.sacrifice_time.sub(window.diff *(player.mm3_volumes.mm45buyables[1]+1))
+            if (player.mm3_volumes.sacrifice_time.lte("0")){
+                player.mm3_volumes.sacrifice_time = E("0")
+                player.mm3_volumes.in_sacrifice=false
+            }
+            
+        }
         mm35_loop();
 
         if (player.volumes.isNaN()) {
@@ -396,11 +462,14 @@ function loop() {
 
 
         player.volume_generated.mm4 = player.volume_generated.mm4.add(more);
-        player.volumes = player.volumes.add(
-            more
-        );
         //MM35();
-        calculate_dim();
+        if (!player.mm3_volumes.in_sacrifice){
+            player.volumes = player.volumes.add(
+                more
+            );
+            calculate_dim();
+
+        }
 
         for (let i = 0; i < 8; i++) {
             if (player.auto.includes(i + 1) && !(player.inMM3Challenge==2)) {
@@ -551,8 +620,20 @@ function fix() {/*
     if (player.mm3_volumes.upgrades.toString() === "[object Object]"){
         player.mm3_volumes.upgrades = []
     }
-    if (player.mm3_volumes.buyable1 === void 0){
-        player.mm3_volumes.buyable1 = 0
+    if (player.mm3_volumes.in_sacrifice === void 0){
+        player.mm3_volumes.in_sacrifice = false
+    }
+    if (player.mm3_volumes.sacrifice_time === void 0){
+        player.mm3_volumes.sacrifice_time = E(0)
+    }
+    if (player.mm3_volumes.mm45_points === void 0){
+        player.mm3_volumes.mm45_points = E(0)
+    }
+    if (player.mm3_volumes.sacrifice_dim1_log10 === void 0){
+        player.mm3_volumes.sacrifice_dim1_log10 = E(0)
+    }
+    if (player.mm3_volumes.mm45buyables === void 0){
+        player.mm3_volumes.mm45buyables =  [0,0,0]
     }
 }
 

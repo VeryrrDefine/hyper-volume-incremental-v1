@@ -1,12 +1,12 @@
 var mm3_challenges = [
-    {
+    {//1
         name: "Useless mm3.5",
         unlocked: true,
         desc: "mm<sup>3.5</sup> to mm<sup>4</sup>'s multiplier is always ×1",
         complete_requirement: E("1e730"),
         reward: "mm<sup>3.5</sup> to mm<sup>4</sup>'s multiplier ×1.000e3"
     },
-    {
+    {//2
         name: "Useless upgrades",
         get unlocked(){
             return hasMM3Chal(1)
@@ -15,7 +15,7 @@ var mm3_challenges = [
         complete_requirement: E("1e350"),
         reward: "All dimensions multiplier ×1.000e3"
     },
-    {
+    {//3
         name: "Dilated 8 times Dimensions",
         get unlocked(){
             return hasMM3Chal(2)
@@ -24,13 +24,13 @@ var mm3_challenges = [
         complete_requirement: E("1e42"),
         reward: "All dimension multiplier ^1.1, Unlock 4<sup>th</sup> mm<sup>3</sup> Upgrade"
     },
-    {
+    {//4
         name: "<del>Dilated END times</del><ins>Unusable</ins> mm<sup>3.5</sup>",
         get unlocked(){
             return hasMM3Upg(5)
         },
         desc: "mm<sup>3.5</sup> replicante ×1 per second.<br>Enter this challenge will reset your mm<sup>3.5</sup> volumes.",
-        complete_requirement: E("e2700"),
+        complete_requirement: E("e2.06e3"),
         reward: "the cap of mm<sup>3.5</sup> volume become higher based of mm<sup>3</sup> volumes.",
         get reward_effect(){
             return player.mm3_volumes.points.pow(100)
@@ -39,17 +39,26 @@ var mm3_challenges = [
             return "×" + this.reward_effect.format() + " later"
         }
     },
-    {
+    {//5
         name: "Unbuyable seven-eight",
         get unlocked(){
             return hasMM4Upg(10)
         },
         desc: "The cost of 7~8<sup>th</sup> Dimensions are K1.000e15 mm<sup>4</sup>(人话：不能买)",
-        complete_requirement: E("e3850"),
+        complete_requirement: E("2.038e2.038e3"),
         reward: "8<sup>th</sup> Dimensions multiplier ×1.000e200",
         
     },
-    {
+    {//6
+        name: "Early Softcap",
+        get unlocked() {
+            return hasMM4Upg(15)
+        },
+        desc: "Softcap starts at 1e100",
+        complete_requirement: E("ee4"),
+        reward: "Softcap starts at 1e1000"
+    },
+    {//7
         name: "Decay Dimensions",
         get unlocked() {
             return player.volume_generated.mm4.gte("e3.6e4")
@@ -58,17 +67,29 @@ var mm3_challenges = [
         complete_requirement: E("e26000"),
         reward: "mm<sup>4</sup> gain ×1.000e500."
     },
-    {
+    {//8
         name: "FINAL",
         get unlocked() {
-            return player.volume_generated.mm4.gte("e5.2e4") && hasMM3Chal(6)
+            return player.volume_generated.mm4.gte("e5.2e4") && hasMM3Chal(7)
         },
         desc: "Game runs 1.000e3 slower and run 3<sup>rd</sup> mm<sup>3</sup> challenge",
         complete_requirement: E("e700"),
         get reward(){
             return ""
         }
-    }
+    }/*,
+    {
+        name: "MC玩家你们开心了吧！迷
+            return "MC玩家你们开你世们开MC玩家害得，我恨你们陪了我五年，五年啊！说下架就下架！都是你们这些MC玩家害得，我恨你们！",
+        complete_requireme下架！你们开你迷你nt: "MC玩家你们开心了些MC玩家害得，我恨界今天下吧！这个游戏陪了我五年，五心了吧！
+    }架心了！都是你们这些你世界今天这个游世界今天下架！你说下架就下
+        desc: "MC玩家你们开心了吧！！这个游游就下吧！",
+        reward: "MC玩家心了吧陪了我五年，五年！迷戏迷年啊！说下架就下架！都是你们这架！戏陪了们开心了吧！这个游戏陪了我五年，五年啊！说下架就下架！都是你们这些MC玩家害得，我恨你们！"?false:true
+        },开心了吧！这啊！戏！迷你世界今天下架！你们你世界今天下架！你你们！",
+        get unlocked() {架！你们开心了吧！我五年，五年啊！说下架都是你们这些MC玩家害得，我恨你们！"
+们开心了吧个
+
+*/
 ]
 
 function mm3doChalText(){

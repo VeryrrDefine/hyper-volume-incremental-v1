@@ -450,7 +450,7 @@
                 a point where the time inside the facility is thousands of times slower than outside.
                 If this continues, the entire facility's time will come to a halt, trapping everyone
                 inside forever like the previous SCP-5616. 
-                The Department of Cosmology reminds: There are thousands of roads, but driving  is the 
+                The Department of Cosmology reminds: There are thousands of roads, but safety  is the 
                 first.Irregular safety makes loved ones cr
             `
             },
@@ -501,16 +501,16 @@ Teresa的现实在公开开放后的1/1e300秒内立刻崩溃了。(Error: Serve
             },
             {
                 text: "Go back to Mars"
-            },
+            },/*
             {
                 text: "星野(Takanashi Hoshino)是什么，就是你一边玩去"
-            },
+            },*/
             {
                 text: "这个游戏的新闻对于我来说就是草文字聚集地"
             },
             {
                 text: "遇事不决，先ExpantaNum.js"
-            },
+            },/*
             {
                 text: `【潜水】 dans le wlgyizhixiaomao a proximité 2024/7/25 星期四 23:53:12
                 星野是什么
@@ -519,12 +519,15 @@ Teresa的现实在公开开放后的1/1e300秒内立刻崩溃了。(Error: Serve
                 dans le wlgyizhixiaomao a proximité  
                 星野是什么
                 @dans le wlgyizhixiaomao a proximité 你一边玩去
-                
+                什么星野，明明是Takanashi Hoshino   
                 `,
                 unlocked: false
-            },
+            },*/
             {
                 text: "Put my heart to develop my game, don't think that 傻逼 dygm"
+            },
+            {
+                text: "本游戏没有任何超级折算"
             }
             // 2.11
 
