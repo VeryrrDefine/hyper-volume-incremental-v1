@@ -1,11 +1,10 @@
-:root{
+:root {
     --color-text-inverted: black;
     --color-text: white;
 }
 
-
-body{
-    font-family: 'Noto Sans SC', sans-serif;
+body {
+    font-family: "Noto Sans SC", sans-serif;
     background: var(--color-text-inverted);
     color: var(--color-text);
 }
@@ -14,18 +13,18 @@ body{
 }
 .saved_text {
     color: #bfb;
-    text-shadow: 1px 1px 3px #0f0, -1px -1px 3px #7f0, 0 0 24px #0f0
+    text-shadow: 1px 1px 3px #0f0, -1px -1px 3px #7f0, 0 0 24px #0f0;
 }
 .quark_color {
-    animation: quark_color 6s cubic-bezier(0.37, 0, 0.63, 1) infinite
+    animation: quark_color 6s cubic-bezier(0.37, 0, 0.63, 1) infinite;
 }
 
 .f_quark_color {
-    animation: quark_color 1s cubic-bezier(0.37, 0, 0.63, 1) infinite
+    animation: quark_color 1s cubic-bezier(0.37, 0, 0.63, 1) infinite;
 }
 
 .ff_quark_color {
-    animation: s_quark_color 0.8s cubic-bezier(0.37, 0, 0.63, 1) infinite
+    animation: s_quark_color 0.8s cubic-bezier(0.37, 0, 0.63, 1) infinite;
 }
 
 .center {
@@ -40,7 +39,7 @@ body{
     text-decoration: none;
     border: 1px solid #777;
     background: #333;
-    font-family: 'Noto Sans SC', sans-serif;
+    font-family: "Noto Sans SC", sans-serif;
     color: var(--color-text);
     display: inline-block;
 }
@@ -56,72 +55,69 @@ body{
     white-space: nowrap;
 }
 @keyframes quark_color {
-
     0%,
     100% {
-      color: #f77;
+        color: #f77;
     }
-  
+
     16.7% {
-      color: #f7f;
+        color: #f7f;
     }
-  
+
     33.3% {
-      color: #77f;
+        color: #77f;
     }
-  
+
     50% {
-      color: #7ff;
+        color: #7ff;
     }
-  
+
     66.7% {
-      color: #7f7;
+        color: #7f7;
     }
-  
+
     83.3% {
-      color: #ff7;
+        color: #ff7;
     }
-  }
+}
 @keyframes s_quark_color {
-
     0%,
     100% {
-      color: #f77;
-      text-shadow: 1px 1px 3px #f77, -1px -1px 3px #f77, 0 0 24px #f77
+        color: #f77;
+        text-shadow: 1px 1px 3px #f77, -1px -1px 3px #f77, 0 0 24px #f77;
     }
-  
+
     16.7% {
-      color: #f7f;
-      text-shadow: 1px 1px 3px #f7f, -1px -1px 3px #f7f, 0 0 24px #f7f
+        color: #f7f;
+        text-shadow: 1px 1px 3px #f7f, -1px -1px 3px #f7f, 0 0 24px #f7f;
     }
-  
+
     33.3% {
-      color: #77f;
-      text-shadow: 1px 1px 3px #77f, -1px -1px 3px #77f, 0 0 24px #77f
+        color: #77f;
+        text-shadow: 1px 1px 3px #77f, -1px -1px 3px #77f, 0 0 24px #77f;
     }
-  
+
     50% {
-      color: #7ff;
-      text-shadow: 1px 1px 3px #7ff, -1px -1px 3px #7ff, 0 0 24px #7ff
+        color: #7ff;
+        text-shadow: 1px 1px 3px #7ff, -1px -1px 3px #7ff, 0 0 24px #7ff;
     }
-  
+
     66.7% {
-      color: #7f7;
-      text-shadow: 1px 1px 3px #7f7, -1px -1px 3px #7f7, 0 0 24px #7f7
+        color: #7f7;
+        text-shadow: 1px 1px 3px #7f7, -1px -1px 3px #7f7, 0 0 24px #7f7;
     }
-  
+
     83.3% {
-      color: #ff7;
-      text-shadow: 1px 1px 3px #ff7, -1px -1px 3px #ff7, 0 0 24px #ff7
+        color: #ff7;
+        text-shadow: 1px 1px 3px #ff7, -1px -1px 3px #ff7, 0 0 24px #ff7;
     }
-  }
-#news{
-    height:5vw;
+}
+#news {
+    height: 5vw;
     margin: auto;
     border-radius: 5px;
 }
 .center {
-
     text-align: center;
 }
 
@@ -129,7 +125,7 @@ body{
     position: sticky;
     top: 0px;
     z-index: 5;
-    background-color: rgba(14,14,14,75%);
+    background-color: rgba(14, 14, 14, 75%);
 }
 /*}*/
 /*.mm3_upgrades{*/
@@ -150,7 +146,7 @@ body{
 /*    background:#72ac28;*/
 /*}*/
 
-.tooltip { 
+.tooltip {
     pointer-events: none;
     text-align: center;
     width: 150px;
@@ -166,15 +162,14 @@ body{
     border-radius: 3px;
     opacity: 0;
     transition: opacity 0.5s;
-  
+
     position: absolute;
     z-index: 20000;
-  
+
     background-color: rgba(0, 0, 0, 0.75);
     color: var(--color-text);
     content: attr(tooltip);
-    font-size:14px;
-
+    font-size: 14px;
 }
 
 .tooltip:after {
@@ -189,18 +184,18 @@ body{
     border-style: solid;
     border-color: var(--color-text) transparent transparent transparent;
 }
-.tooltipBox { 
-	position: relative;
-  }
-  
-  .tooltipBox:hover .tooltip{
-	opacity: 1;
-  }
+.tooltipBox {
+    position: relative;
+}
+
+.tooltipBox:hover .tooltip {
+    opacity: 1;
+}
 
 @keyframes a-existence-glow {
     0% {
         color: var(--color-text-inverted);
-        text-shadow: 0.1rem 0.1rem 0.2rem var(--color-text) ;
+        text-shadow: 0.1rem 0.1rem 0.2rem var(--color-text);
     }
 
     50% {
@@ -215,30 +210,32 @@ body{
 }
 .charged_text {
     color: cyan;
-    text-shadow: -1px -1px 3px lightskyblue, 0px 0px 5px #878ffa, 1px 1px 3px blue;
+    text-shadow: -1px -1px 3px lightskyblue, 0px 0px 5px #878ffa,
+        1px 1px 3px blue;
 }
 .existence {
-    animation: a-existence-glow 3s infinite; color: var(--color-text-inverted); line-height: 0;
+    animation: a-existence-glow 3s infinite;
+    color: var(--color-text-inverted);
+    line-height: 0;
 }
 
-h1{
-    font-family: 'Noto Sans SC', sans-serif;
+h1 {
+    font-family: "Noto Sans SC", sans-serif;
 }
-h2{
-    font-family: 'Noto Sans SC', sans-serif;
+h2 {
+    font-family: "Noto Sans SC", sans-serif;
 }
 @font-face {
-    font-family: 'Noto Sans SC';
+    font-family: "Noto Sans SC";
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url('/Noto\ Sans\ SC.ttf') format('truetype');
+    src: url("../fonts/Noto\ Sans\ SC.ttf") format("truetype");
 }
 
-.game-link{
+.game-link {
     color: #008040;
 }
-
 
 #news {
     background-color: var(--color-text-inverted);
@@ -260,13 +257,13 @@ h2{
 }
 
 button {
-  border: solid 2px #444;
-  background-color: #1b1b1b;
-  color: white;
-  font-size: 14px;
-  cursor: pointer;
-  transition-property: background-color, border, transform, box-shadow;
-  transition-duration: 0.15s;
+    border: solid 2px #444;
+    background-color: #1b1b1b;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition-property: background-color, border, transform, box-shadow;
+    transition-duration: 0.15s;
 }
 
 .mm4_upg,
@@ -314,10 +311,9 @@ button {
     width: 100%;
     height: 150px;
 }
-.green{
-    color: #00d000
+.green {
+    color: #00d000;
 }
-
 
 #notify {
     z-index: 400;
@@ -327,9 +323,9 @@ button {
     transform: translate(-50%, 0);
     min-height: 10px;
     color: var(--color-text-inverted);
-    border: solid 2px rgb(150,150,150);
+    border: solid 2px rgb(150, 150, 150);
     border-radius: 5px;
-    background-color: rgb(241,241,241);
+    background-color: rgb(241, 241, 241);
     padding: 7px 25px;
     transition-duration: 0.75s;
     width: fit-content;
@@ -340,23 +336,20 @@ button {
     top: -130px;
 }
 
-.showhide{
+.showhide {
     opacity: 0;
     transition: 2s;
 }
 
-.showhide:hover{
+.showhide:hover {
     opacity: 1;
     transition: 2s;
-
 }
-.corrupted{
-
-    animation: corrupted_text 4s cubic-bezier(0.37, 0, 0.63, 1) infinite
+.corrupted {
+    animation: corrupted_text 4s cubic-bezier(0.37, 0, 0.63, 1) infinite;
 }
 
 @keyframes corrupted_text {
-
     0%,
     100% {
         text-shadow: -4px -4px 4px #5555ff, 4px 4px 4px #ff5555;
@@ -378,25 +371,24 @@ button {
         color: #ffddee;
     }
 }
-.newsticker-image{
+.newsticker-image {
     width: 10vw;
     height: 10vw;
 }
-.redacted{
-    background: var(--color-text); 
+.redacted {
+    background: var(--color-text);
     color: var(--color-text);
 }
-.mm3_chal{
-    width:60px;
+.mm3_chal {
+    width: 60px;
     height: 60px;
 
     border-width: 3px;
     border-color: #000000;
     border-style: dashed;
-    
 }
-.mm3_chal_completed{
-    background-color: #00a000
+.mm3_chal_completed {
+    background-color: #00a000;
 }
 .mm3_chal:active {
     background-color: #d0d0d0;

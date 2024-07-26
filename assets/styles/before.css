@@ -1,10 +1,9 @@
-:root{
-
+:root {
     --color-text-inverted: black;
     --color-text: white;
 }
 body {
-    font-family: 'Courier New', sans-serif;
+    font-family: "Courier New", sans-serif;
     position: relative;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -16,11 +15,12 @@ body {
 }
 
 @font-face {
-    font-family: 'Noto Sans SC';
+    font-family: "Noto Sans SC";
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url(https://fonts.gstatic.com/s/notosanssc/v36/k3kCo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaG9_FnYw.ttf) format('truetype');
+    src: url(https://fonts.gstatic.com/s/notosanssc/v36/k3kCo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaG9_FnYw.ttf)
+        format("truetype");
 }
 
 .pts-dis {
@@ -32,11 +32,10 @@ body {
 }
 
 .corrupted {
-    animation: corrupted_text 4s cubic-bezier(0.37, 0, 0.63, 1) infinite
+    animation: corrupted_text 4s cubic-bezier(0.37, 0, 0.63, 1) infinite;
 }
 
 @keyframes corrupted_text {
-
     0%,
     100% {
         text-shadow: -4px -4px 4px #5555ff, 4px 4px 4px #ff5555;
@@ -61,16 +60,16 @@ body {
 
 .charged_text {
     color: cyan;
-    text-shadow: -1px -1px 3px lightskyblue, 0px 0px 5px #878ffa, 1px 1px 3px blue;
+    text-shadow: -1px -1px 3px lightskyblue, 0px 0px 5px #878ffa,
+        1px 1px 3px blue;
 }
 
 .saved_text {
     color: #bfb;
-    text-shadow: 1px 1px 3px #0f0, -1px -1px 3px #7f0, 0 0 24px #0f0
+    text-shadow: 1px 1px 3px #0f0, -1px -1px 3px #7f0, 0 0 24px #0f0;
 }
 
 @keyframes quark_color {
-
     0%,
     100% {
         color: #f77;
@@ -98,48 +97,47 @@ body {
 }
 
 .quark_color {
-    animation: quark_color 6s cubic-bezier(0.37, 0, 0.63, 1) infinite
+    animation: quark_color 6s cubic-bezier(0.37, 0, 0.63, 1) infinite;
 }
 
 .f_quark_color {
-    animation: quark_color 1s cubic-bezier(0.37, 0, 0.63, 1) infinite
+    animation: quark_color 1s cubic-bezier(0.37, 0, 0.63, 1) infinite;
 }
 
 .ff_quark_color {
-    animation: s_quark_color 0.8s cubic-bezier(0.37, 0, 0.63, 1) infinite
+    animation: s_quark_color 0.8s cubic-bezier(0.37, 0, 0.63, 1) infinite;
 }
 
 @keyframes s_quark_color {
-
     0%,
     100% {
         color: #f77;
-        text-shadow: 1px 1px 3px #f77, -1px -1px 3px #f77, 0 0 24px #f77
+        text-shadow: 1px 1px 3px #f77, -1px -1px 3px #f77, 0 0 24px #f77;
     }
 
     16.7% {
         color: #f7f;
-        text-shadow: 1px 1px 3px #f7f, -1px -1px 3px #f7f, 0 0 24px #f7f
+        text-shadow: 1px 1px 3px #f7f, -1px -1px 3px #f7f, 0 0 24px #f7f;
     }
 
     33.3% {
         color: #77f;
-        text-shadow: 1px 1px 3px #77f, -1px -1px 3px #77f, 0 0 24px #77f
+        text-shadow: 1px 1px 3px #77f, -1px -1px 3px #77f, 0 0 24px #77f;
     }
 
     50% {
         color: #7ff;
-        text-shadow: 1px 1px 3px #7ff, -1px -1px 3px #7ff, 0 0 24px #7ff
+        text-shadow: 1px 1px 3px #7ff, -1px -1px 3px #7ff, 0 0 24px #7ff;
     }
 
     66.7% {
         color: #7f7;
-        text-shadow: 1px 1px 3px #7f7, -1px -1px 3px #7f7, 0 0 24px #7f7
+        text-shadow: 1px 1px 3px #7f7, -1px -1px 3px #7f7, 0 0 24px #7f7;
     }
 
     83.3% {
         color: #ff7;
-        text-shadow: 1px 1px 3px #ff7, -1px -1px 3px #ff7, 0 0 24px #ff7
+        text-shadow: 1px 1px 3px #ff7, -1px -1px 3px #ff7, 0 0 24px #ff7;
     }
 }
 
@@ -151,7 +149,7 @@ body {
     text-decoration: none;
     border: 1px solid #777;
     background: #333;
-    font-family: 'Courier New', sans-serif;
+    font-family: "Courier New", sans-serif;
     color: var(--color-text);
     display: inline-block;
 }
@@ -164,7 +162,7 @@ body {
     text-decoration: none;
     border: 1px solid #999;
     background: #555;
-    font-family: 'Courier New', sans-serif;
+    font-family: "Courier New", sans-serif;
     color: var(--color-text);
     display: inline-block;
 }
@@ -177,7 +175,7 @@ body {
     text-decoration: none;
     border: 1px solid #770;
     background: #550;
-    font-family: 'Courier New', 'Source Han Sans', sans-serif;
+    font-family: "Courier New", "Source Han Sans", sans-serif;
     color: var(--color-text);
     display: inline-block;
 }
@@ -190,7 +188,7 @@ body {
     text-decoration: none;
     border: 1px solid #990;
     background: #770;
-    font-family: 'Courier New', 'Source Han Sans', sans-serif;
+    font-family: "Courier New", "Source Han Sans", sans-serif;
     color: var(--color-text);
     display: inline-block;
 }
@@ -202,8 +200,8 @@ body {
     padding: 7px 25px;
     text-decoration: none;
     border: 1px solid #777;
-    background: #30B782;
-    font-family: 'Courier New', 'Source Han Sans', sans-serif;
+    background: #30b782;
+    font-family: "Courier New", "Source Han Sans", sans-serif;
     color: var(--color-text);
     display: inline-block;
 }
@@ -232,7 +230,7 @@ body {
     background-color: #000000;
     color: #ffffff;
     border: 4px solid #555500;
-    font-family: 'Courier New', sans-serif;
+    font-family: "Courier New", sans-serif;
     font-size: 16px;
     text-decoration: none;
     cursor: pointer;
@@ -258,7 +256,21 @@ h3 {
 }
 
 .rainbow {
-    background: linear-gradient(90deg, rgb(255, 0, 0), rgb(255, 119, 0), rgb(255, 255, 0), rgb(119, 255, 0), rgb(0, 255, 0), rgb(0, 255, 119), rgb(0, 255, 255), rgb(0, 119, 255), rgb(0, 0, 255), rgb(119, 0, 255), rgb(255, 0, 255), rgb(255, 0, 119));
+    background: linear-gradient(
+        90deg,
+        rgb(255, 0, 0),
+        rgb(255, 119, 0),
+        rgb(255, 255, 0),
+        rgb(119, 255, 0),
+        rgb(0, 255, 0),
+        rgb(0, 255, 119),
+        rgb(0, 255, 255),
+        rgb(0, 119, 255),
+        rgb(0, 0, 255),
+        rgb(119, 0, 255),
+        rgb(255, 0, 255),
+        rgb(255, 0, 119)
+    );
 }
 
 .galaxyReset {
@@ -271,17 +283,18 @@ h3 {
     text-align: center;
     font-size: 16px;
     font-weight: bold;
-    background: url('https://i.postimg.cc/SRvgCLTx/Force-a-galaxy-reset.gif') no-repeat center;
+    background: url("https://i.postimg.cc/SRvgCLTx/Force-a-galaxy-reset.gif")
+        no-repeat center;
     background-size: cover;
     cursor: pointer;
     transition-duration: 0.2s;
     border: solid #00007f 2px;
-    text-shadow: 6px 6px 6px #00007F;
+    text-shadow: 6px 6px 6px #00007f;
     color: var(--color-text);
 }
 
 .galaxyReset:hover {
-    text-shadow: 6px 6px 6px #5000FF;
+    text-shadow: 6px 6px 6px #5000ff;
 }
 
 #loader-overlay {
@@ -343,7 +356,7 @@ h3 {
 }
 
 * {
-    font-family: 'Courier New', Noto Sans SC, sans-serif;
+    font-family: "Courier New", Noto Sans SC, sans-serif;
     user-select: none;
 }
 
@@ -386,7 +399,6 @@ h3 {
 }
 
 @keyframes a-implode {
-
     0%,
     100% {
         transform: scale(1);
@@ -546,7 +558,7 @@ spoiler {
     z-index: 5000;
 }
 
-.popup>input {
+.popup > input {
     width: 300px;
     margin-bottom: 10px;
 }
@@ -607,10 +619,17 @@ spoiler {
     animation: a-replicanti--glow 10s infinite;
 }
 @keyframes a-replicanti--glow {
+    0% {
+        color: #2196f3;
+    }
 
-    0% { color: #2196f3; }
-
-    33% { color: #673ab7; }
-    66% { color: #00bcd4; }
-    100% { color: #2196f3; }
+    33% {
+        color: #673ab7;
+    }
+    66% {
+        color: #00bcd4;
+    }
+    100% {
+        color: #2196f3;
+    }
 }
