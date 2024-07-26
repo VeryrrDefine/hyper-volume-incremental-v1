@@ -34,6 +34,12 @@ function loadVue() {
             developer_code: "",
             changelogs: [
                 {
+                    version: "v1.0.7.1", title: "Project-sort",
+                    changes: [
+                        "项目文件整理"
+                    ]
+                },
+                {
                     version: "v1.0.7", title: "",
                     changes: [
                         "软上限推迟至1.000e1.000e5",
