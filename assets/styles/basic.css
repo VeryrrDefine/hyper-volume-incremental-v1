@@ -230,7 +230,8 @@ h2 {
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url("../fonts/Noto\ Sans\ SC.ttf") format("truetype");
+    src: url(https://fonts.gstatic.com/s/notosanssc/v36/k3kCo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaG9_FnYw.ttf)
+        format("truetype");
 }
 
 .game-link {

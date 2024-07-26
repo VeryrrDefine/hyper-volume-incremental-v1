@@ -1,4 +1,4 @@
-# 多模态体积量维曾化
+# 多维体积增量
 
 项目发起者: [VeryrrDefine](https://github.com/VeryrrDefine)
 
