@@ -8,13 +8,16 @@ body {
     background: var(--color-text-inverted);
     color: var(--color-text);
 }
+
 .locked {
     background: darkred;
 }
+
 .saved_text {
     color: #bfb;
     text-shadow: 1px 1px 3px #0f0, -1px -1px 3px #7f0, 0 0 24px #0f0;
 }
+
 .quark_color {
     animation: quark_color 6s cubic-bezier(0.37, 0, 0.63, 1) infinite;
 }
@@ -48,13 +51,16 @@ body {
     border: 1px solid #999;
     background: #555;
 }
+
 .pts-dis {
     margin: 4px 4px;
     font-size: 48px;
     display: inline-block;
     white-space: nowrap;
 }
+
 @keyframes quark_color {
+
     0%,
     100% {
         color: #f77;
@@ -80,7 +86,9 @@ body {
         color: #ff7;
     }
 }
+
 @keyframes s_quark_color {
+
     0%,
     100% {
         color: #f77;
@@ -112,11 +120,13 @@ body {
         text-shadow: 1px 1px 3px #ff7, -1px -1px 3px #ff7, 0 0 24px #ff7;
     }
 }
+
 #news {
     height: 5vw;
     margin: auto;
     border-radius: 5px;
 }
+
 .center {
     text-align: center;
 }
@@ -127,6 +137,7 @@ body {
     z-index: 5;
     background-color: rgba(14, 14, 14, 75%);
 }
+
 /*}*/
 /*.mm3_upgrades{*/
 /*    width: 23.5vw;*/
@@ -184,6 +195,7 @@ body {
     border-style: solid;
     border-color: var(--color-text) transparent transparent transparent;
 }
+
 .tooltipBox {
     position: relative;
 }
@@ -208,11 +220,13 @@ body {
         text-shadow: 0.1rem 0.1rem 0.2rem var(--color-text);
     }
 }
+
 .charged_text {
     color: cyan;
     text-shadow: -1px -1px 3px lightskyblue, 0px 0px 5px #878ffa,
         1px 1px 3px blue;
 }
+
 .existence {
     animation: a-existence-glow 3s infinite;
     color: var(--color-text-inverted);
@@ -222,15 +236,18 @@ body {
 h1 {
     font-family: "Noto Sans SC", sans-serif;
 }
+
 h2 {
     font-family: "Noto Sans SC", sans-serif;
 }
+
 @font-face {
     font-family: "Noto Sans SC";
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url("../fonts/Noto\ Sans\ SC.ttf") format("truetype");
+    /* 通过第三方字体加载实现加速 */
+    src: url(https://fonts.gstatic.com/s/notosanssc/v36/k3kCo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaG9_FnYw.ttf) format("truetype");
 }
 
 .game-link {
@@ -307,10 +324,12 @@ button {
 .mm3_upg_bought {
     background: #550;
 }
+
 .upg_text_box {
     width: 100%;
     height: 150px;
 }
+
 .green {
     color: #00d000;
 }
@@ -345,11 +364,13 @@ button {
     opacity: 1;
     transition: 2s;
 }
+
 .corrupted {
     animation: corrupted_text 4s cubic-bezier(0.37, 0, 0.63, 1) infinite;
 }
 
 @keyframes corrupted_text {
+
     0%,
     100% {
         text-shadow: -4px -4px 4px #5555ff, 4px 4px 4px #ff5555;
@@ -371,14 +392,17 @@ button {
         color: #ffddee;
     }
 }
+
 .newsticker-image {
     width: 10vw;
     height: 10vw;
 }
+
 .redacted {
     background: var(--color-text);
     color: var(--color-text);
 }
+
 .mm3_chal {
     width: 60px;
     height: 60px;
@@ -387,9 +411,11 @@ button {
     border-color: #000000;
     border-style: dashed;
 }
+
 .mm3_chal_completed {
     background-color: #00a000;
 }
+
 .mm3_chal:active {
     background-color: #d0d0d0;
     border-style: dashed;

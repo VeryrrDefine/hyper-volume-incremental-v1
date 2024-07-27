@@ -2,6 +2,12 @@
 
 Project initiator: [VeryrrDefine](https://github.com/VeryrrDefine)
 
+Project contributors:
+
+-   [VeryrrDefine](https://github.com/VeryrrDefine)
+-   [0i00000000a7](https://github.com/0i00000000a7)
+-   [AImixAE](https://github.com/AImixAE)
+
 ---
 
 Language switching
