@@ -43,7 +43,7 @@ var mm4_upgrades = [
     {//3
         desc :"Unlock 3.5D",
 
-        cost: E("1.14514e102"),
+        cost: E("1.145046196390161e102"),
         get unlocked() {
             return hasMM4Upg(2)
         },
@@ -156,6 +156,13 @@ var mm4_upgrades = [
         get unlocked(){
             return hasMM4Upg(16)
         }
+    },
+    {//18
+        desc: "No mm<sup>4.5</sup>'s debuff",
+        cost: E("ee7"),
+        get unlocked(){
+            return hasMM4Upg(17)
+        }
     }
 ]
 function buyMM4Upg(id) {
@@ -229,11 +236,9 @@ function hard_reset() {
             points: E(0),
             upgrades: [],
             challenges: [],
-            buyable1: 0,
             in_sacrifice: false,
             mm45_points: E(0),
-            sacrifice_time: E(0),
-            sacrifice_dim1_log10: E(0),
+            sacrifice_times: E(0), // 次数
             mm45buyables: [0,0,0]
         },
 
@@ -426,16 +431,8 @@ function loop() {
                 player.options.gamespeed = 1
             }
         }
-        if (player.mm3_volumes.in_sacrifice){
-            player.mm3_volumes.sacrifice_dim1_log10 = player.mm3_volumes.sacrifice_dim1_log10.add(window.diff *(player.mm3_volumes.mm45buyables[1]+1))
-            player.mm3_volumes.mm45_points = player.mm3_volumes.mm45_points.add(window.diff *(player.mm3_volumes.mm45buyables[1]+1))
-            player.mm3_volumes.sacrifice_time = player.mm3_volumes.sacrifice_time.sub(window.diff *(player.mm3_volumes.mm45buyables[1]+1))
-            if (player.mm3_volumes.sacrifice_time.lte("0")){
-                player.mm3_volumes.sacrifice_time = E("0")
-                player.mm3_volumes.in_sacrifice=false
-            }
             
-        }
+        
         mm35_loop();
 
         if (player.volumes.isNaN()) {
@@ -623,14 +620,11 @@ function fix() {/*
     if (player.mm3_volumes.in_sacrifice === void 0){
         player.mm3_volumes.in_sacrifice = false
     }
-    if (player.mm3_volumes.sacrifice_time === void 0){
-        player.mm3_volumes.sacrifice_time = E(0)
-    }
     if (player.mm3_volumes.mm45_points === void 0){
         player.mm3_volumes.mm45_points = E(0)
     }
-    if (player.mm3_volumes.sacrifice_dim1_log10 === void 0){
-        player.mm3_volumes.sacrifice_dim1_log10 = E(0)
+    if (player.mm3_volumes.sacrifice_times === void 0){
+        player.mm3_volumes.sacrifice_times = E(0)
     }
     if (player.mm3_volumes.mm45buyables === void 0){
         player.mm3_volumes.mm45buyables =  [0,0,0]

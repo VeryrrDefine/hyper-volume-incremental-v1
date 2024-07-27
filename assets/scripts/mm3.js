@@ -149,20 +149,20 @@ function getMM3UpgClassName(id) {
 function getMM3resetButton() {
     if (player.inMM3Challenge){
         let req = mm3_challenges[player.inMM3Challenge-1].complete_requirement;
-        return  'Reach ' + req.format()+' mm<sup>4</sup> to do a mm<sup>3</sup>reset, get ' +format(tmp.mm3.gain)+ 'mm<sup>3</sup> volumes'
+        return  'Reach ' + display_volumes(req)+' to do a mm<sup>3</sup>reset, get ' +format(tmp.mm3.gain)+ 'mm<sup>3</sup> volumes'
         + (player.options.percentUpg ?("(" + player.volumes.logarithm(10).div(req.logarithm(10)).mul(100).min(100).format() + "%)" ): "")
     
     }else{
-        return  'Reach 1.797e308 mm<sup>4</sup> to do a mm<sup>3</sup>reset, get ' +format(tmp.mm3.gain)+ 'mm<sup>3</sup> volumes'
+        return  'Reach '+display_volumes(E('1.797e308'))+' to do a mm<sup>3</sup>reset, get ' +format(tmp.mm3.gain)+ 'mm<sup>3</sup> volumes'
         + (player.options.percentUpg ?("(" + player.volumes.logarithm(10).div("308.2547155599167").mul(100).min(100).format() + "%)" ): "")
     }
 }
 
 function sacrif(id){
-    if (!player.mm3_volumes.in_sacrifice){
-        player.mm3_volumes.in_sacrifice=true
-        player.mm3_volumes.sacrifice_time = tmp.mm45.sacrifice_time
-
+    if (id==1 && player.volumes.gte(tmp.mm45.sacrifice_goal)){
+        player.volumes=E("11")
+        player.mm3_volumes.mm45_points = player.mm3_volumes.mm45_points.add(1)
+        player.mm3_volumes.sacrifice_times = player.mm3_volumes.sacrifice_times.add(1)
     }
 }
 function mm45BuyCost(id){
@@ -174,7 +174,7 @@ function mm45BuyCost(id){
 
     }
     if (id===3){
-        return E(2).mul(player.mm3_volumes.mm45buyables[2]+1)
+        return player.mm3_volumes.mm45buyables[2]
 
     }
 }
@@ -187,5 +187,4 @@ function mm45Buy(id){
 function mm45resetopt(){
     player.mm3_volumes.mm45buyables = [0,0,0]
     player.mm3_volumes.mm45_points=E(0)
-    player.mm3_volumes.sacrifice_dim1_log10=E(0)
 }

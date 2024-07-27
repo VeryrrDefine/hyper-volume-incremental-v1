@@ -139,8 +139,8 @@ function mm3ChallengeText(){
         b = b.concat("<br>")
         b = b.concat(chal.desc)
         b = b.concat("<br>Complete Requirement: ")
-        b = b.concat(chal.complete_requirement.format())
-        b = b.concat(" mm<sup>4</sup><br>Reward:")
+        b = b.concat(display_volumes(chal.complete_requirement))
+        b = b.concat("<br>Reward:")
         b = b.concat(chal.reward)
 
         if (chal.effectDisplay !== void 0){

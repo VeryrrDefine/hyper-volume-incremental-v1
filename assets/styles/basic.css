@@ -43,7 +43,18 @@ body {
     color: var(--color-text);
     display: inline-block;
 }
-
+.btn[disabled] {
+    cursor: default;
+    font-size: 12px;
+    max-width: 250px;
+    padding: 7px 25px;
+    text-decoration: none;
+    border: 1px solid #777;
+    background: #111;
+    font-family: "Noto Sans SC", sans-serif;
+    color: var(--color-text);
+    display: inline-block;
+}
 .btn:hover {
     border: 1px solid #999;
     background: #555;

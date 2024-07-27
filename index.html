@@ -49,12 +49,10 @@
                     <newsticker
                         v-if="player.options.showNewsTicker"
                     ></newsticker>
-                    <p class="center">
+                    <p class="center" style="font-size:30px; font-weight: 800">
                         You have
-                        <span class="pts-dis"
-                            >{{player.volumes.formatA()}}</span
-                        >
-                        mm<sup>4</sup>.
+                        <span v-html="display_volumes(player.volumes)"></span>
+                        .
                     </p>
                     <p class="center">
                         You're getting {{formatGainA(player.volumes,
@@ -265,9 +263,8 @@
                                 :disabled="!buyable(dim.id)"
                                 @click="buydim(dim.id)"
                             >
-                                Cost: {{
-                                formatA(player.dimensions[DIMENSIONS_COST][dim.id
-                                - 1]) }} mm<sup>4</sup>
+                                Cost: <span v-html="display_volumes(player.dimensions[DIMENSIONS_COST][dim.id
+                                - 1])">114514 Yly<sup>4</sup></span>
                             </button>
                             <button
                                 class="btn"
@@ -483,36 +480,29 @@
                             >
                         </p>
                         <button class="btn" @click="sacrif(1)">
-                            Sacrifice your 1<sup>st</sup> 4D Dimensions
-                            multiplier to gain mm<sup>4.5</sup> volumes
+                            Sacrifice {{tmp.mm45.sacrifice_goal.formatA()}} mm<sup>4</sup> to gain mm<sup>4.5</sup> volumes
                         </button>
-                        <p>
-                            Your 1<sup>st</sup> 4D Dimensions multiplier
-                            weakened by ÷ 10<sup
-                                >{{player.mm3_volumes.sacrifice_dim1_log10.formatA()}}</sup
-                            >
-                        </p>
                         <button class="btn" @click="mm45Buy(1)">
                             Make 1<sup>st</sup> softcap starts
-                            ×{{E("ee3").pow(player.mm3_volumes.mm45buyables[0]).formatA()}}
+                            ×{{E("ee4").pow(player.mm3_volumes.mm45buyables[0]).formatA()}}
                             →
-                            ×{{E("ee3").pow(player.mm3_volumes.mm45buyables[0]+1).formatA()}}
+                            ×{{E("ee4").pow(player.mm3_volumes.mm45buyables[0]+1).formatA()}}
                             later <br />Cost: {{mm45BuyCost(1)}} mm<sup
                                 >4.5</sup
                             ></button
                         ><br />
-
+<!--
                         <button class="btn" @click="mm45Buy(2)">
                             Make Sacrifice speed
                             ×{{player.mm3_volumes.mm45buyables[1]+1}} →
                             ×{{player.mm3_volumes.mm45buyables[1]+2}}<br />
                             Cost: {{mm45BuyCost(2)}} mm<sup>4.5</sup></button
-                        ><br />
+                        ><br />-->
                         <button class="btn" @click="mm45Buy(3)">
                             Make 2-8<sup>th</sup> 4D Dimensions
-                            ×{{E("ee3").pow(player.mm3_volumes.mm45buyables[2]).formatA()}}
+                            ×{{E("e500").pow(player.mm3_volumes.mm45buyables[2]).formatA()}}
                             →
-                            ×{{E("ee3").pow(player.mm3_volumes.mm45buyables[2]+1).formatA()}}<br />
+                            ×{{E("e500").pow(player.mm3_volumes.mm45buyables[2]+1).formatA()}}<br />
                             Cost: {{mm45BuyCost(3)}} mm<sup>4.5</sup>
                         </button>
                     </div>
