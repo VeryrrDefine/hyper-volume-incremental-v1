@@ -528,6 +528,23 @@ Teresa的现实在公开开放后的1/1e300秒内立刻崩溃了。(Error: Serve
             },
             {
                 text: "本游戏没有任何超级折算"
+            },
+            {
+                text: "efreygrt, the Celestial of 一楼喂百度"
+            },
+            /*{
+                text: "VeryrrDefine, the Celestial of 4D volumes"
+            },
+            {
+                text: "wlgyizhixiaomao, the Celestial of 3D volumes"
+            },*/
+            {
+                text: "本游戏有8个声望层: mm<sup>3</sup>, secutitation(mm<sup>5</sup>), multi(mm<sup>6</sup>), void(mm<sup>7</sup>), element(mm<sup>8</sup>), world (mm<sup>n</sup>), universe(mm^^2)"
+            },
+            {
+                get text(){
+                    return "不" + "！".repeat(50)
+                }
             }
             // 2.11
 

@@ -156,13 +156,6 @@ var mm4_upgrades = [
         get unlocked(){
             return hasMM4Upg(16)
         }
-    },
-    {//18
-        desc: "No mm<sup>4.5</sup>'s debuff",
-        cost: E("ee7"),
-        get unlocked(){
-            return hasMM4Upg(17)
-        }
     }
 ]
 function buyMM4Upg(id) {
@@ -248,6 +241,14 @@ function hard_reset() {
             san_xiang_bo_points: E(0),
             machineState: false
         },
+        secutitation: {
+            mm5_volumes: {
+                points: E(0)
+            },
+            points: E(0),
+            upgrades: [],
+            secutitation_reset_times: E(0)
+        },
         auto: [],
         multi: {
             unl: false,
@@ -319,6 +320,9 @@ function buydim(dim) {
         let temp3 = buycount.clone();
 
         player.volumes = player.volumes.sub(E.pow(10, temp2.mul(dim)))
+        if (buycount.lt(1)){
+            buycount = E(1)
+        }
         player.dimensions[DIMENSIONS_BOUGHT][dim - 1] = player.dimensions[DIMENSIONS_BOUGHT][dim - 1].add(buycount);
         player.dimensions[DIMENSIONS_POINTS][dim - 1] = player.dimensions[DIMENSIONS_POINTS][dim - 1].add(buycount.mul(10)); //     player.volumes = player.volumes.sub(E.pow(10,temp1.mul(dim).ceil()))
 
@@ -431,7 +435,6 @@ function loop() {
                 player.options.gamespeed = 1
             }
         }
-            
         
         mm35_loop();
 

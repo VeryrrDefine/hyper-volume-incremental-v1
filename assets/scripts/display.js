@@ -98,9 +98,16 @@ function addNotify(str) {
     setTimeout(function () {
         hideNotify()
     }, 2000)
-}
-
+}   // 单位
+const format_config =[ //after ee9 mm^4
+    "mlt", "mgv", "giv", "tev", "pev", "exv", "zev", "yov", 
+    "rnv", "quv", "xnv", "wkv", "vev", "udv", "trv", "srv", 
+    "qxv", "ppv", "ocv", "nev", "miv", "luv", "kev", "jrv",
+    "iqv", "huv", "gav", "fev", "env", "dsv", "cev", "bev",
+    "avv"
+]
 function display_volumes_stat(a){
+    
     if (a.lt("1e4")){
         return `${formatWhole(a)} mm<sup>4</sup>`
     }else if (a.lt("1e8")){
@@ -133,27 +140,29 @@ function display_volumes_stat(a){
         return `${format(a.div(LY.mul('1e9').pow(4)),5,false)} Gly<sup>4</sup>`
     }else if (a.lt('ee9')){
         return `${format(a.div(UNI.pow(4)),5,false)} uni<sup>4</sup>`
-    }
-    else if (a.lt("ee24")){
-        return `${format(a.logarithm(10).div("1e9"))} mlt<sup>4</sup>`
-    }
-    else if (a.lt("ee39")){
-        return `${format(a.logarithm(10).div("1e24"))} mgv<sup>4</sup>`
-    }
-    else if (a.lt("ee54")){
-        return `${format(a.logarithm(10).div("1e39"))} tev<sup>4</sup>`
-    }
-    else if (a.lt("ee69")){
-        return `${format(a.logarithm(10).div("1e54"))} pev<sup>4</sup>`
-    }
-    else if (a.lt("ee84")){
-        return `${format(a.logarithm(10).div("1e69"))} exv<sup>4</sup>`
-    }
-    else if (a.lt("ee99")){
-        return `${format(a.logarithm(10).div("1e84"))} zev<sup>4</sup>`
-    }
-    else if (a.lt("ee114")){
-        return `${format(a.logarithm(10).div("1e99"))} yov<sup>4</sup>`
+    }else if (a.lt('ee504')){
+        /*let log_v = a.logarithm(10);
+        let temp1 = log_v.root("1e9").root("1e15").floor().toNumber() // javascript number
+        let temp2 = a.logarithm(10).;*/
+        let log_v = a.logarithm(10);
+        // mlt log_v/1e9
+        let temp14 = log_v.div("1e9")
+        let temp15 = temp14.logarithm(10).div(15).floor() 
+        let temp16 = temp15.toNumber()// getindex
+        let temp17 = temp14.div(E.pow("1e15",temp15));
+        return `${temp17.format()} `+format_config[temp16]+"<sup>4</sup>"
+    }else if (a.lt('eee9')){
+        /*let log_v = a.logarithm(10);
+        let temp1 = log_v.root("1e9").root("1e15").floor().toNumber() // javascript number
+        let temp2 = a.logarithm(10).;*/
+        let log_v = a.logarithm(10);
+        // mlt log_v/1e9
+        let temp14 = log_v.div("1e9")
+        let temp15 = temp14.logarithm(10).div(15).floor()
+        let temp17 = temp14.div(E.pow("1e15",temp15));
+        return `${temp17.format()} `+`(arv^${formatWhole(temp15.add(1))})<sup>4</sup>`
+    }else{
+        return `${format(a)} mm<sup>4</sup>`
     }
 }
 
@@ -238,3 +247,14 @@ function getGameSpeedText(){
 function togglePercentUpg(){
     player.options.percentUpg = !player.options.percentUpg
 }
+const EnglishOrdinals =[
+    "1<sup>st</sup>",
+    "2<sup>nd</sup>",
+    "3<sup>rd</sup>",
+    "4<sup>th</sup>",
+    "5<sup>th</sup>",
+    "6<sup>th</sup>",
+    "7<sup>th</sup>",
+    "8<sup>th</sup>",
+    "9<sup>th</sup>",
+]

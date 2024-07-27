@@ -46,8 +46,9 @@ var tmp = {
                 result = result.div(E.pow("1e5",player.time.mm3));
             }
             if (dimid==1){
+                result = result.mul(E("e700").pow(player.mm3_volumes.mm45buyables[1]))
             }else{
-                result = result.mul(E("e500").pow(player.mm3_volumes.mm45buyables[2]));
+                result = result.mul(E("e600").pow(player.mm3_volumes.mm45buyables[2]));
             }
             result = softcap(result,tmp.dimension.softcap,hasMM3Upg(6)? 0.95 : 0.9,"pow",dis=!softcapped) 
             return result;
@@ -78,8 +79,8 @@ var tmp = {
     },
     mm45: {
         get sacrifice_goal(){
-            let a = E("e7.5e4")
-            a = a.mul(E.pow("e2.5e4",player.mm3_volumes.sacrifice_times))
+            let a = E("e6.5e4")
+            a = a.mul(E.pow("e5e3",player.mm3_volumes.sacrifice_times))
             return a
         }
     },
@@ -163,6 +164,20 @@ var tmp = {
             if (hasMM3Chal(4)) a = a.mul(mm3_challenges[4-1].reward_effect)
 
             return a
+        }
+    },
+    mm5: {
+        get gain(){
+            let temp1 = player.volumes.clone();
+            return temp1.logarithm(10).sub(4900000).div(100000).floor().max(0)
+        },
+        get secu_gain(){
+            let temp1 = player.mm3_volumes.points.clone();
+            return temp1.logarithm(10).sub(19000).div(1000).floor().max(0)
+
+        },
+        get resetable(){
+            return player.volumes.gte("e5e6") && player.mm3_volumes.points.gte("e2e4")
         }
     }
 }

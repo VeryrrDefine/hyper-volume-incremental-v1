@@ -34,6 +34,15 @@ function loadVue() {
             developer_code: "",
             changelogs: [
                 {
+                    version: "v1.1", title: "mm<sup>5</sup>",
+                    changes: [
+                        "修复了拥有10 mm<sup>4</sup>时无法正常购买第一4d维度的bug",
+                        "Add secutitation reset",
+                        "Add mm<sup>5</sup> volumes",
+                        "Add 5D Dimensions(画饼)"
+                    ]
+                },
+                {
                     version: "v1.0.7.1", title: "Project-sort",
                     changes: [
                         "项目文件整理"

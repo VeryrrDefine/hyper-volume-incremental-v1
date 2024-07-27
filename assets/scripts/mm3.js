@@ -159,7 +159,7 @@ function getMM3resetButton() {
 }
 
 function sacrif(id){
-    if (id==1 && player.volumes.gte(tmp.mm45.sacrifice_goal)){
+    if (id==1 && player.volumes.gte(tmp.mm45.sacrifice_goal) && player.mm3_volumes.sacrifice_times.lt(1000)){
         player.volumes=E("11")
         player.mm3_volumes.mm45_points = player.mm3_volumes.mm45_points.add(1)
         player.mm3_volumes.sacrifice_times = player.mm3_volumes.sacrifice_times.add(1)
@@ -167,14 +167,14 @@ function sacrif(id){
 }
 function mm45BuyCost(id){
     if (id===1){
-        return E(10).mul(player.mm3_volumes.mm45buyables[0]+1)
+        return E(0.5).mul(player.mm3_volumes.mm45buyables[0]+1).min(5)
     }
     if (id===2){
-        return E(1).mul(player.mm3_volumes.mm45buyables[1]+1)
+        return E(0.5).mul(player.mm3_volumes.mm45buyables[1]+1).min(5)
 
     }
     if (id===3){
-        return player.mm3_volumes.mm45buyables[2]
+        return E(player.mm3_volumes.mm45buyables[2]).min(5)
 
     }
 }
@@ -187,4 +187,11 @@ function mm45Buy(id){
 function mm45resetopt(){
     player.mm3_volumes.mm45buyables = [0,0,0]
     player.mm3_volumes.mm45_points=E(0)
+    player.mm3_volumes.sacrifice_times = E(0)
+}
+function mm45refund(){
+    player.mm3_volumes.mm45_points=player.mm3_volumes.sacrifice_times
+    player.mm3_volumes.mm45buyables = [0,0,0]
+
+
 }

@@ -74,6 +74,6 @@ const EE10 = E("ee10");
 const EE1000 = E("ee1000");
 const EEE8 = E("eee8");
 
-const ENDGAME= E("e8.3e4");
+const ENDGAME= E("e5e6");
 const LY = E("9454254955488000000");
 const UNI = LY.mul("9.3e10");
