@@ -39,9 +39,8 @@ function regularFormat(num, precision) {
 // Basically does the opposite of what standardize in ExpantaNum does
 // Set smallTop to true to force the top value in the result below 10
 function polarize(array, smallTop=false) {
-    if (FORMAT_DEBUG >= 1) console.log("Begin polarize: "+JSON.stringify(array)+", smallTop "+smallTop)
     if (array.length == 0) array = [[0,0]]
-
+    
     let bottom = array[0][0] == 0 ? array[0][1] : 10, top = 0, height = 0
     if (!Number.isFinite(bottom)) {}
     else if (array.length <= 1 && array[0][0] == 0) {
@@ -73,14 +72,13 @@ function polarize(array, smallTop=false) {
                     for (i=2;i<height;i++) bottom = Math.log10(bottom) + 1
                 }
                 else bottom = 1 // The increment result is indistinguishable from 1
-
+                
                 top += 1
-                if (FORMAT_DEBUG >= 1) console.log("Bottom mode: bottom "+bottom+", top "+top+", height "+height+", elem "+elem)
             }
             else { // Top mode: height is increased by one, or until the next nonzero value
                 // Prevent running top mode more times than necessary
                 if (elem == array.length-1 && array[elem][0] == height && !(smallTop && top >= 10)) break
-
+                
                 bottom = Math.log10(bottom) + top
                 height += 1
                 if (elem < array.length && height > array[elem][0]) elem += 1
@@ -98,12 +96,10 @@ function polarize(array, smallTop=false) {
                     else top = 1
                 }
                 else top = 1
-                if (FORMAT_DEBUG >= 1) console.log("Top mode: bottom "+bottom+", top "+top+", height "+height+", elem "+elem)
             }
         }
     }
-
-    if (FORMAT_DEBUG >= 1) console.log("Polarize result: bottom "+bottom+", top "+top+", height "+height)
+    
     return {bottom: bottom, top: top, height: height}
 }
 
@@ -136,14 +132,21 @@ function format(num, precision=2, small=false) {
     if (num.abs().lt(1e-308)) return (0).toFixed(precision)
     if (num.sign < 0) return "-" + format(num.neg(), precision)
     if (num.isInfinite()) return "Infinity"
-    if (num.lt("0.0001")) { return format(num.rec(), precision) + "⁻¹" }
-    else if (num.lt(1)) return regularFormat(num, precision + (small ? 2 : 0))
+    if (num.lt("0.001")) {
+      let exponent = num.log10().floor()
+      let mantissa = num.div(E(10).pow(exponent))
+      return mantissa.toFixed(precision2) + 'e' + exponent
+    }
+    else if (num.lt(1)) {
+      if (precision == 0) return '0'
+      return regularFormat(num, precision + 2)
+    }
     else if (num.lt(1000)) return regularFormat(num, precision)
-    else if (num.lt(1e12)) return commaFormat(num)
+    else if (num.lt(1e9)) return commaFormat(num)
     else if (num.lt("10^^5")) { // 1e9 ~ 1F5
         let bottom = arraySearch(array, 0)
         let rep = arraySearch(array, 1)-1
-        if (bottom >= 1e12) {
+        if (bottom >= 1e9) {
             bottom = Math.log10(bottom)
             rep += 1
         }
@@ -151,13 +154,11 @@ function format(num, precision=2, small=false) {
         let e = Math.floor(bottom)
         let p
         if (bottom<1000) {
-            p = precision2
+          p = precision2
         }else {
-            p = precision2-Math.log10(bottom)+3
+          p = precision2-Math.log10(bottom)+3
         }
-        if (p<0) {
-            p = 0
-        }
+        p = Math.max(Math.floor(p),0)
         return "e".repeat(rep) + regularFormat(m, p) + "e" + commaFormat(e)
     }
     else if (num.lt("10^^1000000")) { // 1F5 ~ F1,000,000
@@ -192,7 +193,7 @@ function format(num, precision=2, small=false) {
         let pol = polarize(array)
         return regularFormat(pol.bottom, precision3) + "H" + commaFormat(pol.top)
     }
-    else if (num.lt("10^^^^^5")) { // H1,000,000 ~ I5
+    else if (num.lt("10^^^^^5")) { // H1,000,000 ~ 5J4
         let rep = arraySearch(array, 4)
         if (rep >= 1) {
             setToZero(array, 4)
@@ -201,20 +202,6 @@ function format(num, precision=2, small=false) {
         let n = arraySearch(array, 3) + 1
         if (num.gte("10^^^^" + (n + 1))) n += 1
         return "H" + format(n, precision)
-    }
-    else if (num.lt("10^^^^^1000000")) { // 1I5 ~ I1,000,000
-        let pol = polarize(array)
-        return regularFormat(pol.bottom, precision3) + "I" + commaFormat(pol.top)
-    }
-    else if (num.lt("10^^^^^^5")) { // I1,000,000 ~ 5J5
-        let rep = arraySearch(array, 5)
-        if (rep >= 1) {
-            setToZero(array, 5)
-            return "I".repeat(rep) + format(array, precision)
-        }
-        let n = arraySearch(array, 4) + 1
-        if (num.gte("10^^^^^" + (n + 1))) n += 1
-        return "I" + format(n, precision)
     }
     else if (num.lt("J1000000")) { // 5J4 ~ J1,000,000
         let pol = polarize(array, true)
@@ -266,6 +253,6 @@ function formatWhole(num) {
     return format(num, 0)
 }
 
-function formatSmall(num, precision=2) {
-    return format(num, precision, true)
+function formatSmall(num, precision=2) { 
+    return format(num, precision, true)    
 }

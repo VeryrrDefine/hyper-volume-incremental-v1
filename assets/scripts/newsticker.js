@@ -1,7 +1,7 @@
 ﻿!function () {
     try {
         var t, e = [
-            {
+            {//1
                 text: 'Why is there no ninth dimension?',
             },
             {
@@ -28,7 +28,7 @@
             {
                 text: `The order of news broadcast is completely random, you may see two identical news at once.`
             },
-            {
+            {//10
                 text: `This news is produced by First News Dimension.`
             },
             {
@@ -42,15 +42,9 @@
             },
             {
                 text: "今天是3月9日，是arc周年庆，转发这条消息到十个群光光和对立会在早晨八点来你家门口敲门，我试过了，是假的，还会被人说是玩源神玩的，但今天真的是arc周年庆",
-                get unlocked(){
-                    let a = new Date();
-                    return a.getMonth()-2 === 0 && a.getDate() === 9
-                }
-            },
-            {
-                text: ``,
                 get unlocked() {
-                    return false;
+                    let a = new Date();
+                    return a.getMonth() - 2 === 0 && a.getDate() === 9
                 }
             },
             {
@@ -83,7 +77,7 @@
             {
                 text: 'Uncaught ReferenceError: Cheater is not defined'
             },
-            {
+            {//20
                 text: 'Update progress: (5-<sup>1</sup>/<sub>K9.000e15</sub>)/5 hours'
             },
             {
@@ -120,7 +114,7 @@
                     return `${a}+${b}=${c},this is obviously wrong.`
                 }
             },
-            {
+            {//30
                 text: "16-9, 6-9 is not enough, borrow one to get ten, 16-9......"
             },
             {
@@ -150,9 +144,10 @@
                 text: "I can't sleep because they're a lot of Ai-ai👿Dide-dide😈 in my brain"
             },
             {
-                text: "Who is Tendou Arisu? I don't know"
+                text: "DESTROYED BY WLGYIZHIXIAOMAO",
+                unlocked: false
             },
-            {
+            {//40
                 text: "different from news",
             },
             {
@@ -177,13 +172,7 @@
             },
             {
                 text: "i tsu mo na↑ n↓ do demo yumeo i ka kou"
-            },/*
-            {
-                text: "/es ke kə ʒə pø paʁle a/",
-                get unlocked() {
-                    return false
-                }
-            },*/
+            },
             {
                 text: "In 2222, Wind-spirit-creation has least 1000 achievements, 6308 dimensions，75 layers and updates per five hours."
             },
@@ -193,7 +182,7 @@
                     "导引扩散之力。你将扮演一位名为「砂糖」的神秘角色，在漫长的硬挂中邂逅条件各异、加成独特的升级们，和他们一起击败挑战，" +
                     "找回失散的朋友——同时，逐步发掘「生物炼金」的真相。"
             },
-            {
+            {//50
                 text: "Giving people fish is not as good as giving people the first fish dimension is not as good as giving people the second fish dimension……"
             },
             {
@@ -232,7 +221,7 @@
                 text: "Reach g<sub>φ(φ(5,φ(7,5)),φ(φ(7,5),φ(8,φ(5,2))))<sup>η<sub>ε<sub>ζ<sub>8</sub>+1</sub></sub></sup>" +
                     "</sub>(10) points to reset the next 114514 layers."
             },
-            {
+            {//60
                 text: "Coming s1.79e308n"
             },
             {
@@ -245,19 +234,13 @@
                 text: `Emergency ω<sub>1</sub><sup>CK</sup>level accident！ !%^#&&$!&$#$&#$&#@$&!&$#*#%*^&*#!*^%&*^*^%*#%$^&*@!^&#^`
             },
             {
-                text: "Translating English to Chinese: bluearchive -> 蓝韭菜 Translated 100% Although I don't know what's so fun about bluearchive and they're weird, I still respect you, hahahaha."
+                text: "DESTROYED BY WLGYIZHIXIAOMAO",
+                unlocked: false
             },
+           
             {
-                text: "New version 6 ban, 7 ban and 11 ban: Pass EC6, EC7 and EC11 first before speaking. Newcomer: truck, duck, pluck, ( )uck"
-            },/*
-            {
-                text: "Who is dygm?",
-                unlocked: false
-            }, 
-            {
-                text: "Who is Takanashi Hoshino?",
-                unlocked: false
-            },*/
+                text: "New version 6 ban, 7 ban and 11 ban: Pass EC6, EC7 and EC11 first before speaking. Newcomer: truck, duck, pluck, f(   )"
+            },
             {
                 text: "There are 9 prestige layers in Wind Spirit Creation:" +
                     "<span style='color:#ff0000'>swirl</span>,<span style='color:#ffff00'>txosm</span>" +
@@ -276,25 +259,11 @@
             },
             {
                 text: "D'autres temps attendent, j'ai besoin d'être éternel."
-            },/*
-            {
-                text: "/dot ʁ tɑ(n) atɑ(n)d  ʒe bə zwɛ(n) dɛt ʁe tɛʁ nɛl/ ",
-                get unlocked() {
-                    return false;
-                }
-            },*/
-            {
+            },
+            {//70
                 text: "Oh, I appear to have run out of <span style='animation: a-existence-glow 3s infinite; color: " +
                     "white; line-height: 0;'>Existence</span>."
-            },/*
-            {
-                text: "We will fly a-way, far a-way, huo xu hui pang huang, huo xu hui shou shang,fly a-way far " +
-                    "a-way-from-silence! Bie bei shi-jian yi wang sing a song, search for truth, xun hui na-guang-mao, " +
-                    "xun hui na-sheng-xiang.",
-                get unlocked() {
-                    return player.volumes.gte(E(10).expansion(150))
-                }
-            },*/
+            },
             {
                 text: "do t喝 dan a-dand <del>u</del>s<del>ually</del>e b额 zweee-en det 喝e te喝 ne了"
             },
@@ -307,9 +276,8 @@
                     "bridge across the canyon. The biggest dilemma you face is a bunch of timewalls."
             },
             {
-                get text() {
-                    return "I am a special news. .sʍəu lɐᴉɔəds ɐ ɯɐ I"
-                }
+                text: "I am a special news. .sʍəu lɐᴉɔəds ɐ ɯɐ I"
+
             },
             // āāúǐīáì èíāáììē
             {
@@ -330,7 +298,7 @@
             {
                 text: "Bonour Ce n'est pas une faute de frappe. L'inventeur du français a causé cette faute de frappe."
             },
-            {
+            {//80
                 text: `The two values \"9e15\" \"1.79e308\" that appear in the upper limit of some large numbers js are
  actually 2<sup>53</sup>-1 and 2<sup>1024</sup>-2<sup>971</sup>. This is because if it exceeds 2<sup>53</sup>, there
   will only be even numbers, so 2<sup>53</sup>+1=2<sup>53</sup> will appear, and 2<sup>53</sup>+1=2<sup>53</sup> is 
@@ -377,7 +345,7 @@
             {
                 text: "&lt;cllor=#f29e38ff&gt;HTML可以做出模拟宇宙，HTML是最好的语言！&lt;/oolor&gt;"
             },
-            {
+            {//90
                 text: "Reach e1e81 news of total news, your news will overflowoowʍəuwuowəuoəuəʍuoʍo"
             },
             {
@@ -409,29 +377,18 @@
             {
                 text: "深圳地铁 深圳地圳"
             },
-            {
+            {//100
                 text: "!曲扭重八将度速取获数点，后数点 JJ1.000J5 过超"
             },
             {
-                text: "You're gaining 114514 OoMs OoMs OoMs OoMs OoMs OoMs OoMs OoMs "+"OoMs ".repeat(50)+" mm<sup>114514</sup> per second"
+                text: "You're gaining 114514 OoMs OoMs OoMs OoMs OoMs OoMs OoMs OoMs " + "OoMs ".repeat(50) + " mm<sup>114514</sup> per second"
             },
             {
-                text: `给他一个Minecraft中的operator管理员权限，他可以开creative模式对着别人劈雷。
-                近期，有一个名叫<span class='redacted'>[REDACTED]</span><sup>1</sup>的人说，他在某个名叫
-                <span class='redacted'>[REDACTED]</span><sup>2</sup>的服务器中遭受到了管理员<span class=
-                'redacted'>[REDACTED]</span><sup>3</sup>的骚扰
-                随后<span class='redacted'>[REDACTED]</span><sup>1</sup>报告给了这个服务器的腐竹。
-                <span class='redacted'>[REDACTED]</span><sup>1</sup>在向我说明
-                此事件的时候遭到了<span class='redacted'>[REDACTED]</span><sup>3</sup>的威胁
-                在<span class='redacted'>[REDACTED]</span><sup>1</sup>被
-                <span class='redacted'>[REDACTED]</span><sup>3</sup>踢后，我
-                火速询问<span class='redacted'>[REDACTED]</span><sup>1</sup>为何被踢的原因。
-                随后<span class='redacted'>[REDACTED]</span><sup>1</sup>的回答是：“被神权”。
-                对此，五星上将MacArthur说： 有管理员的身份并不意味着高人一等，如果我当时有这个玩意，我早就统治世界了。
-                大型纪录片之《<span class='redacted'>[REDACTED]</span><sup>3</sup>》
-                正在持续为您播出...`
+                text: "DESTROYED BY WLGYIZHIXIAOMAO",
+                unlocked: false
             },
             
+
             {
                 text: "孩子们，这是真的, 我在制作客户端时留了后门, 玩游戏时只需按下alt+f4, 就可以到达Endgame, 快去试吧！"
             },
@@ -461,7 +418,8 @@
                 text: "(I) has been chaos by the chaos reset"
             },
             {
-                text: "<span class=\"redacted\">REDACTED</span><sup>2</sup> 在吗？ 你怎么退了？ 是有什么问题吗？ 有问题我会尽力为你解决的 <span class=\"redacted\">REDACTED</span><sup>1000001</sup>: <span class=\"redacted\">REDACTED</span><sup>1000002</sup>不让玩"
+                text: "DESTROYED BY WLGYIZHIXIAOMAO",
+                unlocked: false
             },
             {
                 text: "I can say a little French, just like this: Je suis chien, 啊呸呸呸"
@@ -469,17 +427,19 @@
             {
                 text: "Eliny put her feet in my mouth when she was sleeping, so I died because suffocate."
             },
-            {
+            {//110
                 text: "Eternal".repeat(10)
+            },{
+                text: "DESTROYED BY WLGYIZHIXIAOMAO",
+                unlocked: false
             },
-            {
-                text: "仪表信息： 网络应力 过载 (5.49376e100002%) 剩余应力量 (-5.49376e100000su / 0su)"
-            },
+            
             {
                 text: "Possible doesn't mean must, 0.000000000000000(There are 1.79e308 zero's)000001%"
             },
             {
-                text: "本来我焯！的东西就很有限"
+                text: "DESTROYED BY WLGYIZHIXIAOMAO",
+                unlocked: false
             },
             {
                 text: "dans le <sup>0i00000000a7</sup> a proximité"
@@ -497,55 +457,86 @@ Teresa的现实在公开开放后的1/1e300秒内立刻崩溃了。(Error: Serve
 试图继续往前时，Lai'tela禁用了所有试图继续向前的玩家所拥有的所有维度。
 “前方封路，请掉头。”然而，Lai'tela似乎忘了一件事。玩家们请来隔壁的Universal Paperclips制造者，超级AI，来生产通用回形针，获得了回形针维度。
 数值膨胀下，回形针硬生生冲开封锁，直逼Pelle。情急之下，Pelle动用了他全部的反物质，极速消灭了回形针。
-这产生了一场史无前例的爆炸。[REDACTED]`
+这产生了一场史无前例的爆炸。[REDACTED]`/*In a parallel antimatter universe, the antimatter will be collapse to the void or a eternal-glyph shard after producing 0.18308 seconds.
+100 eternal-glyph shards can become a eternal glyph. There are*/
             },
             {
                 text: "Go back to Mars"
-            },/*
-            {
-                text: "星野(Takanashi Hoshino)是什么，就是你一边玩去"
-            },*/
+            },
             {
                 text: "这个游戏的新闻对于我来说就是草文字聚集地"
             },
             {
                 text: "遇事不决，先ExpantaNum.js"
-            },/*
-            {
-                text: `【潜水】 dans le wlgyizhixiaomao a proximité 2024/7/25 星期四 23:53:12
-                星野是什么
-                
-                【老玩家】还是PVP大佬 2024/7/25 星期四 23:53:22
-                dans le wlgyizhixiaomao a proximité  
-                星野是什么
-                @dans le wlgyizhixiaomao a proximité 你一边玩去
-                什么星野，明明是Takanashi Hoshino   
-                `,
-                unlocked: false
-            },*/
-            {
-                text: "Put my heart to develop my game, don't think that 傻逼 dygm"
             },
             {
+                text: "Put my heart to develop my game, don't think that 傻逼 <span class='redacted'>REDACTED</span><sup>5</sup>"
+            },
+            {//120
                 text: "本游戏没有任何超级折算"
             },
             {
                 text: "efreygrt, the Celestial of 一楼喂百度"
             },
-            /*{
-                text: "VeryrrDefine, the Celestial of 4D volumes"
+            {
+                text: "本游戏有8个声望层: mm<sup>3</sup>, secutitation(mm<sup>5</sup>), exponenting(mm<sup>6</sup>), void(mm<sup>7</sup>), element(mm<sup>8</sup>), world (mm<sup>n</sup>), universe(mm^^2)"
             },
             {
-                text: "wlgyizhixiaomao, the Celestial of 3D volumes"
-            },*/
+                get text() {
+                    return "不" + "！".repeat(50)
+                }
+            },
             {
-                text: "本游戏有8个声望层: mm<sup>3</sup>, secutitation(mm<sup>5</sup>), multi(mm<sup>6</sup>), void(mm<sup>7</sup>), element(mm<sup>8</sup>), world (mm<sup>n</sup>), universe(mm^^2)"
+                text: "DESTROYED BY WLGYIZHIXIAOMAO",
+                unlocked: false
+            },
+            {
+                text: "DESTROYED BY WLGYIZHIXIAOMAO",
+                unlocked: false
+            },
+            {
+                text: "DESTROYED BY WLGYIZHIXIAOMAO",
+                unlocked: false
+            },
+            {
+                get text() {
+                    return "这个体积的数值也太离谱了，都" + player.volumes.formatA() +"了"
+                }
+            },
+            {
+                text: "next hour in 0.2 updates"
+            },
+            {
+                text: "指数平方增长的威力有多大？假设有一个函数f(x) = 10<sup>x<sup>2</sup></sup>, f(1)=10, f(2)=10000, f(3)=1e9, f(10)=1e100, 跨一步,f<sup>2</sup>(5) = ee25,"
+            },
+            {
+                text: "Why doesn't Points×Points equal Points<sup>2</sup>? Because Points×Points = PPooiinnttss, Points<sup>2</sup> = Pointss"
             },
             {
                 get text(){
-                    return "不" + "！".repeat(50)
+                    let temp = "";
+                    let arr = ["ω","ω2","ω<sup>2</sup>","ω<sup>ω</sup>","ε<sub>0</sub>", "φ(3,0)", "φ(1,0,0)", "φ(1,0,0,0)","SVO","LVO","BHO","BO"]/*ωεζηφΓψΩ*/
+                    for (let i =1;i<50;i++){
+                        temp = temp.concat("")
+                        temp = temp.concat(i.toString())
+                        temp = temp.concat("倍大扩散点")
+                        if (i!= 49){
+                            temp = temp.concat("，")
+                        }
+                    }
+                    temp = temp.concat("...")
+                    for (let i =0;i<arr.length;i++){
+                        temp = temp.concat("")
+                        temp = temp.concat(arr[i])
+                        temp = temp.concat("倍大扩散点")
+                        if (i!= arr.length-1){
+                            temp = temp.concat("...")
+                        }
+                    }
+                    return temp
                 }
             }
+
             // 2.11
 
 
@@ -571,6 +562,7 @@ Teresa的现实在公开开放后的1/1e300秒内立刻崩溃了。(Error: Serve
             a.style.transform = "translateX(" + (l + 10) + "px)";
             let o = (l + a.clientWidth) / 100;
             a.style.transition = "transform " + o + "s linear", a.style.transform = "translateX(-" + x + "px)", a.addEventListener("transitionend", n)
+            player.newsticker_time++
         });
         //
         var n = () => {

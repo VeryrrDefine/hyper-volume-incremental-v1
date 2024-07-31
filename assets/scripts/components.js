@@ -19,6 +19,7 @@ function loadVue() {
                 {id: 8, label: '8th Dimension'},
             ],
             save: "",
+            mm5_upg: chunkArrayIntoGroupsOfTen(mm5_upgrades),
             mm4_upg: chunkArrayIntoGroupsOfTen(mm4_upgrades),
             mm3_upg: chunkArrayIntoGroupsOfTen(mm3_opt.upgrades),
 
@@ -31,8 +32,17 @@ function loadVue() {
             pianyi1: 0,
             hover_upg: 0,
             hover_3upg: 0,
+            hover_5upg: 0,
             developer_code: "",
             changelogs: [
+                {
+                    version: "v1.1.1", title: "",
+                    changes: [
+                        "Add 5D Dimensions",
+                        "Add 5D galaxies",
+                        "Add 2 mm<sup>5</sup> Upgrades"
+                    ]
+                },
                 {
                     version: "v1.1", title: "mm<sup>5</sup>",
                     changes: [

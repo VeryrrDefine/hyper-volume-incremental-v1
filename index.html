@@ -26,6 +26,7 @@
 
     <script src="./assets/scripts/script.js" defer></script>
     <script src="./assets/scripts/format_time.js" defer></script>
+    <script src="./assets/scripts/format_databyte.js" defer></script>
     <script src="./assets/scripts/saves.js" defer></script>
     <script src="./assets/scripts/hotkey.js" defer></script>
     <script src="./assets/scripts/achievements.js" defer></script>
@@ -34,7 +35,10 @@
     <script src="./assets/scripts/components.js" defer></script>
 
     <script src="./assets/scripts/challenges/mm3_chal.js" defer></script>
+
     <script src="./assets/scripts/secutitation/mm5.js" defer></script>
+    <script src="./assets/scripts/secutitation/upgrades.js" defer></script>
+    <script src="./assets/scripts/secutitation/galaxy.js" defer></script>
 </head>
 
 <body>
@@ -48,7 +52,7 @@
                 <newsticker v-if="player.options.showNewsTicker"></newsticker>
                 <p class="center" style="font-size:30px; font-weight: 800">
                     You have
-                    <span v-html="display_volumes(player.volumes)"></span>
+                    <span v-html="display_volumes(player.volumes)">114,514 (arv^1,919,810)<sup>4</sup></span>
                     .
                 </p>
                 <p class="center">
@@ -58,6 +62,10 @@
                 <p class="center" v-if="player.mm3_volumes.unl">
                     <small>You have {{formatA(player.mm3_volumes.points)}}
                         mm<sup>3</sup>.</small>
+                </p>
+                <p class="center" v-if="player.secutitation.secutitation_reset_times.gte(1)">
+                    <small>You have {{formatA(player.secutitation.mm5_volumes.points)}}
+                        mm<sup>5</sup>.</small>
                 </p>
                 <p class="center">
                     <small v-html="getGameSpeedText()">Game speed is altered: 1 second -> 114514
@@ -135,7 +143,7 @@
                 <button class="btn" v-if="inTab(3)" @click="tabShow= '25'" :disabled="tabShow==='25'">
                     Offline Time
                 </button>
-                <button class="btn" v-if="false" @click="tabShow= '26'" :disabled="tabShow==='26'">
+                <button class="btn" v-if="inTab(3)" @click="tabShow= '26'" :disabled="tabShow==='26'">
                     Achievements
                 </button>
                 <button class="btn" v-if="inTab(6)" @click="tabShow= '51'" :disabled="tabShow==='51'">
@@ -144,6 +152,9 @@
                 <button class="btn" v-if="inTab(6)" @click="tabShow= '52'" :disabled="tabShow==='52'">
                     5D Dimensions
                 </button>
+                <button class="btn" v-if="inTab(6)" @click="tabShow= '53'" :disabled="tabShow=='53'">
+                    Upgrades
+                </button>
                 <!--            <button class="btn" @click="tabShow = '3'" :disabled="tabShow==='3'">3.5维</button>-->
             </div>
             <br />
@@ -151,20 +162,26 @@
                 <button @click="buyAll()" class="btn">Max all</button>
                 <div v-for="dim in dimensions" v-if="tmp.mm3.confirm<3" :key="dim.id">
                     <div>
-                        <span v-if="player.dimensions[DIMENSIONS_MULTI][dim.id-1].gte(tmp.dimension.softcap)"
-                            style="color: red">
-                            1<sup>st</sup> softcap
+                        <span v-html="getSoftcapType(dim.id)">
+
                         </span>
                         {{ dim.label }}
-                        <span>{{
+                        +<span>{{
                             formatA(player.dimensions[DIMENSIONS_POINTS][dim.id
-                            - 1]) }}</span>
+                            - 1]) }}
+                        </span>
                         x<span>{{
                             formatA(player.dimensions[DIMENSIONS_MULTI][dim.id
-                            - 1]) }}</span>
+                            - 1]) }}
+                        </span>
+                        ^<span>{{
+                            formatA(player.dimensions[DIMENSIONS_EXPONENT][dim.id
+                            - 1]) }}
+                        </span>
                         <span>{{
                             formatA(player.dimensions[DIMENSIONS_BOUGHT][dim.id
-                            - 1]) }}</span>
+                            - 1]) }}
+                        </span>
 
                         <button class="btn" :disabled="!buyable(dim.id)" @click="buydim(dim.id)">
                             Cost: <span v-html="display_volumes(player.dimensions[DIMENSIONS_COST][dim.id
@@ -303,7 +320,8 @@
                 </p>
                 <table style="margin: auto">
                     <tr v-for="row in mm3_chal" ley="row.id">
-                        <td v-for="chal in mm3_chal[row.id]" key="chal.id" v-if="chal.unlocked">
+                        <td v-for="chal in mm3_chal[row.id]" key="chal.id"
+                            v-if="player.secutitation.secutitation_reset_times.gte(7) || chal.unlocked">
                             <button :class="getMM3ChalClass(chal.id)" @click="mm3ShowChallenge(chal.id)">
                                 C{{chal.id}}
                             </button>
@@ -355,7 +373,7 @@
                         →
                         ×{{E("e600").pow(player.mm3_volumes.mm45buyables[2]+1).formatA()}}<br />
                         Cost: {{mm45BuyCost(3)}} mm<sup>4.5</sup>
-                    </button>
+                    </button><br>
                 </div>
             </div>
             <div v-if="tabShow=='21'" class="center">
@@ -413,10 +431,13 @@
                     Support All 序数增量吧 bar-friends, you can click these
                     link to play increment-games by bar-friends
                 </p>
-                <a href="https://seanxlx2011.github.io/" target="_blank" class="game-link">Incremental Data
+                <a href="https://seanxlx2011.github.io/" target="_blank" class="game-link">
+                    Incremental Data
                     Rewritten</a>,<br />
                 <a href="https://0i00000000a7.github.io/points-incremental-rewritten/" target="_blank"
-                    class="game-link">Points Incremental Rewritten</a>,<br />
+                    class="game-link">
+                    Points Incremental Rewritten
+                </a>,<br />
                 <a href="https://aster131072.github.io/incremental_evolution/" target="_blank"
                     class="game-link">Incremental Evolution</a>,<br />
                 <a href="https://dlsdl.github.io/wind_spirit_creation/" target="_blank" class="game-link">Wind spirit
@@ -427,12 +448,14 @@
                         I was played Ar<span></span>caea for sometime
                         before.<br />
                         <del>PPT</del>PTT is measure of the player's
-                        strength，My PTT is 10.0±0.05。<del>Can you reach me?</del></span></a><br />
+                        strength，My PTT is 10.0±0.05。<del>Can you reach me?</del></span></a>,<br />
                 <a href="https://a262537412640768744.github.io/homework-incremental/main.html" target="_blank"
                     class="game-link">
-                    Homework Incremental </a><br />
-                <a href="https://goldenapple125.github.io/RBN/" target="_blank" class="game-link tooltipBox">The Road of
-                    Big Number </a><br />
+                    Homework Incremental </a>,<br />
+                <a href="https://goldenapple125.github.io/RBN/" target="_blank" class="game-link">The Road of
+                    Big Number </a>,<br />
+<a href="https://qqqe308.github.io/Anti-Anti-Softcap-Tree/111/" target="_blank" class="game-link">
+                    Anti anti softcap tree </a><br />
 
                 <br />
                 <p>You can play other increment-games!</p>
@@ -442,7 +465,8 @@
                     </span></a>,<br />
                 <a href="https://seanxlx2011.github.io/" target="_blank" class="game-link">
                     <del>Infinity Dimension Rewritten</del> </a>,<br />
-
+                <a href="https://patcailmemer.github.io/Ordinal-Markup" target="_blank" class="game-link tooltipBox">
+                    Ordinal Markup<span class="tooltip">Stop updated on Mar 23, 2021</span> </a>,<br />
                 <p>
                     Nobody knows I broke
                     <span class="existence">Void</span> in
@@ -466,9 +490,8 @@
                     你总共制造了{{format(player.volume_generated.mm4)}}
                     mm<sup>4</sup> 4维体积;
                 </p>
-                <p>
-                    如果对体积进行单位换算，You can get
-                    <span v-html="display_volumes(player.volume_generated.mm4)"></span>
+                <p v-html="displayStat()">
+
                 </p>
                 <p>
                     You spent {{formatTime.fromSeconds(player.time.eter)}}
@@ -478,6 +501,9 @@
                     You spent
                     {{formatTime.fromSeconds(player.time.real_eter)}} (real
                     time) in this Eternity
+                </p>
+                <p>
+                    You saw {{player.newsticker_time}} news.
                 </p>
             </div>
             <div v-if="tabShow=='24'" class="center">
@@ -506,10 +532,14 @@
             </div>
             <div v-if="tabShow=='41'" class="center">
                 <button class="btn" @click="doMM3resetManmade()" :disabled="!tmp.mm3.resetable"
-                    v-html="getMM3resetButton()"></button>
-                <button class="btn" @click="doMM5resetManmade()" :disabled="!tmp.mm5.resetable">
+                    v-html="getMM3resetButton()"></button><br>
+                <button :class="{btn: true, anormaly: !hasMM4Upg(17) && player.secutitation.secutitation_reset_times.eq(0)}" @click="doMM5resetManmade()" :disabled="!tmp.mm5.resetable">
                     Reach e5e6 mm<sup>4</sup> and e2e4 mm<sup>3</sup> to do a SECUTITATION
                     reset, get {{tmp.mm5.gain}} mm<sup>5</sup> and {{tmp.mm5.secu_gain}} secutitaion points.
+                </button><br>
+
+                <button class="btn anormaly" @click="" :disabled="true">
+                    Reach 9007199254740991 K galaxies to Eternity and beat the game.
                 </button>
             </div>
             <div v-if="tabShow=='25'" class="center">
@@ -551,7 +581,7 @@
                 当时间超频激活时，游戏速度将被加快至原来的{{ format(2**player.offlinePower) }}倍，但代价是离线时间每秒减少{{ format(2**player.offlinePower-1) }}秒<br>
                 <button class="btn" @click="switchTimeOverpower">{{ player.timeOverpower? "关闭" : "激活" }}时间超频</button> -->
             </div>
-            <div v-if="tabShow=='51'">
+            <div v-if="tabShow=='51'" mm5>
                 <p class="center" v-if="developer_mode">
                     Nobody knows I broke myself in myself, broke
                     <span class="charged_text">dygm</span> in
@@ -563,20 +593,42 @@
                     The SECUTITATION layer doesn't done.
                 </p>
                 <hr />
+                <p class="center">You do secutitation {{player.secutitation.secutitation_reset_times.format()}} times.
+                </p>
+                <hr />
+                <div class="center">
+                    <h1>Milestones</h1>
+                    <p>Secutitation one times: You start with sacrificed 1000 times in mm<sup>4.5</sup></p>
+                    <p>Secutitation two times: You start with 1-6<sup>th</sup> mm<sup>4</sup> upgrades.</p>
+                    <p>Secutitation four times: Your mm<sup>3</sup> volumes is always bigger than 1e10 mm<sup>3</sup>.
+                    </p>
+                    <p>Secutitation five times: Your mm<sup>4</sup> volumes is always bigger than 1e100 mm<sup>4</sup>.
+                    </p>
+                    <p>Secutitation 6 times: You can auto buy mm<sup>4</sup>, mm<sup>3</sup> upgrades.</p>
+                    <p>Secutitation 7 times: You start with all mm<sup>3</sup> challenges and mm<sup>4.5</sup> buyables.
+                    </p>
+                    <p>Secutitation 10 times: You gain 100% of mm<sup>3</sup> volumes when you can reset.</p>
+                </div>
+
             </div>
-            <div v-if="tabShow=='52'" class="center">
-                <p>You have <span style="color:#00ffff; font-size: 50px;">0.00</span> mm<sup>5</sup> energy</p>
-                <p>1.125 power to this give <span style="color:#00ffff; font-size: 50px;">×1.00</span> multiplier to All 4D Dimensions</p>
+            <div v-if="tabShow=='52'" class="center" mm5>
+                <p>You have <span
+                        style="color:#00ffff; font-size: 50px;">{{player.secutitation.mm5_volumes.energy.format()}}</span>
+                    mm<sup>5</sup> energy</p>
+                <p>^5 give <span style="color:#00ffff; font-size: 50px;">×{{tmp.mm5.energyeffect.format()}}</span>
+                    multiplier (ignore softcap) to All 4D Dimensions</p>
                 <div v-for="dim in dimensions" :key="dim.id">
                     <div>
                         <span v-html="EnglishOrdinals[dim.id-1]"></span> 5D Dimension
-                        <span>0.00</span>
-                        x<span>
-                            1.00</span>
-                        <span>0.00</span>
+                        <span>{{player.mm5_volume_dimensions[DIMENSIONS_POINTS][dim.id-1].format()}}</span>
+                        x<span>{{player.mm5_volume_dimensions[DIMENSIONS_MULTI][dim.id-1].format()}}</span>
+                        <span>{{player.mm5_volume_dimensions[DIMENSIONS_BOUGHT][dim.id-1].format()}}</span>
 
-                        <button class="btn" :disabled="true" @click="">
-                            Cost: <span>K9.000e15 mm<sup>5</sup></span>
+                        <button class="btn"
+                            :disabled="player.secutitation.mm5_volumes.points.lt(player.mm5_volume_dimensions[DIMENSIONS_COST][dim.id-1])"
+                            @click="buymm5dim(dim.id)">
+                            Cost: <span>{{player.mm5_volume_dimensions[DIMENSIONS_COST][dim.id-1].format()}}
+                                mm<sup>5</sup></span>
                         </button>
                         <button class="btn" v-if="false" @click="">
                             Auto: {{player.auto.includes(dim.id) ? "ON" :
@@ -585,8 +637,35 @@
                     </div>
                     <br />
                 </div>
+                <p>mm<sup>5</sup> galaxy({{player.secutitation.mm5_volumes.galaxies.formatA()}})</p>
+                <button class="galaxy" v-html="getMM5galaxyText()" @click="mm5_gal_reset_manmade()">
+                </button>
+
             </div>
-            <div v-if="tabShow=='114511'" class="center">
+            <div v-if="tabShow=='53'" mm5>
+                <div class="upg_text_box center">
+                    <span v-html="getMM5UpgText()"></span>
+                </div>
+                <div>
+                    <table class="center" style="margin: auto">
+                        <tr v-for="row in mm5_upg" key="row.id">
+                            <td v-for="upg in mm5_upg[row.id]" key="upg.id" v-if="mm5_upgrades[upg.id-1].unlocked">
+                                <!--                            {{row.id}} {{upg.id}}-->
+                                <div :class="getMM5UpgClassName(upg.id)" @touchstart="hover_5upg= upg.id"
+                                    @touchend="hover_5upg= 0" @mouseover="hover_5upg= upg.id"
+                                    @mouseleave="hover_5upg= 0" @click="buyMM5Upg(upg.id)">
+                                    <span>{{ upg.id }}</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div v-if="tabShow=='26'" class="center">
+                <p>You have done {{player.achievements.length}} achievements.</p>
+                <achievements></achievements>
+            </div>
+            <div v-if="tabShow=='114511'" class="center" efreygrt>
                 <button class="btn" @click="speedrun(1)">
                     游戏速度 1x
                 </button>

@@ -1,0 +1,49 @@
+
+.mm5_upg_buyable {
+    background: #aaa;
+}
+
+.mm5_upg_bought {
+    background: #0aa;
+}
+.mm5_upg,
+.mm5_upg_bought,
+.mm5_upg_buyable {
+    width: 40px;
+    height: 40px;
+    border: solid 2px #0aa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-size: 100% 100%;
+}
+
+[mm5] > .btn{
+    
+    border: 1px solid #077;
+    background: #033;
+}
+[mm5] > .btn[disabled]{
+    
+    border: 1px solid #077;
+    background: #011;
+}
+.galaxy{
+    
+  border-radius: 20px;
+  display: block;
+  width: 300px;
+  margin: auto;
+  margin-top: 30px;
+  height: 300px;
+  text-align: center;
+  font-size: 16px;
+  background-size: cover;
+  background: #011;
+  cursor: pointer;
+  transition-duration: 0.2s;
+  border: solid #007f7f 2px;
+  text-shadow: 6px 6px 6px #007f7F;
+  color: white;
+}

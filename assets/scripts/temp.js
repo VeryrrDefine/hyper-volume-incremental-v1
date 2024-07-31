@@ -51,7 +51,26 @@ var tmp = {
                 result = result.mul(E("e600").pow(player.mm3_volumes.mm45buyables[2]));
             }
             result = softcap(result,tmp.dimension.softcap,hasMM3Upg(6)? 0.95 : 0.9,"pow",dis=!softcapped) 
+            result = softcap(result,tmp.dimension.softcap2,0.7,"pow",dis=!softcapped) 
+
+            result = result.mul(tmp.mm5.energyeffect);
+            if (player.secutitation.mm5_volumes.galaxies.gte("2")){
+                result = result.mul("e1e6")
+            }
             return result;
+        },
+        getDimExponentplier(dimid){
+            let result = E(1)
+            if (dimid === 8 && hasMM5Upg(1)){
+                result = result.add(0.05)
+            }
+            if (player.secutitation.mm5_volumes.galaxies.gte("1")){
+                result = result.add(0.05)
+            }
+            if (dimid === 1 && hasMM5Upg(2)){
+                result = result.add(0.15)
+            }
+            return result
         },
         get softcap(){
             let a = E("e308")
@@ -75,6 +94,10 @@ var tmp = {
             }
             a = a.mul(E("ee4").pow(player.mm3_volumes.mm45buyables[0]))
             return a
+        },
+        get softcap2(){
+            let a = E("e1e7")
+            return a;
         }
     },
     mm45: {
@@ -169,15 +192,43 @@ var tmp = {
     mm5: {
         get gain(){
             let temp1 = player.volumes.clone();
-            return temp1.logarithm(10).sub(4900000).div(100000).floor().max(0)
+            return temp1.logarithm(10).sub(4500000).div(500000).floor().max(0)
         },
         get secu_gain(){
             let temp1 = player.mm3_volumes.points.clone();
-            return temp1.logarithm(10).sub(19000).div(1000).floor().max(0)
+            return temp1.logarithm(10).sub(15000).div(5000).floor().max(0)
 
         },
         get resetable(){
             return player.volumes.gte("e5e6") && player.mm3_volumes.points.gte("e2e4")
+        },
+        get galaxycost(){
+            return mm5Galaxycost()
+        },
+        getDimMultiplier(dimid){
+            i = dimid - 1;
+            let result = E('1.5')
+
+                //.add(player.mm3o5_volumes.points.logarithm("100").div(10).minimum("1.5")))
+            result = result.pow(player.mm5_volume_dimensions[DIMENSIONS_BOUGHT][i].floor())
+            return result;
+        },
+        /*
+        1st dim x3
+        2st dim x5
+        3st dim x10
+        4st dim x20
+        5st dim x35
+        6st dim x90
+        7st dim x270
+        8st dim x1729
+        */
+        dimcost(dimid){ // 1-8
+            return E.pow(mm5_scale[dimid-1],player.mm5_volume_dimensions[DIMENSIONS_BOUGHT][dimid-1].add(1))
+        },
+        get energyeffect(){
+            return player.secutitation.mm5_volumes.energy.pow(5)
         }
+        
     }
 }

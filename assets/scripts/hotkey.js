@@ -8,6 +8,7 @@ hotkeys("*",function (event,handler){
 hotkeys("m",function (event,handler){
     event.preventDefault();
     buyAll();
+    getAch(24);
 })
 
 hotkeys("n",function (event,handler){
@@ -16,7 +17,15 @@ hotkeys("n",function (event,handler){
         doMM3resetManmade();
     }
 })
-
+hotkeys("1",function(event,handler){event.preventDefault();buydim(1)})
+hotkeys("2",function(event,handler){event.preventDefault();buydim(2)})
+hotkeys("3",function(event,handler){event.preventDefault();buydim(3)})
+hotkeys("4",function(event,handler){event.preventDefault();buydim(4)})
+hotkeys("5",function(event,handler){event.preventDefault();buydim(5)})
+hotkeys("6",function(event,handler){event.preventDefault();buydim(6)})
+hotkeys("7",function(event,handler){event.preventDefault();buydim(7)})
+hotkeys("8",function(event,handler){event.preventDefault();buydim(8)})
+hotkeys("9",function(event,handler){event.preventDefault();getAch(25)})
 hotkeys("ctrl+shift+c",function (event,handler){
     event.preventDefault();
     addNotify("No opening console.")

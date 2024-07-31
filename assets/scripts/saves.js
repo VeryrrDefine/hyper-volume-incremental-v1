@@ -107,8 +107,10 @@ function handle_import(save2) {
         let fakeplayer = JSON.parse(atob(save2))
         if (fakeplayer['ord'] !== void 0 && fakeplayer['OP'] !== void 0)
             addNotify("wait a second, Are you importing a save of Ordinal Markup?")
-        else if (fakeplayer['energy'] !== void 0 && fakeplayer['wsca06'] !== void 0)
-            addNotify("wait a second, Are you importing a save of Wind Spirit Creation?")
+        else if (fakeplayer['energy'] !== void 0 && fakeplayer['wsca06'] !== void 0){
+            getAch(51)
+            addNotify("wait a second, Are you importing a save from Wind Spirit Creation?")
+        }
         else
             addNotify("wait a second, What are you importing?")
         return;

@@ -258,3 +258,20 @@ const EnglishOrdinals =[
     "8<sup>th</sup>",
     "9<sup>th</sup>",
 ]
+
+function displayStat(){
+    if (player.volumes.lt("ee5")){
+        return `如果对4维体积进行单位换算，You can get ${display_volumes(player.volumes)}`
+    }else if (player.volumes.lt("e1e19")){
+        return `如果将4维体积以十进制的形式存储，那么你需要一个${formatDatabyte.fromBytes(player.volumes.logarithm(10).add(1))}大的存储设备才能将他存下。`
+    }
+}
+
+function getSoftcapType(a){
+    if (player.dimensions[DIMENSIONS_MULTI][a-1].gte(tmp.dimension.softcap2)){
+        return "<span style='color:rgb(121,0,0)'>2<sup>nd</sup> softcap</span>"
+    }
+    if (player.dimensions[DIMENSIONS_MULTI][a-1].gte(tmp.dimension.softcap)){
+        return "<span style='color:red'>1<sup>st</sup> softcap</span>"
+    }
+}
