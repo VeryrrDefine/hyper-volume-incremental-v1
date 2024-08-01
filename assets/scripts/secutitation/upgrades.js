@@ -16,7 +16,7 @@ const mm5_upgrades = [
         }
     },
     {//2
-        desc: "1<sup>st</sup> 4D Dimension exponentplier +0.15",
+        desc: "2<sup>nd</sup> 4D Dimension exponentplier +0.15",
         get require(){
             return player.secutitation.points.gte(1024) && player.dimensions[DIMENSIONS_POINTS][7].gte(10000000)
         },
@@ -29,6 +29,21 @@ const mm5_upgrades = [
         bought_do(){
             player.secutitation.points = player.secutitation.points.sub(1024)
             player.dimensions[DIMENSIONS_POINTS][7] = player.dimensions[DIMENSIONS_POINTS][7].sub(125000000)
+        }
+    },
+    {//3
+        desc: "1<sup>st</sup> 4D Dimension exponentplier +0.05",
+        get require(){
+            return player.secutitation.points.gte(10000)
+        },
+        get require_desc(){
+            return "10000 secutitation points"
+        },
+        get unlocked() {
+            return hasMM5Upg(2);
+        },
+        bought_do(){
+            player.secutitation.points = player.secutitation.points.sub(10000)
         }
     },
 ]

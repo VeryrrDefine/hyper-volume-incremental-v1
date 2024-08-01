@@ -54,8 +54,11 @@ var tmp = {
             result = softcap(result,tmp.dimension.softcap2,0.7,"pow",dis=!softcapped) 
 
             result = result.mul(tmp.mm5.energyeffect);
-            if (player.secutitation.mm5_volumes.galaxies.gte("2")){
+            if (player.secutitation.mm5_volumes.galaxies.gte("2") && dimid != 1){
                 result = result.mul("e1e6")
+            }
+            if (player.secutitation.mm5_volumes.galaxies.gte("4") && dimid != 1){
+                result = result.mul("e1e4")
             }
             return result;
         },
@@ -64,11 +67,18 @@ var tmp = {
             if (dimid === 8 && hasMM5Upg(1)){
                 result = result.add(0.05)
             }
-            if (player.secutitation.mm5_volumes.galaxies.gte("1")){
+            if (dimid !== 1 && player.secutitation.mm5_volumes.galaxies.gte("1")){
                 result = result.add(0.05)
             }
-            if (dimid === 1 && hasMM5Upg(2)){
+            if (dimid === 2 && hasMM5Upg(2)){
                 result = result.add(0.15)
+            }
+            if (dimid === 1 && player.secutitation.mm5_volumes.galaxies.gte("7")){
+                result = result.add(0.2)
+            }
+            if (dimid === 1 && hasMM5Upg(3)){
+                result = result.add(0.05)
+
             }
             return result
         },
@@ -132,17 +142,18 @@ var tmp = {
             return player.dimensions[DIMENSIONS_POINTS][0]
                 .mul(player.dimensions[DIMENSIONS_MULTI][0])
                 .mul(hasMM3Upg(1) ? 1e5 : 1)
-                .softcap(tmp.mm4.softcap1_start, tmp.mm4.softcap1_power, 'pow')
-                .mul(hasMM3Chal(7) ? "1e500" : 1);
+                .mul(hasMM3Chal(7) ? "1e500" : 1)
+                .pow(player.dimensions[DIMENSIONS_EXPONENT][0])
+                .softcap(tmp.mm4.softcap1_start, tmp.mm4.softcap1_power, 'log')
         },
         get softcapped1() {
             return tmp.mm4.gain.gte(tmp.mm4.softcap1_start)
         },
         get softcap1_power() {
-            return 0.9
+            return 3
         },
         get softcap1_start() {
-            return E("eee114514")
+            return E("ee10")
         }
     },
     mm35: {
@@ -227,6 +238,9 @@ var tmp = {
             return E.pow(mm5_scale[dimid-1],player.mm5_volume_dimensions[DIMENSIONS_BOUGHT][dimid-1].add(1))
         },
         get energyeffect(){
+            if (player.secutitation.mm5_volumes.galaxies.gte(10)){
+                return player.secutitation.mm5_volumes.energy.pow("1e5")
+            }
             return player.secutitation.mm5_volumes.energy.pow(5)
         }
         

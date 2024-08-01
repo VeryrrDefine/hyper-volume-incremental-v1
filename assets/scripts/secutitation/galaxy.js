@@ -17,15 +17,23 @@ function mm5Galaxycost(){
 const galaxy_rewards = [
     {
         req: E("1"),
-        desc: "All 4D Dimensions exponentplier +0.05"
+        desc: "2~7<sup>th</sup> 4D Dimensions exponentplier +0.05"
     },
     {
         req: E("2"),
-        desc: "All 4D Dimensions multiplier ×1e1,000,000"
+        desc: "2~7<sup>th</sup> 4D Dimensions multiplier ×1e1,000,000"
     },
     {
         req: E("4"),
-        desc: "All 4D Dimensions multiplier ×1e10,000"
+        desc: "2~7<sup>th</sup> 4D Dimensions multiplier ×1e10,000"
+    },
+    {
+        req: E("7"),
+        desc: "1<sup>st</sup> 4D Dimensions exponentplier +0.20"
+    },
+    {
+        req: E("10"),
+        desc: "Improve 5D Dimensions to 4D Dimensions' multiplier formula (x^5 → x^1e5)"
     }
 ]
 function mm5_gal_reset(){

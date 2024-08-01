@@ -242,13 +242,22 @@
                 text: "New version 6 ban, 7 ban and 11 ban: Pass EC6, EC7 and EC11 first before speaking. Newcomer: truck, duck, pluck, f(   )"
             },
             {
+                text: `
+There are ω2 prestige layers in Wind spirit Creation:
+<span style='color:#ff0000'>swirl</span>, <span style='color:#ffff00'>txosm</span>,
+<span style='color:#00ff00'>vyutn</span>, <span style='color:#00ffff'>wzavp</span>,
+<span style='color:#0000ff'>xbewq</span>, <span style='color:#ff00ff'>ycixr</span>,
+zdoys, anemoity, meta-anemoity
+`
+            },
+            /*{
                 text: "There are 9 prestige layers in Wind Spirit Creation:" +
                     "<span style='color:#ff0000'>swirl</span>,<span style='color:#ffff00'>txosm</span>" +
                     ",<span style='color:#00ff00'>vyutn</span>,<span style='color:#00ffff'>wzavp</span>," +
                     "<span style='color:#0000ff'>xbewq</span>,<span style='color:#ff00ff'>ycixr</span>,zdoys, anemoity, " +
-                    "Zheqiao."
+                    "meta-anemoity."
 
-            },
+            },*/
             {
                 text: "<span  style='color:rgb(154,119,169)'>怀旧空吟闻笛赋</span>，到乡翻似烂柯人，other times <span style='color: rgb(208 ,121 ,49)'>await,</span> " +
                     "<span style='color:rgb(154,119,169)'>I</span> need <span style='color:rgb(154,119,169)'>to</span> become eternal"
@@ -509,7 +518,7 @@ Teresa的现实在公开开放后的1/1e300秒内立刻崩溃了。(Error: Serve
             {
                 text: "指数平方增长的威力有多大？假设有一个函数f(x) = 10<sup>x<sup>2</sup></sup>, f(1)=10, f(2)=10000, f(3)=1e9, f(10)=1e100, 跨一步,f<sup>2</sup>(5) = ee25,"
             },
-            {
+            {//130
                 text: "Why doesn't Points×Points equal Points<sup>2</sup>? Because Points×Points = PPooiinnttss, Points<sup>2</sup> = Pointss"
             },
             {

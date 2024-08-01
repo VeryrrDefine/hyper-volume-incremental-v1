@@ -131,7 +131,7 @@ function format(num, precision=2, small=false) {
     let array = num.array
     if (num.abs().lt(1e-308)) return (0).toFixed(precision)
     if (num.sign < 0) return "-" + format(num.neg(), precision)
-    if (num.isInfinite()) return "Infinity"
+    if (num.isInfinite()) return "Infinite"
     if (num.lt("0.001")) {
       let exponent = num.log10().floor()
       let mantissa = num.div(E(10).pow(exponent))
@@ -246,7 +246,11 @@ function format(num, precision=2, small=false) {
     // K1,000,000 and beyond
     let n = num.layer + 1
     if (num.gte("J^" + n + " 10")) n += 1
-    return "K" + format(n, precision)
+    if (n < 2**53){
+        return "K" + commaFormat(E(n));
+    }else{
+        return "Infinite"
+    }
 }
 
 function formatWhole(num) {

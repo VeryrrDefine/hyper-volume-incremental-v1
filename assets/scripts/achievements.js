@@ -46,7 +46,10 @@ const achievements = [
         { title: "这mm<sup>4.5</sup>也太离谱了", goal: "Sacrifice 1000 times"}
     ],
     [
-        { title: "Medusa", goal: "See the achievements page 5 minutes.", secret: true}
+        { title: "Medusa", goal: "See the achievements page 5 minutes.", secret: true},
+        { title: "Energy generator", goal: "Produce mm<sup>5</sup> energies."},
+        { title: "This is not a Point<sup>0.5</sup> galaxy", goal: "Buy a mm<sup>5</sup> galaxy."},
+        { title: "2<sup>2<sup>31.62</sup></sup>", goal: "Reach "+display_volumes(E("ee9"))}
     ],
     [
         { title: "无尽能源", goal: "Reach e9.007e15 mm<sup>5</sup> energies"}
@@ -57,6 +60,15 @@ const achievements = [
 
 ]
 function updateAch(){
+    if (player.volumes.gte("ee9")){
+        getAch(34)
+    }
+    if (player.secutitation.mm5_volumes.galaxies.gt(0)){
+        getAch(33)
+    }
+    if (tmp.mm5.gain.gt(0)){
+        getAch(32)
+    }
     if (player.dimensions[DIMENSIONS_BOUGHT][0].gte(1)){
         getAch(11)
     }
@@ -98,7 +110,7 @@ function updateAch(){
     if (hasMM4Upg(8)){
         getAch(23)
     }
-    if (player.volumes.gte("e30388636569473")){
+    if (player.volumes.gte("ee2085")){
         getAch(26)
     }
     if (mm3_challenges[5].unlocked){
