@@ -47,9 +47,9 @@ const achievements = [
     ],
     [
         { title: "Medusa", goal: "See the achievements page 5 minutes.", secret: true},
-        { title: "Energy generator", goal: "Produce mm<sup>5</sup> energies."},
+        { title: "5D volume generator", goal: "Can you produce 1 mm<sup>5</sup> volumes?"},
         { title: "This is not a Point<sup>0.5</sup> galaxy", goal: "Buy a mm<sup>5</sup> galaxy."},
-        { title: "2<sup>2<sup>31.62</sup></sup>", goal: "Reach "+display_volumes(E("ee9"))}
+        { title: "<sup>5</sup>2", goal: "Reach "+display_volumes(E(2).tetr(5))}
     ],
     [
         { title: "无尽能源", goal: "Reach e9.007e15 mm<sup>5</sup> energies"}
@@ -60,7 +60,7 @@ const achievements = [
 
 ]
 function updateAch(){
-    if (player.volumes.gte("ee9")){
+    if (player.volumes.gte(E(2).tetr(5))){
         getAch(34)
     }
     if (player.secutitation.mm5_volumes.galaxies.gt(0)){
@@ -97,9 +97,6 @@ function updateAch(){
         !player.mm3_volumes.unl && player.mm35_volumes.points.gte("1e100")
     )){
         getAch(17)
-    }
-    if (player.volumes.gte("e9e15")){
-        getAch(18)
     }
     if (player.volumes.gte("10^^9.007199254740992e15")){
         getAch(21)

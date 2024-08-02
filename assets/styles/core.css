@@ -3,6 +3,7 @@
 @import "./mm3.css";
 @import "./mm5.css";
 @import "./achi.css";
+@import "./animations.css";
 [efreygrt]{
     background-image: url("/efreygrt.jpg");
 }
@@ -11,14 +12,14 @@
     animation: anormaly 5s infinite;
     
 }
-@keyframes anormaly{
-    0%{
-        opacity: 0;
-    }
-    50%{
-        opacity: 0.02;
-    }
-    100%{
-        opacity: 0.00;
-    }
+.usesticky {
+    position: sticky;
+    top: 0px;
+    z-index: 5;
+    background-color: rgba(14, 14, 14, 75%);
+    padding-top: 8px;
+}
+.usesticky_false{
+    padding-top: 8px;
+
 }

@@ -1,8 +1,10 @@
 function no_reward_mm5_reset(){
     no_reward_mm3_reset()
+    if (player.secutitation.secutitation_reset_times.lt(4-1)){
+        player.mm3_volumes.mm45buyables = [0,0,0]
+    }
     if (player.secutitation.secutitation_reset_times.lt(6)){
         player.mm3_volumes.challenges = []
-        player.mm3_volumes.mm45buyables = [0,0,0]
     }else{
         player.mm3_volumes.challenges = [1,2,3,4,5,6,7,8]
     }
@@ -116,7 +118,7 @@ function calculate_mm5dim() {
             }
         }
     }
-    if (player.secutitation.secutitation_reset_times.gte(10)){
+    if (player.secutitation.secutitation_reset_times.gte(10) || secret_achievement_data.dev_passive_generate){
         player.mm3_volumes.points = player.mm3_volumes.points.add(tmp.mm3.gain.mul(diff))
     }
 }

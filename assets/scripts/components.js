@@ -34,7 +34,14 @@ function loadVue() {
             hover_3upg: 0,
             hover_5upg: 0,
             developer_code: "",
+            whistle_unlock: false,
             changelogs: [
+                {
+                    version: "v1.1.2", title: "",
+                    changes: [
+                        "削弱了mm<sup>4</sup>升级1到第一次mm<sup>3</sup>重置所需的时间"
+                    ]
+                },
                 {
                     version: "v1.1.1", title: "",
                     changes: [

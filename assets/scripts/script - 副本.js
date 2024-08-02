@@ -429,7 +429,7 @@ function loop() {
         player.time.time_now = Date.now();
 
         window.global_diff = (this_frame - last_frame) / 1000 * developer.timeboost ;
-        sacrif(1)
+
         updateAch()
 
 
@@ -774,9 +774,7 @@ function get_mm4_vol(a) {
 function dev_reset_vol() {
     player.volumes = E(10);
 }
-function devPassiveGenerate(){
-    alert("PassiveGenerate is not allowed in the release version");
-}
+
 (() => {
     if (!location.hostname.endsWith("github.io")) {
         window.speedrun = function (timeBoost) {
@@ -788,9 +786,6 @@ function devPassiveGenerate(){
         window.get_mm4_vol = function () {
             player.volumes = player.volumes.add(app.developer_get_mm4);
         };
-        window.devPassiveGenerate = function(){
-            secret_achievement_data.dev_passive_generate = true;
-        }
     }
 })();
 

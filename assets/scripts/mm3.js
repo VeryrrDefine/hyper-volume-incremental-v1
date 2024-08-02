@@ -160,7 +160,7 @@ function getMM3resetButton() {
 
 function sacrif(id){
     if (id==1 && player.volumes.gte(tmp.mm45.sacrifice_goal) && player.mm3_volumes.sacrifice_times.lt(1000)){
-        player.volumes=E("11")
+        
         player.mm3_volumes.mm45_points = player.mm3_volumes.mm45_points.add(1)
         player.mm3_volumes.sacrifice_times = player.mm3_volumes.sacrifice_times.add(1)
     }
@@ -194,4 +194,9 @@ function mm45refund(){
     player.mm3_volumes.mm45buyables = [0,0,0]
 
 
+}
+function mm3DevComplete(){
+    if (app.developer_mode){
+        player.mm3_volumes.challenges.push(player.selectedMM3Challenge)
+    }
 }

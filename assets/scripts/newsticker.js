@@ -544,6 +544,29 @@ Teresa的现实在公开开放后的1/1e300秒内立刻崩溃了。(Error: Serve
                     }
                     return temp
                 }
+            },
+            {
+                get text(){
+                    let temp = "仙境由于能量过多，坍塌了。";
+                    for (let i = 1; i<20; i++){
+                        temp = temp.concat("多".repeat(i))
+                        temp = temp.concat("元仙境由于能量过多，")
+                        temp = temp.concat("又".repeat(i))
+                        temp = temp.concat("坍塌了。")
+                    }
+                    return temp
+                }
+            },
+            {
+                text: `<span style="animation: a-game-header__antimatter--glow 3s infinite"
+                onclick="animationBigCrunch()" onmouseenter="animationBigCrunch()">This text is made of antimatter. Do not touch or else the
+                universe will collapse.</span>`
+            },
+            {
+                text: "<span class='redacted'>[REDACTED]</span><sup>3</sup>正在翻译一个插件，但他把config的键值改了，导致出bug"
+            },
+            { 
+                text: "看似永不停息的时间，却和活动的画面组成影像一般，but game speed is altered，0.000"
             }
 
             // 2.11
