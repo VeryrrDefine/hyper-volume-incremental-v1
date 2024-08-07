@@ -10,3 +10,4 @@ redactedList.txt
 *.java
 *.bat
 *.class
+*.bak

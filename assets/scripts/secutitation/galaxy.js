@@ -1,5 +1,5 @@
 function mm5Galaxycost(){
-    return E.mul("1e8",E.pow("1e3",player.secutitation.mm5_volumes.galaxies));
+    return E.mul("1e6",E.pow("1e3.2",player.secutitation.mm5_volumes.galaxies));
     if (player.secutitation.mm5_volumes.galaxies.eq(0)){
         return E("1e9");
     }
@@ -17,28 +17,47 @@ function mm5Galaxycost(){
 const galaxy_rewards = [
     {
         req: E("1"),
-        desc: "2~7<sup>th</sup> 4D Dimensions exponentplier +0.05"
+        desc: "2~7<sup>th</sup> 4D Dimensions multiplier ^1.01"
     },
     {
         req: E("2"),
         desc: "2~7<sup>th</sup> 4D Dimensions multiplier ×1e1,000,000"
     },
     {
+        req: E("3"),
+        desc: "Purchasing mm<sup>5</sup> galaxies doesn't reset anything"
+    },
+    {
         req: E("4"),
         desc: "2~7<sup>th</sup> 4D Dimensions multiplier ×1e10,000"
     },
     {
+        req: E("5"),
+        desc: "mm<sup>5</sup> reset doesn't reset mm<sup>5</sup> energies"
+    },/*
+    {
         req: E("7"),
-        desc: "1<sup>st</sup> 4D Dimensions exponentplier +0.20"
+        desc: "1<sup>st</sup> 4D Dimensions exponentplier +0.05"
+    },
+    {
+        req: E("8"),
+        desc: "Improve 5D Dimensions to 4D Dimensions' multiplier formula (x^5 → x^1e5)"
+    },
+    {
+        req: E("9"),
+        desc: "Imp 5D→4D multiplier formula (x^1e5 → x^1e6)"
     },
     {
         req: E("10"),
-        desc: "Improve 5D Dimensions to 4D Dimensions' multiplier formula (x^5 → x^1e5)"
-    }
+        desc: "All 4D Dimensions multiplier ^1.02"
+    }*/
 ]
 function mm5_gal_reset(){
-    player.mm5_volume_dimensions[DIMENSIONS_POINTS][0] = E(0);
-    player.secutitation.mm5_volumes.energy = E(1);
+    if (player.secutitation.mm5_volumes.galaxies.lt(2)){
+        player.mm5_volume_dimensions[DIMENSIONS_POINTS][0] = E(0);
+        player.secutitation.mm5_volumes.energy = E(1);
+    }
+
     player.secutitation.mm5_volumes.galaxies = player.secutitation.mm5_volumes.galaxies.add(1);
 
 }

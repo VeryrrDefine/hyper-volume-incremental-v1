@@ -34,18 +34,48 @@ const mm5_upgrades = [
     {//3
         desc: "1<sup>st</sup> 4D Dimension exponentplier +0.05",
         get require(){
-            return player.secutitation.points.gte(10000)
+            return player.secutitation.points.gte(2048)
         },
         get require_desc(){
-            return "10000 secutitation points"
+            return "2048 secutitation points"
         },
         get unlocked() {
             return hasMM5Upg(2);
         },
         bought_do(){
-            player.secutitation.points = player.secutitation.points.sub(10000)
+            player.secutitation.points = player.secutitation.points.sub(2048)
         }
     },
+    {//4
+        desc: "All 4D Dimensions multiplier ^1.02",
+        get require(){
+            return player.secutitation.mm5_volumes.energy.gte("1e25")
+        },
+        get require_desc(){
+            return "1e25 mm<sup>5</sup> energies"
+        },
+        get unlocked() {
+            return hasMM5Upg(3);
+        },
+        bought_do(){
+        }
+    },
+    {//5
+        get desc() {
+            return "unlock something you will know";
+        },
+        require: false,
+        get require_desc() {
+            return "";
+        },
+        get unlocked(){
+            return hasMM5Upg(4) 
+           
+        },
+        bought_do(){
+
+        }
+    }
 ]
 
 

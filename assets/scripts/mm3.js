@@ -56,6 +56,13 @@ var mm3_opt = {
             get unlocked(){
                 return hasMM3Upg(7)
             }
+        },
+        {//9
+            desc: "There is no 1<sup>st</sup> softcap anymore.",
+            cost: E("e6.31e5"),
+            get unlocked() {
+                return hasMM3Upg(8)
+            }
         }
     ]
 }

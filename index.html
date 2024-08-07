@@ -40,6 +40,8 @@
     <script src="./assets/scripts/secutitation/mm5.js" defer></script>
     <script src="./assets/scripts/secutitation/upgrades.js" defer></script>
     <script src="./assets/scripts/secutitation/galaxy.js" defer></script>
+    <script src="./assets/scripts/secutitation/upg_tow.js" defer></script>
+    <script src="./assets/scripts/secutitation/mm5Chal.js" defer></script>
 </head>
 
 <body style="margin-top: 0px;">
@@ -89,6 +91,9 @@
                     <button class="btn" @click="tabShow= '11'" :disabled="inTab(2)" v-if="player.mm3_volumes.unl">
                         3D Volumes
                     </button>
+                    <button class="btn" @click="tabShow= '251'" :disabled="inTab(26)" v-if="player.mm3_volumes.unl">
+                        Challenges
+                    </button>
                     <button class="btn" @click="tabShow= '51'" :disabled="inTab(6)"
                         v-if="player.secutitation.secutitation_reset_times.gte(1)">
                         Secutitaion
@@ -122,9 +127,14 @@
                         mm<sup>3</sup>
                         Upgrades
                     </button>
-                    <button class="btn" v-if="inTab(2) && (hasMM4Upg(8) || player.inMM3Challenge === 2)"
-                        @click="tabShow= '12'" :disabled="tabShow=='12'">
+                    <button class="btn" v-if="inTab(26) && (hasMM4Upg(8) || player.inMM3Challenge === 2)"
+                        @click="tabShow= '251'" :disabled="tabShow=='251'">
                         mm<sup>3</sup>
+                        Challenges
+                    </button>
+                    <button class="btn" v-if="inTab(26) && player.unlockedMM5ChallengeLeastOnce"
+                        @click="tabShow= '252'" :disabled="tabShow=='252'">
+                        mm<sup>5</sup>
                         Challenges
                     </button>
                     <button class="btn" v-if="inTab(2)" @click="tabShow= '13'" :disabled="tabShow=='13'">
@@ -156,6 +166,9 @@
                     </button>
                     <button class="btn" v-if="inTab(6)" @click="tabShow= '53'" :disabled="tabShow=='53'">
                         Upgrades
+                    </button>
+                    <button class="btn" v-if="inTab(6) && hasMM5Upg(5)" @click="tabShow= '54'" :disabled="tabShow=='54'">
+                        Upgrade Tower
                     </button>
                     <!--            <button class="btn" @click="tabShow = '3'" :disabled="tabShow==='3'">3.5维</button>-->
                 </div>
@@ -220,9 +233,13 @@
                             </button>
                         </div>
                     </div>
-                    <div>
-                        1<sup>st</sup> starts at
+                    <div v-if="!hasMM3Upg(9)">
+                        1<sup>st</sup> softcap starts at
                         {{tmp.dimension.softcap.formatA()}}
+                    </div>
+                    <div>
+                        2<sup>nd</sup> softcap starts at
+                        {{tmp.dimension.softcap2.formatA()}}
                     </div>
 
                     <div style="color: red" v-if="tmp.mm4.softcapped1">
@@ -304,7 +321,7 @@
                         <table class="center" style="margin: auto">
                             <tr v-for="row in mm3_upg" key="row.id">
                                 <td v-for="upg in mm3_upg[row.id]" key="upg.id"
-                                    v-if="mm3_opt.upgrades[upg.id-1].unlocked">
+                                    v-if="player.secutitation.secutitation_reset_times.gte(1) || mm3_opt.upgrades[upg.id-1].unlocked">
                                     <!--                            {{row.id}} {{upg.id}}-->
                                     <div :class="getMM3UpgClassName(upg.id)" @touchstart="hover_3upg= upg.id"
                                         @touchend="hover_3upg= 0" @mouseover="hover_3upg= upg.id"
@@ -316,8 +333,8 @@
                         </table>
                     </div>
                 </div>
-                <div v-if="tabShow=='12'">
-                    <p class="center">Select a challenge and enter</p>
+                <div v-if="tabShow=='251'">
+                    <p class="center">Select a mm<sup>3</sup> challenge and enter</p>
                     <p class="center">
                         <button class="btn" v-html="mm3doChalText()" @click="mm3HandleChallenge()"></button>
                     </p>
@@ -336,6 +353,25 @@
                     </table>
                     <div class="center">
                         <span v-html="mm3ChallengeText()"></span>
+                    </div>
+                </div>
+                <div v-if="tabShow=='252'">
+                    <p class="center">Select a mm<sup>5</sup> challenge and enter</p>
+                    <p class="center">
+                        <button class="btn" v-html="mm5doChalText()" @click="mm5HandleChallenge()"></button>
+                    </p>
+                    <table style="margin: auto">
+                        <tr v-for="row in mm5_chal" ley="row.id">
+                            <td v-for="chal in mm5_chal[row.id]" key="chal.id"
+                                v-if="chal.unlocked">
+                                <button :class="getMM5ChalClass(chal.id)" @click="mm5ShowChallenge(chal.id)">
+                                    5C{{chal.id}}
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="center">
+                        <span v-html="mm5ChallengeText()"></span>
                     </div>
                 </div>
                 <div v-if="tabShow=='13'" class="center">
@@ -359,12 +395,17 @@
                             Reach {{tmp.mm45.sacrifice_goal.formatA()}} mm<sup>4</sup> to gain mm<sup>4.5</sup>
                             volumes
                         </button>
-                        <button class="btn" @click="mm45Buy(1)">
+                        <button class="btn" @click="mm45Buy(1)" v-if="!hasMM3Upg(9)">
                             Make 1<sup>st</sup> softcap starts
                             ×{{E("ee4").pow(player.mm3_volumes.mm45buyables[0]).formatA()}}
                             →
                             ×{{E("ee4").pow(player.mm3_volumes.mm45buyables[0]+1).formatA()}}
-                            later <br />Cost: {{mm45BuyCost(1)}} mm<sup>4.5</sup></button><br />
+                            later <br />Cost: {{mm45BuyCost(1)}} mm<sup>4.5</sup>
+                        </button>
+                        <button class="btn" v-if="hasMM3Upg(9)">
+                            Make 1<sup>st</sup> softcap starts ×K9.000e15 → ×K9.000e15 later <br />Cost: K9.000e15 mm<sup>4.5</sup>
+                        </button>
+                            <br />
 
                         <button class="btn" @click="mm45Buy(2)">
                             Make 1<sup>st</sup> 4D Dimension
@@ -393,9 +434,6 @@
                         Hard Reset
                     </button>
                     <br />
-                    <button class="btn showhide" @click="addNotify('Wow, are you trying to do it?')">
-                        Reach Endgame
-                    </button>
                 </div>
                 <div v-if="tabShow=='22'" class="center">
                     <div>
@@ -417,6 +455,7 @@
                         Hotkeys:<br />
                         M: Max All<br />
                         N: Do mm<sup>3</sup> reset<br />
+                        B: Do mm<sup>5</sup> reset<br />
                     </div>
                     <hr />
                     QQ: 1829752018<br />
@@ -528,11 +567,13 @@
                         开启升级进度提示：
                         {{getOpenClose(player.options.percentUpg)}}
                     </button>
-                    <button @click="e114e514()" class="showhide btn">
+                    <!--<button @click="e114e514()" class="showhide btn">
                         e1.14e514
-                    </button>
+                    </button>-->
+
                     <br />
-                    <button @click="toggleMusic()" class="btn">
+                    <!--<button @click="QoLShortDisplay()" class="btn">QoL mobile[1]: short display: </button><br>
+                --><button @click="toggleMusic()" class="btn">
                         Sound: {{musics[player.options.music]}}
                     </button>
                     <br />
@@ -625,6 +666,10 @@
                         <p>Secutitation 10 times: You gain 100% of mm<sup>3</sup> volumes when you can reset.</p>
                     </div>
 
+                </div>
+                <div v-if="tabShow=='54'" mm5>
+                    <div class="center"><button class="btn" @click="respecMM5TowUpg()">Respec, but do a mm<sup>5</sup> reset</button></div>
+                    <upgradetowers></upgradetowers>
                 </div>
                 <div v-if="tabShow=='52'" class="center" mm5>
                     <p>You have <span
@@ -727,6 +772,11 @@
                     几层声望层<input v-model:value="pianyi1" type="number"><br>
                     生成结果：<input v-bind:value="db_pianyi()"><br>
                     <br />
+                    <br>
+                    <span>This is a {{wordCycle(['wordCycle',"never", "gonna", "give", "you", "up"])}} word.</span>
+                    
+                    <p style=" background: #000">我是 <span v-html='wordCycle(["傻逼", "啊米诺斯", "wlgyizhixiaomao", "\x3csup>eee\x3c/sup>"])'></span>.</p>
+                    <br>
                     <br>
                     <div style=" background: #000">
                         <p style="color:#fff;">This is a reactor simulation.</p>

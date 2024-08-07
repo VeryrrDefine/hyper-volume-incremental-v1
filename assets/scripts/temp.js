@@ -2,6 +2,9 @@ var tmp = {
 
     dimension: {
         getDimMultiplier(dimid,softcapped=true) {
+            if (player.inMM5Challenge==1){
+                return E(1)
+            }
             i = dimid - 1;
             let result = E('2')
             if (hasMM3Upg(7)){
@@ -50,7 +53,9 @@ var tmp = {
             }else{
                 result = result.mul(E("e600").pow(player.mm3_volumes.mm45buyables[2]));
             }
-            result = softcap(result,tmp.dimension.softcap,hasMM3Upg(6)? 0.95 : 0.9,"pow",dis=!softcapped) 
+            if (!hasMM3Upg(9)){
+                result = softcap(result,tmp.dimension.softcap,hasMM3Upg(6)? 0.95 : 0.9,"pow",dis=!softcapped) 
+            }
             result = softcap(result,tmp.dimension.softcap2,0.7,"pow",dis=!softcapped) 
 
             result = result.mul(tmp.mm5.energyeffect);
@@ -60,6 +65,18 @@ var tmp = {
             if (player.secutitation.mm5_volumes.galaxies.gte("4") && dimid != 1){
                 result = result.mul("e1e4")
             }
+            if (dimid !== 1 && player.secutitation.mm5_volumes.galaxies.gte("1")){
+                result = result.pow(1.01)
+            }
+            /*if (player.secutitation.mm5_volumes.galaxies.gte(10)){
+                result = result.pow(1.02)
+            }*/
+            if (hasMM5Upg(4)){
+                result = result.pow(1.02)
+            }
+            if (hasMM5TowUpg(31)){
+                result = result.mul("ee6")
+            }
             return result;
         },
         getDimExponentplier(dimid){
@@ -67,17 +84,21 @@ var tmp = {
             if (dimid === 8 && hasMM5Upg(1)){
                 result = result.add(0.05)
             }
-            if (dimid !== 1 && player.secutitation.mm5_volumes.galaxies.gte("1")){
-                result = result.add(0.05)
-            }
             if (dimid === 2 && hasMM5Upg(2)){
                 result = result.add(0.15)
             }
-            if (dimid === 1 && player.secutitation.mm5_volumes.galaxies.gte("7")){
-                result = result.add(0.2)
-            }
+            /*if (dimid === 1 && player.secutitation.mm5_volumes.galaxies.gte("7")){
+                result = result.add(0.05)
+            }*/
             if (dimid === 1 && hasMM5Upg(3)){
                 result = result.add(0.05)
+
+            }
+            if (dimid===8){
+                result = result.add(0.01*getMM5ChalCompletionTimes(1))
+            }
+            if (player.inMM5Challenge == 1){
+                result = result.add(1)
 
             }
             return result
@@ -123,6 +144,10 @@ var tmp = {
             if (hasMM4Upg(9)){
                 a = player.volumes.div("1e8").root(250).div(10);
             }
+            
+            if (!player.inMM5Challenge==1){
+                a=a.mul(hasMM5TowUpg(51)?"1e10000":1)
+            }
             return a
                 
         },
@@ -139,21 +164,26 @@ var tmp = {
     },
     mm4: {
         get gain() { // gain per second
-            return player.dimensions[DIMENSIONS_POINTS][0]
-                .mul(player.dimensions[DIMENSIONS_MULTI][0])
-                .mul(hasMM3Upg(1) ? 1e5 : 1)
+            let temp1 = player.dimensions[DIMENSIONS_POINTS][0]
+            temp1 = temp1.mul(player.dimensions[DIMENSIONS_MULTI][0])
+            if (!player.inMM5Challenge==1){
+                temp1 = temp1.mul(hasMM3Upg(1) ? 1e5 : 1)
                 .mul(hasMM3Chal(7) ? "1e500" : 1)
-                .pow(player.dimensions[DIMENSIONS_EXPONENT][0])
-                .softcap(tmp.mm4.softcap1_start, tmp.mm4.softcap1_power, 'log')
+                .mul(hasMM5TowUpg(21) ? "1e10000" : 1)
+            
+            }
+            temp1 = temp1.softcap(tmp.mm4.softcap1_start, tmp.mm4.softcap1_power, 'pow')
+            .pow(player.dimensions[DIMENSIONS_EXPONENT][0])
+                return temp1;
         },
         get softcapped1() {
             return tmp.mm4.gain.gte(tmp.mm4.softcap1_start)
         },
         get softcap1_power() {
-            return 3
+            return 1
         },
         get softcap1_start() {
-            return E("ee10")
+            return E("eeeeee10")
         }
     },
     mm35: {
@@ -203,7 +233,11 @@ var tmp = {
     mm5: {
         get gain(){
             let temp1 = player.volumes.clone();
-            return temp1.logarithm(10).sub(4500000).div(500000).floor().max(0)
+            
+            temp1 = temp1.logarithm(10).sub(4500000).div(500000)
+            temp1 = temp1.mul(hasMM5TowUpg(41) ? 15 : 1)
+            temp1 = temp1.floor().max(0)
+            return temp1
         },
         get secu_gain(){
             let temp1 = player.mm3_volumes.points.clone();
@@ -211,7 +245,14 @@ var tmp = {
 
         },
         get resetable(){
-            return player.volumes.gte("e5e6") && player.mm3_volumes.points.gte("e2e4")
+            
+            if (player.inMM5Challenge){
+                return player.mm3_volumes.points.gte(
+                    mm5_challenges[player.inMM5Challenge-1].complete_requirements[getMM5ChalCompletionTimes(player.inMM5Challenge)]
+                )
+            }else{
+                return player.volumes.gte("e5e6") && player.mm3_volumes.points.gte("e2e4")
+            }
         },
         get galaxycost(){
             return mm5Galaxycost()
@@ -238,9 +279,12 @@ var tmp = {
             return E.pow(mm5_scale[dimid-1],player.mm5_volume_dimensions[DIMENSIONS_BOUGHT][dimid-1].add(1))
         },
         get energyeffect(){
-            if (player.secutitation.mm5_volumes.galaxies.gte(10)){
-                return player.secutitation.mm5_volumes.energy.pow("1e5")
+            /*if (player.secutitation.mm5_volumes.galaxies.gte(9)){
+                return player.secutitation.mm5_volumes.energy.pow("1e6")
             }
+            if (player.secutitation.mm5_volumes.galaxies.gte(8)){
+                return player.secutitation.mm5_volumes.energy.pow("1e5")
+            }*/
             return player.secutitation.mm5_volumes.energy.pow(5)
         }
         

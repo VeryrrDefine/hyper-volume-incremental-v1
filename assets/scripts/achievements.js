@@ -25,104 +25,138 @@ const achievements = [
         { title: "Dimension Boosting?", goal: "Buy 20 4<sup>th</sup> Dimensions" },
         { title: "Antimatter Galaxy?", goal: "Buy 80 8<sup>th</sup> Dimensions" },
         { title: "Point<sup>0.5</sup>?", goal: "Unlock mm<sup>3.5</sup>" },
-        { title: "Infinite mm<sup>4</sup>",  get goal(){ return "Reach "+display_volumes(E("1.79e308"))} },
+        { title: "Infinite mm<sup>4</sup>", get goal() { return "Reach " + display_volumes(E("1.79e308")) } },
         { title: "Oh, no! My 4D dimensions!", goal: "Trigge dimension collapsing" },
-        { title: "授人以鱼，不如授人以鱼限(Fishinity)", get goal(){ return "Buy 190 8<sup>th</sup> Dimensions"}},
+        { title: "授人以鱼，不如授人以鱼限(Fishinity)", get goal() { return "Buy 190 8<sup>th</sup> Dimensions" } },
     ],
     [
-        { title: "授人以鱼，不如授人以鱼恒(Fishernity)", get goal(){ return "Reach 1.797e308 mm<sup>3</sup>" }},
-        { title: "3D Volumes", goal: "Get 1 mm<sup>3</sup>"},
-        { title: "Challenge Era", goal: "Unlock mm<sup>3</sup> challenge"},
-        { title: "Hotkeys^_^", goal: "Press M", secret:true},
-        { title: "Why does we cannot produce 8<sup>th</sup> Dimensions?", goal: "Press 9", secret: true},
-        { 
-            title: `啊${String.fromCodePoint(129322)}～啊${String.fromCodePoint(129322)}～啊咦${String.fromCodePoint(128556)}啊咦${String.fromCodePoint(128556)}`, 
-            get goal(){
-                return "Reach "+display_volumes(E("ee2085"))
-            }    
+        { title: "授人以鱼，不如授人以鱼恒(Fishernity)", get goal() { return "Reach 1.797e308 mm<sup>3</sup>" } },
+        { title: "3D Volumes", goal: "Get 1 mm<sup>3</sup>" },
+        { title: "Challenge Era", goal: "Unlock mm<sup>3</sup> challenge" },
+        { title: "There's nothing I'd rather do", goal: "Unlock 17<sup>th</sup> mm<sup>4</sup> Upgrade" },
+        { title: "Why does we cannot produce 8<sup>th</sup> Dimensions?", goal: "Reach 1e20000 mm<sup>3</sup>", secret: true },
+        {
+            title: `啊${String.fromCodePoint(129322)}～啊${String.fromCodePoint(129322)}～啊咦${String.fromCodePoint(128556)}啊咦${String.fromCodePoint(128556)}`,
+            get goal() {
+                return "Reach " + display_volumes(E("ee2085"))
+            }
         }, //30388636569473
-        
-        { title: "这软上限也太离谱了", goal: "Unlock 6<sup>th</sup> mm<sup>3</sup> challenge"},
-        { title: "这mm<sup>4.5</sup>也太离谱了", goal: "Sacrifice 1000 times"}
+
+        { title: "这软上限也太离谱了", goal: "Unlock 6<sup>th</sup> mm<sup>3</sup> challenge" },
+        { title: "这mm<sup>4.5</sup>也太离谱了", goal: "Sacrifice 1000 times" }
     ],
     [
-        { title: "Medusa", goal: "See the achievements page 5 minutes.", secret: true},
-        { title: "5D volume generator", goal: "Can you produce 1 mm<sup>5</sup> volumes?"},
-        { title: "This is not a Point<sup>0.5</sup> galaxy", goal: "Buy a mm<sup>5</sup> galaxy."},
-        { title: "<sup>5</sup>2", goal: "Reach "+display_volumes(E(2).tetr(5))}
+        { title: "Medusa", goal: "See the achievements page 5 minutes.", secret: true },
+        { title: "5D volume generator", goal: "Can you produce 1 mm<sup>5</sup> volumes?" },
+        { title: "This is not a Point<sup>0.5</sup> galaxy", goal: "Buy a mm<sup>5</sup> galaxy." },
+        { title: "<sup>5</sup>2", goal: "Reach " + display_volumes(E(2).tetr(5)) },
+        { title: String.fromCodePoint(129420)+"<sup>100,000</sup>", goal: "Reach "+display_volumes(E("e12942000000"))},
+        { title: "985211", goal: "Reach "+display_volumes(E("e9.85211e8"))},
+        { title: "9.9e99999999", goal: "Reach "+display_volumes(E("9.999e99999999"))},
+        { get title() {return "4D multiverse"}, goal: "Reach "+display_volumes(E("ee9"))}
+    
     ],
     [
-        { title: "无尽能源", goal: "Reach e9.007e15 mm<sup>5</sup> energies"}
+        { title: "无尽能源", goal: "Reach 1.797e308 mm<sup>5</sup> energies" },
+        { title: "Hundred Thousand", goal: "Reach 100000 mm<sup>5</sup>"}
     ],
     [
-        { title: "Save fixer 1", goal: "Try to import a save from Wind spirit creation", secret: true}
+        { title: "Save fixer 1", goal: "Try to import a save from Wind spirit creation", secret: true },
+        { title: "Can you download more RAMs?", goal: "Make 3 FPS", secret: true}
     ],
 
 ]
-function updateAch(){
-    if (player.volumes.gte(E(2).tetr(5))){
-        getAch(34)
+function updateAch() {
+    if (player.volumes.gte(-1.79e308) && "AchRow1") {
+        if (player.dimensions[DIMENSIONS_BOUGHT][0].gte(1)) {
+            getAch(11)
+        }
+        if (player.dimensions[DIMENSIONS_BOUGHT][1].gte(1)) {
+            getAch(12)
+        }
+        if (player.dimensions[DIMENSIONS_BOUGHT][3].gte(20)) {
+            getAch(13)
+        }
+        if (player.dimensions[DIMENSIONS_BOUGHT][7].gte(80)) {
+            getAch(14)
+        }
+        if (player.mm35_volumes.unl) {
+            getAch(15)
+        }
+        if (player.volumes.gte("1.797e308")) {
+            getAch(16)
+        }
+        if (player.mm3_volumes.unl || (
+            !player.mm3_volumes.unl && player.mm35_volumes.points.gte("1e100")
+        )) {
+            getAch(17)
+        }
+        if (player.dimensions[DIMENSIONS_BOUGHT][7].gte(190)) {
+            getAch(18)
+        }
     }
-    if (player.secutitation.mm5_volumes.galaxies.gt(0)){
-        getAch(33)
+    if (player.volumes.gte(-1.79e308) && "AchRow2") {
+        if (player.mm3_volumes.points.gte("1.797e308")) {
+            getAch(21)
+        }
+        if (player.mm3_volumes.points.gte(1)) {
+            getAch(22)
+        }
+        if (hasMM4Upg(8)) {
+            getAch(23)
+        }
+        if (hasMM4Upg(17)) {
+            getAch(24)
+        }
+        if (player.mm3_volumes.points.gte("e2e4")) {
+            getAch(25)
+        }
+        if (player.volumes.gte("ee2085")) {
+            getAch(26)
+        }
+        if (mm3_challenges[5].unlocked) {
+            getAch(27)
+        }
+        if (player.mm3_volumes.sacrifice_times.gte(1000)) {
+            getAch(28)
+        }
+
     }
-    if (tmp.mm5.gain.gt(0)){
-        getAch(32)
+    if (player.volumes.gte(-1.79e308) && "AchRow3") {
+        if (secret_achievement_data.medusa > 5 * 60) {
+            getAch(31)
+        }
+        if (tmp.mm5.gain.gt(0)) {
+            getAch(32)
+        }
+        if (player.secutitation.mm5_volumes.galaxies.gt(0)) {
+            getAch(33)
+        }
+        if (player.volumes.gte(E(2).tetr(5))) {
+            getAch(34)
+        }
+        if (player.volumes.gte("e1.2942e10")) {
+            getAch(35)
+        }
+        if (player.volumes.gte("e9.85211e8")){
+            getAch(36)
+        }
+        if (player.volumes.gte("9.999e99999999")){
+            getAch(37)
+        }
+
     }
-    if (player.dimensions[DIMENSIONS_BOUGHT][0].gte(1)){
-        getAch(11)
+    if (player.volumes.gte(-1.79e308) && "AchRow4") {
+        if (shortcut.secu.mm5_volumes.points.gte(1e5)) {
+            getAch(42)
+        }
+
     }
-    if (player.dimensions[DIMENSIONS_BOUGHT][1].gte(1)){
-        getAch(12)
-    }
-    if (player.dimensions[DIMENSIONS_BOUGHT][3].gte(20)){
-        getAch(13)
-    }
-    if (player.dimensions[DIMENSIONS_BOUGHT][7].gte(80)){
-        getAch(14)
-    }
-    if (player.dimensions[DIMENSIONS_BOUGHT][7].gte(190)){
-        getAch(18)
-    }
-    if (player.mm35_volumes.unl){
-        getAch(15)
-    }
-    if (player.volumes.gte("1.797e308")){
-        getAch(16)
-    }
-    if (player.mm3_volumes.points.gte("1.797e308")){
-        getAch(21)
-    }
-    if (player.mm3_volumes.unl || (
-        !player.mm3_volumes.unl && player.mm35_volumes.points.gte("1e100")
-    )){
-        getAch(17)
-    }
-    if (player.volumes.gte("10^^9.007199254740992e15")){
-        getAch(21)
-    }
-    if (player.mm3_volumes.points.gte(1)){
-        getAch(22)
-    }
-    if (hasMM4Upg(8)){
-        getAch(23)
-    }
-    if (player.volumes.gte("ee2085")){
-        getAch(26)
-    }
-    if (mm3_challenges[5].unlocked){
-        getAch(27)
-    }
-    if (player.mm3_volumes.sacrifice_times.gte(1000)){
-        getAch(28)
-    }
-    if (app.tabShow=='26'){
+    
+    if (app.tabShow == '26') {
         secret_achievement_data.medusa += global_diff
-    }else{
+    } else {
         secret_achievement_data.medusa = 0
-    }
-    if (secret_achievement_data.medusa > 5*60){
-        getAch(31)
     }
 }
 

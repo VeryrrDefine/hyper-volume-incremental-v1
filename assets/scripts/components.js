@@ -24,6 +24,7 @@ function loadVue() {
             mm3_upg: chunkArrayIntoGroupsOfTen(mm3_opt.upgrades),
 
             mm3_chal: chunkArrayIntoGroupsOfTen(mm3_challenges),
+            mm5_chal: chunkArrayIntoGroupsOfTen(mm5_challenges),
             
             isShowingPopup: false,
             hasError: false,
@@ -36,6 +37,13 @@ function loadVue() {
             developer_code: "",
             whistle_unlock: false,
             changelogs: [
+                {
+                    version: "v1.1.3", title: "",
+                    changes: [
+                        "添加了<del>Time Studies</del><ins>升级塔</ins>",
+                        "修复了某些情况下mm<sup>3</sup>升级画面卡的bug"
+                    ]
+                },
                 {
                     version: "v1.1.2", title: "",
                     changes: [

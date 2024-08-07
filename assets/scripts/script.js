@@ -228,7 +228,8 @@ function hard_reset() {
             stickyDisplay: false,
             music: 0,
             gamespeed: 1,
-            percentUpg: false
+            percentUpg: false,
+            qol_shortDisplay: false
         },
 
         mm3_volumes: {
@@ -255,7 +256,13 @@ function hard_reset() {
                 galaxies: E(0)
             },
             points: E(0),
+            challenges: [],
+            challenges2x: [],
+            challenges3x: [],
+            challenges4x: [],
+            challenges5x: [],
             upgrades: [],
+            towerUpgrades: [],
             secutitation_reset_times: E(0)
         },
         auto: [],
@@ -283,7 +290,10 @@ function hard_reset() {
         },
         selectedMM3Challenge: 0,
         inMM3Challenge: 0,
+        selectedMM5Challenge: 0,
+        inMM5Challenge: 0,
         lastTab: '1',
+        unlockedMM5ChallengeLeastOnce: false,
         newsticker_time: 0,
         achievements: []
 
@@ -428,14 +438,24 @@ function loop() {
         player.time_now = Date.now();
         player.time.time_now = Date.now();
 
-        window.global_diff = (this_frame - last_frame) / 1000 * developer.timeboost ;
+        window.global_diff = (this_frame - last_frame) / 1000;
+        if (window.global_diff>0.3333){
+            getAch(52)
+        }
+        if (hasMM5TowUpg(61)){
+            player.unlockedMM5ChallengeLeastOnce = true
+        }
+        window.global_diff *= developer.timeboost
         sacrif(1)
         updateAch()
 
 
         sound_element.volume = player.sound_volume;
-        if (player.lastTab!="12"){
+        if (player.lastTab!="251"){
             player.selectedMM3Challenge = 0
+        }
+        if (player.lastTab!="252"){
+            player.selectedMM5Challenge = 0
         }
         window.diff = window.global_diff * player.options.gamespeed * (player.inMM3Challenge===8 ? 0.001 : 1);
 
@@ -649,12 +669,32 @@ function fix() {/*
     if (player.options.percentUpg === void 0) {
         player.options.percentUpg = false;
     }
+    if (player.options.qol_shortDisplay === void 0){
+        player.options.qol_shortDisplay = false;
+
+    }
     if (player.mm3_volumes.challenges === void 0) {
         player.mm3_volumes.challenges = [];
+    }
+    if (shortcut.secu.challenges === void 0) {
+        shortcut.secu.challenges = [];
+    }
+    if (shortcut.secu.challenges2x === void 0) {
+        shortcut.secu.challenges2x = [];
+    }
+    if (shortcut.secu.challenges3x === void 0) {
+        shortcut.secu.challenges3x = [];
+    }
+    if (shortcut.secu.challenges4x === void 0) {
+        shortcut.secu.challenges4x = [];
+    }
+    if (shortcut.secu.challenges5x === void 0) {
+        shortcut.secu.challenges5x = [];
     }
     if (player.mm3_volumes.upgrades.toString() === "[object Object]"){
         player.mm3_volumes.upgrades = []
     }
+    player.mm3_volumes.upgrades = [...new Set(player.mm3_volumes.upgrades)]
     if (player.mm3_volumes.in_sacrifice === void 0){
         player.mm3_volumes.in_sacrifice = false
     }
@@ -674,6 +714,9 @@ function fix() {/*
     if (player.secutitation.mm5_volumes.galaxies === void 0){
         player.secutitation.mm5_volumes.galaxies = E(0)
 
+    }
+    if (player.secutitation.towerUpgrades === void 0){
+        player.secutitation.towerUpgrades = []
     }
     if (player.dimensions[DIMENSIONS_EXPONENT] === void 0){
         player.dimensions[DIMENSIONS_EXPONENT] = [E(1), E(1), E(1), E(1), E(1), E(1), E(1), E(1)]
@@ -813,4 +856,14 @@ function db_pianyi() {
 
 function changeTabShow(a,b){
     app.tabShow = a.toString();
+}
+
+var shortcut = {
+    get secu() {
+        return player.secutitation
+    },
+    get mm5() {
+        return player.secutitation.mm5_volumes
+
+    }
 }

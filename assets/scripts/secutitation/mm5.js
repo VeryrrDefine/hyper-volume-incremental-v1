@@ -18,8 +18,9 @@ function no_reward_mm5_reset(){
     player.mm35_volumes.san_xiang_bo_points = E(1);
     player.mm35_volumes.unl = false;
     player.secutitation.secutitation_reset_times = player.secutitation.secutitation_reset_times.add(1)
-
-    player.secutitation.mm5_volumes.energy = E(1);
+    if (player.secutitation.mm5_volumes.galaxies.lt(5)){
+        player.secutitation.mm5_volumes.energy = E(1);
+    }
     if (player.secutitation.secutitation_reset_times.lt(2)){
         player.upgrades = [];
         player.auto = []
@@ -100,20 +101,20 @@ function calculate_mm5dim() {
     if (player.secutitation.secutitation_reset_times.gte(1)){
         player.mm3_volumes.sacrifice_times = E(1000)
     }
-    if (player.secutitation.secutitation_reset_times.gte(4)){
+    if (player.secutitation.secutitation_reset_times.gte(4) && !player.inMM5Challenge == 1){
         player.mm3_volumes.points = player.mm3_volumes.points.max("1e10")
     }
-    if (player.secutitation.secutitation_reset_times.gte(5)){
+    if (player.secutitation.secutitation_reset_times.gte(5) && !player.inMM5Challenge == 1){
         player.volumes = player.volumes.max("1e100")
     }
     if (player.secutitation.secutitation_reset_times.gte(6)){
         for (let i = 1; i < 18; i++){
-            if (mm4_upgrades[i-1].cost.lte(player.volumes)){
+            if (!hasMM4Upg(i) && mm4_upgrades[i-1].cost.lte(player.volumes)){
                 buyMM4Upg(i)
             }
         }
-        for (let i = 1; i < 9; i++){
-            if (mm3_opt.upgrades[i-1].cost.lte(player.mm3_volumes.points)){
+        for (let i = 1; i < 10; i++){
+            if (!hasMM3Upg(i) & mm3_opt.upgrades[i-1].cost.lte(player.mm3_volumes.points)){
                 buyMM3Upg(i)
             }
         }

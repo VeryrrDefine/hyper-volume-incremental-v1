@@ -566,7 +566,13 @@ Teresa的现实在公开开放后的1/1e300秒内立刻崩溃了。(Error: Serve
                 text: "<span class='redacted'>[REDACTED]</span><sup>3</sup>正在翻译一个插件，但他把config的键值改了，导致出bug"
             },
             { 
-                text: "看似永不停息的时间，却和活动的画面组成影像一般，but game speed is altered，0.000"
+                text: "看似永不停息的时间，却和活动的画面组成影像一般，game speed is altered，0.000"
+            },
+            {
+                text: "Isolation, I don't want to, sit on the softcap tree"
+            },
+            {
+                text: "Veryrrde1.79e308finedwlg<sub>ψ(Ω<sup>Ω</sup>)</sub>(3)yizhiɕjaumao"
             }
 
             // 2.11
