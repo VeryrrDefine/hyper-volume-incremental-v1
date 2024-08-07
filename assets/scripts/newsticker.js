@@ -1,4 +1,4 @@
-﻿!function () {
+!function () {
     try {
         var t, e = [
             {//1
@@ -392,10 +392,6 @@ zdoys, anemoity, meta-anemoity
             {
                 text: "You're gaining 114514 OoMs OoMs OoMs OoMs OoMs OoMs OoMs OoMs " + "OoMs ".repeat(50) + " mm<sup>114514</sup> per second"
             },
-            {
-                text: "DESTROYED BY WLGYIZHIXIAOMAO",
-                unlocked: false
-            },
             
 
             {
@@ -427,10 +423,6 @@ zdoys, anemoity, meta-anemoity
                 text: "(I) has been chaos by the chaos reset"
             },
             {
-                text: "DESTROYED BY WLGYIZHIXIAOMAO",
-                unlocked: false
-            },
-            {
                 text: "I can say a little French, just like this: Je suis chien, 啊呸呸呸"
             },
             {
@@ -438,17 +430,10 @@ zdoys, anemoity, meta-anemoity
             },
             {//110
                 text: "Eternal".repeat(10)
-            },{
-                text: "DESTROYED BY WLGYIZHIXIAOMAO",
-                unlocked: false
             },
             
             {
                 text: "Possible doesn't mean must, 0.000000000000000(There are 1.79e308 zero's)000001%"
-            },
-            {
-                text: "DESTROYED BY WLGYIZHIXIAOMAO",
-                unlocked: false
             },
             {
                 text: "dans le <sup>0i00000000a7</sup> a proximité"
@@ -494,18 +479,6 @@ Teresa的现实在公开开放后的1/1e300秒内立刻崩溃了。(Error: Serve
                 get text() {
                     return "不" + "！".repeat(50)
                 }
-            },
-            {
-                text: "DESTROYED BY WLGYIZHIXIAOMAO",
-                unlocked: false
-            },
-            {
-                text: "DESTROYED BY WLGYIZHIXIAOMAO",
-                unlocked: false
-            },
-            {
-                text: "DESTROYED BY WLGYIZHIXIAOMAO",
-                unlocked: false
             },
             {
                 get text() {
@@ -561,9 +534,6 @@ Teresa的现实在公开开放后的1/1e300秒内立刻崩溃了。(Error: Serve
                 text: `<span style="animation: a-game-header__antimatter--glow 3s infinite"
                 onclick="animationBigCrunch()" onmouseenter="animationBigCrunch()">This text is made of antimatter. Do not touch or else the
                 universe will collapse.</span>`
-            },
-            {
-                text: "<span class='redacted'>[REDACTED]</span><sup>3</sup>正在翻译一个插件，但他把config的键值改了，导致出bug"
             },
             { 
                 text: "看似永不停息的时间，却和活动的画面组成影像一般，game speed is altered，0.000"
