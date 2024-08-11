@@ -123,15 +123,6 @@
     }
     return r * m;
   };
-  P.softcap = function(start, power, mode, disabled = false) {
-    var x = this.clone()
-    if(!disabled && x.gte(start)) {
-      if([0, "pow"].includes(mode)) x = x.div(start).max(1).pow(power).mul(start)
-      if([1, "mul"].includes(mode)) x = x.sub(start).div(power).add(start)
-      if([2, "log"].includes(mode)) x = x.div(start).log(power).add(1).mul(start)
-    }
-    return x
-  }
   P.overflow = function(start, power, meta = 1) {
     var number = this.clone()
     power = E(power)

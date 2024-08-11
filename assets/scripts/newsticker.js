@@ -1,4 +1,4 @@
-!function () {
+﻿!function () {
     try {
         var t, e = [
             {//1
@@ -144,13 +144,9 @@
                 text: "I can't sleep because they're a lot of Ai-ai👿Dide-dide😈 in my brain"
             },
             {
-                text: "DESTROYED BY WLGYIZHIXIAOMAO",
-                unlocked: false
-            },
-            {//40
                 text: "different from news",
             },
-            {
+            {//40
                 text: "How is the property managementer? Pe-nis PM!"
             },
             {
@@ -182,10 +178,10 @@
                     "导引扩散之力。你将扮演一位名为「砂糖」的神秘角色，在漫长的硬挂中邂逅条件各异、加成独特的升级们，和他们一起击败挑战，" +
                     "找回失散的朋友——同时，逐步发掘「生物炼金」的真相。"
             },
-            {//50
+            {
                 text: "Giving people fish is not as good as giving people the first fish dimension is not as good as giving people the second fish dimension……"
             },
-            {
+            {//50
                 text: 'g<sub>0</sub>(2) g<sub>1</sub>(2) g<sub>ω</sub>(2) g<sub>ω+1</sub>(2) g<sub>ε<sub>0</sub></sub>(2)' +
                     ' g<sub>ε<sub>0</sub>+1</sub>(2) g<sub>ε<sub>0</sub>+ω</sub>(2) g<sub>ε<sub>0</sub>+ω+1</sub>(2) ' +
                     'g<sub>ε<sub>0</sub>ω</sub>(2)'//ε
@@ -221,10 +217,10 @@
                 text: "Reach g<sub>φ(φ(5,φ(7,5)),φ(φ(7,5),φ(8,φ(5,2))))<sup>η<sub>ε<sub>ζ<sub>8</sub>+1</sub></sub></sup>" +
                     "</sub>(10) points to reset the next 114514 layers."
             },
-            {//60
+            {
                 text: "Coming s1.79e308n"
             },
-            {
+            {//60
                 text: "<span onclick='toggleNewsTicker()'>If you don't want to display the news, you can click this text to turn it off.</span>"
             },
             {
@@ -232,10 +228,6 @@
             },
             {
                 text: `Emergency ω<sub>1</sub><sup>CK</sup>level accident！ !%^#&&$!&$#$&#$&#@$&!&$#*#%*^&*#!*^%&*^*^%*#%$^&*@!^&#^`
-            },
-            {
-                text: "DESTROYED BY WLGYIZHIXIAOMAO",
-                unlocked: false
             },
            
             {
@@ -269,14 +261,14 @@ zdoys, anemoity, meta-anemoity
             {
                 text: "D'autres temps attendent, j'ai besoin d'être éternel."
             },
-            {//70
+            {
                 text: "Oh, I appear to have run out of <span style='animation: a-existence-glow 3s infinite; color: " +
                     "white; line-height: 0;'>Existence</span>."
             },
             {
                 text: "do t喝 dan a-dand <del>u</del>s<del>ually</del>e b额 zweee-en det 喝e te喝 ne了"
             },
-            {
+            {//70
                 text: "If an incremental game has a bug, its value may change from 1.0000F136 to F1.005e114514."
 
             },
@@ -307,7 +299,7 @@ zdoys, anemoity, meta-anemoity
             {
                 text: "Bonour Ce n'est pas une faute de frappe. L'inventeur du français a causé cette faute de frappe."
             },
-            {//80
+            {
                 text: `The two values \"9e15\" \"1.79e308\" that appear in the upper limit of some large numbers js are
  actually 2<sup>53</sup>-1 and 2<sup>1024</sup>-2<sup>971</sup>. This is because if it exceeds 2<sup>53</sup>, there
   will only be even numbers, so 2<sup>53</sup>+1=2<sup>53</sup> will appear, and 2<sup>53</sup>+1=2<sup>53</sup> is 
@@ -329,7 +321,7 @@ zdoys, anemoity, meta-anemoity
             {
                 text: "Lain said: All of Fourth-Dimensional-meter 4D space is interconnected in any time, any place."
             },
-            {
+            {//80
                 text: "Can the girl eat 4D rice dumplings in the Wired?"
             },
             {
@@ -354,13 +346,13 @@ zdoys, anemoity, meta-anemoity
             {
                 text: "&lt;cllor=#f29e38ff&gt;HTML可以做出模拟宇宙，HTML是最好的语言！&lt;/oolor&gt;"
             },
-            {//90
+            {
                 text: "Reach e1e81 news of total news, your news will overflowoowʍəuwuowəuoəuəʍuoʍo"
             },
             {
                 text: "Gave it a tickspeed bonus, and it dared to sell it at a price of 1024 archverses (1e1.000e15339 g)"
             },
-            {
+            {//90
                 text: "Can we make FASTER Incremental Mass Rewritten? It's a lot of time-walls"
             },
             {
@@ -386,7 +378,7 @@ zdoys, anemoity, meta-anemoity
             {
                 text: "深圳地铁 深圳地圳"
             },
-            {//100
+            {
                 text: "!曲扭重八将度速取获数点，后数点 JJ1.000J5 过超"
             },
             {
@@ -394,7 +386,7 @@ zdoys, anemoity, meta-anemoity
             },
             
 
-            {
+            {//100
                 text: "孩子们，这是真的, 我在制作客户端时留了后门, 玩游戏时只需按下alt+f4, 就可以到达Endgame, 快去试吧！"
             },
             {
@@ -428,7 +420,7 @@ zdoys, anemoity, meta-anemoity
             {
                 text: "Eliny put her feet in my mouth when she was sleeping, so I died because suffocate."
             },
-            {//110
+            {
                 text: "Eternal".repeat(10)
             },
             
@@ -452,12 +444,12 @@ Teresa的现实在公开开放后的1/1e300秒内立刻崩溃了。(Error: Serve
 “前方封路，请掉头。”然而，Lai'tela似乎忘了一件事。玩家们请来隔壁的Universal Paperclips制造者，超级AI，来生产通用回形针，获得了回形针维度。
 数值膨胀下，回形针硬生生冲开封锁，直逼Pelle。情急之下，Pelle动用了他全部的反物质，极速消灭了回形针。
 这产生了一场史无前例的爆炸。[REDACTED]`/*In a parallel antimatter universe, the antimatter will be collapse to the void or a eternal-glyph shard after producing 0.18308 seconds.
-100 eternal-glyph shards can become a eternal glyph. There are*/
+100 eternal-glyph shards can become a eternal glyph. There are 1.797e308 players say: 'We're capped on 99 E-gly shards'*/
             },
             {
                 text: "Go back to Mars"
             },
-            {
+            {//110
                 text: "这个游戏的新闻对于我来说就是草文字聚集地"
             },
             {
@@ -466,14 +458,14 @@ Teresa的现实在公开开放后的1/1e300秒内立刻崩溃了。(Error: Serve
             {
                 text: "Put my heart to develop my game, don't think that 傻逼 <span class='redacted'>REDACTED</span><sup>5</sup>"
             },
-            {//120
+            {
                 text: "本游戏没有任何超级折算"
             },
             {
                 text: "efreygrt, the Celestial of 一楼喂百度"
             },
             {
-                text: "本游戏有8个声望层: mm<sup>3</sup>, secutitation(mm<sup>5</sup>), exponenting(mm<sup>6</sup>), void(mm<sup>7</sup>), element(mm<sup>8</sup>), world (mm<sup>n</sup>), universe(mm^^2)"
+                text: "本游戏有ε<sub>0</sub>个声望层: mm<sup>3</sup>, secutitation(mm<sup>5</sup>), mm<sup>6</sup>, void(mm<sup>7</sup>), element(mm<sup>8</sup>), world (mm<sup>n</sup>), universe(mm<sup>mm</sup>), mm^^3, mm^^4, mm^^n, mm^^mm"
             },
             {
                 get text() {
@@ -491,7 +483,7 @@ Teresa的现实在公开开放后的1/1e300秒内立刻崩溃了。(Error: Serve
             {
                 text: "指数平方增长的威力有多大？假设有一个函数f(x) = 10<sup>x<sup>2</sup></sup>, f(1)=10, f(2)=10000, f(3)=1e9, f(10)=1e100, 跨一步,f<sup>2</sup>(5) = ee25,"
             },
-            {//130
+            {//120
                 text: "Why doesn't Points×Points equal Points<sup>2</sup>? Because Points×Points = PPooiinnttss, Points<sup>2</sup> = Pointss"
             },
             {
@@ -532,18 +524,51 @@ Teresa的现实在公开开放后的1/1e300秒内立刻崩溃了。(Error: Serve
             },
             {
                 text: `<span style="animation: a-game-header__antimatter--glow 3s infinite"
-                onclick="animationBigCrunch()" onmouseenter="animationBigCrunch()">This text is made of antimatter. Do not touch or else the
+                onclick="animationBigCrunch()">This text is made of antimatter. Do not touch or else the
                 universe will collapse.</span>`
             },
             { 
-                text: "看似永不停息的时间，却和活动的画面组成影像一般，game speed is altered，0.000"
+                text: "看似永不停息的时间，却和活动的画面组成影像一般，game speed is altered，0.000, game speed is altered, -3.1536e7"
             },
-            {
+            {//125
                 text: "Isolation, I don't want to, sit on the softcap tree"
             },
             {
-                text: "Veryrrde1.79e308finedwlg<sub>ψ(Ω<sup>Ω</sup>)</sub>(3)yizhiɕjaumao"
-            }
+                text: "再说就砍"
+            },
+            {
+                text: "I wonder how, I wonder why, Yesterday you told me <span style='color:red'>[This character has been deleted by Pelle]</span>bout the blue blue sky"
+            },
+            {
+                text: '我是三四，我要神盘你。 我去这个三四，台可怕了'
+            },
+            {
+                text: "给它一个互联网，它能墙掉全世界 它就是中国顶尖技术长城防火墙 美国五星将军麦克阿瑟曾表示:如果中国利用好这项技术，可以将世界互联网一分为二 长城防火墙就是这么厉害，正当ChatGPT中国用户正在为注册成功沾沾自喜的时候，仅仅1分钟，大陆就失去了ChatGPT的访问权限 长城防火墙究竟是何等技术 大型纪录片长城防火墙持续为您播出"
+            },
+            {//130
+                text: "我在一个小游戏开挂被误封了"
+            },
+            {
+                text: "国内玩家遇到的第一道墙： <span style=\"color: rgb(28,253,253)\">Anti</span><span style=\"color: rgb(255,255,9)\">matter</span> Dimensions, The <span style=\"color: rgb(11,96,14)\">Reality</span> Update"
+            },
+            {
+                text: "Phigros联动无穷了！！！！！！！！！以后打歌前要开启无穷无尽，刷100000大嘎吱次数，存储1.79e308复制人，买321个穷尽升级，打8次我明白了，刷1e308网络地址，还要没完没了的重置！！"
+            },
+            {
+                text: "Phigros联动reality！！！！！！！！！以后打歌前要reality，刷10000 realities，获得100 ra levels，填埋5 celestial，打60次lai teia，刷1e17 iM，还要皮肤重置！！"
+            },
+            {
+                text: "Phigros联动反问题尺寸了！！！！！！！！！以后打歌前要开皮肤，刷1e9e15反问题，获得999999999星系，填埋5个裂缝，打60次永久质疑，刷1e4000永久指画，还要皮肤重置！！"
+            },
+            {
+                text: "Phigros联动永恒了！！！！！！！！！以后打歌前要开启永恒，刷100000永恒次数，存储20850419的无限次数，买100个时间之理，打50次EC，刷1e4000EP，还要进入实际！！"
+            },
+            {
+                text: "Phigros联动天体了！！！！！！！！！以后打歌前要进入有一个的实际，刷100个eff字型，存储1天的现实时间，买100个空间之理，挂100级天体记忆，刷1e40个奇点，还要预订实际！！"
+            },/*
+            {
+                text: "I can't sleep because they're a lot of, lot of,  "
+            }*/
 
             // 2.11
 
@@ -552,6 +577,7 @@ Teresa的现实在公开开放后的1/1e300秒内立刻崩溃了。(Error: Serve
             /*ωεζηφΓψΩ*/
         ];
         window.special_news_state = 0;
+        window.texts = e;
         let s;
         t = e.length;
         console.log(t);

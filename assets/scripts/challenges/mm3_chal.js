@@ -1,7 +1,9 @@
 var mm3_challenges = [
     {//1
         name: "Useless mm3.5",
-        unlocked: true,
+        get unlocked() {
+            return hasMM4Upg(8)
+        },
         desc: "mm<sup>3.5</sup> to mm<sup>4</sup>'s multiplier is always ×1",
         complete_requirement: E("1e730"),
         reward: "mm<sup>3.5</sup> to mm<sup>4</sup>'s multiplier ×1.000e3"
@@ -164,7 +166,6 @@ function mm3HandleChallenge(){
         if (player.volumes.gte(mm3_challenges[player.inMM3Challenge-1].complete_requirement)){
             player.mm3_volumes.challenges.push(player.inMM3Challenge);
         }
-        doMM3reset();
         player.inMM3Challenge = 0
 
     }

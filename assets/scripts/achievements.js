@@ -58,7 +58,8 @@ const achievements = [
     ],
     [
         { title: "无尽能源", goal: "Reach 1.797e308 mm<sup>5</sup> energies" },
-        { title: "Hundred Thousand", goal: "Reach 100000 mm<sup>5</sup>"}
+        { title: "Hundred Thousand", goal: "Reach 100000 mm<sup>5</sup>"},
+        { title: "什么计时器掌握者", goal: "Enable Time Hooker", secret: true }
     ],
     [
         { title: "Save fixer 1", goal: "Try to import a save from Wind spirit creation", secret: true },

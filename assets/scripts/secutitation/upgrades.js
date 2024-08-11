@@ -62,11 +62,13 @@ const mm5_upgrades = [
     },
     {//5
         get desc() {
-            return "unlock something you will know";
+            return "unlock Upgrade Tower";
         },
-        require: false,
+        get require(){
+            return player.secutitation.mm5_volumes.energy.gte("1e38")
+        },
         get require_desc() {
-            return "";
+            return "1e38 mm<sup>5</sup> energies";
         },
         get unlocked(){
             return hasMM5Upg(4) 

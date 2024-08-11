@@ -36,7 +36,14 @@ function loadVue() {
             hover_5upg: 0,
             developer_code: "",
             whistle_unlock: false,
+            devNews: window.texts,
             changelogs: [
+                {
+                    version: "v1.1.4", title: "",
+                    changes: [
+                        "Just a update, i can't descript it"
+                    ]
+                },
                 {
                     version: "v1.1.3", title: "",
                     changes: [

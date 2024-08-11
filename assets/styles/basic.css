@@ -8,13 +8,16 @@ body {
     background: var(--color-text-inverted);
     color: var(--color-text);
 }
+
 .locked {
     background: darkred;
 }
+
 .saved_text {
     color: #bfb;
     text-shadow: 1px 1px 3px #0f0, -1px -1px 3px #7f0, 0 0 24px #0f0;
 }
+
 .quark_color {
     animation: quark_color 6s cubic-bezier(0.37, 0, 0.63, 1) infinite;
 }
@@ -43,6 +46,7 @@ body {
     color: var(--color-text);
     display: inline-block;
 }
+
 .btn[disabled] {
     cursor: default;
     font-size: 12px;
@@ -55,16 +59,19 @@ body {
     color: var(--color-text);
     display: inline-block;
 }
+
 .btn:hover {
     border: 1px solid #999;
     background: #555;
 }
+
 .pts-dis {
     margin: 4px 4px;
     font-size: 48px;
     display: inline-block;
     white-space: nowrap;
 }
+
 .center {
     text-align: center;
 }
@@ -126,6 +133,7 @@ body {
     border-style: solid;
     border-color: var(--color-text) transparent transparent transparent;
 }
+
 .tooltipBox {
     position: relative;
 }
@@ -133,11 +141,13 @@ body {
 .tooltipBox:hover .tooltip {
     opacity: 1;
 }
+
 .charged_text {
     color: cyan;
     text-shadow: -1px -1px 3px lightskyblue, 0px 0px 5px #878ffa,
         1px 1px 3px blue;
 }
+
 .existence {
     animation: a-existence-glow 3s infinite;
     color: var(--color-text-inverted);
@@ -147,16 +157,17 @@ body {
 h1 {
     font-family: "Noto Sans SC", sans-serif;
 }
+
 h2 {
     font-family: "Noto Sans SC", sans-serif;
 }
+
 @font-face {
     font-family: "Noto Sans SC";
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url(https://fonts.gstatic.com/s/notosanssc/v36/k3kCo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaG9_FnYw.ttf)
-        format("truetype");
+    src: url(https://fonts.gstatic.com/s/notosanssc/v36/k3kCo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaG9_FnYw.ttf) format("truetype");
 }
 
 .game-link {
@@ -201,6 +212,7 @@ button {
     width: 100%;
     height: 150px;
 }
+
 .green {
     color: #00d000;
 }
@@ -235,6 +247,7 @@ button {
     opacity: 1;
     transition: 2s;
 }
+
 .corrupted {
     animation: corrupted_text 4s cubic-bezier(0.37, 0, 0.63, 1) infinite;
 }
@@ -243,12 +256,13 @@ button {
     width: 10vw;
     height: 10vw;
 }
+
 .redacted {
     background: var(--color-text);
     color: var(--color-text);
 }
 
-[mm5]{
+[mm5] {
     background-color: #044;
 }
 
@@ -267,8 +281,31 @@ button {
     display: flex;
     align-items: center;
     overflow: hidden;
-  }
-  
-  #newsText{
+}
+
+#newsText {
     white-space: nowrap;
-  }
+}
+
+@keyframes masked-animation {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: -8000px -3000px;
+    }
+}
+
+.adventuring {
+    text-align: center;
+    color: #000;
+    max-width: 700px;
+    background: -webkit-linear-gradient(left, #2c2a2b 0%, #315030 25%, #107421 50%, #35f704 100%) repeat;
+    background-clip: text;
+    animation: masked-animation 50s linear infinite;
+}
+/*
+*{
+    display: block;
+}*/

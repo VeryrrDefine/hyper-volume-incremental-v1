@@ -101,10 +101,10 @@ function calculate_mm5dim() {
     if (player.secutitation.secutitation_reset_times.gte(1)){
         player.mm3_volumes.sacrifice_times = E(1000)
     }
-    if (player.secutitation.secutitation_reset_times.gte(4) && !player.inMM5Challenge == 1){
+    if (player.secutitation.secutitation_reset_times.gte(4)){
         player.mm3_volumes.points = player.mm3_volumes.points.max("1e10")
     }
-    if (player.secutitation.secutitation_reset_times.gte(5) && !player.inMM5Challenge == 1){
+    if (player.secutitation.secutitation_reset_times.gte(5)){
         player.volumes = player.volumes.max("1e100")
     }
     if (player.secutitation.secutitation_reset_times.gte(6)){

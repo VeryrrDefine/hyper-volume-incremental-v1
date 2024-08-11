@@ -10,6 +10,7 @@ var secret_achievement_data = {
     medusa: 0
 }
 
+var frameCollection = [];
 
 var this_frame = Date.now();
 var last_frame = Date.now();
@@ -20,10 +21,14 @@ var mm4_upgrades = [
         desc: "1<sup>st</sup> Dimension multiplier add based on mm<sup>4</sup> Volumes",
         get effect() {
             let a = player.volumes.root(90);
-            if (hasMM4Upg(14)){
+            if (hasMM4Upg(14) && !hasMM5TowUpg(81)){
                 a = player.volumes.root(40);
             }
-            if (a.gte("1000")) {
+            if (hasMM5TowUpg(81)){
+                a = player.volumes.root(60);
+
+            }
+            if (a.gte("1000") && !hasMM5TowUpg(81)) {
                 a = softcap(a,1000,0.5,"pow",false);
             }
             return a.max(1)
@@ -431,14 +436,25 @@ function exportPurePlayerJson() {
         navigator.clipboard.writeText(JSON.stringify(player));
     }
 }
-
+var hasTHContainer = false;
+var checkedTH = false;
 function loop() {
     try {
         this_frame = Date.now()
         player.time_now = Date.now();
         player.time.time_now = Date.now();
-
         window.global_diff = (this_frame - last_frame) / 1000;
+        if (eHook && !app.developer_mode){
+            getAch(43);
+            
+            save();
+            clearInterval(window.qqq);
+            clearInterval(window.www);
+            setTimeout(function(){
+                let urlarray = ["https://www.bilibili.com/video/BV1Jg411o7J4","https://www.bilibili.com/video/BV15C4y1K7PN"];
+                location.href = urlarray[Math.floor(Math.random()*urlarray.length)]
+            },1000);
+        }
         if (window.global_diff>0.3333){
             getAch(52)
         }
@@ -449,6 +465,12 @@ function loop() {
         sacrif(1)
         updateAch()
 
+        // QoL challenging life
+        if (player.inMM3Challenge!= 0 && player.auto.includes(9) && player.volumes.gte(
+            mm3_challenges[player.inMM3Challenge-1].complete_requirement
+        )){
+            mm3HandleChallenge()
+        }
 
         sound_element.volume = player.sound_volume;
         if (player.lastTab!="251"){
@@ -470,7 +492,6 @@ function loop() {
                 player.options.gamespeed = 1
             }
         }
-        
         mm35_loop();
 
         if (player.volumes.isNaN()) {
@@ -743,6 +764,12 @@ function load() {
         last_frame = Date.now();
         fix();
         player.offlinedTime += (this_frame - player.time_now)
+        if ((this_frame - player.time_now) < 0){ // 穿越？
+            localStorage.setItem("backup",formatsave.encode(player));
+            console.log("Bye")
+            hard_reset();
+
+        }
         let temp = Math.random();
         /*
         mm3FixOldSaves();

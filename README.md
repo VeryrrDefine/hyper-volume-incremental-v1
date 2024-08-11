@@ -1,4 +1,4 @@
-# Mutli-damnsional Volume Incremental
+# Mutli-dimensional Volume Incremental
 
 Project initiator: [VeryrrDefine](https://github.com/VeryrrDefine)
 
@@ -17,3 +17,5 @@ This is a game developed using `HTML`, `CSS`, and `JS`
 Play slowly
 
 I don't know what to say either
+
+I want to say, ~dygmwozaochengfo~

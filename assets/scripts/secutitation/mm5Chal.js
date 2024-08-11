@@ -4,16 +4,16 @@ var mm5_challenges = [
         get unlocked() {
             return hasMM5TowUpg(61)
         },
-        desc: "All multipliers to 4D Dimensions and mm<sup>4</sup> mm<sup>3</sup> volumes are disabled, 4,5 times secutitation milestone is disabled(always ×1, but keep exponentplier).",
+        desc: "All 4D Dimensions multiplier double-exponent ×0.25(10<sup>10<sup>x</sup></sup>→10<sup>10<sup>0.25x</sup></sup>)",
         complete_requirements: [
-            ExpantaNum("1e8"),
-            ExpantaNum("3e8"),
-            ExpantaNum("5e8"),
-            ExpantaNum("7e8"),
-            ExpantaNum("9e8")
+            ExpantaNum("1e10047"),
+            ExpantaNum("1e1145141919810"),
+            ExpantaNum("1e1145141919810"),
+            ExpantaNum("1e1145141919810"),
+            ExpantaNum("1e1145141919810"),
         ], // Need 3P
         get reward(){
-            return "8<sup>th</sup> 4D Dimension exponentplier +"+ (0.01*getMM5ChalCompletionTimes(1)).toString()
+            return "8<sup>th</sup> 4D Dimension exponentplier +"+ (0.01*getMM5ChalCompletionTimes(1)).toString()+"→"+(0.01*(getMM5ChalCompletionTimes(1)+1)).toString()
         }
     }
     /*
@@ -129,6 +129,7 @@ function mm5HandleChallenge(){
                     break;
 
             }
+            respecMM5TowUpg()
         }
         doMM5reset();
         player.inMM5Challenge = 0

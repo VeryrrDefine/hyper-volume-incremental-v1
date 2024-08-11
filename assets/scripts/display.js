@@ -1,30 +1,4 @@
-function boost_reward_desc() {
-    if (player.dim_boost.eq(0)) {
-        return "解锁维度5<br>维度1倍率x" + (hasMM3upgrade(22) ? "4" : "2") + "<br>需要20 维度4"
-    }
-    if (player.dim_boost.eq(1)) {
-        return "解锁维度6<br>维度1-2倍率x" + (hasMM3upgrade(22) ? "4" : "2") + "<br>需要20 维度5"
-    }
-    if (player.dim_boost.eq(2)) {
-        return "解锁维度7<br>维度1-3倍率x" + (hasMM3upgrade(22) ? "4" : "2") + "<br><br>需要20 维度6"
-    }
-    if (player.dim_boost.eq(3)) {
-        return "解锁维度8<br>维度1-4倍率x" + ((hasMM3upgrade(22) ? "4" : "2")) + "<br><br>需要20 维度7"
-    }
-    if (player.dim_boost.eq(4)) {
-        return "维度1-5倍率x" + (hasMM3upgrade(22) ? "4" : "2") + "<br><br>需要" + format(tmp.dimensionBoost.need_aft_4) + " 维度8"
-    }
-    if (player.dim_boost.eq(5)) {
-        return "维度1-6倍率x" + (hasMM3upgrade(22) ? "4" : "2") + "<br><br>需要" + format(tmp.dimensionBoost.need_aft_4) + " 维度8"
-    }
-    if (player.dim_boost.eq(6)) {
-        return "维度1-7倍率x" + (hasMM3upgrade(22) ? "4" : "2") + "<br><br>需要" + format(tmp.dimensionBoost.need_aft_4) + " 维度8"
-    }
-    if (player.dim_boost.gt(6)) {
-        let n8d = tmp.dimensionBoost.need_aft_4;
-        return `所有维度倍率x${(hasMM3upgrade(22) ? "4" : "2")}<br><br>需要${formatWhole(n8d)}${tmp.dimensionBoost.softcapped ? `(+${format(tmp.dimensionBoost.softcap)})` : ""}维度8`
-    }
-}
+var gameNaNed=false;
 
 function errorText(length, q) {
     let errorTexts = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿĀāĂăĄąĆćĈĉĊċČčĎďĐđĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħĨĩĪīĬĭĮįİıĲĳĴĵĶķĸĹĺĻļĽľĿŀŁłŃńŅņŇňŉŊŋŌōŎŏŐőŒœŔŕŖŗŘřŚśŜŝŞşŠšŢţŤťŦŧŨũŪūŬŭŮůŰűŲųŴŵŶŷŸŹźŻżŽžſƀƁƂƃƄƅƆƇƈƉƊƋƌƍƎƏƐƑƒƓƔƕƖƗƘƙƚƛƜƝƞƟƠơƢƣƤƥƦƧƨƩƪƫƬƭƮƯưƱƲƳƴƵƶƷƸƹƺƻƼƽƾƿǀǁǂǃǄǅǆǇǈǉǊǋǌǍǎǏǐǑǒǓǔǕǖǗǘǙǚǛǜǝǞǟǠǡǢǣǤǥǦǧǨǩǪǫǬǭǮǯǰǱǲǳǴǵǶǷǸǹǺǻǼǽǾǿȀȁȂȃȄȅȆȇȈȉȊȋȌȍȎȏȐȑȒȓȔȕȖȗȘșȚțȜȝȞȟȠȡȢȣȤȥȦȧȨȩȪȫȬȭȮȯȰȱȲȳȴȵȶȷȸȹȺȻȼȽȾȿɀɁɂɃɄɅɆɇɈɉɊɋɌɍɎɏɐɑɒɓɔɕɖɗɘəɚɛɜɝɞɟɠɡɢɣɤɥɦɧɨɩɪɫɬɭɮɯɰɱɲɳɴɵɶɷɸɹɺɻɼɽɾɿʀʁʂʃʄʅʆʇʈʉʊʋʌʍʎʏʐʑʒʓʔʕʖʗʘʙʚʛʜʝʞʟʠʡʢʣʤʥʦʧʨʩʪʫʬʭʮʯʰʱʲʳʴʵʶʷʸʹʺʻʼʽʾʿˀˁ˂˃˄˅ˆˇˈˉˊˋˌˍˎˏːˑ˒˓˔˕˖˗˘˙˚˛˜˝˞˟ˠˡˢˣˤ˥˦˧˨˩˪˫ˬ˭ˮ˯˰˱˲˳˴˵˶˷˸˹˺˻˼˽˾˿̴̵̶̷̸̡̢̧̨̛̖̗̘̙̜̝̞̟̠̣̤̥̦̩̪̫̬̭̮̯̰̱̲̳̹̺̻̼͇͈͉͍͎̀́̂̃̄̅̆̇̈̉̊̋̌̍̎̏̐̑̒̓̔̽̾̿̀́͂̓̈́͆͊͋͌̕̚ͅ͏͓͔͕͖͙͚͐͑͒͗͛ͣͤͥͦͧͨͩͪͫͬͭͮͯ͘͜͟͢͝͞͠͡ͰͱͲͳʹ͵Ͷͷ͸͹ͺͻͼͽ;Ϳ΀΁΂΃΄΅Ά·ΈΉΊ΋Ό΍ΎΏΐΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡ΢ΣΤΥΦΧΨΩΪΫάέήίΰαβγδεζηθικλμνξοπρςστυφχψωϊϋόύώϏϐϑϒϓϔϕϖϗϘϙϚϛϜϝϞϟϠϡϢϣϤϥϦϧϨϩϪϫϬϭϮϯϰϱϲϳϴϵ϶ϷϸϹϺϻϼϽϾϿЀЁЂЃЄЅІЇЈЉЊЋЌЍЎЏАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюяѐёђѓєѕіїјљњћќѝўџѠѡѢѣѤѥѦѧѨѩѪѫѬѭѮѯѰѱѲѳѴѵѶѷѸѹѺѻѼѽѾѿҀҁ҂҃҄҅҆҇҈҉ҊҋҌҍҎҏҐґҒғҔҕҖҗҘҙҚқҜҝҞҟҠҡҢңҤҥҦҧҨҩҪҫҬҭҮүҰұҲҳҴҵҶҷҸҹҺһҼҽҾҿӀӁӂӃӄӅӆӇӈӉӊӋӌӍӎӏӐӑӒӓӔӕӖӗӘәӚӛӜӝӞӟӠӡӢӣӤӥӦӧӨөӪӫӬӭӮӯӰӱӲӳӴӵӶӷӸӹӺӻӼӽӾӿԀԁԂԃԄԅԆԇԈԉԊԋԌԍԎԏԐԑԒԓԔԕԖԗԘԙԚԛԜԝԞԟԠԡԢԣԤԥԦԧԨԩԪԫԬԭԮԯ԰ԱԲԳԴԵԶԷԸԹԺԻԼԽԾԿՀՁՂՃՄՅՆՇՈՉՊՋՌՍՎՏՐՑՒՓՔՕՖՙ՚՛՜՝՞՟աբգդեզէըթժիլխծկհձղճմյնշոչպջռսվտրցւփքօֆև։֊";
@@ -107,7 +81,6 @@ const format_config = [ //after ee9 mm^4
     "avv"
 ]
 function display_volumes_stat(a) {
-
     if (a.lt("1e4")) {
         return `${formatWhole(a)} mm<sup>4</sup>`
     } else if (a.lt("1e8")) {
@@ -237,9 +210,9 @@ function e114e514() {
 function getGameSpeedText() {
     let temp = developer.timeboost * player.options.gamespeed * (player.inMM3Challenge === 8 ? 0.001 : 1);
     if (temp === 1) {
-        return "Game speed is unaltered: 1 second -> 1 second"
+        return "Game speed is unaltered: 1.000"
     } else {
-        return `Game speed is altered: 1 second -> ${formatTime.fromSeconds(temp)}`
+        return `Game speed is altered: ${temp}`
     }
 
 }
@@ -263,7 +236,7 @@ function displayStat() {
     if (player.volumes.lt("ee5")) {
         return `如果对4维体积进行单位换算，You can get ${display_volumes(player.volumes)}`
     } else if (player.volumes.lt("e1e19")) {
-        return `如果将4维体积以十进制的形式存储，那么你需要一个${formatDatabyte.fromBytes(player.volumes.logarithm(10).add(1))}大的存储设备才能将他存下。`
+        return `如果将4维体积以十进制的形式存储，那么你需要一个${formatDatabyte.fromBytes(player.volumes.logarithm(10).add(1))}大的存储设备将他存下。`
     }
 }
 
@@ -331,4 +304,7 @@ function blendWords(first, second, param) {
     if (param >= 1) return second;
     return first.substring(0, first.length * (1 - param)) +
         second.substring(second.length * (1 - param), second.length);
+}
+function becomeNaNed(){
+    gameNaNed = true;
 }

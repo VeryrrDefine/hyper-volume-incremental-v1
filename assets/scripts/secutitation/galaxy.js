@@ -34,7 +34,26 @@ const galaxy_rewards = [
     {
         req: E("5"),
         desc: "mm<sup>5</sup> reset doesn't reset mm<sup>5</sup> energies"
-    },/*
+    },
+    {
+        req: E("6"),
+        desc: "Get a 5D Dimensions multiplier based on mm<sup>4</sup> volumes",
+        get effect() {
+            return player.volumes.logarithm(2).logarithm(2).max(1)
+        },
+        get effectDisplay() {
+            return "×"+this.effect.format();
+        }
+    },{
+        req: E("10"),
+        desc: "Get a 4D Dimensions multiplier based on galaxies count",
+        get effect() {
+            return E(10).pow(shortcut.mm5.galaxies.pow(1.264454438).mul(1000))
+        },
+        get effectDisplay() {
+            return "×"+this.effect.format();
+        }
+    }/*
     {
         req: E("7"),
         desc: "1<sup>st</sup> 4D Dimensions exponentplier +0.05"
@@ -82,9 +101,39 @@ function getMM5galaxyText(){
                     a = a.concat(" galaxies, ")
                 }
                 a = a.concat(galaxy_rewards[i].desc)
+                if (galaxy_rewards[i].effectDisplay){
+                    a = a.concat("<br> Currently:");
+                    a = a.concat(galaxy_rewards[i].effectDisplay);
+                }
                 return a;
             }
         }
     }
     return a;
+}
+function statMM5galaxies() {
+    let temp1 = "";
+    let x = player.secutitation.mm5_volumes.galaxies;
+    for (let i=0;i<galaxy_rewards.length;i++){
+        if (x.gte(galaxy_rewards[i].req)){
+            let a = "";
+            a = a.concat("In ")
+            a = a.concat(galaxy_rewards[i].req.formatA())
+            if (galaxy_rewards[i].req.eq(1)){
+                a = a.concat(" galaxy, ")
+            }else{
+                a = a.concat(" galaxies, ")
+            }
+            a = a.concat(galaxy_rewards[i].desc)
+            if (galaxy_rewards[i].effectDisplay){
+                a = a.concat(" Currently:");
+                a = a.concat(galaxy_rewards[i].effectDisplay);
+            }
+            temp1 = temp1.concat(a)
+            temp1 = temp1.concat("<br>")
+            a = ""
+        }
+    }
+    return temp1;
+
 }

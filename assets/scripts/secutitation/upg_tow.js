@@ -75,14 +75,14 @@ const mm5_upg_tow = [
     [
         {
             id: 41,
-            description: "mm<sup>5</sup> gain ×15",
+            description: "mm<sup>5</sup> gain ×30",
             reqDesc: "31",
-            costDesc: "Require: 16384 mm<sup>5</sup>",
+            costDesc: "Require: 25600 mm<sup>5</sup>",
             get affordable() {
                 return hasMM5TowUpg(31) || hasMM5TowUpg(32)
             },
             get buyable() {
-                return shortcut.secu.mm5_volumes.points.gte(16384)
+                return shortcut.secu.mm5_volumes.points.gte(25600)
             }
         },
     ],
@@ -107,12 +107,41 @@ const mm5_upg_tow = [
             additionHint: " 5C1",
             description: "Unlock 1<sup>st</sup> <abbr title=\"mm^5 challenge\">5C</abbr>",
             reqDesc: "51",
-            costDesc: "Require: 32000 SP and 262144 mm<sup>5</sup>",
+            get costDesc(){
+                switch (getMM5ChalCompletionTimes(1)){
+                    case 0:
+                        return "Require: 32000 SP and 262144 mm<sup>5</sup>"
+                        
+                    default: 
+                        return "Require: K9.007e15 SP and K9.007e15 mm<sup>5</sup>"
+                    /*case 1:
+                        return "Require: 64000 SP and 524288 mm<sup>5</sup>"
+                    case 2:
+                        return "Require: 128000 SP and 1048576 mm<sup>5</sup>"
+                    case 3:
+                        return "Require: 256000 SP and 2097152 mm<sup>5</sup>"
+                    case 4:
+                        return "Require: 512000 SP and 4194304 mm<sup>5</sup>"*/
+                }
+            },
             get affordable() {
                 return hasMM5TowUpg(51)
             },
             get buyable() {
-                return shortcut.secu.points.gte(32000) && shortcut.secu.mm5_volumes.points.gte(262144)
+                switch( getMM5ChalCompletionTimes(1)){
+                    case 0:
+                        return shortcut.secu.points.gte(32000) && shortcut.secu.mm5_volumes.points.gte(262144)
+                   /* case 1:
+                        return shortcut.secu.points.gte(64000) && shortcut.secu.mm5_volumes.points.gte(524288)
+                    case 2:
+                        return shortcut.secu.points.gte(128000) && shortcut.secu.mm5_volumes.points.gte(1048576)
+                    case 3:
+                        return shortcut.secu.points.gte(256000) && shortcut.secu.mm5_volumes.points.gte(2097152)
+                    case 4:
+                        return shortcut.secu.points.gte(512000) && shortcut.secu.mm5_volumes.points.gte(4194304)
+                    */default: 
+                        return false
+                }
             
             }
         }
@@ -122,7 +151,7 @@ const mm5_upg_tow = [
             id: 71,
             additionHint: "",
             get description(){ 
-                return "你通过了5维挑战1一次！接下来是2个分叉，但是每个分叉不可DESPECABLE different endings and game run speeds"
+                return "你通过了5维挑战1一次！接下来是2个分叉"
             },
             reqDesc: "5C1",
             costDesc: "Require: Nothing",
@@ -137,14 +166,14 @@ const mm5_upg_tow = [
     [
         {
             id: 81,
-            additionHint: "Fast",
-            costDesc: "",
-            reqDesc: "71",
+            additionHint: " 4D Dim",
+            costDesc: "Weaker 1<sup>st</sup> mm<sup>4</sup> Upgrade formula, but remove softcap",
+            reqDesc: "71&!82",
             get description() {
-                return "This branch make game runs fastly(×100) and a lot of buff."
+                return ""
             },
             get affordable() {
-                return hasMM5TowUpg(71)
+                return hasMM5TowUpg(71) && !hasMM5TowUpg(82)
             },
             get buyable() {
                 return true
@@ -152,14 +181,14 @@ const mm5_upg_tow = [
         },
         {
             id: 82,
-            additionHint: "Slow",
-            costDesc: "",
-            reqDesc: "71",
+            additionHint: " 5D Dim",
+            costDesc: "All 5D Dims multiplier ^1.3",
+            reqDesc: "71&!81",
             get description() {
-                return "This branch make game runs normaly and a lot of debuff"
+                return ""
             },
             get affordable() {
-                return hasMM5TowUpg(71)
+                return hasMM5TowUpg(71) && !hasMM5TowUpg(81)
             },
             get buyable() {
                 return true

@@ -2,9 +2,6 @@ var tmp = {
 
     dimension: {
         getDimMultiplier(dimid,softcapped=true) {
-            if (player.inMM5Challenge==1){
-                return E(1)
-            }
             i = dimid - 1;
             let result = E('2')
             if (hasMM3Upg(7)){
@@ -77,6 +74,13 @@ var tmp = {
             if (hasMM5TowUpg(31)){
                 result = result.mul("ee6")
             }
+            if (player.inMM5Challenge==1){
+                temp1 = result.logarithm(10).logarithm(10)
+                temp1 = temp1.mul(0.25)
+                result = E(10).pow(E(10).pow(temp1));
+            }
+            result = result.mul(shortcut.secu.mm5_volumes.galaxies.gte(10)?galaxy_rewards[6].effect:"1");
+            
             return result;
         },
         getDimExponentplier(dimid){
@@ -96,10 +100,6 @@ var tmp = {
             }
             if (dimid===8){
                 result = result.add(0.01*getMM5ChalCompletionTimes(1))
-            }
-            if (player.inMM5Challenge == 1){
-                result = result.add(1)
-
             }
             return result
         },
@@ -145,9 +145,7 @@ var tmp = {
                 a = player.volumes.div("1e8").root(250).div(10);
             }
             
-            if (!player.inMM5Challenge==1){
-                a=a.mul(hasMM5TowUpg(51)?"1e10000":1)
-            }
+            a=a.mul(hasMM5TowUpg(51)?"1e10000":1)
             return a
                 
         },
@@ -166,12 +164,9 @@ var tmp = {
         get gain() { // gain per second
             let temp1 = player.dimensions[DIMENSIONS_POINTS][0]
             temp1 = temp1.mul(player.dimensions[DIMENSIONS_MULTI][0])
-            if (!player.inMM5Challenge==1){
-                temp1 = temp1.mul(hasMM3Upg(1) ? 1e5 : 1)
-                .mul(hasMM3Chal(7) ? "1e500" : 1)
-                .mul(hasMM5TowUpg(21) ? "1e10000" : 1)
-            
-            }
+            temp1 = temp1.mul(hasMM3Upg(1) ? 1e5 : 1)
+            .mul(hasMM3Chal(7) ? "1e500" : 1)
+            .mul(hasMM5TowUpg(21) ? "1e10000" : 1)
             temp1 = temp1.softcap(tmp.mm4.softcap1_start, tmp.mm4.softcap1_power, 'pow')
             .pow(player.dimensions[DIMENSIONS_EXPONENT][0])
                 return temp1;
@@ -183,7 +178,7 @@ var tmp = {
             return 1
         },
         get softcap1_start() {
-            return E("eeeeee10")
+            return E("eeeeeeeeeeeeeeeee10")
         }
     },
     mm35: {
@@ -235,7 +230,7 @@ var tmp = {
             let temp1 = player.volumes.clone();
             
             temp1 = temp1.logarithm(10).sub(4500000).div(500000)
-            temp1 = temp1.mul(hasMM5TowUpg(41) ? 15 : 1)
+            temp1 = temp1.mul(hasMM5TowUpg(41) ? 30 : 1)
             temp1 = temp1.floor().max(0)
             return temp1
         },
@@ -263,6 +258,10 @@ var tmp = {
 
                 //.add(player.mm3o5_volumes.points.logarithm("100").div(10).minimum("1.5")))
             result = result.pow(player.mm5_volume_dimensions[DIMENSIONS_BOUGHT][i].floor())
+            if (hasMM5TowUpg(82)){
+                result = result.pow(1.3)
+            }
+            result = result.mul(shortcut.secu.mm5_volumes.galaxies.gte(6)?galaxy_rewards[5].effect:"1");
             return result;
         },
         /*

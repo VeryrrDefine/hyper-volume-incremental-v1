@@ -4,44 +4,13 @@
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <title>Site not found &middot; #&$*%# Pages</title>
-    <link href="./assets/styles/core.css" rel="stylesheet" />
     <script>
         if (document.documentMode) {
             alert("Your browser doesn't support this game.");
             window.close();
         }
     </script>
-    <script src="./assets/scripts/technical/hotkeys.js" defer></script>
-    <script src="./assets/scripts/technical/ExpantaNum.js" defer></script>
-    <script src="./assets/scripts/technical/format_expantanum.js" defer></script>
-    <script src="./assets/scripts/technical/pako.js" defer></script>
-    <script src="./assets/scripts/technical/vue.js" defer></script>
-    <script src="./assets/scripts/temp.js" defer></script>
-    <script src="./assets/scripts/others.js" defer></script>
-
-    <script src="./assets/scripts/init.js" defer></script>
-    <script src="./assets/scripts/display.js" defer></script>
-    <script src="./assets/scripts/mm3.js" defer></script>
-    <script src="./assets/scripts/mm35.js" defer></script>
-
-    <script src="./assets/scripts/script.js" defer></script>
-    <script src="./assets/scripts/format_time.js" defer></script>
-    <script src="./assets/scripts/format_databyte.js" defer></script>
-    <script src="./assets/scripts/saves.js" defer></script>
-    <script src="./assets/scripts/hotkey.js" defer></script>
-    <script src="./assets/scripts/achievements.js" defer></script>
-    <script src="./assets/scripts/tooltip.js" defer></script>
-    <script src="./assets/scripts/newsticker.js" defer></script>
-    <script src="./assets/scripts/components.js" defer></script>
-
-    <script src="./assets/scripts/challenges/mm3_chal.js" defer></script>
-    <script src="./assets/scripts/animations.js" defer></script>
-
-    <script src="./assets/scripts/secutitation/mm5.js" defer></script>
-    <script src="./assets/scripts/secutitation/upgrades.js" defer></script>
-    <script src="./assets/scripts/secutitation/galaxy.js" defer></script>
-    <script src="./assets/scripts/secutitation/upg_tow.js" defer></script>
-    <script src="./assets/scripts/secutitation/mm5Chal.js" defer></script>
+    
 </head>
 
 <body style="margin-top: 0px;">
@@ -94,9 +63,10 @@
                     <button class="btn" @click="tabShow= '251'" :disabled="inTab(26)" v-if="player.mm3_volumes.unl">
                         Challenges
                     </button>
+                    <button class="btn" @click="tabShow = '261'" :disabled="inTab(27)" v-if="player.secutitation.secutitation_reset_times.gte(1)">Automation</button>
                     <button class="btn" @click="tabShow= '51'" :disabled="inTab(6)"
-                        v-if="player.secutitation.secutitation_reset_times.gte(1)">
-                        Secutitaion
+                        v-if="hasMM4Upg(5) ||player.secutitation.secutitation_reset_times.gte(1)">
+                        Secutitation
                     </button>
 
                     <!-- 不是哥们，这代码写的太抽象了啊 -->
@@ -122,7 +92,7 @@
                     <button class="btn" v-if="inTab(1)" @click="tabShow= '3'" :disabled="tabShow==='3'">
                         3.5D
                     </button>
-
+                    <button class="btn" v-if="inTab(1)" @click="tabShow= '4'" :disabled="tabShow==='4'">Experimental records</button>
                     <button class="btn" v-if="inTab(2)" @click="tabShow= '11'" :disabled="tabShow=='11'">
                         mm<sup>3</sup>
                         Upgrades
@@ -132,8 +102,8 @@
                         mm<sup>3</sup>
                         Challenges
                     </button>
-                    <button class="btn" v-if="inTab(26) && player.unlockedMM5ChallengeLeastOnce"
-                        @click="tabShow= '252'" :disabled="tabShow=='252'">
+                    <button class="btn" v-if="inTab(26) && player.unlockedMM5ChallengeLeastOnce" @click="tabShow= '252'"
+                        :disabled="tabShow=='252'">
                         mm<sup>5</sup>
                         Challenges
                     </button>
@@ -167,12 +137,16 @@
                     <button class="btn" v-if="inTab(6)" @click="tabShow= '53'" :disabled="tabShow=='53'">
                         Upgrades
                     </button>
-                    <button class="btn" v-if="inTab(6) && hasMM5Upg(5)" @click="tabShow= '54'" :disabled="tabShow=='54'">
+                    <button class="btn" v-if="inTab(6) && hasMM5Upg(5)" @click="tabShow= '54'"
+                        :disabled="tabShow=='54'">
                         Upgrade Tower
                     </button>
                     <!--            <button class="btn" @click="tabShow = '3'" :disabled="tabShow==='3'">3.5维</button>-->
                 </div>
                 <br />
+                <div v-if="tabShow=='4'" class="center">
+                    <exprecord></exprecord>
+                </div>
                 <div v-if="tabShow=='1'" class="center">
                     <button @click="buyAll()" class="btn">Max all</button>
                     <div v-for="dim in dimensions" v-if="tmp.mm3.confirm<3" :key="dim.id">
@@ -200,7 +174,7 @@
 
                             <button class="btn" :disabled="!buyable(dim.id)" @click="buydim(dim.id)">
                                 Cost: <span v-html="display_volumes(player.dimensions[DIMENSIONS_COST][dim.id
-                                    - 1])">114514 Yly<sup>4</sup></span>
+                                    - 1])"></span>
                             </button>
                             <button class="btn" v-if="hasMM4Upg(5)" @click="toggleAutobuyer(dim.id)">
                                 Auto: {{player.auto.includes(dim.id) ? "ON" :
@@ -339,7 +313,7 @@
                         <button class="btn" v-html="mm3doChalText()" @click="mm3HandleChallenge()"></button>
                     </p>
                     <p class="center" v-if="developer_mode">
-                        <button class="btn"  @click="mm3DevComplete()">Complete</button>
+                        <button class="btn" @click="mm3DevComplete()">Complete</button>
                     </p>
                     <table style="margin: auto">
                         <tr v-for="row in mm3_chal" ley="row.id">
@@ -362,8 +336,7 @@
                     </p>
                     <table style="margin: auto">
                         <tr v-for="row in mm5_chal" ley="row.id">
-                            <td v-for="chal in mm5_chal[row.id]" key="chal.id"
-                                v-if="chal.unlocked">
+                            <td v-for="chal in mm5_chal[row.id]" key="chal.id" v-if="chal.unlocked">
                                 <button :class="getMM5ChalClass(chal.id)" @click="mm5ShowChallenge(chal.id)">
                                     5C{{chal.id}}
                                 </button>
@@ -372,6 +345,23 @@
                     </table>
                     <div class="center">
                         <span v-html="mm5ChallengeText()"></span>
+                    </div>
+                </div>
+                <div v-if="tabShow=='261'" class="center">
+                    <div v-for="dim in dimensions">
+                        <button class="btn" v-if="hasMM4Upg(5)" @click="toggleAutobuyer(dim.id)">
+                            Automation <span v-html="EnglishOrdinals[dim.id-1]"></span> 4D Dimensions: {{player.auto.includes(dim.id) ? "ON" :
+                            "OFF"}}
+                        </button>
+                    </div>
+                            <button class="btn" v-if="player.secutitation.secutitation_reset_times.gte(1) || hasMM4Upg(8)" @click="toggleAutobuyer(9)">
+                            Auto complete mm<sup>3</sup> challenge: {{player.auto.includes(9) ? "ON" : "OFF"}}
+                        </button>
+                    <div v-if="false && player.secutitation.secutitation_reset_times.gte(1)">
+                        <div style="border:rgb(0, 255, 149) 1px solid">
+                            Automation mm<sup>3</sup> reset<br>
+                            Trigger at  <input type="text">
+                        </div>
                     </div>
                 </div>
                 <div v-if="tabShow=='13'" class="center">
@@ -403,9 +393,10 @@
                             later <br />Cost: {{mm45BuyCost(1)}} mm<sup>4.5</sup>
                         </button>
                         <button class="btn" v-if="hasMM3Upg(9)">
-                            Make 1<sup>st</sup> softcap starts ×K9.000e15 → ×K9.000e15 later <br />Cost: K9.000e15 mm<sup>4.5</sup>
+                            Make 1<sup>st</sup> softcap starts ×K9.000e15 → ×K9.000e15 later <br />Cost: K9.000e15
+                            mm<sup>4.5</sup>
                         </button>
-                            <br />
+                        <br />
 
                         <button class="btn" @click="mm45Buy(2)">
                             Make 1<sup>st</sup> 4D Dimension
@@ -460,16 +451,23 @@
                     <hr />
                     QQ: 1829752018<br />
                     Version: {{changelogs[0].version}}<br />
-                    This game uses
+                    <hr>
+                    部分新闻来源：PIR, Wind spirit creation, 反物质维度交流群, IDR, <span class="redacted">[REDACTED]</span><sup>2</sup>的服务器交流群
+                    <hr>
+                    This game was inspired by (Points Incremental Rewritten by <sup>0i00000000a7</sup>),<br> (Incremental mass rewritten by MrRedShark77), (Incremental data rewritten by seanxlx) and (Antimatter Dimensions by Hevipelle)<br>
+                    and it uses
                     <a href="https://github.com/Naruyoko/ExpantaNum.js" target="_blank">Naruyoko/ExpantaNum.js</a>
                     <a href="https://github.com/cloudytheconqueror/letter-notation-format"
                         target="_blank">cloudytheconqueror/letter-notation-format</a>
                     to handle very, very big number<br />
-                    This game uses
+                    , uses
                     <a href="https://github.com/nodeca/pako">nodeca/pako</a> to
                     handle save.<br />
 
                     <hr />
+                    <a href="./assets/website/savebank/savebank.html" target="_blank"
+                        class="game-link">Click to savebank(developing...)</a>
+                    <hr>
                     <p>
                         Support All 序数增量吧 bar-friends, you can click these
                         link to play increment-games by bar-friends
@@ -492,7 +490,7 @@
                             I was played Ar<span></span>caea for sometime
                             before.<br />
                             <del>PPT</del>PTT is measure of the player's
-                            strength，My PTT is 10.0±0.05。<del>Can you reach me?</del></span></a>,<br />
+                            strength，My PTT is 10.05 (截止到2023.7.9)。<del>Can you reach me?</del></span></a>,<br />
                     <a href="https://a262537412640768744.github.io/homework-incremental/main.html" target="_blank"
                         class="game-link">
                         Homework Incremental </a>,<br />
@@ -500,9 +498,7 @@
                         Big Number </a>,<br />
                     <a href="https://qqqe308.github.io/Anti-Anti-Softcap-Tree/111/" target="_blank" class="game-link">
                         Anti anti softcap tree </a>,<br />
-                    <a href="http://veryrrdefine.github.io/The-BYD-Tree" target="_blank" class="game-link tooltipBox">
-                        The BYD Tree<span class="tooltip">I develop this game!</span>
-                    </a><br />
+                    <br />
                     <br />
                     <p>You can play other increment-games!</p>
                     <a href="https://ivark.github.io/AntimatterDimensions" target="_blank"
@@ -511,6 +507,8 @@
                         </span></a>,<br />
                     <a href="https://seanxlx2011.github.io/" target="_blank" class="game-link">
                         <del>Infinity Dimension Rewritten</del> </a>,<br />
+                    <a href="https://jacorb90.github.io/Prestige-Tree/" target="_blank" class="game-link">
+                        The Prestige Tree </a>,<br />
                     <a href="https://patcailmemer.github.io/Ordinal-Markup" target="_blank"
                         class="game-link tooltipBox">
                         Ordinal Markup<span class="tooltip">Stop updated on Mar 23, 2021</span> </a><br />
@@ -542,17 +540,18 @@
 
                     </p>
                     <p>
-                        You spent {{formatTime.fromSeconds(player.time.eter)}}
-                        (game time) in this Eternity
+                        Your existence has spanned {{formatTime.fromSeconds(player.time.eter)}}.
+                        (game time).
                     </p>
                     <p>
-                        You spent
-                        {{formatTime.fromSeconds(player.time.real_eter)}} (real
-                        time) in this Eternity
+                        You have played for
+                        {{formatTime.fromSeconds(player.time.real_eter)}}. (real
+                        time)
                     </p>
                     <p>
                         You saw {{player.newsticker_time}} news.
                     </p>
+                    <div v-html="statMM5galaxies()"></div>
                 </div>
                 <div v-if="tabShow=='24'" class="center">
                     <button @click="toggleNewsTicker()" class="btn">
@@ -587,11 +586,11 @@
                         :class="{btn: true, anormaly: !hasMM4Upg(17) && player.secutitation.secutitation_reset_times.eq(0)}"
                         @click="doMM5resetManmade()" :disabled="!tmp.mm5.resetable">
                         Reach e5e6 mm<sup>4</sup> and e2e4 mm<sup>3</sup> to do a SECUTITATION
-                        reset, get {{tmp.mm5.gain}} mm<sup>5</sup> and {{tmp.mm5.secu_gain}} secutitaion points.
+                        reset, get {{tmp.mm5.gain}} mm<sup>5</sup> and {{tmp.mm5.secu_gain}} secutitation points.
                     </button><br>
 
-                    <button class="btn anormaly" @click="" :disabled="true">
-                        Reach 9007199254740991 K galaxies to Eternity and beat the game.
+                    <button class="btn anormaly" :disabled="true">
+                        Other times await, I need to become 
                     </button>
                 </div>
                 <div v-if="tabShow=='25'" class="center">
@@ -639,7 +638,7 @@
                         <span class="charged_text">dygm</span> in
                         <span class="ff_quark_color">Arschloch</span>
                     </p>
-                    <p class="center">You have {{player.secutitation.points}} secutitaion points.</p>
+                    <p class="center">You have {{player.secutitation.points}} secutitation points.</p>
                     <p class="center">You have {{player.secutitation.mm5_volumes.points}} mm<sup>5</sup>.</p>
                     <p class="center" style="font-size: small">
                         The SECUTITATION layer doesn't done.
@@ -668,7 +667,8 @@
 
                 </div>
                 <div v-if="tabShow=='54'" mm5>
-                    <div class="center"><button class="btn" @click="respecMM5TowUpg()">Respec, but do a mm<sup>5</sup> reset</button></div>
+                    <div class="center"><button class="btn" @click="respecMM5TowUpg()">Respec, but do a mm<sup>5</sup>
+                            reset</button></div>
                     <upgradetowers></upgradetowers>
                 </div>
                 <div v-if="tabShow=='52'" class="center" mm5>
@@ -689,10 +689,6 @@
                                 @click="buymm5dim(dim.id)">
                                 Cost: <span>{{player.mm5_volume_dimensions[DIMENSIONS_COST][dim.id-1].format()}}
                                     mm<sup>5</sup></span>
-                            </button>
-                            <button class="btn" v-if="false" @click="">
-                                Auto: {{player.auto.includes(dim.id) ? "ON" :
-                                "OFF"}}
                             </button>
                         </div>
                         <br />
@@ -725,7 +721,8 @@
                     <p>You have done {{player.achievements.length}} achievements.</p>
                     <achievements></achievements>
                 </div>
-                <div v-if="tabShow=='114511'" class="center" efreygrt>
+                <div v-if="tabShow=='114511'" class="center">
+                    <br>
                     <button class="btn" @click="speedrun(1)">
                         游戏速度 1x
                     </button>
@@ -774,9 +771,14 @@
                     <br />
                     <br>
                     <span>This is a {{wordCycle(['wordCycle',"never", "gonna", "give", "you", "up"])}} word.</span>
-                    
-                    <p style=" background: #000">我是 <span v-html='wordCycle(["傻逼", "啊米诺斯", "wlgyizhixiaomao", "\x3csup>eee\x3c/sup>"])'></span>.</p>
                     <br>
+                    <br>
+                    <br>
+                    <div style=" background: #000">
+                        <div v-for="textobj in devNews">
+                            <span v-html="textobj.text"></span>
+                        </div>
+                    </div>
                     <br>
                     <div style=" background: #000">
                         <p style="color:#fff;">This is a reactor simulation.</p>
@@ -785,7 +787,7 @@
                                 60%
                             </div>
                             <div style="width:11%;height: 100%;background: #880000">
-                                11% 
+                                11%
                             </div>
                             <div style="width:10%;height: 100%;background: rgb(122,0,86)">
                                 10%
@@ -795,7 +797,7 @@
                             </div>
                         </div>
                         <br>
-                    
+
                     </div>
                     <br>
                     <div>
@@ -883,8 +885,10 @@
         </div>
     </div>
     <div style="position: absolute; left: -999999px; top: -999999px"></div>
-    <!-- preloading -->
-    <br />
+    <!-- preloading
+    <p id="thisistherealnews" style="width:fit-content">这才是真正的滚动新闻</p>
+    --> <br />
+
 </body>
 
 </html>

@@ -8,16 +8,16 @@ ExpantaNum.prototype.format = function (){
     return format(this);
 }
 ExpantaNum.prototype.formatA = function (){
-    return formatA(this);
+    return  gameNaNed ? "NaN" : formatA(this);
 }
 function formatA(...args){
-    return format(...args)
+    return gameNaNed ? "NaN" : format(...args)
 }
 function formatWholeA(...args){
-    return formatWhole(...args)
+    return gameNaNed ? "NaN" : formatWhole(...args)
 }
 function formatGainA(...args){
-    return formatGain(...args)
+    return gameNaNed ? "NaN OoM^^2" : formatGain(...args)
 }
 function softcap(value,start,power,mode,dis=false){
     var x = value.clone()
@@ -70,6 +70,14 @@ function ENify(a) {
     return b
 }
 
+function fromCharCodes(list){
+    let result = ""
+    for (const a of list){
+        result += String.fromCharCode(a)
+    }
+    return result
+}
+
 const EE5 = E("ee5");
 const EE10 = E("ee10");
 const EE1000 = E("ee1000");
@@ -79,4 +87,3 @@ const ENDGAME= E("e1.847e9");
 const LY = E("9454254955488000000");
 const UNI = LY.mul("9.3e10");
 const mm5_scale = [2,8,32,128,512,2048,8192,32768]
-
