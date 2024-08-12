@@ -320,6 +320,9 @@ function hard_reset() {
 
 
 function buyable(dim) {
+    if (!tmp.dimension.canbuyDim(dim)){
+        return false
+    }
     let temp1 = player.dimensions[DIMENSIONS_COST][dim - 1]
     if (player.inMM3Challenge === 5 && between(7,dim,8)){
         return false;
@@ -335,18 +338,24 @@ function import_str(pl) {
     location.href = location.href;
 }
 
-function buydim(dim) {
+function buydim(dim,single=false) {
+    if (single){
+        if (player.volumes.gte(player.dimensions[DIMENSIONS_COST][dim - 1])){
+            player.dimensions[DIMENSIONS_BOUGHT][dim - 1] = player.dimensions[DIMENSIONS_BOUGHT][dim - 1].add(1);
+            return true;
+        }
+    }
     if (player.inMM3Challenge === 5 && between(7,dim,8)){
         return false;
     }
     if (player.volumes.gte(player.dimensions[DIMENSIONS_COST][dim - 1])) {
-        let temp1 = player.volumes.logarithm(10).div(dim)
-        let temp2 = (player.dimensions[DIMENSIONS_COST][dim - 1]).logarithm(10).div(dim)
+        let temp1 = player.volumes.logarithm(10).div(dim).mul(hasMM5TowUpg(91) ? 0.9 : 1)
+        let temp2 = (player.dimensions[DIMENSIONS_COST][dim - 1]).logarithm(10).div(dim).mul(hasMM5TowUpg(91) ? 0.9 : 1)
         let bought_now = player.dimensions[DIMENSIONS_BOUGHT][dim - 1];
         let buycount = temp1.sub(temp2).ceil();
         let temp3 = buycount.clone();
 
-        player.volumes = player.volumes.sub(E.pow(10, temp2.mul(dim)))
+        player.volumes = player.volumes.sub(E.pow(10, temp2.mul(dim).div(hasMM5TowUpg(91) ? 0.9 : 1)))
         if (buycount.lt(1)){
             buycount = E(1)
         }
@@ -413,7 +422,7 @@ function calc_cost(dimid, count) {
     // count before buy
     // 1st dimension dimid = 0
     let temp1 = dim_base_price[dimid]
-        .mul(dim_incre[dimid].pow(count.floor()));
+        .mul(dim_incre[dimid].mul(hasMM5TowUpg(91) ? 0.9 : 1).pow(count.floor()));
     if (player.inMM3Challenge===5 && between(6,dimid,7)){
         temp1 = E.expansion(10,1e15)
     }
@@ -450,10 +459,9 @@ function loop() {
             save();
             clearInterval(window.qqq);
             clearInterval(window.www);
-            setTimeout(function(){
-                let urlarray = ["https://www.bilibili.com/video/BV1Jg411o7J4","https://www.bilibili.com/video/BV15C4y1K7PN"];
-                location.href = urlarray[Math.floor(Math.random()*urlarray.length)]
-            },1000);
+            let urlarray = ["https://www.bilibili.com/video/BV1Jg411o7J4","https://www.bilibili.com/video/BV15C4y1K7PN"];
+            location.href = urlarray[Math.floor(Math.random()*urlarray.length)]
+            
         }
         if (window.global_diff>0.3333){
             getAch(52)
@@ -764,12 +772,12 @@ function load() {
         last_frame = Date.now();
         fix();
         player.offlinedTime += (this_frame - player.time_now)
-        if ((this_frame - player.time_now) < 0){ // 穿越？
+       /* if ((this_frame - player.time_now) < 0){ // 穿越？
             localStorage.setItem("backup",formatsave.encode(player));
             console.log("Bye")
             hard_reset();
 
-        }
+        }*/
         let temp = Math.random();
         /*
         mm3FixOldSaves();

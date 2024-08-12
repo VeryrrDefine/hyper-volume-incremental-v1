@@ -35,7 +35,7 @@ var mm3_challenges = [
         complete_requirement: E("e2.06e3"),
         reward: "the cap of mm<sup>3.5</sup> volume become higher based of mm<sup>3</sup> volumes.",
         get reward_effect(){
-            return player.mm3_volumes.points.pow(100)
+            return shortcut.secu.secutitation_reset_times.gte(200) ? E(10).expansion(Number.MAX_SAFE_INTEGER) : player.mm3_volumes.points.pow(100)
         },
         get effectDisplay(){
             return "×" + this.reward_effect.format() + " later"

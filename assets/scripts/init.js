@@ -83,7 +83,7 @@ const EE10 = E("ee10");
 const EE1000 = E("ee1000");
 const EEE8 = E("eee8");
 
-const ENDGAME= E("e1.847e9");
+const ENDGAME= E("1e293605500");
 const LY = E("9454254955488000000");
 const UNI = LY.mul("9.3e10");
 const mm5_scale = [2,8,32,128,512,2048,8192,32768]

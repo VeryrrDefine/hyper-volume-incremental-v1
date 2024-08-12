@@ -122,7 +122,7 @@ function setToZero(array, height) {
     if (i<array.length) array[i][1] = 0
 }
 
-function format(num, precision=2, small=false) {
+function formatFE(num, precision=2, small=false) {
     if (ExpantaNum.isNaN(num)) return "NaN"
     let precision2 = Math.max(3, precision) // for e
     let precision3 = Math.max(4, precision) // for F, G, H
@@ -130,7 +130,7 @@ function format(num, precision=2, small=false) {
     num = new ExpantaNum(num)
     let array = num.array
     if (num.abs().lt(1e-308)) return (0).toFixed(precision)
-    if (num.sign < 0) return "-" + format(num.neg(), precision)
+    if (num.sign < 0) return "-" + formatFE(num.neg(), precision)
     if (num.isInfinite()) return "Infinite"
     if (num.lt("0.001")) {
       let exponent = num.log10().floor()
@@ -169,11 +169,11 @@ function format(num, precision=2, small=false) {
         let rep = arraySearch(array, 2)
         if (rep >= 1) {
             setToZero(array, 2)
-            return "F".repeat(rep) + format(array, precision)
+            return "F".repeat(rep) + formatFE(array, precision)
         }
         let n = arraySearch(array, 1) + 1
         if (num.gte("10^^" + (n + 1))) n += 1
-        return "F" + format(n, precision)
+        return "F" + formatFE(n, precision)
     }
     else if (num.lt("10^^^1000000")) { // 1G5 ~ G1,000,000
         let pol = polarize(array)
@@ -183,11 +183,11 @@ function format(num, precision=2, small=false) {
         let rep = arraySearch(array, 3)
         if (rep >= 1) {
             setToZero(array, 3)
-            return "G".repeat(rep) + format(array, precision)
+            return "G".repeat(rep) + formatFE(array, precision)
         }
         let n = arraySearch(array, 2) + 1
         if (num.gte("10^^^" + (n + 1))) n += 1
-        return "G" + format(n, precision)
+        return "G" + formatFE(n, precision)
     }
     else if (num.lt("10^^^^1000000")) { // 1H5 ~ H1,000,000
         let pol = polarize(array)
@@ -197,11 +197,11 @@ function format(num, precision=2, small=false) {
         let rep = arraySearch(array, 4)
         if (rep >= 1) {
             setToZero(array, 4)
-            return "H".repeat(rep) + format(array, precision)
+            return "H".repeat(rep) + formatFE(array, precision)
         }
         let n = arraySearch(array, 3) + 1
         if (num.gte("10^^^^" + (n + 1))) n += 1
-        return "H" + format(n, precision)
+        return "H" + formatFE(n, precision)
     }
     else if (num.lt("J1000000")) { // 5J4 ~ J1,000,000
         let pol = polarize(array, true)
@@ -209,10 +209,10 @@ function format(num, precision=2, small=false) {
     }
     else if (num.lt("J^4 10")) { // J1,000,000 ~ 1K5
         let rep = num.layer
-        if (rep >= 1) return "J".repeat(rep) + format(array, precision)
+        if (rep >= 1) return "J".repeat(rep) + formatFE(array, precision)
         let n = array[array.length-1][0]
         if (num.gte("J" + (n + 1))) n += 1
-        return "J" + format(n, precision)
+        return "J" + formatFE(n, precision)
     }
     else if (num.lt("J^999999 10")) { // 1K5 ~ K1,000,000
         // https://googology.wikia.org/wiki/User_blog:PsiCubed2/Letter_Notation_Part_II
@@ -246,17 +246,22 @@ function format(num, precision=2, small=false) {
     // K1,000,000 and beyond
     let n = num.layer + 1
     if (num.gte("J^" + n + " 10")) n += 1
-    if (n < 2**53){
-        return "K" + commaFormat(E(n));
-    }else{
-        return "Infinite"
-    }
+    return "K" + formatFE(E(n));
 }
 
+function formatWholeFE(num) {
+    return formatFE(num, 0)
+}
+function formatSmallFE(num, precision=2) { 
+    return formatFE(num, precision, true)    
+}
+
+function format(...args){
+    return formatFE(...args)
+}
 function formatWhole(num) {
-    return format(num, 0)
+    return formatWholeFE(num, 0)
 }
-
 function formatSmall(num, precision=2) { 
-    return format(num, precision, true)    
+    return formatSmallFE(num, precision, true)    
 }

@@ -194,6 +194,38 @@ const mm5_upg_tow = [
                 return true
             }
         },
+    ],
+    [
+        {
+            id: 91,
+            additionHint: " 4D Dim",
+            costDesc: "580000 mm<sup>5</sup> & e1.000e10 mm<sup>3.5</sup>",
+            reqDesc: "81&!82",
+            get description() {
+                return "4D Dimensions Cost Scale ×0.99"
+            },
+            get affordable() {
+                return hasMM5TowUpg(81) && !hasMM5TowUpg(82)
+            },
+            get buyable() {
+                return shortcut.mm5.points.gte(580000) && player.mm35_volumes.points.gte("e5e9")
+            }
+        },
+        {
+            id: 92,
+            additionHint: " 5D Dim",
+            costDesc: "All 5D Dims multiplier ^1.3",
+            reqDesc: "71&!81",
+            get description() {
+                return "580000 mm<sup>5</sup> & e5.000e9 mm<sup>3.5</sup>"
+            },
+            get affordable() {
+                return hasMM5TowUpg(82) && !hasMM5TowUpg(81)
+            },
+            get buyable() {
+                return shortcut.mm5.points.gte(580000) && player.mm35_volumes.points.gte("e5e9")
+            }
+        },
     ]
 ]
 /*

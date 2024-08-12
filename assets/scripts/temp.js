@@ -83,6 +83,13 @@ var tmp = {
             
             return result;
         },
+        canbuyDim(dim){
+            if (player.dimensions[DIMENSIONS_COST][dim-1].gte(E.pow(10,Number.MAX_SAFE_INTEGER))){
+                return false;
+            }
+            return true;
+        }
+        ,
         getDimExponentplier(dimid){
             let result = E(1)
             if (dimid === 8 && hasMM5Upg(1)){
@@ -178,12 +185,12 @@ var tmp = {
             return 1
         },
         get softcap1_start() {
-            return E("eeeeeeeeeeeeeeeee10")
+            return E("J^11451191 999")
         }
     },
     mm35: {
-        get replicatePerTick() {
-            let mult = E(1).add(E(0.1).mul(player.volumes.add(1).logarithm(10).div(80).max(1)).mul(diff))
+        get replicatePerSecond() {
+            let mult = E(1).add(E(0.1).mul(player.volumes.add(1).logarithm(10).div(80).max(1)))
 
             if (hasMM3Upg(4)){
                 mult = mult.pow(10)
@@ -192,7 +199,7 @@ var tmp = {
                 mult = E(1)
 
             }
-            return mult
+            return mult.pow(tmp.mm5.mm35replicatemore)
         },
         get effect_to_dimensions() {
 
@@ -234,9 +241,16 @@ var tmp = {
             temp1 = temp1.floor().max(0)
             return temp1
         },
+        get nextmm5At(){
+            return E.pow(10,this.gain.add(1).div(hasMM5TowUpg(41) ? 30 : 1).mul(500000).add(4500000))
+        },
         get secu_gain(){
             let temp1 = player.mm3_volumes.points.clone();
             return temp1.logarithm(10).sub(15000).div(5000).floor().max(0)
+
+        },
+        get nextSecuAt(){
+            return E.pow(10,this.secu_gain.add(1).mul(5000).add(15000));
 
         },
         get resetable(){
@@ -274,6 +288,10 @@ var tmp = {
         7st dim x270
         8st dim x1729
         */
+        get mm35replicatemore(){
+            return shortcut.secu.secutitation_reset_times.gte(200) ? shortcut.mm5.points.max(1) : 1
+        },
+
         dimcost(dimid){ // 1-8
             return E.pow(mm5_scale[dimid-1],player.mm5_volume_dimensions[DIMENSIONS_BOUGHT][dimid-1].add(1))
         },

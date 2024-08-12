@@ -10,7 +10,37 @@
             window.close();
         }
     </script>
-    
+
+    <link rel="stylesheet" href="./assets/styles/core.css">
+
+    <script src="./assets/scripts/technical/ExpantaNum.js" defer></script>
+    <script src="./assets/scripts/technical/format_expantanum.js" defer></script>
+    <script src="./assets/scripts/technical/hotkeys.js" defer></script>
+    <script src="./assets/scripts/technical/pako.js" defer></script>
+    <script src="./assets/scripts/technical/vue.js" defer></script>
+    <script src="./assets/scripts/display.js" defer></script>
+    <script src="./assets/scripts/animations.js" defer></script>
+    <script src="./assets/scripts/components.js" defer></script>
+    <script src="./assets/scripts/exprecord.js" defer></script>
+    <script src="./assets/scripts/format_databyte.js" defer></script>
+    <script src="./assets/scripts/format_time.js" defer></script>
+    <script src="./assets/scripts/hotkey.js" defer></script>
+    <script src="./assets/scripts/init.js" defer></script>
+    <script src="./assets/scripts/mm3.js" defer></script>
+    <script src="./assets/scripts/mm35.js" defer></script>
+    <script src="./assets/scripts/newsticker.js" defer></script>
+    <script src="./assets/scripts/others.js" defer></script>
+    <script src="./assets/scripts/saves.js" defer></script>
+    <script src="./assets/scripts/script.js" defer></script>
+    <script src="./assets/scripts/temp.js" defer></script>
+    <script src="./assets/scripts/tooltip.js" defer></script>
+    <script src="./assets/scripts/challenges/mm3_chal.js" defer></script>
+    <script src="./assets/scripts/secutitation/galaxy.js" defer></script>
+    <script src="./assets/scripts/secutitation/mm5.js" defer></script>
+    <script src="./assets/scripts/secutitation/mm5Chal.js" defer></script>
+    <script src="./assets/scripts/secutitation/upg_tow.js" defer></script>
+    <script src="./assets/scripts/secutitation/upgrades.js" defer></script>
+    <script src="./assets/scripts/achievements.js" defer></script>
 </head>
 
 <body style="margin-top: 0px;">
@@ -36,9 +66,10 @@
                         <small>You have {{formatA(player.mm3_volumes.points)}}
                             mm<sup>3</sup>.</small>
                     </p>
+                    <!-- Wow, it's a nice number! -->
                     <p class="center" v-if="player.secutitation.secutitation_reset_times.gte(1)">
                         <small>You have {{formatA(player.secutitation.mm5_volumes.points)}}
-                            mm<sup>5</sup>.</small>
+                            mm<sup>5</sup><span v-if="shortcut.secu.secutitation_reset_times.gte(200)">, make mm<sup>3.5</sup> replicate speed ×{{tmp.mm5.mm35replicatemore}}</span>.</small>
                     </p>
                     <p class="center">
                         <small v-html="getGameSpeedText()">Game speed is altered: 1 second -> 114514
@@ -63,14 +94,13 @@
                     <button class="btn" @click="tabShow= '251'" :disabled="inTab(26)" v-if="player.mm3_volumes.unl">
                         Challenges
                     </button>
-                    <button class="btn" @click="tabShow = '261'" :disabled="inTab(27)" v-if="player.secutitation.secutitation_reset_times.gte(1)">Automation</button>
+                    <button class="btn" @click="tabShow = '261'" :disabled="inTab(27)"
+                        v-if="player.secutitation.secutitation_reset_times.gte(1)">Automation</button>
                     <button class="btn" @click="tabShow= '51'" :disabled="inTab(6)"
                         v-if="hasMM4Upg(5) ||player.secutitation.secutitation_reset_times.gte(1)">
                         Secutitation
                     </button>
 
-                    <!-- 不是哥们，这代码写的太抽象了啊 -->
-                    <!-- 专挑114行的我  --AImixAE -->
                     <button class="btn" @click="tabShow= '21'" :disabled="inTab(3)">
                         Options
                     </button>
@@ -92,7 +122,8 @@
                     <button class="btn" v-if="inTab(1)" @click="tabShow= '3'" :disabled="tabShow==='3'">
                         3.5D
                     </button>
-                    <button class="btn" v-if="inTab(1)" @click="tabShow= '4'" :disabled="tabShow==='4'">Experimental records</button>
+                    <button class="btn" v-if="inTab(1)" @click="tabShow= '4'" :disabled="tabShow==='4'">Experimental
+                        records</button>
                     <button class="btn" v-if="inTab(2)" @click="tabShow= '11'" :disabled="tabShow=='11'">
                         mm<sup>3</sup>
                         Upgrades
@@ -140,6 +171,10 @@
                     <button class="btn" v-if="inTab(6) && hasMM5Upg(5)" @click="tabShow= '54'"
                         :disabled="tabShow=='54'">
                         Upgrade Tower
+                    </button>
+                    <button class="btn" v-if="inTab(6) && app.developer_mode" @click="tabShow= '55'"
+                        :disabled="tabShow=='55'">
+                        5D Cube
                     </button>
                     <!--            <button class="btn" @click="tabShow = '3'" :disabled="tabShow==='3'">3.5维</button>-->
                 </div>
@@ -262,7 +297,7 @@
                             per second!
                         </p>
                         <p>
-                            <small>×{{tmp.mm35.replicatePerTick.pow(E(1).div(diff)).formatA()}}
+                            <small>×{{tmp.mm35.replicatePerSecond.formatA()}}
                                 per second</small>
                         </p>
                         <p>
@@ -350,17 +385,19 @@
                 <div v-if="tabShow=='261'" class="center">
                     <div v-for="dim in dimensions">
                         <button class="btn" v-if="hasMM4Upg(5)" @click="toggleAutobuyer(dim.id)">
-                            Automation <span v-html="EnglishOrdinals[dim.id-1]"></span> 4D Dimensions: {{player.auto.includes(dim.id) ? "ON" :
+                            Automation <span v-html="EnglishOrdinals[dim.id-1]"></span> 4D Dimensions:
+                            {{player.auto.includes(dim.id) ? "ON" :
                             "OFF"}}
                         </button>
                     </div>
-                            <button class="btn" v-if="player.secutitation.secutitation_reset_times.gte(1) || hasMM4Upg(8)" @click="toggleAutobuyer(9)">
-                            Auto complete mm<sup>3</sup> challenge: {{player.auto.includes(9) ? "ON" : "OFF"}}
-                        </button>
+                    <button class="btn" v-if="player.secutitation.secutitation_reset_times.gte(1) || hasMM4Upg(8)"
+                        @click="toggleAutobuyer(9)">
+                        Auto complete mm<sup>3</sup> challenge: {{player.auto.includes(9) ? "ON" : "OFF"}}
+                    </button>
                     <div v-if="false && player.secutitation.secutitation_reset_times.gte(1)">
                         <div style="border:rgb(0, 255, 149) 1px solid">
                             Automation mm<sup>3</sup> reset<br>
-                            Trigger at  <input type="text">
+                            Trigger at <input type="text">
                         </div>
                     </div>
                 </div>
@@ -452,9 +489,12 @@
                     QQ: 1829752018<br />
                     Version: {{changelogs[0].version}}<br />
                     <hr>
-                    部分新闻来源：PIR, Wind spirit creation, 反物质维度交流群, IDR, <span class="redacted">[REDACTED]</span><sup>2</sup>的服务器交流群
+                    部分新闻来源：PIR, Wind spirit creation, 反物质维度交流群, IDR, <span
+                        class="redacted">[REDACTED]</span><sup>2</sup>的服务器交流群
                     <hr>
-                    This game was inspired by (Points Incremental Rewritten by <sup>0i00000000a7</sup>),<br> (Incremental mass rewritten by MrRedShark77), (Incremental data rewritten by seanxlx) and (Antimatter Dimensions by Hevipelle)<br>
+                    This game was inspired by (Points Incremental Rewritten by <sup>0i00000000a7</sup>),<br>
+                    (Incremental mass rewritten by MrRedShark77), (Incremental data rewritten by seanxlx) and
+                    (Antimatter Dimensions by Hevipelle)<br>
                     and it uses
                     <a href="https://github.com/Naruyoko/ExpantaNum.js" target="_blank">Naruyoko/ExpantaNum.js</a>
                     <a href="https://github.com/cloudytheconqueror/letter-notation-format"
@@ -465,8 +505,8 @@
                     handle save.<br />
 
                     <hr />
-                    <a href="./assets/website/savebank/savebank.html" target="_blank"
-                        class="game-link">Click to savebank(developing...)</a>
+                    <a href="./assets/website/savebank/savebank.html" target="_blank" class="game-link">Click to
+                        savebank(developing...)</a>
                     <hr>
                     <p>
                         Support All 序数增量吧 bar-friends, you can click these
@@ -580,17 +620,20 @@
                         v-model.number="player.sound_volume" />
                 </div>
                 <div v-if="tabShow=='41'" class="center">
+                    
                     <button class="btn" @click="doMM3resetManmade()" :disabled="!tmp.mm3.resetable"
-                        v-html="getMM3resetButton()"></button><br>
+                        v-html="getMM3resetButton()"></button>
                     <button
                         :class="{btn: true, anormaly: !hasMM4Upg(17) && player.secutitation.secutitation_reset_times.eq(0)}"
                         @click="doMM5resetManmade()" :disabled="!tmp.mm5.resetable">
                         Reach e5e6 mm<sup>4</sup> and e2e4 mm<sup>3</sup> to do a SECUTITATION
                         reset, get {{tmp.mm5.gain}} mm<sup>5</sup> and {{tmp.mm5.secu_gain}} secutitation points.
+                        (Next 1 mm<sup>5</sup> at {{format(tmp.mm5.nextmm5At)}} mm<sup>4</sup>)<br>
+                        (Next 1 SP at {{format(tmp.mm5.nextSecuAt)}} mm<sup>3</sup>)
                     </button><br>
 
                     <button class="btn anormaly" :disabled="true">
-                        Other times await, I need to become 
+                        Other times await, I need to become
                     </button>
                 </div>
                 <div v-if="tabShow=='25'" class="center">
@@ -635,8 +678,42 @@
                 <div v-if="tabShow=='51'" mm5>
                     <p class="center" v-if="developer_mode">
                         Nobody knows I broke myself in myself, broke
-                        <span class="charged_text">dygm</span> in
-                        <span class="ff_quark_color">Arschloch</span>
+                        <span class="charged_text">返せ！返せ！ボクの家族を👿👿
+                            kaese kaese boku no ka zokuwo 
+                            
+                            悪の手から未来の欠片を取り返す😭💔💔
+                            aku no teka ra mirai no ka ke ra(u) o
+                            to ri ka e su(sa) 
+                            
+                            ボクの使命だこの身の全てが滅びようとも😡✊
+                            boku no shi meida  kono mino subete ga hono biyou do mo
+                            
+                            返せ！返せ！ボクの家族を👿👿 
+                            kaese kaese boku no ka zokuwo
+                            
+                            0419 必ず見つけだして😎👉
+                            zeroyon ichikyu kanarazu mitsu keda (shi te)(o)
+                            
+                            また幸せな温もりをこの鉄の肌で感じたい😫🤲💞💞
+                            mata (kou saki sachi)(shi nya wa) sena nuku mo(ri)(ryo) kono tetsu no hada de kan ji tai</span> in (/mop/) (/xoçi/)
+                        <span class="ff_quark_color">返せ！返せ！ボクの家族を👿👿
+                            kaese kaese boku no ka zokuwo 
+                            
+                            悪の手から未来の欠片を取り返す😭💔💔
+                            aku no teka ra mirai no ka ke ra(u) o
+                            to ri ka e su(sa) 
+                            
+                            ボクの使命だこの身の全てが滅びようとも😡✊
+                            boku no shi meida  kono mino subete ga hono biyou do mo
+                            
+                            返せ！返せ！ボクの家族を👿👿 
+                            kaese kaese boku no ka zokuwo
+                            
+                            0419 必ず見つけだして😎👉
+                            zeroyon ichikyu kanarazu mitsu keda (shi te)(o)
+                            
+                            また幸せな温もりをこの鉄の肌で感じたい😫🤲💞💞
+                            mata (kou saki sachi)(shi nya wa) sena nuku mo(ri)(ryo) kono tetsu no hada de kan ji tai</span>
                     </p>
                     <p class="center">You have {{player.secutitation.points}} secutitation points.</p>
                     <p class="center">You have {{player.secutitation.mm5_volumes.points}} mm<sup>5</sup>.</p>
@@ -663,13 +740,23 @@
                         <p>Secutitation 7 times: You start with all mm<sup>3</sup> challenges.
                         </p>
                         <p>Secutitation 10 times: You gain 100% of mm<sup>3</sup> volumes when you can reset.</p>
+                        <p>Secutitation 200 times: mm<sup>3.5</sup> cap is removed, mm<sup>3.5</sup> replicate speed be fast based on mm<sup>5</sup> volumes.</p>
                     </div>
 
                 </div>
                 <div v-if="tabShow=='54'" mm5>
-                    <div class="center"><button class="btn" @click="respecMM5TowUpg()">Respec, but do a mm<sup>5</sup>
-                            reset</button></div>
+                    <div class="center">
+                        <button class="btn" @click="respecMM5TowUpg()">
+                            Respec, but do a mm<sup>5</sup> reset
+                        </button>
+                    </div>
                     <upgradetowers></upgradetowers>
+
+                </div>
+                <div v-if="tabShow=='55'" mm5>
+                    <div class="center">
+                        <p>Your 5D cube is 0 mm long, 0 mm weigh, 0 mm high, 0 mm moph , 0 mm xofjhi </p>
+                    </div>
                 </div>
                 <div v-if="tabShow=='52'" class="center" mm5>
                     <p>You have <span
@@ -888,7 +975,5 @@
     <!-- preloading
     <p id="thisistherealnews" style="width:fit-content">这才是真正的滚动新闻</p>
     --> <br />
-
 </body>
-
 </html>
