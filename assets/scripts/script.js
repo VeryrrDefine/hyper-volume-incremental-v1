@@ -1,4 +1,6 @@
 ﻿"use strict";
+
+var parallelUniverseName = "volume-incremental";
 /*
 try{
     console.log(2n**5n)
@@ -268,6 +270,12 @@ function hard_reset() {
             challenges5x: [],
             upgrades: [],
             towerUpgrades: [],
+            tower: {
+                fromMM3: E(0),
+                fromMM4: E(0),
+                fromMM5: E(0),
+                spent: E(0)
+            },
             secutitation_reset_times: E(0)
         },
         auto: [],
@@ -349,13 +357,12 @@ function buydim(dim,single=false) {
         return false;
     }
     if (player.volumes.gte(player.dimensions[DIMENSIONS_COST][dim - 1])) {
-        let temp1 = player.volumes.logarithm(10).div(dim).mul(hasMM5TowUpg(91) ? 0.9 : 1)
-        let temp2 = (player.dimensions[DIMENSIONS_COST][dim - 1]).logarithm(10).div(dim).mul(hasMM5TowUpg(91) ? 0.9 : 1)
+        let temp1 = player.volumes.logarithm(tmp.dimension.getDimScale(dim))
+        let temp2 = (player.dimensions[DIMENSIONS_COST][dim - 1]).logarithm(tmp.dimension.getDimScale(dim))
         let bought_now = player.dimensions[DIMENSIONS_BOUGHT][dim - 1];
         let buycount = temp1.sub(temp2).ceil();
         let temp3 = buycount.clone();
 
-        player.volumes = player.volumes.sub(E.pow(10, temp2.mul(dim).div(hasMM5TowUpg(91) ? 0.9 : 1)))
         if (buycount.lt(1)){
             buycount = E(1)
         }
@@ -747,17 +754,92 @@ function fix() {/*
     if (player.secutitation.towerUpgrades === void 0){
         player.secutitation.towerUpgrades = []
     }
+    if (player.secutitation.tower === void 0){
+        player.secutitation.tower = {
+            fromMM3: E(0),
+            fromMM4: E(0),
+            fromMM5: E(0),
+            spent: E(0)
+        }
+    }
     if (player.dimensions[DIMENSIONS_EXPONENT] === void 0){
         player.dimensions[DIMENSIONS_EXPONENT] = [E(1), E(1), E(1), E(1), E(1), E(1), E(1), E(1)]
     }
 
     player.lastTab = player.lastTab.toNumber().toString()
 }
+var parallelUniverseId = 1
+function goParaUni(id){
+    if (parallelUniverseId==id){
+        alert("You're currently in this parallel universe")
+        return;
+    }
+    else if(confirm("Are you sure you want to go to Parallel Universe #"+id.toString())){
+        save()
+        localStorage.setItem("volume-incremental-parallel-universe", Number(id))
+        location.href = location.href
 
+    }
+}
+function delParaUni(id){
+    if(confirm("Are you sure you want to delete Parallel Universe #"+id.toString()+"?")){
+        let temp2 = "volume-incremental";
+        let temp1 = id
+        if (temp1 > 1){
+            temp2 = temp2.concat("-"+temp1.toString())
+        }
+        localStorage.removeItem(temp2)
+
+    }
+}
+function getParaUniState(id){
+    if (id== parallelUniverseId){
+        return "Parallel Universe #"+id.toString()+" Volumes: "+player.volumes.format()+" mm<sup>4</sup>"
+    }
+    let temp1
+    switch(id){
+        case 1:
+            temp1 = localStorage.getItem("volume-incremental")
+            if (!temp1 || temp1===null){
+                return "Parallel Universe #1 Volumes: Uninited"
+            }else{
+                return "Parallel Universe #1 Volumes: "+ E(JSON.parse(temp1).volumes).format() + " mm<sup>4</sup>"
+            }
+            
+        case 2:
+            temp1 = localStorage.getItem("volume-incremental-2")
+            if (!temp1 || temp1===null){
+                return "Parallel Universe #2 Volumes: Uninited"
+            }else{
+                return "Parallel Universe #2 Volumes: "+E(JSON.parse(temp1).volumes).format() + " mm<sup>4</sup>"
+            }
+            
+        case 3:
+            temp1 = localStorage.getItem("volume-incremental-3")
+            if (!temp1 || temp1===null){
+                return "Parallel Universe #3 Volumes: Uninited"
+            }else{
+                return "Parallel Universe #3 Volumes: "+ E(JSON.parse(temp1).volumes).format() + " mm<sup>4</sup>"
+            }
+
+    }
+}
 function load() {
     try {
+        let temp1 = Number(localStorage.getItem("volume-incremental-parallel-universe"))
+        if (temp1 == 0 || Number.isNaN(temp1)){
+            localStorage.setItem("volume-incremental-parallel-universe", 1)
+            temp1 = 1
+        }
+        parallelUniverseId = temp1;
+
+
         hard_reset();
-        let loadplayer = JSON.parse(localStorage.getItem("volume-incremental"));
+        parallelUniverseName = "volume-incremental";
+        if (temp1 > 1){
+            parallelUniverseName = parallelUniverseName.concat("-"+temp1.toString())
+        }
+        let loadplayer = JSON.parse(localStorage.getItem(parallelUniverseName));
         let loaddeveloper = JSON.parse(localStorage.getItem("developerSettings"));
         if (loadplayer != null) {
             if (loadplayer.version != player.version) {

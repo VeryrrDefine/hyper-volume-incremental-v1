@@ -30,8 +30,8 @@
     <script src="./assets/scripts/mm35.js" defer></script>
     <script src="./assets/scripts/newsticker.js" defer></script>
     <script src="./assets/scripts/others.js" defer></script>
-    <script src="./assets/scripts/saves.js" defer></script>
     <script src="./assets/scripts/script.js" defer></script>
+    <script src="./assets/scripts/saves.js" defer></script>
     <script src="./assets/scripts/temp.js" defer></script>
     <script src="./assets/scripts/tooltip.js" defer></script>
     <script src="./assets/scripts/challenges/mm3_chal.js" defer></script>
@@ -88,7 +88,7 @@
                     <button class="btn" @click="tabShow= '41'" :disabled="inTab(5)" v-if="player.mm3_volumes.unl">
                         Reset
                     </button>
-                    <button class="btn" @click="tabShow= '11'" :disabled="inTab(2)" v-if="player.mm3_volumes.unl">
+                    <button class="btn mm3btn" @click="tabShow= '11'" :disabled="inTab(2)" v-if="player.mm3_volumes.unl">
                         3D Volumes
                     </button>
                     <button class="btn" @click="tabShow= '251'" :disabled="inTab(26)" v-if="player.mm3_volumes.unl">
@@ -96,7 +96,7 @@
                     </button>
                     <button class="btn" @click="tabShow = '261'" :disabled="inTab(27)"
                         v-if="player.secutitation.secutitation_reset_times.gte(1)">Automation</button>
-                    <button class="btn" @click="tabShow= '51'" :disabled="inTab(6)"
+                    <button class="btn mm5btn" @click="tabShow= '51'" :disabled="inTab(6)"
                         v-if="hasMM4Upg(5) ||player.secutitation.secutitation_reset_times.gte(1)">
                         Secutitation
                     </button>
@@ -124,21 +124,21 @@
                     </button>
                     <button class="btn" v-if="inTab(1)" @click="tabShow= '4'" :disabled="tabShow==='4'">Experimental
                         records</button>
-                    <button class="btn" v-if="inTab(2)" @click="tabShow= '11'" :disabled="tabShow=='11'">
+                    <button class="btn mm3btn" v-if="inTab(2)" @click="tabShow= '11'" :disabled="tabShow=='11'">
                         mm<sup>3</sup>
                         Upgrades
                     </button>
-                    <button class="btn" v-if="inTab(26) && (hasMM4Upg(8) || player.inMM3Challenge === 2)"
+                    <button class="btn mm3btn" v-if="inTab(26) && (hasMM4Upg(8) || player.inMM3Challenge === 2)"
                         @click="tabShow= '251'" :disabled="tabShow=='251'">
                         mm<sup>3</sup>
                         Challenges
                     </button>
-                    <button class="btn" v-if="inTab(26) && player.unlockedMM5ChallengeLeastOnce" @click="tabShow= '252'"
+                    <button class="btn mm5btn" v-if="inTab(26) && player.unlockedMM5ChallengeLeastOnce" @click="tabShow= '252'"
                         :disabled="tabShow=='252'">
                         mm<sup>5</sup>
                         Challenges
                     </button>
-                    <button class="btn" v-if="inTab(2)" @click="tabShow= '13'" :disabled="tabShow=='13'">
+                    <button class="btn mm3btn" v-if="inTab(2)" @click="tabShow= '13'" :disabled="tabShow=='13'">
                         mm<sup>4.5</sup>
                     </button>
                     <button class="btn" v-if="inTab(3)" @click="tabShow= '21'" :disabled="tabShow==='21'">
@@ -159,20 +159,20 @@
                     <button class="btn" v-if="inTab(3)" @click="tabShow= '26'" :disabled="tabShow==='26'">
                         Achievements
                     </button>
-                    <button class="btn" v-if="inTab(6)" @click="tabShow= '51'" :disabled="tabShow==='51'">
+                    <button class="btn mm5btn" v-if="inTab(6)" @click="tabShow= '51'" :disabled="tabShow==='51'">
                         Secutitation
                     </button>
-                    <button class="btn" v-if="inTab(6)" @click="tabShow= '52'" :disabled="tabShow==='52'">
+                    <button class="btn mm5btn" v-if="inTab(6)" @click="tabShow= '52'" :disabled="tabShow==='52'">
                         5D Dimensions
                     </button>
-                    <button class="btn" v-if="inTab(6)" @click="tabShow= '53'" :disabled="tabShow=='53'">
+                    <button class="btn mm5btn" v-if="inTab(6)" @click="tabShow= '53'" :disabled="tabShow=='53'">
                         Upgrades
                     </button>
-                    <button class="btn" v-if="inTab(6) && hasMM5Upg(5)" @click="tabShow= '54'"
+                    <button class="btn mm5btn" v-if="inTab(6)" @click="tabShow= '54'"
                         :disabled="tabShow=='54'">
                         Upgrade Tower
                     </button>
-                    <button class="btn" v-if="inTab(6) && app.developer_mode" @click="tabShow= '55'"
+                    <button class="btn mm5btn" v-if="inTab(6) && app.developer_mode" @click="tabShow= '55'"
                         :disabled="tabShow=='55'">
                         5D Cube
                     </button>
@@ -409,7 +409,7 @@
                         </p>
                     </div>
                     <div v-else>
-                        <button @click="mm45refund()" class="btn">
+                        <button @click="mm45refund()" class="btn mm3btn">
                             refund mm<sup>4.5</sup>
                         </button>
                         <p>You can get total 1,000 mm<sup>4.5</sup>.</p>
@@ -418,29 +418,29 @@
                             {{player.mm3_volumes.mm45_points.formatA()}}({{player.mm3_volumes.sacrifice_times}})
                             mm<sup>4.5</sup>
                         </p>
-                        <button class="btn" @click="sacrif(1)">
+                        <button class="btn mm3btn" @click="sacrif(1)">
                             Reach {{tmp.mm45.sacrifice_goal.formatA()}} mm<sup>4</sup> to gain mm<sup>4.5</sup>
                             volumes
                         </button>
-                        <button class="btn" @click="mm45Buy(1)" v-if="!hasMM3Upg(9)">
+                        <button class="btn mm3btn" @click="mm45Buy(1)" v-if="!hasMM3Upg(9)">
                             Make 1<sup>st</sup> softcap starts
                             ×{{E("ee4").pow(player.mm3_volumes.mm45buyables[0]).formatA()}}
                             →
                             ×{{E("ee4").pow(player.mm3_volumes.mm45buyables[0]+1).formatA()}}
                             later <br />Cost: {{mm45BuyCost(1)}} mm<sup>4.5</sup>
                         </button>
-                        <button class="btn" v-if="hasMM3Upg(9)">
+                        <button class="btn mm3btn" v-if="hasMM3Upg(9)">
                             Make 1<sup>st</sup> softcap starts ×K9.000e15 → ×K9.000e15 later <br />Cost: K9.000e15
                             mm<sup>4.5</sup>
                         </button>
                         <br />
 
-                        <button class="btn" @click="mm45Buy(2)">
+                        <button class="btn mm3btn" @click="mm45Buy(2)">
                             Make 1<sup>st</sup> 4D Dimension
                             ×{{E("e700").pow(player.mm3_volumes.mm45buyables[1]).formatA()}} →
                             ×{{E("e700").pow(player.mm3_volumes.mm45buyables[1]+1).formatA()}}<br />
                             Cost: {{mm45BuyCost(2)}} mm<sup>4.5</sup></button><br />
-                        <button class="btn" @click="mm45Buy(3)">
+                        <button class="btn mm3btn" @click="mm45Buy(3)">
                             Make 2-8<sup>th</sup> 4D Dimensions
                             ×{{E("e600").pow(player.mm3_volumes.mm45buyables[2]).formatA()}}
                             →
@@ -462,6 +462,7 @@
                         Hard Reset
                     </button>
                     <br />
+                    <button class="btn" @click="parallelUniverseModal = !parallelUniverseModal" style="background-image: linear-gradient(to bottom, #ff0000,#ffff00,#00ff00,#00ffff,#0000ff,#ff00ff,#ff0000)">Another Parallel Universe</button>
                 </div>
                 <div v-if="tabShow=='22'" class="center">
                     <div>
@@ -746,7 +747,7 @@
                 </div>
                 <div v-if="tabShow=='54'" mm5>
                     <div class="center">
-                        <button class="btn" @click="respecMM5TowUpg()">
+                        <button class="btn mm5btn" @click="respecMM5TowUpg()">
                             Respec, but do a mm<sup>5</sup> reset
                         </button>
                     </div>
@@ -964,6 +965,16 @@
                         <span> 点数在达到K1e19后将锁定为K1e19!</span><br />
                     </div>
                 </div>
+            </div>
+            <div class="paralleluniverse center" v-if="parallelUniverseModal">
+                <h1>Go Another Parallel Universe</h1>
+                <p>Parallel Universes</p>
+                <button class="btn" @click="parallelUniverseModal = !parallelUniverseModal">Back</button>
+                <br>
+                <p>You're currently in Parallel Universe #{{parallelUniverseId}}</p>
+                <span v-html="getParaUniState(1)"></span> <button class="btn" @click="goParaUni(1)">Go Parallel Universe 1</button><button class="btn" @click="delParaUni(1)">Delete Parallel Universe 1</button><br>
+                <span v-html="getParaUniState(2)"></span> <button class="btn" @click="goParaUni(2)">Go Parallel Universe 2</button><button class="btn" @click="delParaUni(2)">Delete Parallel Universe 2</button><br>
+                <span v-html="getParaUniState(3)"></span> <button class="btn" @click="goParaUni(3)">Go Parallel Universe 3</button><button class="btn" @click="delParaUni(3)">Delete Parallel Universe 3</button><br>
             </div>
         </div>
         <div style="display: none; position: absolute; max-width:100vw; max-height: 100vh; top: 0px; left: 0px;"

@@ -147,7 +147,7 @@ function fast_hard_reset(){
 
 }
 function formated_hard_reset() {
-    let redeem = prompt("您确定要硬重置吗？输入以下文字确认，此操作无法取消!："+
+    let redeem = prompt("Do you want to reset this parallel universe? Enter text："+
     "Did you think i am a sb? \n\n\na?")
     if (redeem === "Did you think i am a sb?" ||
         (app.developer_mode && redeem === "a")){
@@ -178,7 +178,7 @@ function import_file() {
 }
 
 function save() {
-    localStorage.setItem("volume-incremental", JSON.stringify(player))
+    localStorage.setItem(parallelUniverseName, JSON.stringify(player))
     localStorage.setItem("developerSettings", JSON.stringify(developer))
 }
 

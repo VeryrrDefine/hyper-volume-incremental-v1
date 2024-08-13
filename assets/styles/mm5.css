@@ -72,6 +72,18 @@
     background-color: rgb(0, 159, 159);
 }
 
+.mm5btn{
+    background-color: #044;
+    border-color: #088;
+}
+.mm5btn:hover{
+    background-color: #055;
+    border-color: #0aa;
+}
+.mm5btn[disabled]{
+    background-color: #022;
+    border-color: #044;
+}
 
 .mm5_chal {
     width: 60px;

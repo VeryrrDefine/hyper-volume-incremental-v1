@@ -7,6 +7,18 @@
     border-color: #000000;
     border-style: dashed;
 }
+.mm3btn{
+    background-color: #440;
+    border-color: #880;
+}
+.mm3btn:hover{
+    background-color: #550;
+    border-color: #aa0;
+}
+.mm3btn[disabled]{
+    background-color: #220;
+    border-color: #440;
+}
 .mm3_chal_completed {
     background-color: #00a000;
 }

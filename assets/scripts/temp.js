@@ -88,8 +88,12 @@ var tmp = {
                 return false;
             }
             return true;
-        }
-        ,
+        },
+        getDimScale(dimid){
+            let temp1 = E(10);
+            temp1 = temp1.pow(dimid);
+            return temp1
+        },
         getDimExponentplier(dimid){
             let result = E(1)
             if (dimid === 8 && hasMM5Upg(1)){
@@ -152,7 +156,7 @@ var tmp = {
                 a = player.volumes.div("1e8").root(250).div(10);
             }
             
-            a=a.mul(hasMM5TowUpg(51)?"1e10000":1)
+            //a=a.mul(hasMM5TowUpg(51)?"1e10000":1)
             return a
                 
         },
@@ -237,12 +241,12 @@ var tmp = {
             let temp1 = player.volumes.clone();
             
             temp1 = temp1.logarithm(10).sub(4500000).div(500000)
-            temp1 = temp1.mul(hasMM5TowUpg(41) ? 30 : 1)
+            //temp1 = temp1.mul(hasMM5TowUpg(41) ? 30 : 1)
             temp1 = temp1.floor().max(0)
             return temp1
         },
         get nextmm5At(){
-            return E.pow(10,this.gain.add(1).div(hasMM5TowUpg(41) ? 30 : 1).mul(500000).add(4500000))
+            return E.pow(10,this.gain.add(1)/*.div(hasMM5TowUpg(41) ? 30 : 1)*/.mul(500000).add(4500000))
         },
         get secu_gain(){
             let temp1 = player.mm3_volumes.points.clone();
@@ -272,9 +276,9 @@ var tmp = {
 
                 //.add(player.mm3o5_volumes.points.logarithm("100").div(10).minimum("1.5")))
             result = result.pow(player.mm5_volume_dimensions[DIMENSIONS_BOUGHT][i].floor())
-            if (hasMM5TowUpg(82)){
+            /*if (hasMM5TowUpg(82)){
                 result = result.pow(1.3)
-            }
+            }*/
             result = result.mul(shortcut.secu.mm5_volumes.galaxies.gte(6)?galaxy_rewards[5].effect:"1");
             return result;
         },
@@ -305,5 +309,23 @@ var tmp = {
             return player.secutitation.mm5_volumes.energy.pow(5)
         }
         
+    },
+    tower: {
+        get totalMM52() {
+            return shortcut.secu.tower.fromMM3.add(shortcut.secu.tower.fromMM4.add(shortcut.secu.tower.fromMM5))
+        },
+        get mm52costFrommm3() {
+            return E("e8e5").mul(
+                E("e1e5").pow(shortcut.secu.tower.fromMM3)
+            )
+        },
+        get mm52costFrommm4() {
+            return E("e5e6").mul(
+                E("e1e6").pow(shortcut.secu.tower.fromMM4)
+            )
+        },
+        get mm52costFrommm5() {
+            return E("2").pow(shortcut.secu.tower.fromMM5)
+        },
     }
 }

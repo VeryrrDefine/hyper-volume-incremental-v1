@@ -32,12 +32,21 @@ function loadVue() {
             pianyi0: "aa",
             pianyi1: 0,
             hover_upg: 0,
+            parallelUniverseId,
             hover_3upg: 0,
             hover_5upg: 0,
             developer_code: "",
             whistle_unlock: false,
             devNews: window.texts,
+            parallelUniverseModal: false,
             changelogs: [
+                {
+                    version: "v1.1.5", title: "",
+                    changes: [
+                        "修改了升级塔的升级方式",
+                        "添加了平行宇宙切换"
+                    ]
+                },
                 {
                     version: "v1.1.4", title: "",
                     changes: [
