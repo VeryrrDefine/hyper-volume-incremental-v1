@@ -257,11 +257,14 @@ function formatSmallFE(num, precision=2) {
 }
 
 function format(...args){
+    //return args[0].toString()
     return formatFE(...args)
 }
 function formatWhole(num) {
+    //return args[0].toString()
     return formatWholeFE(num, 0)
 }
-function formatSmall(num, precision=2) { 
+function formatSmall(num, precision=2) {
+    //return args[0].toString() 
     return formatSmallFE(num, precision, true)    
 }

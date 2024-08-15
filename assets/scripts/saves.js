@@ -124,10 +124,11 @@ function handle_import(save2) {
         return;
     }
     try{
+        hard_reset();
         let importing_player = formatsave.decode(save2);
         Object.assign(player, importing_player)
         fix();
-        console.clear()
+        location.href = location.href
     }catch{
         addNotify("I cant handle this save.")
 

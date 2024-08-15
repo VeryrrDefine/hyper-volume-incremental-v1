@@ -537,7 +537,7 @@ Teresa的现实在公开开放后的1/1e300秒内立刻崩溃了。(Error: Serve
                 text: "再说就砍"
             },
             {
-                text: "I wonder how, I wonder why, Yesterday you told me <span style='color:red'>[This character has been deleted by Pelle]</span>bout the blue blue sky"
+                text: "I wonder how, I wonder why, Yesterday you told me about the blue blue sky"
             },
             {
                 text: '我是三四，我要神盘你。 我去这个三四，台可怕了'
@@ -565,7 +565,11 @@ Teresa的现实在公开开放后的1/1e300秒内立刻崩溃了。(Error: Serve
             },
             {
                 text: "Phigros联动天体了！！！！！！！！！以后打歌前要进入有一个的实际，刷100个eff字型，存储1天的现实时间，买100个空间之理，挂100级天体记忆，刷1e40个奇点，还要预订实际！！"
-            },/*
+            },
+            {
+                text: "我昨天吃了1.79e308g海苔，今天一看里面有2.912e310g是钠伪装的"
+            }
+            /*
             {
                 text: "I can't sleep because they're a lot of, lot of,  "
             }*/

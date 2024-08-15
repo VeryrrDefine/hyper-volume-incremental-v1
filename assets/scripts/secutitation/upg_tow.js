@@ -11,6 +11,7 @@ function buyMM5TowUpg(id) {
 }
 function respecMM5TowUpg() {
     shortcut.secu.towerUpgrades = []
+    shortcut.secu.tower.spent = E(0)
     doMM5reset()
 }
 function hasMM5TowUpg(id) {
@@ -58,6 +59,59 @@ const mm5_upg_tow = [
             cost: E("2"),
             get affordable() {
                 return hasMM5TowUpg(21)
+            }
+        }
+    ],
+    [
+        {
+            id: 41,
+            description: "5D Dimensions to 4D Dimensions exponent +2",
+            reqDesc: "31",
+            cost: E("95"),
+            get affordable() {
+                return hasMM5TowUpg(31)
+
+            }
+        },
+        {
+            id: 42,
+            description: "mm<sup>5</sup> energy 增益 mm<sup>3</sup> 获取",
+            reqDesc: "41",
+            cost: E("2"),
+            get affordable() {
+                return hasMM5TowUpg(41)
+
+            }
+        },
+        {
+            id: 43,
+            description: "2<sup>nd</sup> 4D Dimensions cost scale 100 -> ~26.44",
+            reqDesc: "42",
+            cost: E("14"),
+            get affordable() {
+                return hasMM5TowUpg(42)
+
+            }
+        }
+    ],
+    [
+        {
+            id: 51,
+            description: "2<sup>nd</sup> softcap 弱化 50%",
+            reqDesc: "43",
+            cost: E("60"),
+            get affordable() {
+                return hasMM5TowUpg(43)
+            }
+        },
+        {
+            id: 52,
+            description: "Unlock Reactor",
+            reqDesc: "51",
+            cost: E("408"),
+            get affordable() {
+                return hasMM5TowUpg(51)
+
             }
         }
     ]
@@ -236,7 +290,7 @@ function buyMM52Max(buyid){
             if (player.volumes.gte(tmp.tower.mm52costFrommm4)){
                 shortcut.secu.tower.fromMM4 = shortcut.secu.tower.fromMM4.add(
                     player.volumes.logarithm(10).div("1000000").floor().sub(
-                        tmp.tower.mm52costFrommm4.logarithm(10).div("1000000").floor().add(1).max(0)
+                        tmp.tower.mm52costFrommm4.logarithm(10).div("1000000").floor().max(0)
                     )
                 )
             }
@@ -244,8 +298,8 @@ function buyMM52Max(buyid){
         case 2:
             if (player.mm3_volumes.points.gte(tmp.tower.mm52costFrommm3)){
                 shortcut.secu.tower.fromMM3 = shortcut.secu.tower.fromMM3.add(
-                    player.mm3_volumes.points.logarithm(10).div("1e5").floor().sub(
-                        tmp.tower.mm52costFrommm3.logarithm(10).div("1e5").floor().add(1).max(0)
+                    player.mm3_volumes.points.logarithm(10).div("2644.54438").floor().sub(
+                        tmp.tower.mm52costFrommm3.logarithm(10).div("2644.54438").floor().max(0)
                     )
                 )
             }
@@ -254,7 +308,7 @@ function buyMM52Max(buyid){
             if (shortcut.mm5.points.gte(tmp.tower.mm52costFrommm5)){
                 shortcut.secu.tower.fromMM5 = shortcut.secu.tower.fromMM3.add(
                     shortcut.mm5.points.logarithm(2).floor().sub(
-                        tmp.tower.mm52costFrommm5.logarithm(2).floor().add(1).max(0)
+                        tmp.tower.mm52costFrommm5.logarithm(2).floor().max(0)
                     )
                 )
                 shortcut.mm5.points = shortcut.mm5.points.sub(E.pow(2,shortcut.mm5.points.logarithm(2).floor()))
@@ -269,9 +323,9 @@ Vue.component("upgradetowers", {
 <div>
     <div class="center">
         <p>You have {{tmp.tower.totalMM52.sub(player.secutitation.tower.spent).format()}}({{tmp.tower.totalMM52.format(0)}}) mm<sup>5.2</sup></p>
-        <button @click="buyMM52(1)" class="btn" :disabled="player.volumes.lt(tmp.tower.mm52costFrommm4)">Buy mm<sup>5.2</sup><br>Cost: {{tmp.tower.mm52costFrommm4}} mm<sup>4</sup></button>
-        <button @click="buyMM52(2)" class="btn mm3btn" :disabled="player.mm3_volumes.points.lt(tmp.tower.mm52costFrommm3)">Buy mm<sup>5.2</sup><br>Cost: {{tmp.tower.mm52costFrommm3}} mm<sup>3</sup></button>
-        <button @click="buyMM52(3)" class="btn mm5btn" :disabled="player.secutitation.mm5_volumes.points.lt(tmp.tower.mm52costFrommm5)">Buy mm<sup>5.2</sup><br>Cost: {{tmp.tower.mm52costFrommm5}} mm<sup>5</sup></button>
+        <button @click="buyMM52(1)" class="btn" :disabled="player.volumes.lt(tmp.tower.mm52costFrommm4)">Buy mm<sup>5.2</sup><br>Cost: {{tmp.tower.mm52costFrommm4.format()}} mm<sup>4</sup></button>
+        <button @click="buyMM52(2)" class="btn mm3btn" :disabled="player.mm3_volumes.points.lt(tmp.tower.mm52costFrommm3)">Buy mm<sup>5.2</sup><br>Cost: {{tmp.tower.mm52costFrommm3.format()}} mm<sup>3</sup></button>
+        <button @click="buyMM52(3)" class="btn mm5btn" :disabled="player.secutitation.mm5_volumes.points.lt(tmp.tower.mm52costFrommm5)">Buy mm<sup>5.2</sup><br>Cost: {{tmp.tower.mm52costFrommm5.format()}} mm<sup>5</sup></button>
     </div>
     <div v-for="row in mm5_upg_tow" style="display: flex">
         <div v-for="tow in row"  :class="getUpgTowClass(tow.id)" mm5>

@@ -9,7 +9,7 @@ var mm3_opt = {
             }
         },
         {//2
-            desc: "All dimensions multiplier ×1.000e10",
+            desc: "1-8<sup>th</sup> 4D Dimensions multiplier ×1.000e10",
             cost: E("2"),
             get unlocked() {
                 return hasMM4Upg(7)
@@ -57,13 +57,13 @@ var mm3_opt = {
                 return hasMM3Upg(7)
             }
         },
-        {//9
+       /* {//9
             desc: "There is no 1<sup>st</sup> softcap anymore.",
             cost: E("e6.31e5"),
             get unlocked() {
                 return hasMM3Upg(8)
             }
-        }
+        }*/
     ]
 }
 

@@ -100,3 +100,32 @@
     background-color: #d0d0d0;
     border-style: dashed;
 }
+
+.rea{
+    width: 120px;
+    height: 120px;
+    background-color: #044;
+    color: #ffffff;
+    border: 2px solid #0aa;
+    border-radius: 3px;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.rea_active{
+    background-color: #088;
+
+}
+.cmpbtn{
+    width: 150px;
+    height: 150px;
+}
+.rea:hover{
+    background-color: #066;
+    border: 2px solid #00c8c8;
+}
+
+.rea_active:hover{
+    background-color: #099;
+    border: 2px solid #00c8c8;
+}

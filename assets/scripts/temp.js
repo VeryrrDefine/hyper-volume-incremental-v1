@@ -3,85 +3,83 @@ var tmp = {
     dimension: {
         getDimMultiplier(dimid,softcapped=true) {
             i = dimid - 1;
-            let result = E('2')
-            if (hasMM3Upg(7)){
-                result = E("2.1")
-            }
-            if (hasMM3Upg(8)){
-                result = E("2.105")
-            }
+            if (between(1,dimid,8)){
+                let result = E('2')
+                if (hasMM3Upg(7)){
+                    result = E("2.1")
+                }
+                if (hasMM3Upg(8)){
+                    result = E("2.105")
+                }
 
-                //.add(player.mm3o5_volumes.points.logarithm("100").div(10).minimum("1.5")))
-            result = result.pow(player.dimensions[DIMENSIONS_BOUGHT][i].floor())
-            result = result.mul(tmp.mm35.effect_to_dimensions);
+                    //.add(player.mm3o5_volumes.points.logarithm("100").div(10).minimum("1.5")))
+                result = result.pow(player.dimensions[DIMENSIONS_BOUGHT][i].floor())
+                result = result.mul(tmp.mm35.effect_to_dimensions);
 
-            if (hasMM4Upg(1) && i === 0) {
-                result = result.mul(mm4_upgrades[0].effect);
-            }
-            if (hasMM4Upg(2) && i === 6) {
-                result = result.mul(mm4_upgrades[1].effect);
-            }
-            if (hasMM4Upg(4)) {
-                result = result.mul(mm4_upgrades[3].effect);
-            }
-            if (hasMM4Upg(6)) {
-                result = result.mul(E.pow(1.001, player.dimensions[DIMENSIONS_BOUGHT][i].div(10).floor()));
-            }
-            if (hasMM3Upg(2)){
-                result = result.mul("1e10")
-            }
-            if (hasMM3Chal(2)){
-                result = result.mul("1e3")
-            }
-            if (hasMM3Chal(3)){
-                result = result.pow(1.1);
-            }
-            if (hasMM3Chal(5) && i === 7) {
-                result = result.mul("1e200");
-            }
-            if (player.inMM3Challenge === 3 || player.inMM3Challenge === 8){
-                result = result.pow(0.1);
-            }
-            if (player.inMM3Challenge === 7){
-                result = result.div(E.pow("1e5",player.time.mm3));
-            }
-            if (dimid==1){
-                result = result.mul(E("e700").pow(player.mm3_volumes.mm45buyables[1]))
-            }else{
-                result = result.mul(E("e600").pow(player.mm3_volumes.mm45buyables[2]));
-            }
-            if (!hasMM3Upg(9)){
+                if (hasMM4Upg(1) && i === 0) {
+                    result = result.mul(mm4_upgrades[0].effect);
+                }
+                if (hasMM4Upg(2) && i === 6) {
+                    result = result.mul(mm4_upgrades[1].effect);
+                }
+                if (hasMM4Upg(4)) {
+                    result = result.mul(mm4_upgrades[3].effect);
+                }
+                if (hasMM4Upg(6)) {
+                    result = result.mul(E.pow(1.001, player.dimensions[DIMENSIONS_BOUGHT][i].div(10).floor()));
+                }
+                if (hasMM3Upg(2)){
+                    result = result.mul("1e10")
+                }
+                if (hasMM3Chal(2)){
+                    result = result.mul("1e3")
+                }
+                if (hasMM3Chal(3)){
+                    result = result.pow(1.1);
+                }
+                if (hasMM3Chal(5) && i === 7) {
+                    result = result.mul("1e200");
+                }
+                if (player.inMM3Challenge === 3 || player.inMM3Challenge === 8){
+                    result = result.pow(0.1);
+                }
+                if (player.inMM3Challenge === 7){
+                    result = result.div(E.pow("1e5",player.time.mm3));
+                }
+                if (dimid==1){
+                    result = result.mul(E("e700").pow(player.mm3_volumes.mm45buyables[1]))
+                }else{
+                    result = result.mul(E("e600").pow(player.mm3_volumes.mm45buyables[2]));
+                }
                 result = softcap(result,tmp.dimension.softcap,hasMM3Upg(6)? 0.95 : 0.9,"pow",dis=!softcapped) 
-            }
-            result = softcap(result,tmp.dimension.softcap2,0.7,"pow",dis=!softcapped) 
+                
+                result = softcap(result,tmp.dimension.softcap2,hasMM5TowUpg(51) ? 0.95:0.7,"pow",dis=!softcapped) 
 
-            result = result.mul(tmp.mm5.energyeffect);
-            if (player.secutitation.mm5_volumes.galaxies.gte("2") && dimid != 1){
-                result = result.mul("e1e6")
+                result = result.mul(tmp.mm5.energyeffect);
+                if (player.secutitation.mm5_volumes.galaxies.gte("2") && dimid != 1){
+                    result = result.mul("e1e6")
+                }
+                if (player.secutitation.mm5_volumes.galaxies.gte("4") && dimid != 1){
+                    result = result.mul("e1e4")
+                }
+                if (dimid !== 1 && player.secutitation.mm5_volumes.galaxies.gte("1")){
+                    result = result.pow(1.01)
+                }
+                /*if (player.secutitation.mm5_volumes.galaxies.gte(10)){
+                    result = result.pow(1.02)
+                }*/
+                if (hasMM5TowUpg(31)){
+                    result = result.mul("ee6")
+                }
+                if (player.inMM5Challenge==1){
+                    temp1 = result.logarithm(10).logarithm(10)
+                    temp1 = temp1.mul(0.25)
+                    result = E(10).pow(E(10).pow(temp1));
+                }
+                result = result.mul(shortcut.secu.mm5_volumes.galaxies.gte(10)?galaxy_rewards[6].effect:"1");
+                if (player.compress.inCompress) {result = doubleExponentMult(result, 0.95)}
+                return result;
             }
-            if (player.secutitation.mm5_volumes.galaxies.gte("4") && dimid != 1){
-                result = result.mul("e1e4")
-            }
-            if (dimid !== 1 && player.secutitation.mm5_volumes.galaxies.gte("1")){
-                result = result.pow(1.01)
-            }
-            /*if (player.secutitation.mm5_volumes.galaxies.gte(10)){
-                result = result.pow(1.02)
-            }*/
-            if (hasMM5Upg(4)){
-                result = result.pow(1.02)
-            }
-            if (hasMM5TowUpg(31)){
-                result = result.mul("ee6")
-            }
-            if (player.inMM5Challenge==1){
-                temp1 = result.logarithm(10).logarithm(10)
-                temp1 = temp1.mul(0.25)
-                result = E(10).pow(E(10).pow(temp1));
-            }
-            result = result.mul(shortcut.secu.mm5_volumes.galaxies.gte(10)?galaxy_rewards[6].effect:"1");
-            
-            return result;
         },
         canbuyDim(dim){
             if (player.dimensions[DIMENSIONS_COST][dim-1].gte(E.pow(10,Number.MAX_SAFE_INTEGER))){
@@ -92,6 +90,9 @@ var tmp = {
         getDimScale(dimid){
             let temp1 = E(10);
             temp1 = temp1.pow(dimid);
+            if (dimid == 2 && hasMM5TowUpg(43)){
+                temp1 = E(26.445)
+            }
             return temp1
         },
         getDimExponentplier(dimid){
@@ -99,16 +100,9 @@ var tmp = {
             if (dimid === 8 && hasMM5Upg(1)){
                 result = result.add(0.05)
             }
-            if (dimid === 2 && hasMM5Upg(2)){
-                result = result.add(0.15)
-            }
             /*if (dimid === 1 && player.secutitation.mm5_volumes.galaxies.gte("7")){
                 result = result.add(0.05)
             }*/
-            if (dimid === 1 && hasMM5Upg(3)){
-                result = result.add(0.05)
-
-            }
             if (dimid===8){
                 result = result.add(0.01*getMM5ChalCompletionTimes(1))
             }
@@ -155,7 +149,10 @@ var tmp = {
             if (hasMM4Upg(9)){
                 a = player.volumes.div("1e8").root(250).div(10);
             }
-            
+            if (hasMM5TowUpg(42)){
+                a = a.mul(E.pow(10,shortcut.mm5.energy.logarithm(2).mul(1000)))
+            }
+            if (player.compress.inCompress) {a = doubleExponentMult(a, 0.95)}
             //a=a.mul(hasMM5TowUpg(51)?"1e10000":1)
             return a
                 
@@ -180,6 +177,7 @@ var tmp = {
             .mul(hasMM5TowUpg(21) ? "1e10000" : 1)
             temp1 = temp1.softcap(tmp.mm4.softcap1_start, tmp.mm4.softcap1_power, 'pow')
             .pow(player.dimensions[DIMENSIONS_EXPONENT][0])
+            if (player.compress.inCompress) {temp1 =  doubleExponentMult(temp1, 0.95)}
                 return temp1;
         },
         get softcapped1() {
@@ -242,11 +240,14 @@ var tmp = {
             
             temp1 = temp1.logarithm(10).sub(4500000).div(500000)
             //temp1 = temp1.mul(hasMM5TowUpg(41) ? 30 : 1)
+            temp1 = temp1.mul(
+                E(2).pow(shortcut.secu.reacUpgrades[0])
+            )
             temp1 = temp1.floor().max(0)
             return temp1
         },
         get nextmm5At(){
-            return E.pow(10,this.gain.add(1)/*.div(hasMM5TowUpg(41) ? 30 : 1)*/.mul(500000).add(4500000))
+            return E.pow(10,this.gain.add(1).div(E(2).pow(shortcut.secu.reacUpgrades[0]))/*.div(hasMM5TowUpg(41) ? 30 : 1)*/.mul(500000).add(4500000))
         },
         get secu_gain(){
             let temp1 = player.mm3_volumes.points.clone();
@@ -306,7 +307,9 @@ var tmp = {
             if (player.secutitation.mm5_volumes.galaxies.gte(8)){
                 return player.secutitation.mm5_volumes.energy.pow("1e5")
             }*/
-            return player.secutitation.mm5_volumes.energy.pow(5)
+            return player.secutitation.mm5_volumes.energy.pow(5 + (
+                hasMM5TowUpg(41) ? 2 : 0
+            ))
         }
         
     },
@@ -315,8 +318,8 @@ var tmp = {
             return shortcut.secu.tower.fromMM3.add(shortcut.secu.tower.fromMM4.add(shortcut.secu.tower.fromMM5))
         },
         get mm52costFrommm3() {
-            return E("e8e5").mul(
-                E("e1e5").pow(shortcut.secu.tower.fromMM3)
+            return E("e435000").mul(
+                E("e2644.54438").pow(shortcut.secu.tower.fromMM3)
             )
         },
         get mm52costFrommm4() {
@@ -327,5 +330,24 @@ var tmp = {
         get mm52costFrommm5() {
             return E("2").pow(shortcut.secu.tower.fromMM5)
         },
+    },
+    reactor: {
+        get speed() {
+            let temp1 = E(1)
+            temp1 = temp1.mul(E.pow(1.8,shortcut.secu.reacUpgrades[1]))
+            temp1 = temp1.mul(E.pow(2,shortcut.secu.reacUpgrades[2]))
+            return temp1
+        }
+        
+    },
+    mm59: {
+        get gain() {
+            if (player.compress.inCompress){
+                return player.volumes.logarithm(10).sub(player.compress.highestMM4inCompress.max(1)/* max 1 beware of -Infinity*/.log10()).sub(4300000).div(10000).floor().max(0)
+            }else return E(0)
+        },
+        get mm595gain() {
+            return player.compress.mm59
+        }
     }
 }

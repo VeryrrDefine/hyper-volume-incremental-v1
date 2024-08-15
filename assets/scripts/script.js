@@ -65,7 +65,7 @@ var mm4_upgrades = [
 
     },
     {//4
-        desc: "All Dimensions multiplier add based on your mm<sup>3</sup> volumes<br>",
+        desc: "1-8<sup>th</sup> 4D Dimensions multiplier add based on your mm<sup>3</sup> volumes<br>",
         cost: E("1e50"),
         get unlocked() {
             return player.mm3_volumes.unl;
@@ -276,7 +276,20 @@ function hard_reset() {
                 fromMM5: E(0),
                 spent: E(0)
             },
-            secutitation_reset_times: E(0)
+            secutitation_reset_times: E(0),
+            mm53: E(0),
+            mm54: E(0),
+            mm55: E(0),
+            mm56: E(0),
+        },
+        compress: {
+            mm59: E(0),
+            mm595: E(0),
+            highestMM4inCompress: E(0),
+            upgrades: [],
+            buyables: [],
+            inCompress: false,
+            unl: false
         },
         auto: [],
         multi: {
@@ -404,9 +417,6 @@ function dimensionBoost(nBoost) {
 const dim_base_price = [
     E(10), E(100), E(1E3), E(1E4), E(1E5), E(1E6), E(1E7), E(1E8)
 ]
-const dim_incre = [
-    E(1e1), E(1e2), E(1E3), E(1E4), E(1E5), E(1E6), E(1E7), E(1E8)
-];
 
 function calculate_dim() {
 
@@ -429,7 +439,7 @@ function calc_cost(dimid, count) {
     // count before buy
     // 1st dimension dimid = 0
     let temp1 = dim_base_price[dimid]
-        .mul(dim_incre[dimid].mul(hasMM5TowUpg(91) ? 0.9 : 1).pow(count.floor()));
+        .mul(tmp.dimension.getDimScale(dimid+1).pow(count.floor()));
     if (player.inMM3Challenge===5 && between(6,dimid,7)){
         temp1 = E.expansion(10,1e15)
     }
@@ -460,7 +470,7 @@ function loop() {
         player.time_now = Date.now();
         player.time.time_now = Date.now();
         window.global_diff = (this_frame - last_frame) / 1000;
-        if (eHook && !app.developer_mode){
+        if (window.eHook && !app.developer_mode){
             getAch(43);
             
             save();
@@ -473,13 +483,13 @@ function loop() {
         if (window.global_diff>0.3333){
             getAch(52)
         }
-        if (hasMM5TowUpg(61)){
+        /*if (hasMM5TowUpg(61)){
             player.unlockedMM5ChallengeLeastOnce = true
-        }
+        }*/
         window.global_diff *= developer.timeboost
         sacrif(1)
         updateAch()
-
+        reactorLoop()
         // QoL challenging life
         if (player.inMM3Challenge!= 0 && player.auto.includes(9) && player.volumes.gte(
             mm3_challenges[player.inMM3Challenge-1].complete_requirement
@@ -507,8 +517,8 @@ function loop() {
                 player.options.gamespeed = 1
             }
         }
+        player.compress.mm595 = player.compress.mm595.add(tmp.mm59.mm595gain.mul(diff))
         mm35_loop();
-
         if (player.volumes.isNaN()) {
             player.volumes = E(11);
         }
@@ -526,9 +536,12 @@ function loop() {
         /* if (player.volumes.isNaN()){
              player.volumes = E(10);
          }*/
+
+
         let more = tmp.mm4.gain.mul(diff);
-
-
+        if (player.volume_generated.mm4=="NaN"){
+            player.volume_generated.mm4 = E(0)
+        }
         player.volume_generated.mm4 = player.volume_generated.mm4.add(more);
         //MM35();
         if (!player.mm3_volumes.in_sacrifice){
@@ -666,6 +679,7 @@ function transformToE(object) {
       }
     }
   }
+
 function fix() {/*
     player.volumes = ENify(player.volumes);
     player.mm3_volumes.points = ENify(player.mm3_volumes.points);
@@ -688,7 +702,7 @@ function fix() {/*
     }*/
     transformToE(player);
     if (player.mm35_volumes.machineState === void 0) {
-        player.mm35_volumes.machineState = false;
+        player.mm35_volumes.machineState = 1;
     }
     if (player.options.music === void 0) {
         player.options.music = 0;
@@ -754,6 +768,9 @@ function fix() {/*
     if (player.secutitation.towerUpgrades === void 0){
         player.secutitation.towerUpgrades = []
     }
+    if (player.secutitation.reacUpgrades === void 0){
+        player.secutitation.reacUpgrades = [0,0,0,0,0,0]
+    }
     if (player.secutitation.tower === void 0){
         player.secutitation.tower = {
             fromMM3: E(0),
@@ -765,7 +782,22 @@ function fix() {/*
     if (player.dimensions[DIMENSIONS_EXPONENT] === void 0){
         player.dimensions[DIMENSIONS_EXPONENT] = [E(1), E(1), E(1), E(1), E(1), E(1), E(1), E(1)]
     }
-
+    for (let i = 0; i<6;i++){
+        let temp1 = ["mm53","mm54","mm55",'mm56',"mm57"]
+        if (player.secutitation[temp1[i]] === void 0){
+            player.secutitation[temp1[i]] = E(0)
+        }
+    }
+    if (player.secutitation.reactorStates === void 0){
+        player.secutitation.reactorStates = [] 
+    }
+    
+    if (player.compress.mm595 === void 0){
+        player.compress.mm595 = E(0)
+    }
+    if (player.compress.highestMM4inCompress === void 0){
+        player.compress.highestMM4inCompress = E(0)
+    }
     player.lastTab = player.lastTab.toNumber().toString()
 }
 var parallelUniverseId = 1

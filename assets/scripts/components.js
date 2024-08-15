@@ -41,6 +41,12 @@ function loadVue() {
             parallelUniverseModal: false,
             changelogs: [
                 {
+                    version: "v1.1.6", title: "",
+                    changes:[
+                        "添加了Reactor"
+                    ]
+                },
+                {
                     version: "v1.1.5", title: "",
                     changes: [
                         "修改了升级塔的升级方式",

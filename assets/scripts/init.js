@@ -82,6 +82,7 @@ const EE5 = E("ee5");
 const EE10 = E("ee10");
 const EE1000 = E("ee1000");
 const EEE8 = E("eee8");
+const K9E15 = E("10").expansion(Number.MAX_SAFE_INTEGER)
 
 const ENDGAME= E("1e293605500");
 const LY = E("9454254955488000000");

@@ -113,7 +113,7 @@ function calculate_mm5dim() {
                 buyMM4Upg(i)
             }
         }
-        for (let i = 1; i < 10; i++){
+        for (let i = 1; i < 9; i++){
             if (!hasMM3Upg(i) & mm3_opt.upgrades[i-1].cost.lte(player.mm3_volumes.points)){
                 buyMM3Upg(i)
             }
