@@ -10,13 +10,18 @@ function getFractalEffect() {
     if (player.exponenting.fractal.fractals.lt(1000)) {
         temp1 = temp1.concat("Get 1,000 6D Fractal unlock 6DFr-2<sup>nd</sup> Effect<br>")
     }else{
-        temp1 = temp1.concat("mm<sup>5.95</sup> gain ×"+(tmp.mm6.fractal.fracEff2.formatA()))
+        temp1 = temp1.concat("mm<sup>5.95</sup> gain ×"+(tmp.mm6.fractal.fracEff2.formatA() + "<br>"))
+    }
+    if (player.exponenting.fractal.fractals.lt(12000)) {
+        temp1 = temp1.concat("Get 12,000 6D Fractal unlock 6DFr-3<sup>rd</sup> Effect<br>")
+    }else{
+        temp1 = temp1.concat("6D Fractal gain ×"+(tmp.mm6.fractal.fracEff3.formatA()) + "<br>")
     }
     return temp1
 }
 function updateFractal(){
     player.exponenting.fractal.fractals = player.exponenting.fractal.fractals.add(
-        player.exponenting.fractal.fractalEngine.mul(diff2)
+        player.exponenting.fractal.fractalEngine.mul(tmp.mm6.fractal.fracEff3).mul(diff2)
     )
 }
 function getFractalEngineCost() {

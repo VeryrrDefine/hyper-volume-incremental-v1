@@ -21,7 +21,7 @@ function no_reward_mm6_reset() {
             fromMM5: E(0),
             spent: E(0)
         },
-        secutitation_reset_times: E(0),
+        secutitation_reset_times: E(7),
         mm53: E(0),
         mm54: E(0),
         mm55: E(0),

@@ -392,6 +392,9 @@ var tmp = {
             get fracEff2(){
                 return player.exponenting.fractal.fractals.gte(1000) ? player.exponenting.fractal.fractals.sub(995).root(10).max(1) : 1
             },
+            get fracEff3(){
+                return player.exponenting.fractal.fractals.gte(12000) ? player.exponenting.fractal.fractals.sub(690).root(10).max(1) : 1
+            },
         }
         
     }

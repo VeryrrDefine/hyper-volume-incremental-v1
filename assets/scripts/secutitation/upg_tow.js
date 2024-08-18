@@ -306,7 +306,7 @@ function buyMM52Max(buyid){
             break;
         case 3:
             if (shortcut.mm5.points.gte(tmp.tower.mm52costFrommm5)){
-                shortcut.secu.tower.fromMM5 = shortcut.secu.tower.fromMM3.add(
+                shortcut.secu.tower.fromMM5 = shortcut.secu.tower.fromMM5.add(
                     shortcut.mm5.points.logarithm(2).floor().sub(
                         tmp.tower.mm52costFrommm5.logarithm(2).floor().max(0)
                     )
