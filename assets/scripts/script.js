@@ -287,9 +287,19 @@ function hard_reset() {
             mm595: E(0),
             highestMM4inCompress: E(0),
             upgrades: [],
-            buyables: [],
+            buyables: [E(0),E(0),E(0),],
             inCompress: false,
             unl: false
+        },
+        exponenting: {
+            points: E(0), //mm^6
+            resetTimes: E(0),
+            unl: false,
+            fractal: {
+                fractals: E(0),
+                fractalEngine: E(0)
+            }
+        
         },
         auto: [],
         multi: {
@@ -300,15 +310,16 @@ function hard_reset() {
         upgrades: [],
         // stats
         time: {
-            eter: 0,
+            eter: E(0),
             real_eter: 0,
-            mm3: 0,
+            mm3: E(0),
             real_mm3: 0,
             time_now: Date.now()
         },
         volume_generated: {
             mm4: E(0),
-            mm3: E(0)
+            mm3: E(0),
+            mm6: E(0)
         },
 
         window_show: {
@@ -321,8 +332,9 @@ function hard_reset() {
         lastTab: '1',
         unlockedMM5ChallengeLeastOnce: false,
         newsticker_time: 0,
-        achievements: []
-
+        achievements: [],
+        fakeGoInfinite: false,
+        fGItime: 0
 
     }
     reset_dimensions(1)
@@ -470,6 +482,9 @@ function loop() {
         player.time_now = Date.now();
         player.time.time_now = Date.now();
         window.global_diff = (this_frame - last_frame) / 1000;
+        if (Number.isNaN(player.offlinedTime)){
+            player.offlinedTime = 0
+        }
         if (window.eHook && !app.developer_mode){
             getAch(43);
             
@@ -487,9 +502,14 @@ function loop() {
             player.unlockedMM5ChallengeLeastOnce = true
         }*/
         window.global_diff *= developer.timeboost
+        window.diff2 = E(window.global_diff * player.options.gamespeed);
+        window.diff = E(diff2 * (player.inMM3Challenge===8 ? 0.001 : 1)).mul(tmp.mm6.perMM6speed);
+
+
         sacrif(1)
         updateAch()
         reactorLoop()
+        updateFractal()
         // QoL challenging life
         if (player.inMM3Challenge!= 0 && player.auto.includes(9) && player.volumes.gte(
             mm3_challenges[player.inMM3Challenge-1].complete_requirement
@@ -504,7 +524,6 @@ function loop() {
         if (player.lastTab!="252"){
             player.selectedMM5Challenge = 0
         }
-        window.diff = window.global_diff * player.options.gamespeed * (player.inMM3Challenge===8 ? 0.001 : 1);
 
         let temp1 = (player.options.gamespeed-1) * window.global_diff * 1000
         if (player.offlinedTime < 1){
@@ -529,9 +548,15 @@ function loop() {
         if (player.mm35_volumes.points.lt(1)) {
             player.mm35_volumes.points = E(1);
         }
-        player.time.eter += window.diff;
+        if (typeof player.time.eter == 'number'){
+            player.time.eter = E(player.time.eter)
+        }
+        if (typeof player.time.mm3 == 'number'){
+            player.time.mm3 = E(player.time.mm3)
+        }
+        player.time.eter = player.time.eter.add(window.diff2);
+        player.time.mm3 = player.time.mm3.add(window.diff);
         player.time.real_eter += window.global_diff;
-        player.time.mm3 += window.diff;
         player.time.real_mm3 += window.global_diff;
         /* if (player.volumes.isNaN()){
              player.volumes = E(10);
@@ -544,29 +569,39 @@ function loop() {
         }
         player.volume_generated.mm4 = player.volume_generated.mm4.add(more);
         //MM35();
-        if (!player.mm3_volumes.in_sacrifice){
-            player.volumes = player.volumes.add(
-                more
-            );
-            calculate_dim();
-
-        }
+        player.volumes = player.volumes.add(
+            more
+        );
+        calculate_dim();
+        updateDimensionData()
         calculate_mm5dim();
-
         for (let i = 0; i < 8; i++) {
             if (player.auto.includes(i + 1) && !(player.inMM3Challenge==2)) {
                 if (buyable(i + 1)) {
                     buydim(i + 1)
                 }
             }
-            player.dimensions[DIMENSIONS_MULTI][i] = tmp.dimension.getDimMultiplier(i + 1);
-            player.dimensions[DIMENSIONS_EXPONENT][i] = tmp.dimension.getDimExponentplier(i + 1);
-            player.dimensions[DIMENSIONS_COST][i] = calc_cost(i, player.dimensions[DIMENSIONS_BOUGHT][i])
-            player.mm5_volume_dimensions[DIMENSIONS_COST][i] = tmp.mm5.dimcost(i+1)
         }
+
         if (player.error !== void 0) {
             throw new Error("you throw a error!");
         }
+        if (player.volumes.gte(E.E_MAX_SAFE_INTEGER) && !player.exponenting.unl){
+            player.volumes = E.E_MAX_SAFE_INTEGER.clone()
+            player.fakeGoInfinite = true
+        }
+        if (player.fakeGoInfinite){
+            player.fGItime += global_diff
+            if (player.fGItime > 35){
+                player.fGItime = 0
+                player.exponenting.unl = true
+                //doMM6reset();
+                player.fakeGoInfinite = false
+            }
+        }
+
+
+
         player.lastTab = app.tabShow
         last_frame = this_frame
     } catch (e) {
@@ -577,7 +612,15 @@ function loop() {
         console.log(e);
     }
 }
+function updateDimensionData() {
+    for (let i = 0; i < 8; i++) {
+        player.dimensions[DIMENSIONS_MULTI][i] = tmp.dimension.getDimMultiplier(i + 1);
+        player.dimensions[DIMENSIONS_EXPONENT][i] = tmp.dimension.getDimExponentplier(i + 1);
+        player.dimensions[DIMENSIONS_COST][i] = calc_cost(i, player.dimensions[DIMENSIONS_BOUGHT][i])
+        player.mm5_volume_dimensions[DIMENSIONS_COST][i] = tmp.mm5.dimcost(i+1)
+    }
 
+}
 function setErrorDial(q) {
     app.hasError = true;
     app.errortext = q.stack.replaceAll("\n", "<br>");
@@ -671,7 +714,8 @@ function buyAll() {
 }
 function transformToE(object) {
     for(let key in object) {
-      if(typeof object[key] === "string" && !new E(object[key]).isNaN()) {
+        
+      if(key !== "offlinedTime" && typeof object[key] === "string" && !new E(object[key]).isNaN()) {
         object[key] = new E(object[key]);
       }
       if(typeof object[key] === "object") {
@@ -722,6 +766,9 @@ function fix() {/*
     if (player.options.qol_shortDisplay === void 0){
         player.options.qol_shortDisplay = false;
 
+    }
+    if (player.volume_generated.mm6 === void 0){
+        player.volume_generated.mm6 = E(0)
     }
     if (player.mm3_volumes.challenges === void 0) {
         player.mm3_volumes.challenges = [];
@@ -795,8 +842,17 @@ function fix() {/*
     if (player.compress.mm595 === void 0){
         player.compress.mm595 = E(0)
     }
+    if (player.compress.buyables.length !==3){
+        player.compress.buyables = [E(0),E(0),E(0)]
+    }
     if (player.compress.highestMM4inCompress === void 0){
         player.compress.highestMM4inCompress = E(0)
+    }
+    if (player.exponenting.fractal === void 0){
+        player.exponenting.fractal = {
+            fractals: E(0),
+            fractalEngine: E(0)
+        }
     }
     player.lastTab = player.lastTab.toNumber().toString()
 }

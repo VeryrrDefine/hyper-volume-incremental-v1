@@ -77,14 +77,15 @@ var tmp = {
                     result = E(10).pow(E(10).pow(temp1));
                 }
                 result = result.mul(shortcut.secu.mm5_volumes.galaxies.gte(10)?galaxy_rewards[6].effect:"1");
-                if (player.compress.inCompress) {result = doubleExponentMult(result, 0.95)}
+                result = result.mul(tmp.mm59.mm595Effect)
+                if (player.compress.inCompress) {result = doubleExponentMult(result, tmp.mm59.compressPenalty)}
                 return result;
             }
         },
         canbuyDim(dim){
-            if (player.dimensions[DIMENSIONS_COST][dim-1].gte(E.pow(10,Number.MAX_SAFE_INTEGER))){
+            /*if (player.dimensions[DIMENSIONS_COST][dim-1].gte(E.pow(10,Number.MAX_SAFE_INTEGER))){
                 return false;
-            }
+            }*/
             return true;
         },
         getDimScale(dimid){
@@ -152,7 +153,6 @@ var tmp = {
             if (hasMM5TowUpg(42)){
                 a = a.mul(E.pow(10,shortcut.mm5.energy.logarithm(2).mul(1000)))
             }
-            if (player.compress.inCompress) {a = doubleExponentMult(a, 0.95)}
             //a=a.mul(hasMM5TowUpg(51)?"1e10000":1)
             return a
                 
@@ -175,19 +175,29 @@ var tmp = {
             temp1 = temp1.mul(hasMM3Upg(1) ? 1e5 : 1)
             .mul(hasMM3Chal(7) ? "1e500" : 1)
             .mul(hasMM5TowUpg(21) ? "1e10000" : 1)
-            temp1 = temp1.softcap(tmp.mm4.softcap1_start, tmp.mm4.softcap1_power, 'pow')
+            temp1 = temp1.overflow(tmp.mm4.softcap1_start, tmp.mm4.softcap1_power)
+            temp1 = temp1.overflow(tmp.mm4.softcap2_start, tmp.mm4.softcap2_power)
             .pow(player.dimensions[DIMENSIONS_EXPONENT][0])
-            if (player.compress.inCompress) {temp1 =  doubleExponentMult(temp1, 0.95)}
+            if (player.compress.inCompress) {temp1 =  doubleExponentMult(temp1, tmp.mm59.compressPenalty)}
                 return temp1;
         },
         get softcapped1() {
             return tmp.mm4.gain.gte(tmp.mm4.softcap1_start)
         },
         get softcap1_power() {
-            return 1
+            return 0.5
         },
         get softcap1_start() {
-            return E("J^11451191 999")
+            return E("e9.5e15")
+        },
+        get softcapped2() {
+            return tmp.mm4.gain.gte(tmp.mm4.softcap2_start)
+        },
+        get softcap2_power() {
+            return 0.3
+        },
+        get softcap2_start() {
+            return E("e1.8e35")
         }
     },
     mm35: {
@@ -243,6 +253,7 @@ var tmp = {
             temp1 = temp1.mul(
                 E(2).pow(shortcut.secu.reacUpgrades[0])
             )
+            temp1 = temp1.mul(tmp.mm6.fractal.fracEff1)
             temp1 = temp1.floor().max(0)
             return temp1
         },
@@ -343,11 +354,45 @@ var tmp = {
     mm59: {
         get gain() {
             if (player.compress.inCompress){
-                return player.volumes.logarithm(10).sub(player.compress.highestMM4inCompress.max(1)/* max 1 beware of -Infinity*/.log10()).sub(4300000).div(10000).floor().max(0)
+                        //308
+                return player.volumes.logarithm(10).sub(player.compress.highestMM4inCompress.max(1)/* max 1 beware of -Infinity*/.log10().max(308.2547)).add(1).floor().max(0)
             }else return E(0)
         },
         get mm595gain() {
-            return player.compress.mm59
+            return player.compress.mm59.mul(
+                E.pow(3,player.compress.buyables[0])
+            ).mul(tmp.mm6.fractal.fracEff2)
+        },
+        get compressPenalty(){
+            return E(0.5495).mul(E.pow(1.001,player.compress.buyables[2]))
+        },
+        get mm595Effect(){
+            return E.pow(
+                1.165+(player.compress.buyables[1].mul(0.02).toNumber())
+                ,player.compress.mm595)
         }
+    },
+    mm6: {
+        get gain(){
+            return player.volumes.log10().sub(9007199254740991).div("5e15").floor().add(1).max(0)
+        },
+        get nextMM6at(){
+            return E.pow(10,this.gain.add(1).sub(1).mul("5e15").add(9007199254740991))
+        },
+        get perMM6speed(){
+            return E.add(1,player.volume_generated.mm6).overflow(1000,0.9)
+        },
+        get resetable() {
+            return player.volumes.log10().sub(9007199254740991).gte(0)
+        },
+        fractal: {
+            get fracEff1(){
+                return player.exponenting.fractal.fractals.gte(10) ? player.exponenting.fractal.fractals.root(5).max(1) : 1
+            },
+            get fracEff2(){
+                return player.exponenting.fractal.fractals.gte(1000) ? player.exponenting.fractal.fractals.sub(995).root(10).max(1) : 1
+            },
+        }
+        
     }
 }

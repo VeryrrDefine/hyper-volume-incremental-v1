@@ -38,7 +38,7 @@ const achievements = [
         {
             title: `啊${String.fromCodePoint(129322)}～啊${String.fromCodePoint(129322)}～啊咦${String.fromCodePoint(128556)}啊咦${String.fromCodePoint(128556)}`,
             get goal() {
-                return "Reach " + display_volumes(E("ee2085"))
+                return "Reach " + display_volumes(E("e2085"))
             }
         }, //30388636569473
 
@@ -59,7 +59,12 @@ const achievements = [
     [
         { title: "无尽能源", goal: "Reach 1.797e308 mm<sup>5</sup> energies" },
         { title: "Hundred Thousand", goal: "Reach 100000 mm<sup>5</sup>"},
-        { title: "什么计时器掌握者", goal: "Enable Time Hooker", secret: true }
+        { title: "什么计时器掌握者", goal: "Enable Time Hooker", secret: true },
+        { title: "这不是Time Studies，这是升级塔", goal: "Buy mm<sup>5</sup> Tower #51 Upgrade",},
+        { title: "这不是炼金生命，这是反应堆", goal: "Unlock Reactor",},
+        { title: "你可以获得50-35个星系？", goal: "Get 15 mm<sup>5</sup> Galaxies",},
+        { title: "挑战.zip", goal: "Run a challenge in Compress"}
+    
     ],
     [
         { title: "Save fixer 1", goal: "Try to import a save from Wind spirit creation", secret: true },
@@ -112,7 +117,7 @@ function updateAch() {
         if (player.mm3_volumes.points.gte("e2e4")) {
             getAch(25)
         }
-        if (player.volumes.gte("ee2085")) {
+        if (player.volumes.gte("e2085")) {
             getAch(26)
         }
         if (mm3_challenges[5].unlocked) {
@@ -145,11 +150,26 @@ function updateAch() {
         if (player.volumes.gte("9.999e99999999")){
             getAch(37)
         }
+        if (player.volumes.gte("ee9")){
+            getAch(38)
+        }
 
     }
     if (player.volumes.gte(-1.79e308) && "AchRow4") {
         if (shortcut.secu.mm5_volumes.points.gte(1e5)) {
             getAch(42)
+        }
+        if (hasMM5TowUpg(51)) {
+            getAch(44)
+        }
+        if (hasMM5TowUpg(52)) {
+            getAch(45)
+        }
+        if (shortcut.mm5.galaxies.gte(15)) {
+            getAch(46)
+        }
+        if (player.compress.inCompress && player.inMM3Challenge) {
+            getAch(47)
         }
 
     }

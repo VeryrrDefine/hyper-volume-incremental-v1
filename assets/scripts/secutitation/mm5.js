@@ -17,7 +17,6 @@ function no_reward_mm5_reset(){
     player.mm35_volumes.points = E(1);
     player.mm35_volumes.san_xiang_bo_points = E(1);
     player.mm35_volumes.unl = false;
-    player.secutitation.secutitation_reset_times = player.secutitation.secutitation_reset_times.add(1)
     if (player.secutitation.mm5_volumes.galaxies.lt(5)){
         player.secutitation.mm5_volumes.energy = E(1);
     }
@@ -30,6 +29,10 @@ function no_reward_mm5_reset(){
 }
 
 function doMM5reset(){
+    player.secutitation.secutitation_reset_times = player.secutitation.secutitation_reset_times.add(
+        1 * (player.exponenting.unl ? 100 : 1)
+        
+        )
     player.secutitation.points = player.secutitation.points.add(tmp.mm5.secu_gain)
     player.secutitation.mm5_volumes.points = player.secutitation.mm5_volumes.points.add(tmp.mm5.gain)
     no_reward_mm5_reset()
@@ -119,7 +122,7 @@ function calculate_mm5dim() {
             }
         }
     }
-    if (player.secutitation.secutitation_reset_times.gte(10) || secret_achievement_data.dev_passive_generate){
+    if (player.secutitation.secutitation_reset_times.gte(10) || player.exponenting.unl || secret_achievement_data.dev_passive_generate){
         player.mm3_volumes.points = player.mm3_volumes.points.add(tmp.mm3.gain.mul(diff))
     }
 }

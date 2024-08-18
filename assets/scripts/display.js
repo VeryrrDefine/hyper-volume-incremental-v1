@@ -140,8 +140,8 @@ function display_volumes_stat(a) {
 }
 
 function display_volumes(a) {
-    return a.formatA() + " mm<sup>4</sup>";
-
+    //return a.formatA() + " mm<sup>4</sup>";
+     return display_volumes_stat(a)
 }
 
 function getMM4UpgClassName(id) {
@@ -235,8 +235,10 @@ const EnglishOrdinals = [
 function displayStat() {
     if (player.volumes.lt("ee5")) {
         return `如果对4维体积进行单位换算，You can get ${display_volumes(player.volumes)}`
-    } else if (player.volumes.lt("e1e19")) {
-        return `如果将4维体积以十进制的形式存储，那么你需要一个${formatDatabyte.fromBytes(player.volumes.logarithm(10).add(1))}大的存储设备将他存下。`
+    } else if (player.volumes.lt(E.E_MAX_SAFE_INTEGER)) {
+        return `如果你每秒写1个数字，那么把你的4维体积写下来需要${formatTime.fromSeconds(player.volumes.log10().floor().add(1))}`
+    }else if (player.volumes.lt(E.EE_MAX_SAFE_INTEGER)) {
+        return `你的4维体积的指数为${player.volumes.log10().formatA()}`
     }
 }
 
@@ -307,4 +309,29 @@ function blendWords(first, second, param) {
 }
 function becomeNaNed(){
     gameNaNed = true;
+}
+
+function fakeGoInfiniteText(){
+    if (player.fakeGoInfinite){
+        switch(true){
+            case player.fGItime>30:
+                return "Never gonna give you up~ Never gonna let you down~ Never gonna aaaaaaaaaaaaaa round and desert you"
+            case player.fGItime>20:
+                return "But..."
+            
+            case player.fGItime>15:
+                return "It means 10^9007199254740991."
+            case player.fGItime>10:
+                return "Finally, you beated the game, e9.007e15."
+        }
+    }
+    else return ""
+}
+
+function getPageOpacity(){
+    if (player.fakeGoInfinite){
+        return 1 - Math.min(1, player.fGItime/10)
+    }else{
+        return 1
+    }
 }

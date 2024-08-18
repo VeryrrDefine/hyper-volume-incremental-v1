@@ -41,6 +41,18 @@ function loadVue() {
             parallelUniverseModal: false,
             changelogs: [
                 {
+                    version: "v1.2.0", title: "Exponenting Update!",
+                    changes: [
+                        "添加了mm<sup>6</sup>"
+                    ]
+                },
+                {
+                    version: "v1.1.7", title: "",
+                    changes:[
+                        "添加了Compress"
+                    ]
+                },
+                {
                     version: "v1.1.6", title: "",
                     changes:[
                         "添加了Reactor"

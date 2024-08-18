@@ -1,0 +1,12 @@
+.mm6btn{
+    background-color: #404;
+    border-color: #808;
+}
+.mm6btn:hover{
+    background-color: #505;
+    border-color: #a0a;
+}
+.mm6btn[disabled]{
+    background-color: #202;
+    border-color: #404;
+}
