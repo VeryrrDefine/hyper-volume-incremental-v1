@@ -33,7 +33,15 @@ ExpantaNum.prototype.softcap = function (start,power,mode,dis=false){
     var x = this.clone()
     return softcap(x,start,power,mode,dis)
 }
-
+ExpantaNum.softcap = function(x,...args){
+    return softcap(x,...args)
+}
+ExpantaNum.prototype.tenpow = function (){
+    return ExpantaNum.pow(10,this)
+}
+ExpantaNum.tenpow = function (x){
+    return ExpantaNum.pow(10,x)
+}
 /*
 =
 
@@ -77,6 +85,7 @@ function fromCharCodes(list){
     }
     return result
 }
+
 const E30825 = E(Number.MAX_VALUE);
 const EE5 = E("ee5");
 const EE10 = E("ee10");
@@ -88,3 +97,6 @@ const ENDGAME= E.E_MAX_SAFE_INTEGER.clone();
 const LY = E("9454254955488000000");
 const UNI = LY.mul("9.3e10");
 const mm5_scale = [2,8,32,128,512,2048,8192,32768]
+const three_tetr_four = E(3).tetr(4)
+
+const MEGAVERSE = E("ee24")

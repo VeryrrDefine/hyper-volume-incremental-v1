@@ -199,6 +199,7 @@
                     </div>
                     <br />
                     <div v-if="tabShow=='102'" class="center">
+                        <p>玩点数增量重制版玩的</p>
                         <p>You have {{player.exponenting.fractal.fractals.formatA()}} 6D Fractals.</p>
                         <div v-html="getFractalEffect()"></div>
                         <br>
@@ -227,7 +228,9 @@
                             <h3>You have {{player.compress.mm59.formatA()}} mm<sup>5.9</sup>,</h3>
                             <p>Produce {{tmp.mm59.mm595gain.formatA()}} mm<sup>5.95</sup> per second</p>
                             <h3>You have {{player.compress.mm595.formatA()}} mm<sup>5.95</sup>,</h3>
-                            <p>make 4D Dimensions ×{{tmp.mm59.mm595Effect.formatA()}}</p>
+                            <p>make 4D Dimensions ×{{tmp.mm59.mm595Effect.formatA()}}<span class="softcap" v-if="tmp.mm59.mm595EffSoftcapped">(Softcapped) 
+                                
+                            </p>
                             <!--
                                 
                             -->
@@ -264,6 +267,7 @@
                         </div>
                     </div>
                     <div v-if="tabShow=='55'" class="center">
+                        <p>玩风灵作成玩的</p>
                         <div v-if="hasMM5TowUpg(52)">
                             <p>Reactor produce speed: {{tmp.reactor.speed.format()}} unit per second</p>
                             <!-- <p :style="{color: getUndulatingColor(1)}">Remember to check Upgrades!</p> -->
@@ -414,7 +418,7 @@
                             After <span v-html="display_volumes(tmp.mm4.softcap1_start)"></span>
                             of 4D volumes gain, 4D volumes gain will be softcapped!
                         </div>
-                        <div style="color: red" v-if="tmp.mm4.softcapped2">
+                        <div style="color: rgb(121, 0, 0)" v-if="tmp.mm4.softcapped2">
                             After <span v-html="display_volumes(tmp.mm4.softcap2_start)"></span>
                             of 4D volumes gain will softcap^2 4D volumes gain!
                         </div>
@@ -992,6 +996,15 @@
                         生成结果：<input v-bind:value="db_pianyi()"><br>
                         <br />
                         <br>
+                        
+                        <div style="color: red">
+                            After >
+                            of 4D volumes gain, 4D volumes gain will be softcapped!
+                        </div>
+                        <div style="color: rgb(121, 0, 0)">
+                            After 
+                            of 4D volumes gain will softcap^2 4D volumes gain!
+                        </div>
                         <span>This is a {{wordCycle(['wordCycle',"never", "gonna", "give", "you", "up"])}} word.</span>
                         <br>
                         <br>

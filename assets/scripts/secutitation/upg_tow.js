@@ -114,6 +114,17 @@ const mm5_upg_tow = [
 
             }
         }
+    ],
+    [
+        {
+            id: 61,
+            description: "mm<sup>5.3</sup> boosts mm<sup>4</sup> (after softcap)",
+            reqDesc: "52",
+            cost: E(1.2e5),
+            get affordable() {
+                return hasMM5TowUpg(52)
+            }
+        }
     ]
     /*
     [

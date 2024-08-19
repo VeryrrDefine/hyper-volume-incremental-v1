@@ -364,7 +364,7 @@ zdoys, anemoity, meta-anemoity
                 }
             },
             {
-                text: `<img class="newsticker-image" src="/image/kanlile.gif" alt="A girl was ↑ ↓↓ ↑ ↓↑ ↓↓↓ ↑↓↑↓ing">`
+                text: `A girl was ↑ ↓↓ ↑ ↓↑ ↓↓↓ ↑↓↑↓ing`
             },
             {
                 text: `Let me <span class='redacted'>fuck</span> you: F - fall in love with you; U - understand you; C - call you beautiful; K - keep in touch with you`
@@ -571,6 +571,9 @@ Teresa的现实在公开开放后的1/1e300秒内立刻崩溃了。(Error: Serve
             },
             {
                 text: "隔壁家叔叔过年了还在Arcaea Malody ??? MuseDash ??? ??? ??? Phigros ??? ??? ??? osu Steam FLStudio ??? QQ 网易云音乐 Discord 几何冲刺 ??? ??? ??? ??? ??? ??? ??? Prenium ??? ??? Google ??? ??? Devc++ ??? bilibili ??? Terraria ??? ??? Au Photoshop Pycharm Clion Visual-Studio-Code ??? Word Excel Outlook Powerpoint ??? ??? ??? Github OBS"
+            },
+            {
+                text: "【UP猪】你【？！～！】的操作，很【抢】啊，不仅【几树】不错，外挂也用的【步厝】，所以，能不能【彡脸】换置顶【链接已屏蔽】？？！"
             }
             /*
             {

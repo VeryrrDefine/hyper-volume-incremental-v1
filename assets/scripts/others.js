@@ -20,7 +20,7 @@ function formatGain(a,e,res="",oom_max=0.5) {
             if (oom.gte(1e-3)) return oom.format() + " OoM^^2"
         }
 
-        if (a.gte('ee100')) {
+        if (a.gte('ee10')) {
             var tower = E(a).slog(10).sub(1.3010299956639813).floor();
 
             var oom = E(g).iteratedlog(10,tower).sub(E(a).iteratedlog(10,tower)).div(diff), rated = false;

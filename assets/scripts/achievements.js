@@ -63,12 +63,14 @@ const achievements = [
         { title: "这不是Time Studies，这是升级塔", goal: "Buy mm<sup>5</sup> Tower #51 Upgrade",},
         { title: "这不是炼金生命，这是反应堆", goal: "Unlock Reactor",},
         { title: "你可以获得50-35个星系？", goal: "Get 15 mm<sup>5</sup> Galaxies",},
-        { title: "挑战.zip", goal: "Run a challenge in Compress"}
+        { title: "挑战.zip", goal: "Run a challenge in Compress"},
+        { title: "3↑↑4", goal: "Reach "+display_volumes(three_tetr_four)}
     
     ],
     [
         { title: "Save fixer 1", goal: "Try to import a save from Wind spirit creation", secret: true },
-        { title: "Can you download more RAMs?", goal: "Make 3 FPS", secret: true}
+        { title: "Can you download more RAMs?", goal: "Make 3 FPS", secret: true},
+        { title: "MegaVerse", goal: "Reach "+display_volumes(MEGAVERSE)}
     ],
 
 ]
@@ -170,6 +172,15 @@ function updateAch() {
         }
         if (player.compress.inCompress && player.inMM3Challenge) {
             getAch(47)
+        }
+        if (player.volumes.gte(three_tetr_four)){
+            getAch(48)
+        }
+
+    }
+    if (player.volumes.gte(-1.79e308) && "AchRow5") {
+        if (player.volumes.gte(MEGAVERSE)) {
+            getAch(51)
         }
 
     }

@@ -140,8 +140,8 @@ function display_volumes_stat(a) {
 }
 
 function display_volumes(a) {
-    //return a.formatA() + " mm<sup>4</sup>";
-     return display_volumes_stat(a)
+    return a.formatA() + " mm<sup>4</sup>";
+     //return display_volumes_stat(a)
 }
 
 function getMM4UpgClassName(id) {
