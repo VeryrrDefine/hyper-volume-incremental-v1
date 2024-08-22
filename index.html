@@ -3,6 +3,7 @@
 
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Site not found &middot; #&$*%# Pages</title>
     <script>
         if (document.documentMode) {
@@ -45,6 +46,7 @@
     <script src="./assets/scripts/secutitation/compress.js" defer></script>
     <script src="./assets/scripts/exponenting/exponenting.js" defer></script>
     <script src="./assets/scripts/exponenting/fractal.js" defer></script>
+    <script src="./assets/scripts/exponenting/upgrades.js" defer></script>
 </head>
 
 <body style="margin-top: 0px;">
@@ -193,23 +195,51 @@
                             Exponenting
                         </button>
                         <button class="btn mm6btn" v-if="inTab(11)" @click="tabShow= '102'" :disabled="tabShow=='102'">
-                            6D Fractals
+                            6D Fractals & Upgrades
                         </button>
                         <!--            <button class="btn" @click="tabShow = '3'" :disabled="tabShow==='3'">3.5维</button>-->
                     </div>
                     <br />
                     <div v-if="tabShow=='102'" class="center">
                         <p>玩点数增量重制版玩的</p>
-                        <p>You have {{player.exponenting.fractal.fractals.formatA()}} 6D Fractals.</p>
+                        <p>You have {{player.exponenting.fractal.fractals.formatA()}} 6D Fractals(mm<sup>6.05</sup>).</p>
+                        
+    <div class="center" v-if="player.exponenting.unl">
+        <p>You have {{tmp.mm6tower.totalMM61.sub(player.exponenting.tower.spent).format()}}({{tmp.mm6tower.totalMM61.format(0)}}) mm<sup>6.1</sup></p>
+        <button @click="buyMM52(4)" class="btn mm6btn" :disabled="player.exponenting.fractal.fractals.lt(tmp.mm6tower.mm61costFromFractal)">Buy mm<sup>6.1</sup><br>Cost: {{tmp.mm6tower.mm61costFromFractal.format()}} 6D Fractals</button>
+    </div>
                         <div v-html="getFractalEffect()"></div>
                         <br>
                         <div>
                             <span style="display: block;">Fractal Engine({{player.exponenting.fractal.fractalEngine.formatA()}})</span>
-                            <button class="btn mm6btn center" @click="buyFractalEngine()">
+                            <button class="btn mm6btn center" @click="buyFractalEngine()"
+                             :disabled="player.exponenting.points.lt(getFractalEngineCost())"
+                            >
+
+
                                 Buy a Fractal Engine<br>
                                 Cost: {{getFractalEngineCost().formatA()}} mm<sup>6</sup>
                             </button>
+                            <p>Fracltal Engines produce {{getFractalProduce().formatA()}} 6D Fractals per second.</p>
                             
+                        </div>
+                        <div class="upg_text_box center">
+                            <span v-html="getMM6UpgText()"></span>
+                        </div>
+                        <div>
+                            <table class="center" style="margin: auto">
+                                <tr v-for="row in mm6_upg" key="row.id">
+                                    <td v-for="upg in mm6_upg[row.id]" key="upg.id"
+                                        v-if="mm6_upgrades[upg.id-1].unlocked">
+                                        <!--                            {{row.id}} {{upg.id}}-->
+                                        <div :class="getMM6UpgClassName(upg.id)" @touchstart="hover_6upg= upg.id"
+                                            @touchend="hover_6upg= 0" @mouseover="hover_6upg= upg.id"
+                                            @mouseleave="hover_6upg= 0" @click="buyMM6Upg(upg.id)">
+                                            <span>{{ upg.id }}</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                     <div v-if="tabShow=='101'" class="center">
@@ -228,7 +258,7 @@
                             <h3>You have {{player.compress.mm59.formatA()}} mm<sup>5.9</sup>,</h3>
                             <p>Produce {{tmp.mm59.mm595gain.formatA()}} mm<sup>5.95</sup> per second</p>
                             <h3>You have {{player.compress.mm595.formatA()}} mm<sup>5.95</sup>,</h3>
-                            <p>make 4D Dimensions ×{{tmp.mm59.mm595Effect.formatA()}}<span class="softcap" v-if="tmp.mm59.mm595EffSoftcapped">(Softcapped) 
+                            <p>make 4D Dimensions ×{{tmp.mm59.mm595Effect.formatA()}}<span class="softcap" v-if="tmp.mm59.mm595EffSoftcapped" v-html="tmp.mm59.mm595EffSoftcapText"> 
                                 
                             </p>
                             <!--
@@ -918,7 +948,7 @@
                             </div>
                             <br />
                         </div>
-                        <p>mm<sup>5</sup> galaxy({{player.secutitation.mm5_volumes.galaxies.formatA()}})</p>
+                        <p><span v-html="getSuperMM5GalaxyType()"></span>mm<sup>5</sup> galaxy({{player.secutitation.mm5_volumes.galaxies.formatA()}})</p>
                         <button class="galaxy" v-html="getMM5galaxyText()" @click="mm5_gal_reset_manmade()">
                         </button>
 
@@ -1117,6 +1147,7 @@
 
             <div class="paralleluniverse center" v-if="parallelUniverseModal">
                 <h1>Go Another Parallel Universe</h1>
+                <h3 v-if="!hasLoaded.status">The game is loading, if it takes longly, then there may be some errors!</h3>
                 <p>Parallel Universes</p>
                 <button class="btn" @click="parallelUniverseModal = !parallelUniverseModal">Back</button>
                 <br>

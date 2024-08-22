@@ -382,7 +382,7 @@ zdoys, anemoity, meta-anemoity
                 text: "!曲扭重八将度速取获数点，后数点 JJ1.000J5 过超"
             },
             {
-                text: "You're gaining 114514 OoMs OoMs OoMs OoMs OoMs OoMs OoMs OoMs " + "OoMs ".repeat(50) + " mm<sup>114514</sup> per second"
+                text: "操"
             },
             
 
@@ -574,6 +574,12 @@ Teresa的现实在公开开放后的1/1e300秒内立刻崩溃了。(Error: Serve
             },
             {
                 text: "【UP猪】你【？！～！】的操作，很【抢】啊，不仅【几树】不错，外挂也用的【步厝】，所以，能不能【彡脸】换置顶【链接已屏蔽】？？！"
+            },
+            {
+                text: '在后期，你获取e1.000e10 mm<sup>6</sup>需要1.000F5 mm<sup>4</sup>'
+            },
+            {
+                text: "当你看到某个升级的价格为"+format(K9E15)+"这个数字，就说明这个升级被硬上限了"
             }
             /*
             {

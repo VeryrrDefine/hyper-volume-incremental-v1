@@ -47,13 +47,6 @@ function toggleStickyDisplay() {
     player.options.stickyDisplay = !player.options.stickyDisplay
 }
 
-function getGalaxyText() {
-    return `维度星系(${formatWhole(player.galaxy_count)})<br>` +
-        `重置维度，tickspeed和维度提升<br>获得一个维度星系<br>将Tickspeed效果+0.05<br>需要<span>${formatWhole(tmp.galaxy.cost)}</span>维度8`
-        + (!hasMM3upgrade(30) ? "和<span class='corrupted'>???</span>" : "")
-
-}
-
 var notify = document.getElementById('notify');
 
 // 显示通知框

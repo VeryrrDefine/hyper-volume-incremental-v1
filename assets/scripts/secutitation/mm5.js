@@ -78,8 +78,8 @@ function buymm5dim(dim) {
 
 
 function calculate_mm5dim() {
-    buyMM52(1)
-    buyMM52(2)
+    buyMM52Max(1)
+    buyMM52Max(2)
     player.secutitation.mm5_volumes.energy = player.secutitation.mm5_volumes.energy
             .add(
                 player.mm5_volume_dimensions[DIMENSIONS_POINTS][0]

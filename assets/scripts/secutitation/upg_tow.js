@@ -253,19 +253,34 @@ Vue.component("upgradetower", {
     props: ["hint", "uid"]
 })*/
 function getUpgTowClass(uid) {
+    let temp1 = getUpgTow(uid)
+    let temp2 = ""
+    if(temp1.isMM6 && !player.exponenting.unl){
+        return "upgBoxMM6"
+    }
+    /*  !player.exponenting.unl corruptedBox*/
     if (hasMM5TowUpg(uid)) {
-        return "upgBoxBought"
+        temp2 = temp2.concat("upgBoxBought")
     } else {
         if (canBuyTow(uid)) {
-            return "upgBoxBuyable"
+            temp2 = temp2.concat("upgBoxBuyable")
         } else {
-            return "upgBox"
+            temp2 = temp2.concat("upgBox")
         }
     }
+    if (temp1.isMM6){
+        temp2 = temp2.concat("MM6")
+    }
+    return temp2
+
 
 }
 function canBuyTow(uid){
-    return shortcut.secu.tower.spent.add(getUpgTow(uid).cost).lte(tmp.tower.totalMM52) && getUpgTow(uid).affordable
+    let temp1 = getUpgTow(uid);
+    if (temp1.isMM6){
+        return player.exponenting.unl && player.exponenting.tower.spent.add(temp1.cost).lte(tmp.mm6tower.totalMM61) && temp1.affordable
+    }
+    return shortcut.secu.tower.spent.add(temp1.cost).lte(tmp.tower.totalMM52) && temp1.affordable
 }
 function getUpgTow(uid) {
     let row = Math.floor((uid / 10) - 1);
@@ -291,6 +306,12 @@ function buyMM52(buyid){
             if (shortcut.mm5.points.gte(tmp.tower.mm52costFrommm5)){
                 shortcut.mm5.points = shortcut.mm5.points.sub(tmp.tower.mm52costFrommm5)
                 shortcut.secu.tower.fromMM5 = shortcut.secu.tower.fromMM5.add(1)
+            }
+            break;
+        case 4:
+            if (player.exponenting.fractal.fractals.gte(tmp.mm6tower.mm61costFromFractal)){
+                player.exponenting.fractal.fractals = player.exponenting.fractal.fractals.sub(tmp.mm6tower.mm61costFromFractal)
+                player.exponenting.tower.from6DFractal = player.exponenting.tower.from6DFractal.add(1)
             }
             break;
     }
@@ -327,6 +348,15 @@ function buyMM52Max(buyid){
             break;
     }
 }
+function getBoxClass(uid) {
+    let temp1 = getUpgTow(uid)
+    if (temp1.isMM6 && !player.exponenting.unl){
+        return "corruptedBox"
+    }else{
+        return ""
+}
+    //!player.exponenting.unl corruptedBox
+}
 Vue.component("upgradetowers", {
     get template() {
         return (
@@ -341,7 +371,7 @@ Vue.component("upgradetowers", {
     <div v-for="row in mm5_upg_tow" style="display: flex">
         <div v-for="tow in row"  :class="getUpgTowClass(tow.id)" mm5>
             <div style="position: relative; top: -1.5rem; text-align: left; font-size: 16px;" v-html="getHintText(tow.id)"></div>
-            <div  class="center" @click="buyMM5TowUpg(tow.id)" style="position: relative; top: -1.5rem; font-size: 10px; height: 100%; vertical-align: middle;">
+            <div :class="getBoxClass(tow.id)" class="center" @click="buyMM5TowUpg(tow.id)" style="position: relative; top: -1.5rem; font-size: 10px; height: 100%; vertical-align: middle;">
                 <br>
                 <span v-html="getTowDescription(tow.id)"></span>
             </div>
@@ -367,7 +397,17 @@ Vue.component("upgradetowers", {
             }
         },
         getTowDescription(uid) {
-            return getUpgTow(uid).description + "<br>" + getUpgTow(uid).reqDesc + "<br>" + getUpgTow(uid).cost.format() + "mm<sup>5.2</sup>"
+            let temp1 = getUpgTow(uid);
+            if (temp1.isMM6){
+                if (player.exponenting.unl){
+                    return temp1.description + "<br>" + temp1.reqDesc + "<br>" + temp1.cost.format() + " mm<sup>6.1</sup>"
+                }else{
+                    return "<span class=\"corrupted\">????????<br>??<br>?? ??<sup>???</sup></span>"
+                }
+
+            }else{
+                return temp1.description + "<br>" + temp1.reqDesc + "<br>" + temp1.cost.format() + " mm<sup>5.2</sup>"
+            }
         }
     }
 })

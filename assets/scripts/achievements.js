@@ -70,7 +70,8 @@ const achievements = [
     [
         { title: "Save fixer 1", goal: "Try to import a save from Wind spirit creation", secret: true },
         { title: "Can you download more RAMs?", goal: "Make 3 FPS", secret: true},
-        { title: "MegaVerse", goal: "Reach "+display_volumes(MEGAVERSE)}
+        { title: "MegaVerse", goal: "Reach "+display_volumes(MEGAVERSE)},
+        { title: "I didn't need compress, just a upgrade ^_^", goal:"Reach "+display_volumes(E.E_MAX_SAFE_INTEGER)+" without gaining mm<sup>5.95</sup>"}
     ],
 
 ]
@@ -181,6 +182,9 @@ function updateAch() {
     if (player.volumes.gte(-1.79e308) && "AchRow5") {
         if (player.volumes.gte(MEGAVERSE)) {
             getAch(51)
+        }
+        if (player.volumes.gte(E.E_MAX_SAFE_INTEGER) && player.compress.mm595.eq(0)) {
+            getAch(52)
         }
 
     }

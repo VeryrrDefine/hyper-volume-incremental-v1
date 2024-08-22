@@ -20,9 +20,14 @@ function getFractalEffect() {
     return temp1
 }
 function updateFractal(){
-    player.exponenting.fractal.fractals = player.exponenting.fractal.fractals.add(
-        player.exponenting.fractal.fractalEngine.mul(tmp.mm6.fractal.fracEff3).mul(diff2)
-    )
+    if (player.exponenting.fractal.fractalEngine.gte(1)){
+        player.exponenting.fractal.fractals = player.exponenting.fractal.fractals.add(
+            getFractalProduce().mul(diff2)
+        )
+    }
+}
+function getFractalProduce(){
+    return E.pow(2,player.exponenting.fractal.fractalEngine).mul(tmp.mm6.fractal.fracEff3)
 }
 function getFractalEngineCost() {
     return ExpantaNum.pow(2.64454438, player.exponenting.fractal.fractalEngine)
