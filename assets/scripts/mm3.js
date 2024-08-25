@@ -90,7 +90,7 @@ function no_reward_mm3_reset() {
 
     player.tickspeed = E("0");
     player.time.real_mm3 = 0;
-    player.time.mm3 = 0;
+    player.time.mm3 = E(0);
 }
 
 function doMM3reset() {

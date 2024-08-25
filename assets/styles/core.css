@@ -2,6 +2,7 @@
 @import "./basic.css";
 @import "./mm3.css";
 @import "./mm5.css";
+@import "./mm6.css";
 @import "./achi.css";
 @import "./animations.css";
 [efreygrt]{
@@ -26,6 +27,16 @@
 
 .paralleluniverse{
     z-index: 10;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background: black;
+}
+
+.fakegoinfinite{
+    z-index: -1;
     position: absolute;
     top: 0px;
     left: 0px;

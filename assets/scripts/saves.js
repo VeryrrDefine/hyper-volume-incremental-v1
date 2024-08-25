@@ -128,6 +128,7 @@ function handle_import(save2) {
         let importing_player = formatsave.decode(save2);
         Object.assign(player, importing_player)
         fix();
+        save();
         location.href = location.href
     }catch{
         addNotify("I cant handle this save.")
@@ -149,7 +150,7 @@ function fast_hard_reset(){
 }
 function formated_hard_reset() {
     let redeem = prompt("Do you want to reset this parallel universe? Enter text："+
-    "Did you think i am a sb? \n\n\na?")
+    "Did you think i am a sb?zz")
     if (redeem === "Did you think i am a sb?" ||
         (app.developer_mode && redeem === "a")){
         hard_reset();

@@ -17,7 +17,6 @@ function no_reward_mm5_reset(){
     player.mm35_volumes.points = E(1);
     player.mm35_volumes.san_xiang_bo_points = E(1);
     player.mm35_volumes.unl = false;
-    player.secutitation.secutitation_reset_times = player.secutitation.secutitation_reset_times.add(1)
     if (player.secutitation.mm5_volumes.galaxies.lt(5)){
         player.secutitation.mm5_volumes.energy = E(1);
     }
@@ -30,6 +29,10 @@ function no_reward_mm5_reset(){
 }
 
 function doMM5reset(){
+    player.secutitation.secutitation_reset_times = player.secutitation.secutitation_reset_times.add(
+        1 * (player.exponenting.unl ? 100 : 1)
+        
+        )
     player.secutitation.points = player.secutitation.points.add(tmp.mm5.secu_gain)
     player.secutitation.mm5_volumes.points = player.secutitation.mm5_volumes.points.add(tmp.mm5.gain)
     no_reward_mm5_reset()
@@ -46,21 +49,17 @@ function doMM5resetManmade(){
     }
     
 }
-
+function buymm5dimMax(dim){
+    let x = player.secutitation.mm5_volumes.points.clone();
+    let temp1 = x.logarithm(mm5_scale[dim-1]).ceil()
+    if (temp1.gt(player.mm5_volume_dimensions[DIMENSIONS_BOUGHT][dim - 1])){
+        player.mm5_volume_dimensions[DIMENSIONS_BOUGHT][dim - 1] = temp1.clone()
+    }
+}
 function buymm5dim(dim) {
-    /*
-    1st dim x3
-    2st dim x5
-    3st dim x10
-    4st dim x20
-    5st dim x35
-    6st dim x90
-    7st dim x270
-    8st dim x1729
-    */
     if (player.secutitation.mm5_volumes.points.gte(player.mm5_volume_dimensions[DIMENSIONS_COST][dim - 1])) {
 
-        player.secutitation.mm5_volumes.points = player.secutitation.mm5_volumes.points.sub(player.mm5_volume_dimensions[DIMENSIONS_COST][dim - 1])
+        if (!hasMM6Upg(10)) player.secutitation.mm5_volumes.points = player.secutitation.mm5_volumes.points.sub(player.mm5_volume_dimensions[DIMENSIONS_COST][dim - 1])
         
         player.mm5_volume_dimensions[DIMENSIONS_BOUGHT][dim - 1] = player.mm5_volume_dimensions[DIMENSIONS_BOUGHT][dim - 1].add(1);
         player.mm5_volume_dimensions[DIMENSIONS_POINTS][dim - 1] = player.mm5_volume_dimensions[DIMENSIONS_POINTS][dim - 1].add(1); //     player.volumes = player.volumes.sub(E.pow(10,temp1.mul(dim).ceil()))
@@ -75,6 +74,8 @@ function buymm5dim(dim) {
 
 
 function calculate_mm5dim() {
+    buyMM52Max(1)
+    buyMM52Max(2)
     player.secutitation.mm5_volumes.energy = player.secutitation.mm5_volumes.energy
             .add(
                 player.mm5_volume_dimensions[DIMENSIONS_POINTS][0]
@@ -94,6 +95,9 @@ function calculate_mm5dim() {
             player.mm5_volume_dimensions[DIMENSIONS_MULTI][i] = tmp.mm5.getDimMultiplier(i + 1);
         if (player.mm5_volume_dimensions[DIMENSIONS_POINTS][i].isNaN()) {
             player.mm5_volume_dimensions[DIMENSIONS_POINTS][i] = E(0);
+        }
+        if (player.auto.includes(13+i)){
+            buymm5dimMax(i+1)
         }
     }
 
@@ -119,7 +123,7 @@ function calculate_mm5dim() {
             }
         }
     }
-    if (player.secutitation.secutitation_reset_times.gte(10) || secret_achievement_data.dev_passive_generate){
+    if (player.secutitation.secutitation_reset_times.gte(10) || player.exponenting.unl || secret_achievement_data.dev_passive_generate){
         player.mm3_volumes.points = player.mm3_volumes.points.add(tmp.mm3.gain.mul(diff))
     }
 }

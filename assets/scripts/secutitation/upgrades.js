@@ -2,16 +2,16 @@ const mm5_upgrades = [
     {//1
         desc: "8<sup>th</sup> 4D Dimension exponentplier +0.05",
         get require(){
-            return player.secutitation.points.gte(30)
+            return player.secutitation.points.gte(1000)
         },
         get require_desc(){
-            return "4000 secutitation points"
+            return "1000 secutitation points"
         },
         get unlocked() {
             return player.secutitation.secutitation_reset_times.gt("0");
         },
         bought_do(){
-            player.secutitation.points = player.secutitation.points.sub(4000)
+            player.secutitation.points = player.secutitation.points.sub(1000)
 
         }
     },/*

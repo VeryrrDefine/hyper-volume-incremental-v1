@@ -57,14 +57,14 @@ window["Vue"].component("exprecord", {
     template: `
     <div>
         <h1>Experimental records</h1>
-        <p>下列是一系列实验记录，从2022/8/24开始到锟斤拷烫烫ElV  In   a ֱ        ߈烫烫结束</p>
+        <p>下列是一系列实验记录，从2022/8/24开始到<span class="corrupted">锟斤拷烫烫ElV  In   a ֱ        ߈烫烫结束{{wordCycle(["无论如何","请你记住","不要超过"])}}<span v-html="display_volumes(E.E_MAX_SAFE_INTEGER)"></span>...</span></p>
+        
         <div v-for="record in records" :key="record.id"  v-if="record.unlocked">
             
             <h3 v-html="record.name"></h3>
             <p v-html="record.date"></p>
             <div v-html="record.desc"></div>
         </div>
-        <p class="adventuring"><i>Adventuring....</i></p>
-    </div>
+        </div>
     `
 })

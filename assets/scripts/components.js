@@ -22,6 +22,7 @@ function loadVue() {
             mm5_upg: chunkArrayIntoGroupsOfTen(mm5_upgrades),
             mm4_upg: chunkArrayIntoGroupsOfTen(mm4_upgrades),
             mm3_upg: chunkArrayIntoGroupsOfTen(mm3_opt.upgrades),
+            mm6_upg: chunkArrayIntoGroupsOfTen(mm6_upgrades),
 
             mm3_chal: chunkArrayIntoGroupsOfTen(mm3_challenges),
             mm5_chal: chunkArrayIntoGroupsOfTen(mm5_challenges),
@@ -35,11 +36,24 @@ function loadVue() {
             parallelUniverseId,
             hover_3upg: 0,
             hover_5upg: 0,
+            hover_6upg: 0,
             developer_code: "",
             whistle_unlock: false,
             devNews: window.texts,
             parallelUniverseModal: false,
             changelogs: [
+                {
+                    version: "v1.2.0", title: "Exponenting Update!",
+                    changes: [
+                        "添加了mm<sup>6</sup>"
+                    ]
+                },
+                {
+                    version: "v1.1.7", title: "",
+                    changes:[
+                        "添加了Compress"
+                    ]
+                },
                 {
                     version: "v1.1.6", title: "",
                     changes:[

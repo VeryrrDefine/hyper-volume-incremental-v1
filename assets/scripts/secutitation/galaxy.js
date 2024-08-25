@@ -1,6 +1,13 @@
-function mm5Galaxycost(){
-    return E.mul("1e6",E.pow("1e3.2",player.secutitation.mm5_volumes.galaxies));
-    if (player.secutitation.mm5_volumes.galaxies.eq(0)){
+function mm5Galaxycost(){ //50 100 800
+    let temp1 = E.mul("1e6",E.pow("1e3.2",player.secutitation.mm5_volumes.galaxies));
+    if (player.secutitation.mm5_volumes.galaxies.gte(50)){
+        temp1 = temp1.mul(E.pow(10,player.secutitation.mm5_volumes.galaxies.sub(49)))
+    }
+    if (player.secutitation.mm5_volumes.galaxies.gte(100)){
+        temp1 = temp1.mul(E.pow(10,player.secutitation.mm5_volumes.galaxies.sub(99).pow(1.5)))
+    }
+    return temp1
+    /*if (player.secutitation.mm5_volumes.galaxies.eq(0)){
         return E("1e9");
     }
     if (player.secutitation.mm5_volumes.galaxies.eq(1)){
@@ -12,7 +19,7 @@ function mm5Galaxycost(){
     if (player.secutitation.mm5_volumes.galaxies.eq(3)){
         return E("1e18");
     }
-    return E.GRAHAMS_NUMBER
+    return E.GRAHAMS_NUMBER*/
 }
 const galaxy_rewards = [
     {
@@ -53,6 +60,19 @@ const galaxy_rewards = [
         get effectDisplay() {
             return "×"+this.effect.format();
         }
+    },{
+        req: E("76"),
+        desc: "Get a 4D Dimensions exponentplier based on galaxies count",
+        get effect() {
+            return shortcut.mm5.galaxies.logarithm(10).div(40)
+            /*
+            
+            */
+        },
+        get effectDisplay() {
+            return "+"+this.effect.format();
+        }
+
     }/*
     {
         req: E("7"),
@@ -83,6 +103,14 @@ function mm5_gal_reset(){
 function mm5_gal_reset_manmade(){
     if (player.secutitation.mm5_volumes.energy.gte(tmp.mm5.galaxycost)){
         mm5_gal_reset()
+    }
+}
+function getSuperMM5GalaxyType(){
+    if (shortcut.mm5.galaxies.gte(100)){
+        return "Hyper|"
+    }
+    if (shortcut.mm5.galaxies.gte(50)){
+        return "Super|"
     }
 }
 function getMM5galaxyText(){

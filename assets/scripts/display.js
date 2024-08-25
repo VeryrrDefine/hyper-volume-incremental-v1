@@ -47,13 +47,6 @@ function toggleStickyDisplay() {
     player.options.stickyDisplay = !player.options.stickyDisplay
 }
 
-function getGalaxyText() {
-    return `维度星系(${formatWhole(player.galaxy_count)})<br>` +
-        `重置维度，tickspeed和维度提升<br>获得一个维度星系<br>将Tickspeed效果+0.05<br>需要<span>${formatWhole(tmp.galaxy.cost)}</span>维度8`
-        + (!hasMM3upgrade(30) ? "和<span class='corrupted'>???</span>" : "")
-
-}
-
 var notify = document.getElementById('notify');
 
 // 显示通知框
@@ -113,7 +106,7 @@ function display_volumes_stat(a) {
         return `${format(a.div(LY.mul('1e9').pow(4)), 5, false)} Gly<sup>4</sup>`
     } else if (a.lt('ee9')) {
         return `${format(a.div(UNI.pow(4)), 5, false)} uni<sup>4</sup>`
-    } else if (a.lt('ee504')) {
+    } else if (a.lt('1e1e129')) {
         /*let log_v = a.logarithm(10);
         let temp1 = log_v.root("1e9").root("1e15").floor().toNumber() // javascript number
         let temp2 = a.logarithm(10).;*/
@@ -141,7 +134,7 @@ function display_volumes_stat(a) {
 
 function display_volumes(a) {
     return a.formatA() + " mm<sup>4</sup>";
-
+    return display_volumes_stat(a)
 }
 
 function getMM4UpgClassName(id) {
@@ -235,12 +228,17 @@ const EnglishOrdinals = [
 function displayStat() {
     if (player.volumes.lt("ee5")) {
         return `如果对4维体积进行单位换算，You can get ${display_volumes(player.volumes)}`
-    } else if (player.volumes.lt("e1e19")) {
-        return `如果将4维体积以十进制的形式存储，那么你需要一个${formatDatabyte.fromBytes(player.volumes.logarithm(10).add(1))}大的存储设备将他存下。`
+    } else if (player.volumes.lt(E.E_MAX_SAFE_INTEGER)) {
+        return `如果你每秒写1个数字，那么把你的4维体积写下来需要${formatTime.fromSeconds(player.volumes.log10().floor().add(1))}`
+    }else if (player.volumes.lt(E.EE_MAX_SAFE_INTEGER)) {
+        return `你的4维体积的指数为${player.volumes.log10().formatA()}`
     }
 }
 
 function getSoftcapType(a) {
+    if (player.dimensions[DIMENSIONS_MULTI][a - 1].gte(tmp.dimension.softcap3)) {
+        return "<span style='color: rgb(122, 0, 86);'>3<sup>rd</sup> softcap</span>"
+    }
     if (player.dimensions[DIMENSIONS_MULTI][a - 1].gte(tmp.dimension.softcap2)) {
         return "<span style='color:rgb(121,0,0)'>2<sup>nd</sup> softcap</span>"
     }
@@ -307,4 +305,29 @@ function blendWords(first, second, param) {
 }
 function becomeNaNed(){
     gameNaNed = true;
+}
+
+function fakeGoInfiniteText(){
+    if (player.fakeGoInfinite){
+        switch(true){
+            case player.fGItime>30:
+                return "Never gonna give you up~ Never gonna let you down~ Never gonna aaaaaaaaaaaaaa round and desert you"
+            case player.fGItime>20:
+                return "But..."
+            
+            case player.fGItime>15:
+                return "It means 10^9007199254740991."
+            case player.fGItime>10:
+                return "Finally, you beated the game, e9.007e15."
+        }
+    }
+    else return ""
+}
+
+function getPageOpacity(){
+    if (player.fakeGoInfinite){
+        return 1 - Math.min(1, player.fGItime/10)
+    }else{
+        return 1
+    }
 }

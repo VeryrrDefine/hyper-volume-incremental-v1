@@ -23,15 +23,15 @@ var mm4_upgrades = [
         desc: "1<sup>st</sup> Dimension multiplier add based on mm<sup>4</sup> Volumes",
         get effect() {
             let a = player.volumes.root(90);
-            if (hasMM4Upg(14) && !hasMM5TowUpg(81)){
+            if (hasMM4Upg(14) && !hasMM5TowUpg(81)) {
                 a = player.volumes.root(40);
             }
-            if (hasMM5TowUpg(81)){
+            if (hasMM5TowUpg(81)) {
                 a = player.volumes.root(60);
 
             }
             if (a.gte("1000") && !hasMM5TowUpg(81)) {
-                a = softcap(a,1000,0.5,"pow",false);
+                a = softcap(a, 1000, 0.5, "pow", false);
             }
             return a.max(1)
         },
@@ -56,7 +56,7 @@ var mm4_upgrades = [
         },
     },
     {//3
-        desc :"Unlock 3.5D",
+        desc: "Unlock 3.5D",
 
         cost: E("1.145046196390161e92"),
         get unlocked() {
@@ -72,7 +72,7 @@ var mm4_upgrades = [
         },
         get effect() {
             let a = player.mm3_volumes.points.add(1).mul(10).min("1e301")
-            a = softcap(a,"5.2e11",0.5,"pow")
+            a = softcap(a, "5.2e11", 0.5, "pow")
 
             return a
 
@@ -105,70 +105,70 @@ var mm4_upgrades = [
     {//8
         desc: "Your mm<sup>3.5</sup> volumes doesn't reset on doing mm<sup>3</sup> reset.<br>Unlock mm<sup>3</sup> Challenge",
         cost: E("e830"),
-        get unlocked(){
+        get unlocked() {
             return hasMM3Upg(3);
         }
     },
     {//9
         desc: "mm<sup>3</sup> volumes gain formula be better",
         cost: E("e5.802e3"),
-        get unlocked(){
+        get unlocked() {
             return player.volumes.gte("e5.8e3") || hasMM4Upg(9)
         }
     },
     {//10
         desc: "Unlock 5<sup>th</sup> mm<sup>3</sup> challenge",
         cost: E("e6.05e3"),
-        get unlocked(){
+        get unlocked() {
             return hasMM4Upg(9)
         }
     },
     {//11
         desc: "1<sup>st</sup> Softcap starts at 1.000e400",
         cost: E("e9.2e3"),
-        get unlocked(){
+        get unlocked() {
             return hasMM4Upg(10)
         }
     },
     {//12
         desc: "1<sup>st</sup> Softcap starts at 1.000e700",
         cost: E("e9.7e3"),
-        get unlocked(){
+        get unlocked() {
             return hasMM4Upg(11)
         }
     },
     {//13
         desc: "1<sup>st</sup> Softcap starts at 1.000e800",
         cost: E("e1.155e4"),
-        get unlocked(){
+        get unlocked() {
             return hasMM4Upg(12)
         }
     },
     {//14
         desc: "Make mm<sup>4</sup> Upgrade 1 formula be better",
         cost: E("e1.2222222e4"),
-        get unlocked(){
+        get unlocked() {
             return hasMM4Upg(13)
         }
     },
     {//15
         desc: "Unlock 6<sup>th</sup> mm<sup>3</sup> Challenge",
         cost: E("e1.3888888888e4"),
-        get unlocked(){
+        get unlocked() {
             return hasMM4Upg(14)
         }
     },
     {//16
         desc: "1<sup>st</sup> Softcap starts at 1.000e12500",
         cost: E("e1.50505050505050505050e4"),
-        get unlocked(){
+        get unlocked() {
             return hasMM3Chal(6)
         }
     },
     {//17
         desc: "Unlock mm<sup>4.5</sup>",
         cost: E("e1.50505050505050505050e4"),
-        get unlocked(){
+        get unlocked() {
             return hasMM4Upg(16)
         }
     }
@@ -181,9 +181,9 @@ function buyMM4Upg(id) {
 }
 
 function hasMM4Upg(id) {
-    if (player.inMM3Challenge == 2 && 
-        (between(1,id,2) || between(4,id,8))
-        ){
+    if (player.inMM3Challenge == 2 &&
+        (between(1, id, 2) || between(4, id, 8))
+    ) {
         return false;
     }
     return player.upgrades.includes(id);
@@ -216,7 +216,7 @@ function reset_mm5_dimensions() {
 }
 
 function hard_reset() {
-    if (player.options !== void undefined){
+    if (player.options !== void undefined) {
         var b = player.options;
     }
 
@@ -247,7 +247,7 @@ function hard_reset() {
             in_sacrifice: false,
             mm45_points: E(0),
             sacrifice_times: E(0), // 次数
-            mm45buyables: [0,0,0]
+            mm45buyables: [0, 0, 0]
         },
 
         mm35_volumes: {
@@ -287,9 +287,26 @@ function hard_reset() {
             mm595: E(0),
             highestMM4inCompress: E(0),
             upgrades: [],
-            buyables: [],
+            buyables: [E(0), E(0), E(0),],
             inCompress: false,
             unl: false
+        },
+        exponenting: {
+            points: E(0), //mm^6
+            resetTimes: E(0),
+            unl: false,
+            fractal: {
+                fractals: E(0),
+                fractalEngine: E(0),
+                fractalEngineMore: E(0),
+                fractalEngineMK2: E(0)
+            },
+            tower: {
+                from6DFractal: E(0),
+                spent: E(0)
+            },
+            upgrades: []
+
         },
         auto: [],
         multi: {
@@ -300,15 +317,16 @@ function hard_reset() {
         upgrades: [],
         // stats
         time: {
-            eter: 0,
+            eter: E(0),
             real_eter: 0,
-            mm3: 0,
+            mm3: E(0),
             real_mm3: 0,
             time_now: Date.now()
         },
         volume_generated: {
             mm4: E(0),
-            mm3: E(0)
+            mm3: E(0),
+            mm6: E(0)
         },
 
         window_show: {
@@ -321,13 +339,14 @@ function hard_reset() {
         lastTab: '1',
         unlockedMM5ChallengeLeastOnce: false,
         newsticker_time: 0,
-        achievements: []
-
+        achievements: [],
+        fakeGoInfinite: false,
+        fGItime: 0
 
     }
     reset_dimensions(1)
     reset_mm5_dimensions()
-    if (b !== void undefined){
+    if (b !== void undefined) {
         player.options = b;
     }
 }
@@ -341,11 +360,11 @@ function hard_reset() {
 
 
 function buyable(dim) {
-    if (!tmp.dimension.canbuyDim(dim)){
+    if (!tmp.dimension.canbuyDim(dim)) {
         return false
     }
     let temp1 = player.dimensions[DIMENSIONS_COST][dim - 1]
-    if (player.inMM3Challenge === 5 && between(7,dim,8)){
+    if (player.inMM3Challenge === 5 && between(7, dim, 8)) {
         return false;
     }
     return player.volumes.gte(temp1)
@@ -359,14 +378,14 @@ function import_str(pl) {
     location.href = location.href;
 }
 
-function buydim(dim,single=false) {
-    if (single){
-        if (player.volumes.gte(player.dimensions[DIMENSIONS_COST][dim - 1])){
+function buydim(dim, single = false) {
+    if (single) {
+        if (player.volumes.gte(player.dimensions[DIMENSIONS_COST][dim - 1])) {
             player.dimensions[DIMENSIONS_BOUGHT][dim - 1] = player.dimensions[DIMENSIONS_BOUGHT][dim - 1].add(1);
             return true;
         }
     }
-    if (player.inMM3Challenge === 5 && between(7,dim,8)){
+    if (player.inMM3Challenge === 5 && between(7, dim, 8)) {
         return false;
     }
     if (player.volumes.gte(player.dimensions[DIMENSIONS_COST][dim - 1])) {
@@ -376,7 +395,7 @@ function buydim(dim,single=false) {
         let buycount = temp1.sub(temp2).ceil();
         let temp3 = buycount.clone();
 
-        if (buycount.lt(1)){
+        if (buycount.lt(1)) {
             buycount = E(1)
         }
         player.dimensions[DIMENSIONS_BOUGHT][dim - 1] = player.dimensions[DIMENSIONS_BOUGHT][dim - 1].add(buycount);
@@ -391,28 +410,6 @@ function buydim(dim,single=false) {
 }
 
 
-function dimensionBoost(nBoost) {
-    if (!tmp.dimensionBoost.boostable) {
-        return;
-    }
-    if (player.dim_boost.lte(3)) {
-        player.dim_boost = player.dim_boost.add(1);
-        reset_dimensions(false)
-        player.volumes = E(10)
-        player.tickspeed = E(0)
-        return;
-    }
-    if (player.dim_boost.gte(4)) {
-        player.dim_boost = player.dim_boost.add(1);
-        reset_dimensions(false)
-        player.volumes = E(10)
-        player.tickspeed = E(0)
-        return;
-
-    }
-
-}
-
 
 const dim_base_price = [
     E(10), E(100), E(1E3), E(1E4), E(1E5), E(1E6), E(1E7), E(1E8)
@@ -425,7 +422,7 @@ function calculate_dim() {
             .add(
                 player.dimensions[DIMENSIONS_POINTS][i + 1]
                     .mul(player.dimensions[DIMENSIONS_MULTI][i + 1])
-                    .pow(player.dimensions[DIMENSIONS_EXPONENT][i+1])
+                    .pow(player.dimensions[DIMENSIONS_EXPONENT][i + 1])
                     .mul(diff)
             );
         if (player.dimensions[DIMENSIONS_POINTS][i].isNaN()) {
@@ -439,9 +436,9 @@ function calc_cost(dimid, count) {
     // count before buy
     // 1st dimension dimid = 0
     let temp1 = dim_base_price[dimid]
-        .mul(tmp.dimension.getDimScale(dimid+1).pow(count.floor()));
-    if (player.inMM3Challenge===5 && between(6,dimid,7)){
-        temp1 = E.expansion(10,1e15)
+        .mul(tmp.dimension.getDimScale(dimid + 1).pow(count.floor()));
+    if (player.inMM3Challenge === 5 && between(6, dimid, 7)) {
+        temp1 = E.expansion(10, 1e15)
     }
     return temp1;
 }
@@ -470,50 +467,58 @@ function loop() {
         player.time_now = Date.now();
         player.time.time_now = Date.now();
         window.global_diff = (this_frame - last_frame) / 1000;
-        if (window.eHook && !app.developer_mode){
+        if (Number.isNaN(player.offlinedTime)) {
+            player.offlinedTime = 0
+        }
+        if (hasMM6Upg(3)) player.compress.unl=true
+        if (window.eHook && !app.developer_mode) {
             getAch(43);
-            
+
             save();
             clearInterval(window.qqq);
             clearInterval(window.www);
-            let urlarray = ["https://www.bilibili.com/video/BV1Jg411o7J4","https://www.bilibili.com/video/BV15C4y1K7PN"];
-            location.href = urlarray[Math.floor(Math.random()*urlarray.length)]
-            
+            let urlarray = ["https://www.bilibili.com/video/BV1Jg411o7J4", "https://www.bilibili.com/video/BV15C4y1K7PN"];
+            location.href = urlarray[Math.floor(Math.random() * urlarray.length)]
+
         }
-        if (window.global_diff>0.3333){
+        if (window.global_diff > 0.3333) {
             getAch(52)
         }
         /*if (hasMM5TowUpg(61)){
             player.unlockedMM5ChallengeLeastOnce = true
         }*/
         window.global_diff *= developer.timeboost
+        window.diff2 = E(window.global_diff * player.options.gamespeed);
+        window.diff = E(diff2 * (player.inMM3Challenge === 8 ? 0.001 : 1)).mul(tmp.mm6.perMM6speed);
+
+
         sacrif(1)
         updateAch()
         reactorLoop()
+        updateFractal()
         // QoL challenging life
-        if (player.inMM3Challenge!= 0 && player.auto.includes(9) && player.volumes.gte(
-            mm3_challenges[player.inMM3Challenge-1].complete_requirement
-        )){
+        if (player.inMM3Challenge != 0 && player.auto.includes(9) && player.volumes.gte(
+            mm3_challenges[player.inMM3Challenge - 1].complete_requirement
+        )) {
             mm3HandleChallenge()
         }
 
         sound_element.volume = player.sound_volume;
-        if (player.lastTab!="251"){
+        if (player.lastTab != "251") {
             player.selectedMM3Challenge = 0
         }
-        if (player.lastTab!="252"){
+        if (player.lastTab != "252") {
             player.selectedMM5Challenge = 0
         }
-        window.diff = window.global_diff * player.options.gamespeed * (player.inMM3Challenge===8 ? 0.001 : 1);
 
-        let temp1 = (player.options.gamespeed-1) * window.global_diff * 1000
-        if (player.offlinedTime < 1){
+        let temp1 = (player.options.gamespeed - 1) * window.global_diff * 1000
+        if (player.offlinedTime < 1) {
             player.offlinedTime = 0
         }
-        if (temp1 <=player.offlinedTime){
+        if (temp1 <= player.offlinedTime) {
             player.offlinedTime -= temp1
-        }else{
-            if (player.options.gamespeed > 1){
+        } else {
+            if (player.options.gamespeed > 1) {
                 player.options.gamespeed = 1
             }
         }
@@ -525,13 +530,19 @@ function loop() {
         if (!player.mm35_volumes.unl && hasMM4Upg(3)) {
             player.mm35_volumes.unl = true
         }
-        
+
         if (player.mm35_volumes.points.lt(1)) {
             player.mm35_volumes.points = E(1);
         }
-        player.time.eter += window.diff;
+        if (typeof player.time.eter == 'number') {
+            player.time.eter = E(player.time.eter)
+        }
+        if (typeof player.time.mm3 == 'number') {
+            player.time.mm3 = E(player.time.mm3)
+        }
+        player.time.eter = player.time.eter.add(window.diff2);
+        player.time.mm3 = player.time.mm3.add(window.diff);
         player.time.real_eter += window.global_diff;
-        player.time.mm3 += window.diff;
         player.time.real_mm3 += window.global_diff;
         /* if (player.volumes.isNaN()){
              player.volumes = E(10);
@@ -539,34 +550,44 @@ function loop() {
 
 
         let more = tmp.mm4.gain.mul(diff);
-        if (player.volume_generated.mm4=="NaN"){
+        if (player.volume_generated.mm4 == "NaN") {
             player.volume_generated.mm4 = E(0)
         }
         player.volume_generated.mm4 = player.volume_generated.mm4.add(more);
         //MM35();
-        if (!player.mm3_volumes.in_sacrifice){
-            player.volumes = player.volumes.add(
-                more
-            );
-            calculate_dim();
-
-        }
+        player.volumes = player.volumes.add(
+            more
+        );
+        calculate_dim();
+        updateDimensionData()
         calculate_mm5dim();
-
         for (let i = 0; i < 8; i++) {
-            if (player.auto.includes(i + 1) && !(player.inMM3Challenge==2)) {
+            if (player.auto.includes(i + 1) && !(player.inMM3Challenge == 2)) {
                 if (buyable(i + 1)) {
                     buydim(i + 1)
                 }
             }
-            player.dimensions[DIMENSIONS_MULTI][i] = tmp.dimension.getDimMultiplier(i + 1);
-            player.dimensions[DIMENSIONS_EXPONENT][i] = tmp.dimension.getDimExponentplier(i + 1);
-            player.dimensions[DIMENSIONS_COST][i] = calc_cost(i, player.dimensions[DIMENSIONS_BOUGHT][i])
-            player.mm5_volume_dimensions[DIMENSIONS_COST][i] = tmp.mm5.dimcost(i+1)
         }
+
         if (player.error !== void 0) {
             throw new Error("you throw a error!");
         }
+        if (player.volumes.gte(E.E_MAX_SAFE_INTEGER) && !player.exponenting.unl) {
+            player.volumes = E.E_MAX_SAFE_INTEGER.clone()
+            player.fakeGoInfinite = true
+        }
+        if (player.fakeGoInfinite) {
+            player.fGItime += global_diff
+            if (player.fGItime > 35) {
+                player.fGItime = 0
+                player.exponenting.unl = true
+                //doMM6reset();
+                player.fakeGoInfinite = false
+            }
+        }
+
+
+
         player.lastTab = app.tabShow
         last_frame = this_frame
     } catch (e) {
@@ -577,7 +598,15 @@ function loop() {
         console.log(e);
     }
 }
+function updateDimensionData() {
+    for (let i = 0; i < 8; i++) {
+        player.dimensions[DIMENSIONS_MULTI][i] = tmp.dimension.getDimMultiplier(i + 1);
+        player.dimensions[DIMENSIONS_EXPONENT][i] = tmp.dimension.getDimExponentplier(i + 1);
+        player.dimensions[DIMENSIONS_COST][i] = calc_cost(i, player.dimensions[DIMENSIONS_BOUGHT][i])
+        player.mm5_volume_dimensions[DIMENSIONS_COST][i] = tmp.mm5.dimcost(i + 1)
+    }
 
+}
 function setErrorDial(q) {
     app.hasError = true;
     app.errortext = q.stack.replaceAll("\n", "<br>");
@@ -613,7 +642,7 @@ function toggleMusic(a = -1) {
             playPromise = ele.play()
             playPromise.catch(function () {
                 addNotify("Sorry, I can't play the music.")
-                player.options.music=0
+                player.options.music = 0
             })
             break;
         case 2:
@@ -622,7 +651,7 @@ function toggleMusic(a = -1) {
             playPromise = ele.play()
             playPromise.catch(function () {
                 addNotify("Sorry, I can't play the music.")
-                player.options.music=0
+                player.options.music = 0
             })
             break;
         case 3:
@@ -631,7 +660,7 @@ function toggleMusic(a = -1) {
             playPromise = ele.play()
             playPromise.catch(function () {
                 addNotify("Sorry, I can't play the music.")
-                player.options.music=0
+                player.options.music = 0
             })
             break;
     }
@@ -670,15 +699,16 @@ function buyAll() {
     buydim(8);
 }
 function transformToE(object) {
-    for(let key in object) {
-      if(typeof object[key] === "string" && !new E(object[key]).isNaN()) {
-        object[key] = new E(object[key]);
-      }
-      if(typeof object[key] === "object") {
-        transformToE(object[key]);
-      }
+    for (let key in object) {
+
+        if (key !== "offlinedTime" && typeof object[key] === "string" && !new E(object[key]).isNaN()) {
+            object[key] = new E(object[key]);
+        }
+        if (typeof object[key] === "object") {
+            transformToE(object[key]);
+        }
     }
-  }
+}
 
 function fix() {/*
     player.volumes = ENify(player.volumes);
@@ -708,10 +738,10 @@ function fix() {/*
         player.options.music = 0;
     }
     if (player.time.mm3 === void 0) {
-        player.time.mm3  = 0;
+        player.time.mm3 = 0;
     }
     if (player.time.real_mm3 === void 0) {
-        player.time.real_mm3  = 0;
+        player.time.real_mm3 = 0;
     }
     if (player.options.gamespeed === void 0) {
         player.options.gamespeed = 1;
@@ -719,9 +749,12 @@ function fix() {/*
     if (player.options.percentUpg === void 0) {
         player.options.percentUpg = false;
     }
-    if (player.options.qol_shortDisplay === void 0){
+    if (player.options.qol_shortDisplay === void 0) {
         player.options.qol_shortDisplay = false;
 
+    }
+    if (player.volume_generated.mm6 === void 0) {
+        player.volume_generated.mm6 = E(0)
     }
     if (player.mm3_volumes.challenges === void 0) {
         player.mm3_volumes.challenges = [];
@@ -741,37 +774,37 @@ function fix() {/*
     if (shortcut.secu.challenges5x === void 0) {
         shortcut.secu.challenges5x = [];
     }
-    if (player.mm3_volumes.upgrades.toString() === "[object Object]"){
+    if (player.mm3_volumes.upgrades.toString() === "[object Object]") {
         player.mm3_volumes.upgrades = []
     }
     player.mm3_volumes.upgrades = [...new Set(player.mm3_volumes.upgrades)]
-    if (player.mm3_volumes.in_sacrifice === void 0){
+    if (player.mm3_volumes.in_sacrifice === void 0) {
         player.mm3_volumes.in_sacrifice = false
     }
-    if (player.mm3_volumes.mm45_points === void 0){
+    if (player.mm3_volumes.mm45_points === void 0) {
         player.mm3_volumes.mm45_points = E(0)
     }
-    if (player.mm3_volumes.sacrifice_times === void 0){
+    if (player.mm3_volumes.sacrifice_times === void 0) {
         player.mm3_volumes.sacrifice_times = E(0)
     }
-    if (player.mm3_volumes.mm45buyables === void 0){
-        player.mm3_volumes.mm45buyables =  [0,0,0]
+    if (player.mm3_volumes.mm45buyables === void 0) {
+        player.mm3_volumes.mm45buyables = [0, 0, 0]
     }
-    if (player.secutitation.mm5_volumes.energy === void 0){
+    if (player.secutitation.mm5_volumes.energy === void 0) {
         player.secutitation.mm5_volumes.energy = E(1)
 
     }
-    if (player.secutitation.mm5_volumes.galaxies === void 0){
+    if (player.secutitation.mm5_volumes.galaxies === void 0) {
         player.secutitation.mm5_volumes.galaxies = E(0)
 
     }
-    if (player.secutitation.towerUpgrades === void 0){
+    if (player.secutitation.towerUpgrades === void 0) {
         player.secutitation.towerUpgrades = []
     }
-    if (player.secutitation.reacUpgrades === void 0){
-        player.secutitation.reacUpgrades = [0,0,0,0,0,0]
+    if (player.secutitation.reacUpgrades === void 0) {
+        player.secutitation.reacUpgrades = [0, 0, 0, 0, 0, 0]
     }
-    if (player.secutitation.tower === void 0){
+    if (player.secutitation.tower === void 0) {
         player.secutitation.tower = {
             fromMM3: E(0),
             fromMM4: E(0),
@@ -779,79 +812,105 @@ function fix() {/*
             spent: E(0)
         }
     }
-    if (player.dimensions[DIMENSIONS_EXPONENT] === void 0){
+    if (player.exponenting.upgrades === void 0){
+        player.exponenting.upgrades = []
+    }
+    if (player.exponenting.tower === void 0){
+        player.exponenting.tower = {
+            from6DFractal: E(0),
+            spent: E(0)
+        }
+    }
+    if (player.dimensions[DIMENSIONS_EXPONENT] === void 0) {
         player.dimensions[DIMENSIONS_EXPONENT] = [E(1), E(1), E(1), E(1), E(1), E(1), E(1), E(1)]
     }
-    for (let i = 0; i<6;i++){
-        let temp1 = ["mm53","mm54","mm55",'mm56',"mm57"]
-        if (player.secutitation[temp1[i]] === void 0){
+    for (let i = 0; i < 6; i++) {
+        let temp1 = ["mm53", "mm54", "mm55", 'mm56', "mm57"]
+        if (player.secutitation[temp1[i]] === void 0) {
             player.secutitation[temp1[i]] = E(0)
         }
     }
-    if (player.secutitation.reactorStates === void 0){
-        player.secutitation.reactorStates = [] 
+    if (player.secutitation.reactorStates === void 0) {
+        player.secutitation.reactorStates = []
     }
-    
-    if (player.compress.mm595 === void 0){
+
+    if (player.compress.mm595 === void 0) {
         player.compress.mm595 = E(0)
     }
-    if (player.compress.highestMM4inCompress === void 0){
+    if (player.compress.buyables.length !== 3) {
+        player.compress.buyables = [E(0), E(0), E(0)]
+    }
+    if (player.compress.highestMM4inCompress === void 0) {
         player.compress.highestMM4inCompress = E(0)
+    }
+    if (player.exponenting.fractal === void 0) {
+        player.exponenting.fractal = {
+            fractals: E(0),
+            fractalEngine: E(0),
+            fractalEngineMore: E(0),
+            fractalEngineMK2: E(0)
+        }
+    }
+    if (player.exponenting.fractal.fractalEngineMore === void 0){
+        player.exponenting.fractal.fractalEngineMore = E(0)
+    }
+    if (player.exponenting.fractal.fractalEngineMK2 === void 0){
+        player.exponenting.fractal.fractalEngineMK2 = E(0)
     }
     player.lastTab = player.lastTab.toNumber().toString()
 }
 var parallelUniverseId = 1
-function goParaUni(id){
-    if (parallelUniverseId==id){
+function goParaUni(id) {
+    if (parallelUniverseId == id) {
         alert("You're currently in this parallel universe")
         return;
     }
-    else if(confirm("Are you sure you want to go to Parallel Universe #"+id.toString())){
+    else if (confirm("Are you sure you want to go to Parallel Universe #" + id.toString())) {
         save()
         localStorage.setItem("volume-incremental-parallel-universe", Number(id))
         location.href = location.href
 
     }
 }
-function delParaUni(id){
-    if(confirm("Are you sure you want to delete Parallel Universe #"+id.toString()+"?")){
+function delParaUni(id) {
+    if (confirm("Are you sure you want to delete Parallel Universe #" + id.toString() + "?")) {
         let temp2 = "volume-incremental";
         let temp1 = id
-        if (temp1 > 1){
-            temp2 = temp2.concat("-"+temp1.toString())
+        if (temp1 > 1) {
+            temp2 = temp2.concat("-" + temp1.toString())
         }
         localStorage.removeItem(temp2)
 
     }
 }
-function getParaUniState(id){
-    if (id== parallelUniverseId){
-        return "Parallel Universe #"+id.toString()+" Volumes: "+player.volumes.format()+" mm<sup>4</sup>"
+function getParaUniState(id) {
+    if (id == parallelUniverseId) {
+        return "Parallel Universe #" + id.toString() + " Volumes: " + player.volumes.format() + " mm<sup>4</sup>"
     }
     let temp1
-    switch(id){
+    switch (id) {
         case 1:
             temp1 = localStorage.getItem("volume-incremental")
-            if (!temp1 || temp1===null){
+            if (!temp1 || temp1 === null) {
                 return "Parallel Universe #1 Volumes: Uninited"
-            }else{
-                return "Parallel Universe #1 Volumes: "+ E(JSON.parse(temp1).volumes).format() + " mm<sup>4</sup>"
+            } else {
+                return "Parallel Universe #1 Volumes: " + E(JSON.parse(temp1).volumes).format() + " mm<sup>4</sup>"
             }
-            
+
         case 2:
             temp1 = localStorage.getItem("volume-incremental-2")
-            if (!temp1 || temp1===null){
+            if (!temp1 || temp1 === null) {
                 return "Parallel Universe #2 Volumes: Uninited"
-            }else{
-                return "Parallel Universe #2 Volumes: "+E(JSON.parse(temp1).volumes).format() + " mm<sup>4</sup>"
+            } else {
+                return "Parallel Universe #2 Volumes: " + E(JSON.parse(temp1).volumes).format() + " mm<sup>4</sup>"
             }
-            
+
         case 3:
             temp1 = localStorage.getItem("volume-incremental-3")
-            if (!temp1 || temp1===null){
+            if (!temp1 || temp1 === null) {
                 return "Parallel Universe #3 Volumes: Uninited"
-            }else{
-                return "Parallel Universe #3 Volumes: "+ E(JSON.parse(temp1).volumes).format() + " mm<sup>4</sup>"
+            } else {
+                return "Parallel Universe #3 Volumes: " + E(JSON.parse(temp1).volumes).format() + " mm<sup>4</sup>"
             }
 
     }
@@ -859,7 +918,7 @@ function getParaUniState(id){
 function load() {
     try {
         let temp1 = Number(localStorage.getItem("volume-incremental-parallel-universe"))
-        if (temp1 == 0 || Number.isNaN(temp1)){
+        if (temp1 == 0 || Number.isNaN(temp1)) {
             localStorage.setItem("volume-incremental-parallel-universe", 1)
             temp1 = 1
         }
@@ -868,8 +927,8 @@ function load() {
 
         hard_reset();
         parallelUniverseName = "volume-incremental";
-        if (temp1 > 1){
-            parallelUniverseName = parallelUniverseName.concat("-"+temp1.toString())
+        if (temp1 > 1) {
+            parallelUniverseName = parallelUniverseName.concat("-" + temp1.toString())
         }
         let loadplayer = JSON.parse(localStorage.getItem(parallelUniverseName));
         let loaddeveloper = JSON.parse(localStorage.getItem("developerSettings"));
@@ -886,29 +945,29 @@ function load() {
         last_frame = Date.now();
         fix();
         player.offlinedTime += (this_frame - player.time_now)
-       /* if ((this_frame - player.time_now) < 0){ // 穿越？
-            localStorage.setItem("backup",formatsave.encode(player));
-            console.log("Bye")
-            hard_reset();
-
-        }*/
+        /* if ((this_frame - player.time_now) < 0){ // 穿越？
+             localStorage.setItem("backup",formatsave.encode(player));
+             console.log("Bye")
+             hard_reset();
+ 
+         }*/
         let temp = Math.random();
         /*
         mm3FixOldSaves();
         delete player.error*/
-        if (temp < 0.01){
-            if (location.hostname.endsWith("github.io")){
-                document.getElementById("unknown").style.display="block"
-                document.getElementById("app").style.display="none"
-                document.getElementById("fatalerror").innerHTML="FATALERROR ".repeat(1000)
-                setTimeout(loadVueNormaly,5000)
-            }else{
+        if (temp < 0.01) {
+            if (location.hostname.endsWith("github.io")) {
+                document.getElementById("unknown").style.display = "block"
+                document.getElementById("app").style.display = "none"
+                document.getElementById("fatalerror").innerHTML = "FATALERROR ".repeat(1000)
+                setTimeout(loadVueNormaly, 5000)
+            } else {
                 console.log("dev, youre lucky!")
                 loadVueNormaly()
             }
-        }else{
+        } else {
             loadVueNormaly()
-            
+
         }
         hasLoaded.status = true
     } catch (e) {
@@ -920,10 +979,10 @@ function load() {
 
     }
 }
-function loadVueNormaly(){
-    document.getElementById("unknown").style.display="none"
-    document.getElementById("app").style.display="block"
-    document.getElementById("fatalerror").innerHTML="?"
+function loadVueNormaly() {
+    document.getElementById("unknown").style.display = "none"
+    document.getElementById("app").style.display = "block"
+    document.getElementById("fatalerror").innerHTML = "?"
     loadVue();
     app.tabShow = player.lastTab
     toggleMusic(player.options.music)
@@ -932,7 +991,7 @@ function loadVueNormaly(){
     if (window.newsTickerError !== undefined) {
         app.hasNewsTickerError = true;
     }
-    
+
 }
 var qqq;
 var www;
@@ -966,7 +1025,7 @@ function get_mm4_vol(a) {
 function dev_reset_vol() {
     player.volumes = E(10);
 }
-function devPassiveGenerate(){
+function devPassiveGenerate() {
     alert("PassiveGenerate is not allowed in the release version");
 }
 (() => {
@@ -980,7 +1039,7 @@ function devPassiveGenerate(){
         window.get_mm4_vol = function () {
             player.volumes = player.volumes.add(app.developer_get_mm4);
         };
-        window.devPassiveGenerate = function(){
+        window.devPassiveGenerate = function () {
             secret_achievement_data.dev_passive_generate = true;
         }
     }
@@ -1003,7 +1062,7 @@ function db_pianyi() {
     return q;
 }
 
-function changeTabShow(a,b){
+function changeTabShow(a, b) {
     app.tabShow = a.toString();
 }
 

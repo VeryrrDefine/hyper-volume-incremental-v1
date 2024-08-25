@@ -174,7 +174,12 @@ h2 {
     color: #008040;
 }
 
-
+.softcap {
+    color: hsl(237, 15%, 47%);
+    font-weight: bold;
+    text-shadow: 0px 1px 0px hsl(252, 19%, 57%);
+    pointer-events: none
+  }
 
 button {
     border: solid 2px #444;
@@ -252,6 +257,9 @@ button {
     animation: corrupted_text 4s cubic-bezier(0.37, 0, 0.63, 1) infinite;
 }
 
+.corruptedBox {
+    animation: corrupted_box 4s cubic-bezier(0.37, 0, 0.63, 1) infinite;
+}
 .newsticker-image {
     width: 10vw;
     height: 10vw;
@@ -309,3 +317,10 @@ button {
 *{
     display: block;
 }*/
+.no-margin{
+    margin: 0px
+}
+.adaptText{
+    font-size: 50%;
+    text-align: center;
+}
