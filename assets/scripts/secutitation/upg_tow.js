@@ -309,10 +309,7 @@ function buyMM52(buyid){
             }
             break;
         case 4:
-            if (player.exponenting.fractal.fractals.gte(tmp.mm6tower.mm61costFromFractal)){
-                player.exponenting.fractal.fractals = player.exponenting.fractal.fractals.sub(tmp.mm6tower.mm61costFromFractal)
-                player.exponenting.tower.from6DFractal = player.exponenting.tower.from6DFractal.add(1)
-            }
+            buyMM61()
             break;
     }
 }

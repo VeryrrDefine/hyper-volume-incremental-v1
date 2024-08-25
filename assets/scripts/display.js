@@ -106,7 +106,7 @@ function display_volumes_stat(a) {
         return `${format(a.div(LY.mul('1e9').pow(4)), 5, false)} Gly<sup>4</sup>`
     } else if (a.lt('ee9')) {
         return `${format(a.div(UNI.pow(4)), 5, false)} uni<sup>4</sup>`
-    } else if (a.lt('ee504')) {
+    } else if (a.lt('1e1e129')) {
         /*let log_v = a.logarithm(10);
         let temp1 = log_v.root("1e9").root("1e15").floor().toNumber() // javascript number
         let temp2 = a.logarithm(10).;*/
@@ -134,7 +134,7 @@ function display_volumes_stat(a) {
 
 function display_volumes(a) {
     return a.formatA() + " mm<sup>4</sup>";
-     //return display_volumes_stat(a)
+    return display_volumes_stat(a)
 }
 
 function getMM4UpgClassName(id) {
@@ -236,6 +236,9 @@ function displayStat() {
 }
 
 function getSoftcapType(a) {
+    if (player.dimensions[DIMENSIONS_MULTI][a - 1].gte(tmp.dimension.softcap3)) {
+        return "<span style='color: rgb(122, 0, 86);'>3<sup>rd</sup> softcap</span>"
+    }
     if (player.dimensions[DIMENSIONS_MULTI][a - 1].gte(tmp.dimension.softcap2)) {
         return "<span style='color:rgb(121,0,0)'>2<sup>nd</sup> softcap</span>"
     }

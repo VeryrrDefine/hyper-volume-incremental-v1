@@ -71,7 +71,8 @@ const achievements = [
         { title: "Save fixer 1", goal: "Try to import a save from Wind spirit creation", secret: true },
         { title: "Can you download more RAMs?", goal: "Make 3 FPS", secret: true},
         { title: "MegaVerse", goal: "Reach "+display_volumes(MEGAVERSE)},
-        { title: "I didn't need compress, just a upgrade ^_^", goal:"Reach "+display_volumes(E.E_MAX_SAFE_INTEGER)+" without gaining mm<sup>5.95</sup>"}
+        { title: "I didn't need compress, just a upgrade ^_^", goal:"Reach "+display_volumes(E.E_MAX_SAFE_INTEGER)+" without gaining mm<sup>5.95</sup>"},
+        { title: "But i wanted a prestige dygm...", goal:"Reach "+format(E30825)+" mm<sup>5</sup>"}
     ],
 
 ]
@@ -162,6 +163,9 @@ function updateAch() {
         if (shortcut.secu.mm5_volumes.points.gte(1e5)) {
             getAch(42)
         }
+        if (shortcut.secu.mm5_volumes.energy.gte(E30825)) {
+            getAch(41)
+        }
         if (hasMM5TowUpg(51)) {
             getAch(44)
         }
@@ -181,10 +185,13 @@ function updateAch() {
     }
     if (player.volumes.gte(-1.79e308) && "AchRow5") {
         if (player.volumes.gte(MEGAVERSE)) {
-            getAch(51)
+            getAch(53)
         }
-        if (player.volumes.gte(E.E_MAX_SAFE_INTEGER) && player.compress.mm595.eq(0)) {
-            getAch(52)
+        if (player.volumes.gte(E.E_MAX_SAFE_INTEGER) && player.compress.mm595.lte(0)) {
+            getAch(54)
+        }
+        if (shortcut.secu.points.gte(E30825)) {
+            getAch(55)
         }
 
     }
@@ -204,7 +211,7 @@ function getAch(id) {
     player.achievements.push(id)
     let a = Math.floor(id / 10),
         b = id % 10
-    addNotify(`Achievement ${a}${b}：${achievements[a - 1][b - 1].title} getted`)
+    addNotify(`Achievement ${a}${b}：${achievements[a - 1][b - 1].title} getted, 但这无关紧要`)
 }
 let totalachievements = 0
 for (let i in achievements) {

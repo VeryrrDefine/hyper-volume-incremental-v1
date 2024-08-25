@@ -317,3 +317,10 @@ button {
 *{
     display: block;
 }*/
+.no-margin{
+    margin: 0px
+}
+.adaptText{
+    font-size: 50%;
+    text-align: center;
+}

@@ -191,7 +191,7 @@
             },
             {
                 text: "The Department of Cosmology reminds：There are thousands of roads, but safety is the first. " +
-                    "Irregular driving makes loved ones cry."
+                    "Irregular driving makes loved ones cr"
             },
             {
                 text: "If a large number js library can represent f<sub>ε<sub>0</sub></sub>(10), this large number js " +
@@ -224,7 +224,7 @@
                 text: "<span onclick='toggleNewsTicker()'>If you don't want to display the news, you can click this text to turn it off.</span>"
             },
             {
-                text: `Emergency ψ(K) level accident! <span class='corrupted'>${"?".repeat(100)}! We're trying to ??? to make ??? to be ??????????????????????????????!</span>`
+                text: `Emergency ψ(K) level accident! <span class='corrupted'>${"?".repeat(50)}! We're trying to ??? to make ??? to be ??????????????????????????????!</span>`
             },
             {
                 text: `Emergency ω<sub>1</sub><sup>CK</sup>level accident！ !%^#&&$!&$#$&#$&#@$&!&$#*#%*^&*#!*^%&*^*^%*#%$^&*@!^&#^`
@@ -309,12 +309,11 @@ zdoys, anemoity, meta-anemoity
   2<sup>128</sup>. Using single-precision floating-point numbers will also result in situations like 
   2<sup>24</sup>+1=2<sup>24</sup>. However, there are two other ways to represent integers: int and long. int (unsigned) 
   can represent numbers as large as 4294967295 (2<sup>32</sup>-1), while long (unsigned) can represent numbers as large
-   as 18446744073709551616 (2<sup>64</sup>-1). These two types have no error, but the disadvantage is that the numbers
+   as 18446744073709551615 (2<sup>64</sup>-1). These two types have no error, but the disadvantage is that the numbers
     they can represent are also very small. However, some games have exceeded the upper limit of 1e308: Antimatter 
     Dimensions, Incremental Mass Rewritten...<del>etc.</del>. But the upper limits of the numbers represented by these 
-    games are different. The upper limit of Antimatter Dimensions number is 1.000e9.000e15 (maybe more,to be more precise, it is 
-    1.000e9.007e15); the theorical upper limit of the Incremental Mass Rewritten is F1.797e308(10^^1.797e308); the largest,
-     the Endless Stairwell has a maximum limit of K1e14, which is larger than the Graham's number (~3K64), which is really 
+    games are different. The upper limit of Antimatter Dimensions number is 1.000e9.000e15; the theorical upper limit of the Incremental Mass Rewritten is F1.797e308(10^^1.797e308); the largest,
+     the Endless Stairwell has a maximum limit of K9.007e15, which is larger than the Graham's number (~3K64), which is really 
      incredible!`
 
             },
@@ -387,7 +386,7 @@ zdoys, anemoity, meta-anemoity
             
 
             {//100
-                text: "孩子们，这是真的, 我在制作客户端时留了后门, 玩游戏时只需按下alt+f4, 就可以到达Endgame, 快去试吧！"
+                text: "孩子们，这是真的, 我在制作游戏时留了后门, 玩游戏时只需按下alt+f4, 就可以到达Endgame, 快去试吧！" // from B站 益达笑出 with bluearchive avatar
             },
             {
                 text: `For Mid-Autumn Festival and National Day(Oct 1<sup>st</sup> in China) holidays, 
@@ -415,7 +414,7 @@ zdoys, anemoity, meta-anemoity
                 text: "(I) has been chaos by the chaos reset"
             },
             {
-                text: "I can say a little French, just like this: Je suis chien, 啊呸呸呸"
+                text: "I can say a little French, just like this: Je suis chien(I am a dog), 啊呸呸呸"
             },
             {
                 text: "Eliny put her feet in my mouth when she was sleeping, so I died because suffocate."
@@ -463,10 +462,12 @@ Teresa的现实在公开开放后的1/1e300秒内立刻崩溃了。(Error: Serve
             },
             {
                 text: "efreygrt, the Celestial of 一楼喂百度"
-            },
+            },{
+                text: "Usb"
+            },/*
             {
                 text: "本游戏有ε<sub>0</sub>个声望层: mm<sup>3</sup>, secutitation(mm<sup>5</sup>), mm<sup>6</sup>, void(mm<sup>7</sup>), element(mm<sup>8</sup>), world (mm<sup>n</sup>), universe(mm<sup>mm</sup>), mm^^3, mm^^4, mm^^n, mm^^mm"
-            },
+            },*/
             {
                 get text() {
                     return "不" + "！".repeat(50)
@@ -610,7 +611,7 @@ Teresa的现实在公开开放后的1/1e300秒内立刻崩溃了。(Error: Serve
             let x = a.clientWidth, l = a.parentElement.clientWidth;
             a.style.transition = ""
             a.style.transform = "translateX(" + (l + 10) + "px)";
-            let o = (l + a.clientWidth) / 100;
+            let o = (l + a.clientWidth) / 100 ;
             a.style.transition = "transform " + o + "s linear", a.style.transform = "translateX(-" + x + "px)", a.addEventListener("transitionend", n)
             player.newsticker_time++
         });

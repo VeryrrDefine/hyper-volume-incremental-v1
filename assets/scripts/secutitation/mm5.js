@@ -49,21 +49,17 @@ function doMM5resetManmade(){
     }
     
 }
-
+function buymm5dimMax(dim){
+    let x = player.secutitation.mm5_volumes.points.clone();
+    let temp1 = x.logarithm(mm5_scale[dim-1]).ceil()
+    if (temp1.gt(player.mm5_volume_dimensions[DIMENSIONS_BOUGHT][dim - 1])){
+        player.mm5_volume_dimensions[DIMENSIONS_BOUGHT][dim - 1] = temp1.clone()
+    }
+}
 function buymm5dim(dim) {
-    /*
-    1st dim x3
-    2st dim x5
-    3st dim x10
-    4st dim x20
-    5st dim x35
-    6st dim x90
-    7st dim x270
-    8st dim x1729
-    */
     if (player.secutitation.mm5_volumes.points.gte(player.mm5_volume_dimensions[DIMENSIONS_COST][dim - 1])) {
 
-        player.secutitation.mm5_volumes.points = player.secutitation.mm5_volumes.points.sub(player.mm5_volume_dimensions[DIMENSIONS_COST][dim - 1])
+        if (!hasMM6Upg(10)) player.secutitation.mm5_volumes.points = player.secutitation.mm5_volumes.points.sub(player.mm5_volume_dimensions[DIMENSIONS_COST][dim - 1])
         
         player.mm5_volume_dimensions[DIMENSIONS_BOUGHT][dim - 1] = player.mm5_volume_dimensions[DIMENSIONS_BOUGHT][dim - 1].add(1);
         player.mm5_volume_dimensions[DIMENSIONS_POINTS][dim - 1] = player.mm5_volume_dimensions[DIMENSIONS_POINTS][dim - 1].add(1); //     player.volumes = player.volumes.sub(E.pow(10,temp1.mul(dim).ceil()))
@@ -99,6 +95,9 @@ function calculate_mm5dim() {
             player.mm5_volume_dimensions[DIMENSIONS_MULTI][i] = tmp.mm5.getDimMultiplier(i + 1);
         if (player.mm5_volume_dimensions[DIMENSIONS_POINTS][i].isNaN()) {
             player.mm5_volume_dimensions[DIMENSIONS_POINTS][i] = E(0);
+        }
+        if (player.auto.includes(13+i)){
+            buymm5dimMax(i+1)
         }
     }
 

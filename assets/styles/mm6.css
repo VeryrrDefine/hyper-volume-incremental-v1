@@ -54,3 +54,30 @@
     text-align: center;
     background-size: 100% 100%;
 }
+
+.progress-bar-total {
+    width: 350px;
+    height: 30px;
+    margin:auto;
+    border: 2px solid #ff00ff;
+    border-radius: 5px;
+    color: #00ff80;
+    z-index: 0;
+    background-color: #000000;
+}
+
+.progress-bar-now {
+    width: 100%;
+    height: 30px;
+    text-align:center;
+    z-index: 1;
+    background-color: #800080;
+    white-space: nowrap;
+}
+
+.research-icon{
+    width: 30px;
+    height: 30px;
+    border: 1px solid #800080;
+    background: #400040;
+}

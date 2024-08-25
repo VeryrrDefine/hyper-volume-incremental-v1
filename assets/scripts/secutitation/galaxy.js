@@ -60,6 +60,19 @@ const galaxy_rewards = [
         get effectDisplay() {
             return "×"+this.effect.format();
         }
+    },{
+        req: E("76"),
+        desc: "Get a 4D Dimensions exponentplier based on galaxies count",
+        get effect() {
+            return shortcut.mm5.galaxies.logarithm(10).div(40)
+            /*
+            
+            */
+        },
+        get effectDisplay() {
+            return "+"+this.effect.format();
+        }
+
     }/*
     {
         req: E("7"),

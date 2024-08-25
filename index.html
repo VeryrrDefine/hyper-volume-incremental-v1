@@ -47,6 +47,7 @@
     <script src="./assets/scripts/exponenting/exponenting.js" defer></script>
     <script src="./assets/scripts/exponenting/fractal.js" defer></script>
     <script src="./assets/scripts/exponenting/upgrades.js" defer></script>
+    <script src="./assets/scripts/exponenting/research.js" defer></script>
 </head>
 
 <body style="margin-top: 0px;">
@@ -70,21 +71,25 @@
                             You're getting {{formatGainA(player.volumes,
                             tmp.mm4.gain)}} mm<sup>4</sup> per second
                         </p>
-                        <p class="center" v-if="player.mm3_volumes.unl">
+                        <p class="center no-margin" v-if="player.mm3_volumes.unl">
                             <small>You have {{formatA(player.mm3_volumes.points)}}
                                 mm<sup>3</sup>.</small>
                         </p>
                         <!-- Wow, it's a nice number! -->
-                        <p class="center" v-if="player.secutitation.secutitation_reset_times.gte(1)">
+                        <p class="center no-margin" v-if="player.secutitation.secutitation_reset_times.gte(1)">
                             <small>You have {{formatA(player.secutitation.mm5_volumes.points)}}
                                 mm<sup>5</sup><span v-if="shortcut.secu.secutitation_reset_times.gte(200)">, make
                                     mm<sup>3.5</sup> replicate speed ×{{tmp.mm5.mm35replicatemore}}</span>.</small>
+                        </p>
+                        <p class="center no-margin" v-if="player.exponenting.unl">
+                            <small>You have {{formatA(player.exponenting.points)}}
+                                mm<sup>6</sup>.</small>
                         </p>
                         <p class="center">
                             <small v-html="getGameSpeedText()">Game speed is altered: 1 second -> 114514
                                 years</small>
                         </p>
-                        <p class="center" v-if="player.inMM3Challenge === 7">
+                        <p class="center no-margin" v-if="player.inMM3Challenge === 7">
                             All 4D Dimensions multiplier /
                             {{E.pow("1e5",player.time.mm3).format()}}
                         </p>
@@ -108,7 +113,7 @@
                             v-if="player.secutitation.secutitation_reset_times.gte(1)">Automation</button>
                         <button class="btn mm5btn" @click="tabShow= '51'" :disabled="inTab(6)"
                             v-if="player.secutitation.secutitation_reset_times.gte(1) || player.exponenting.resetTimes.gte(1)">
-                            Secutitation
+                            Secutitation 
                         </button>
                         <button class="btn mm6btn" v-if="player.exponenting.unl" @click="tabShow= '101'" :disabled="inTab(11)">
                             Exponenting
@@ -173,7 +178,7 @@
                             Achievements
                         </button>
                         <button class="btn mm5btn" v-if="inTab(6)" @click="tabShow= '51'" :disabled="tabShow==='51'">
-                            Secutitation
+                            Secutitation & Milestones
                         </button>
                         <button class="btn mm5btn" v-if="inTab(6)" @click="tabShow= '52'" :disabled="tabShow==='52'">
                             5D Dimensions
@@ -197,9 +202,55 @@
                         <button class="btn mm6btn" v-if="inTab(11)" @click="tabShow= '102'" :disabled="tabShow=='102'">
                             6D Fractals & Upgrades
                         </button>
+                        <button class="btn mm6btn" v-if="inTab(11)" @click="tabShow= '103'" :disabled="tabShow=='103'">
+                            Researches
+                        </button>
                         <!--            <button class="btn" @click="tabShow = '3'" :disabled="tabShow==='3'">3.5维</button>-->
                     </div>
                     <br />
+                    <div  v-if="tabShow=='103'">
+                        <div v-if="developer_mode">
+                            <div class="progress-bar-total">
+                                <div class="progress-bar-now">Time: 0 seconds</div>
+                            </div><br>
+                            <div class="progress-bar-total">
+                                <div class="progress-bar-now">4D Volumes: 0 mm<sup>4</sup></div>
+                            </div><br>
+                            <div class="progress-bar-total">
+                                <div class="progress-bar-now">6D Volumes: 0 mm<sup>6</sup></div>
+                            </div><br>
+                            <p class="center no-margin">This is Research Page. You need to select 4 types to research. You can only do 1 researches at once.</p>
+                            <div class="center"><button class="btn mm6btn">Search</button></div><br>
+                            <div class="center">
+                                <button class="research-icon">4</button>
+                                <button class="research-icon">5</button>
+                                <button class="research-icon">6</button>
+                            </div>
+                            <div class="center"> 
+                                <button class="research-icon">D</button>
+                                <button class="research-icon">C</button>
+                                <button class="research-icon">F</button>
+                            </div>
+                            <div class="center">
+                                <button class="research-icon">1</button>
+                                <button class="research-icon">2</button>
+                                <button class="research-icon">3</button>
+                                <button class="research-icon">4</button>
+                            </div>
+                            <div class="center">
+                                <button class="research-icon">1</button>
+                                <button class="research-icon">2</button>
+                                <button class="research-icon">3</button>
+                                <button class="research-icon">4</button>
+                            </div>
+                        </div>
+                        <div v-else>
+                            <p style="font-weight: 1000">
+                                Access denied.<br />Development Mode Only.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- <div v-if="false">nalila balaba</div> -->
                     <div v-if="tabShow=='102'" class="center">
                         <p>玩点数增量重制版玩的</p>
                         <p>You have {{player.exponenting.fractal.fractals.formatA()}} 6D Fractals(mm<sup>6.05</sup>).</p>
@@ -207,21 +258,38 @@
     <div class="center" v-if="player.exponenting.unl">
         <p>You have {{tmp.mm6tower.totalMM61.sub(player.exponenting.tower.spent).format()}}({{tmp.mm6tower.totalMM61.format(0)}}) mm<sup>6.1</sup></p>
         <button @click="buyMM52(4)" class="btn mm6btn" :disabled="player.exponenting.fractal.fractals.lt(tmp.mm6tower.mm61costFromFractal)">Buy mm<sup>6.1</sup><br>Cost: {{tmp.mm6tower.mm61costFromFractal.format()}} 6D Fractals</button>
+        <button @click="buyMM61Max()" class="btn mm6btn">Buy max</button>
     </div>
                         <div v-html="getFractalEffect()"></div>
                         <br>
-                        <div>
-                            <span style="display: block;">Fractal Engine({{player.exponenting.fractal.fractalEngine.formatA()}})</span>
-                            <button class="btn mm6btn center" @click="buyFractalEngine()"
-                             :disabled="player.exponenting.points.lt(getFractalEngineCost())"
-                            >
+                        <div style="display: flex">
+                            <div style="flex: auto;">
+                                <span style="display: block;">Fractal Engine({{player.exponenting.fractal.fractalEngine.formatA()}}<span
+                                    v-if="player.exponenting.fractal.fractalEngineMore.gt(0)"
+                                    >+{{player.exponenting.fractal.fractalEngineMore.formatA()}}</span>)</span>
+                                <button class="btn mm6btn" @click="buyFractalEngine()"
+                                :disabled="player.exponenting.points.lt(getFractalEngineCost())"
+                                >
 
 
-                                Buy a Fractal Engine<br>
-                                Cost: {{getFractalEngineCost().formatA()}} mm<sup>6</sup>
-                            </button>
-                            <p>Fracltal Engines produce {{getFractalProduce().formatA()}} 6D Fractals per second.</p>
-                            
+                                    Buy a Fractal Engine<br>
+                                    Cost: {{getFractalEngineCost().formatA()}} mm<sup>6</sup>
+                                </button>
+                                <p class="adaptText">Fractal Engines produce {{getFractalProduce().formatA()}} 6D Fractals per second.</p>
+                        
+                            </div>
+                            <div style="flex: auto;" v-if="hasMM6Upg(4)">
+                                <span style="display: block;">Fractal Engine MK2({{player.exponenting.fractal.fractalEngineMK2.formatA()}})</span>
+                                <button class="btn mm6btn" @click="buyFractalEngine2()"
+                                :disabled="player.exponenting.fractal.fractalEngine.lt(getFractalEngineCost2())"
+                                >
+
+
+                                    Reset Fractals <span v-if="!hasMM6Upg(12)">and Fractal Engines </span>to buy a Fractal Engine MK2<br>
+                                    Cost: {{getFractalEngineCost2().formatA()}} Fractal Engines
+                                </button>
+                                <p class="adaptText">Fractal Engines MK2 produce {{getFractalProduce2().formatA()}} Fractal Engines per second.</p>
+                            </div>
                         </div>
                         <div class="upg_text_box center">
                             <span v-html="getMM6UpgText()"></span>
@@ -235,7 +303,7 @@
                                         <div :class="getMM6UpgClassName(upg.id)" @touchstart="hover_6upg= upg.id"
                                             @touchend="hover_6upg= 0" @mouseover="hover_6upg= upg.id"
                                             @mouseleave="hover_6upg= 0" @click="buyMM6Upg(upg.id)">
-                                            <span>{{ upg.id }}</span>
+                                            <span>{{ upg.ele ? upg.ele : upg.id }}</span>
                                         </div>
                                     </td>
                                 </tr>
@@ -264,31 +332,43 @@
                             <!--
                                 
                             -->
-                            <button class="btn mm5btn tooltipBox" :disabled="checkMM595UpgradeBuyable(1)"
-                                @click="buyMM595Upgrade(1)">
-                                Triple mm<sup>5.95</sup> gain (per upgrade)<br>Cost:
-                                {{getMM595UpgradeCost(1).formatA()}} mm<sup>5.95</sup>
-                                <span class="tooltip" v-html="getMM595UpgradeHint(1)">
-
-                                </span>
-                            </button>
-                            <button class="btn mm5btn tooltipBox" :disabled="checkMM595UpgradeBuyable(2)"
-                                @click="buyMM595Upgrade(2)">
-                                effect formula bottom +0.02 (per upgrade)<br>Cost: {{getMM595UpgradeCost(2).formatA()}}
-                                mm<sup>5.95</sup>
-                                <span class="tooltip" v-html="getMM595UpgradeHint(2)">
-
-                                </span>
-                            </button><br>
-                            <button class="btn mm5btn tooltipBox" :disabled="checkMM595UpgradeBuyable(3)"
-                                @click="buyMM595Upgrade(3)">
-                                All pre-mm<sup>5</sup> resources double-exponent in Compress ×1.001 (per upgrade)
-                                <br>Cost: {{getMM595UpgradeCost(3).formatA()}} mm<sup>5.95</sup>
-                                <span class="tooltip" v-html="getMM595UpgradeHint(3)">
-
-                                </span>
-                            </button>
-                            <br>
+                            <div style="display: flex">
+                                <div style="flex: 1 1 auto;">
+                                    <button class="btn mm5btn tooltipBox" :disabled="checkMM595UpgradeBuyable(1)"
+                                        @click="buyMM595Upgrade(1)">
+                                        Triple mm<sup>5.95</sup> gain (per upgrade)<br>Cost:
+                                        {{getMM595UpgradeCost(1).formatA()}} mm<sup>5.95</sup>
+                                        <span class="tooltip" v-html="getMM595UpgradeHint(1)">
+        
+                                        </span>
+                                    </button><br>
+                                    <button class="btn mm5btn" style="width: 125px; height: 30px;" v-if="hasMM6Upg(9)" @click="toggleAutobuyer(10)">Auto: {{player.auto.includes(10) ? "ON" : "OFF"}}</button>
+                                </div>
+                                
+                                <div style="flex: 1 1 auto;">
+                                    <button class="btn mm5btn tooltipBox" :disabled="checkMM595UpgradeBuyable(2)"
+                                        @click="buyMM595Upgrade(2)">
+                                        effect formula bottom +0.02 (per upgrade)<br>Cost: {{getMM595UpgradeCost(2).formatA()}}
+                                        mm<sup>5.95</sup>
+                                        <span class="tooltip" v-html="getMM595UpgradeHint(2)">
+        
+                                        </span>
+                                    </button><br>
+                                    <button class="btn mm5btn" style="width: 125px; height: 30px;" v-if="hasMM6Upg(9)" @click="toggleAutobuyer(11)">Auto: {{player.auto.includes(11) ? "ON" : "OFF"}}</button>
+                                </div>
+                                
+                                <div style="flex: 1 1 auto;">
+                                    <button class="btn mm5btn tooltipBox" :disabled="checkMM595UpgradeBuyable(3)"
+                                        @click="buyMM595Upgrade(3)">
+                                        All pre-mm<sup>5</sup> resources double-exponent in Compress ×1.001 (per upgrade)
+                                        <br>Cost: {{getMM595UpgradeCost(3).formatA()}} mm<sup>5.95</sup>
+                                        <span class="tooltip" v-html="getMM595UpgradeHint(3)">
+        
+                                        </span>
+                                    </button><br>
+                                    <button class="btn mm5btn" style="width: 125px; height: 30px;" v-if="hasMM6Upg(9)" @click="toggleAutobuyer(12)">Auto: {{player.auto.includes(12) ? "ON" : "OFF"}}</button>
+                                </div>
+                            </div>
                         </div>
                         <div v-else>
                             <button class="btn mm5btn" @click="tryUnlockCompress()">Unlock Compress<br>Need 100,000
@@ -451,6 +531,16 @@
                         <div style="color: rgb(121, 0, 0)" v-if="tmp.mm4.softcapped2">
                             After <span v-html="display_volumes(tmp.mm4.softcap2_start)"></span>
                             of 4D volumes gain will softcap^2 4D volumes gain!
+                        </div>
+                        <div style="color: rgb(122, 0, 86)" v-if="tmp.mm4.softcapped3">
+                            After <span v-html="display_volumes(tmp.mm4.softcap3_start)"></span>
+                            of 4D volumes gain will softcap^3 4D volumes gain!
+                        
+                        </div>
+                        <div style="color: rgb(255, 94, 0)" v-if="tmp.mm4.softcapped4">
+                            After <span v-html="display_volumes(tmp.mm4.softcap4_start)" ></span>
+                            of 4D volumes gain will softcap^4 4D volumes gain!
+                        
                         </div>
                         <!-- <div style="color: red" v-if="player.volumes.logarithm(10).gte(9007199254740991)">
                             Your mm<sup>4</sup> volumes will capped at
@@ -838,7 +928,6 @@
                             @click="doMM6resetManmade()" :disabled="!tmp.mm6.resetable">
                             Reach e9.007e15 mm<sup>4</sup> do mm<sup>6</sup>
                             reset, get {{tmp.mm6.gain}} mm<sup>6</sup>.
-                            (Next 1 mm<sup>6</sup> at <span v-html="display_volumes(tmp.mm6.nextMM6at)"></span>)<br>
                         </button>
                         <button class="btn anormaly" :disabled="true">
                             Other times await, I need to become
@@ -939,11 +1028,18 @@
                                 x<span>{{player.mm5_volume_dimensions[DIMENSIONS_MULTI][dim.id-1].format()}}</span>
                                 <span>{{player.mm5_volume_dimensions[DIMENSIONS_BOUGHT][dim.id-1].format()}}</span>
 
-                                <button class="btn"
+                                <button class="btn mm5btn"
                                     :disabled="player.secutitation.mm5_volumes.points.lt(player.mm5_volume_dimensions[DIMENSIONS_COST][dim.id-1])"
                                     @click="buymm5dim(dim.id)">
                                     Cost: <span>{{player.mm5_volume_dimensions[DIMENSIONS_COST][dim.id-1].format()}}
                                         mm<sup>5</sup></span>
+                                </button>
+                                <button class="btn mm5btn" @click="buymm5dimMax(dim.id)">
+                                    Buy Max
+                                </button>
+                                <button class="btn mm5btn" v-if="hasMM6Upg(10)" @click="toggleAutobuyer(dim.id+12)">
+                                    Auto: {{player.auto.includes(dim.id+12) ? "ON" :
+                                    "OFF"}}
                                 </button>
                             </div>
                             <br />
@@ -1008,7 +1104,7 @@
                         </button>
                         <label>
                             <button class="btn" @click="get_mm4_vol()">
-                                获取<span v-html="display_volumes(E(developer_get_mm4))"></span>
+                                获取<span v-html=" display_volumes_stat(E(developer_get_mm4))"></span>
                                 4维体积如果可以：
                             </button>
                             <input type="text" v-model:value="developer_get_mm4" />
@@ -1028,12 +1124,22 @@
                         <br>
                         
                         <div style="color: red">
-                            After >
+                            After <span v-html="display_volumes(tmp.mm4.softcap1_start)"></span>
                             of 4D volumes gain, 4D volumes gain will be softcapped!
                         </div>
                         <div style="color: rgb(121, 0, 0)">
-                            After 
+                            After <span v-html="display_volumes(tmp.mm4.softcap2_start)"></span>
                             of 4D volumes gain will softcap^2 4D volumes gain!
+                        </div>
+                        <div style="color: rgb(122, 0, 86)">
+                            After <span v-html="display_volumes(tmp.mm4.softcap3_start)"></span>
+                            of 4D volumes gain will softcap^3 4D volumes gain!
+                        
+                        </div>
+                        <div style="color: rgb(255, 94, 0)">
+                            After <span v-html="display_volumes(tmp.mm4.softcap4_start)" ></span>
+                            of 4D volumes gain will softcap^4 4D volumes gain!
+                        
                         </div>
                         <span>This is a {{wordCycle(['wordCycle',"never", "gonna", "give", "you", "up"])}} word.</span>
                         <br>

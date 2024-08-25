@@ -297,7 +297,9 @@ function hard_reset() {
             unl: false,
             fractal: {
                 fractals: E(0),
-                fractalEngine: E(0)
+                fractalEngine: E(0),
+                fractalEngineMore: E(0),
+                fractalEngineMK2: E(0)
             },
             tower: {
                 from6DFractal: E(0),
@@ -844,8 +846,16 @@ function fix() {/*
     if (player.exponenting.fractal === void 0) {
         player.exponenting.fractal = {
             fractals: E(0),
-            fractalEngine: E(0)
+            fractalEngine: E(0),
+            fractalEngineMore: E(0),
+            fractalEngineMK2: E(0)
         }
+    }
+    if (player.exponenting.fractal.fractalEngineMore === void 0){
+        player.exponenting.fractal.fractalEngineMore = E(0)
+    }
+    if (player.exponenting.fractal.fractalEngineMK2 === void 0){
+        player.exponenting.fractal.fractalEngineMK2 = E(0)
     }
     player.lastTab = player.lastTab.toNumber().toString()
 }

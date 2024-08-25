@@ -19,15 +19,39 @@ function getFractalEffect() {
     }
     return temp1
 }
+function getFractalEngineCost2(){
+    return E(6).add(player.exponenting.fractal.fractalEngineMK2.mul(3))
+}
+function buyFractalEngine2(){
+    if (player.exponenting.fractal.fractalEngine.gte(getFractalEngineCost2())){
+        if (!hasMM6Upg(12)){
+            player.exponenting.fractal.fractalEngine = E(0)
+        }
+        player.exponenting.fractal.fractalEngineMK2 = player.exponenting.fractal.fractalEngineMK2.add(1)
+        no_reward_mm6_reset()
+
+    }
+}
 function updateFractal(){
-    if (player.exponenting.fractal.fractalEngine.gte(1)){
+    if (player.exponenting.fractal.fractalEngine.add(player.exponenting.fractal.fractalEngineMore).gte(1)){
         player.exponenting.fractal.fractals = player.exponenting.fractal.fractals.add(
             getFractalProduce().mul(diff2)
         )
     }
+    player.exponenting.fractal.fractalEngineMore = player.exponenting.fractal.fractalEngineMore.add(
+        getFractalProduce2().mul(diff2)
+    )
+    handleAutobuyMM595()
 }
 function getFractalProduce(){
-    return E.pow(2,player.exponenting.fractal.fractalEngine).mul(tmp.mm6.fractal.fracEff3)
+    return player.exponenting.fractal.fractalEngine.add(player.exponenting.fractal.fractalEngineMore).mul(E.pow(1.1,player.exponenting.fractal.fractalEngine.add(player.exponenting.fractal.fractalEngineMore))).mul(tmp.mm6.fractal.fracEff3)
+}
+function getFractalProduce2(){
+    if (!hasMM6Upg(12)){
+        return E.mul(0.1,player.exponenting.fractal.fractalEngineMK2)
+    }else{
+        return E.mul(0.1,player.exponenting.fractal.fractalEngineMK2.pow(3))
+    }
 }
 function getFractalEngineCost() {
     return ExpantaNum.pow(2.64454438, player.exponenting.fractal.fractalEngine)

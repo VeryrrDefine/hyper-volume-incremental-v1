@@ -1,4 +1,8 @@
 function no_reward_mm6_reset() {
+    let galaxyBefore = E(0)
+    if (hasMM6Upg(13)){
+        galaxyBefore = player.secutitation.mm5_volumes.galaxies.clone()
+    }
     player.secutitation= {
         mm5_volumes: {
             points: E(0),
@@ -29,7 +33,13 @@ function no_reward_mm6_reset() {
         mm57: E(0),
     }
     no_reward_mm5_reset()
-    
+    if (hasMM6Upg(13)){
+        player.secutitation.mm5_volumes.galaxies = galaxyBefore.clone()
+    }
+    let mm59Before = E(0)
+    if (hasMM6Upg(11)){
+        mm59Before = player.compress.mm59.clone()
+    }
     player.compress= {
         mm59: E(0),
         mm595: E(0),
@@ -39,7 +49,13 @@ function no_reward_mm6_reset() {
         inCompress: false,
         unl: false
     }
-    reset_mm5_dimensions()
+    if (hasMM6Upg(11)){
+        player.compress.mm59 = mm59Before.clone()
+    }
+
+    if (!hasMM6Upg(5)){
+        reset_mm5_dimensions()
+    }
 }
 function doMM6reset() {
     if (player.volumes.gte(E.E_MAX_SAFE_INTEGER)){

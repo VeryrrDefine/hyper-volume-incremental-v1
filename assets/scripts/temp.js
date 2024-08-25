@@ -79,6 +79,9 @@ var tmp = {
                 result = result.mul(shortcut.secu.mm5_volumes.galaxies.gte(10) ? galaxy_rewards[6].effect : "1");
                 result = result.mul(tmp.mm59.mm595Effect)
                 if (player.compress.inCompress) { result = doubleExponentMult(result, tmp.mm59.compressPenalty) }
+                if (softcapped){
+                    result = doubleExponentSoftcap(result,this.softcap3,0.25)
+                }
                 return result;
             }
         },
@@ -108,6 +111,7 @@ var tmp = {
                 result = result.add(0.01 * getMM5ChalCompletionTimes(1))
             }
             if (hasMM6Upg(1)) result = result.add(mm6_upgrades[0].effect)
+            if (shortcut.mm5.galaxies.gte(76)) result = result.add(galaxy_rewards[7].effect)
             return result
         },
         get softcap() {
@@ -136,6 +140,9 @@ var tmp = {
         get softcap2() {
             let a = E("e1e7")
             return a;
+        },
+        get softcap3() {
+            return E("ee525")
         }
     },
     mm45: {
@@ -183,7 +190,13 @@ var tmp = {
                 player.secutitation.mm53.pow(2).tenpow().logarithm(3).tenpow()
             ) : 1)
                 if (player.compress.inCompress) { temp1 = doubleExponentMult(temp1, tmp.mm59.compressPenalty) }
-
+                temp1 = temp1.overflow(tmp.mm4.softcap3_start, tmp.mm4.softcap3_power)
+            temp1 = doubleExponentSoftcap(temp1, tmp.mm4.softcap4_start, tmp.mm4.softcap4_power)
+            if (temp1.gte(tmp.mm4.softcap4_start)){
+                temp1 = tmp.mm4.softcap4_start.log10().log10().add(
+                    temp1.log10().log10().sub(tmp.mm4.softcap4_start.log10().log10()).mul(tmp.mm4.softcap4_power)
+                ).tenpow().tenpow()
+            }
             return temp1;
         },
         get softcapped1() {
@@ -205,7 +218,25 @@ var tmp = {
         },
         get softcap2_start() {
             return E("e5e36")
-        }
+        },
+        get softcapped3() {
+            return tmp.mm4.gain.gte(tmp.mm4.softcap3_start)
+        },
+        get softcap3_power() {
+            return 0.001
+        },
+        get softcap3_start() {
+            return E("e5e85")
+        },
+        get softcapped4() {
+            return tmp.mm4.gain.gte(tmp.mm4.softcap4_start)
+        },
+        get softcap4_power() {
+            return 0.5
+        },
+        get softcap4_start() {
+            return E("e1.797e308")
+        },
     },
     mm35: {
         get replicatePerSecond() {
@@ -412,11 +443,11 @@ var tmp = {
     },
     mm6: {
         get gain() {
-            let temp1 = player.volumes.log10().log10().sub(15.954589770191003).div("0.1").floor().add(1).max(0);
+            let temp1 = player.volumes.log10().log10().sub(15.954589770191003).div("0.1").floor().add(1).mul(hasMM6Upg(6) ? mm6_upgrades[5].effect : 1).mul(hasMM6Upg(13) ? mm6_upgrades[12].effect : 1).floor().max(0);
             return temp1;
         },
         get nextMM6at() {
-            return this.gain.add(1).sub(1).mul(0.1).add(15.954589770191003).tenpow().tenpow()
+            return this.gain.floor().add(1).div(hasMM6Upg(13) ? mm6_upgrades[12].effect : 1).div(hasMM6Upg(6) ? mm6_upgrades[5].effect : 1).sub(1).mul(0.1).add(15.954589770191003).tenpow().tenpow()
         },
         get perMM6speed() {
             return E.add(1, player.volume_generated.mm6).overflow(1000, 0.9)
@@ -426,7 +457,9 @@ var tmp = {
         },
         fractal: {
             get fracEff1() {
-                return player.exponenting.fractal.fractals.gte(10) ? player.exponenting.fractal.fractals.root(5).max(1) : 1
+                return player.exponenting.fractal.fractals.gte(10) ? 
+                player.exponenting.fractal.fractals.root(5).max(1) 
+                : 1
             },
             get fracEff2() {
                 return player.exponenting.fractal.fractals.gte(1000) ? player.exponenting.fractal.fractals.sub(995).root(10).max(1) : 1

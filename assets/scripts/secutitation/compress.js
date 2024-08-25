@@ -20,11 +20,13 @@ function getMM595UpgradeCost(x){
                 player.compress.buyables[0] = E(0)
             }
             return E(100).mul(E.pow(8.64454438,player.compress.buyables[0]))
+            // max buy: mm595/100.logarithm(8.64454438).ceil()
         case 2:
             if (player.compress.buyables[1] === void 0){ 
                 player.compress.buyables[1] = E(0)
             }
             return E(2000).mul(E.pow(2.3,player.compress.buyables[1]))
+            // max buy: mm595/2000.logarithm(2.3).ceil()
         case 3:
             if (player.compress.buyables[2] === void 0){ 
                 player.compress.buyables[2] = E(0)
@@ -38,7 +40,7 @@ function getMM595UpgradeCost(x){
 }
 function buyMM595Upgrade(x){
     if (getMM595UpgradeCost(x).lte(player.compress.mm595)){
-        player.compress.mm595 = player.compress.mm595.sub(getMM595UpgradeCost(x))
+        if (!hasMM6Upg(9)) player.compress.mm595 = player.compress.mm595.sub(getMM595UpgradeCost(x))
         player.compress.buyables[x-1] = player.compress.buyables[x-1].add(1)
     }
 

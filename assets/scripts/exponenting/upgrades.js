@@ -1,10 +1,8 @@
 function getRealmm61() {
     return player.exponenting.tower.from6DFractal.sub(player.exponenting.tower.spent)
 }
-
 const mm6_upgrades = [
     {//1
-        name: "e+605",
         desc: "All 4D Dimensions exponentplier mores based on 6D Fractals",
         get require(){
             return getRealmm61().gte(15)
@@ -17,6 +15,10 @@ const mm6_upgrades = [
             player.exponenting.tower.spent = player.exponenting.tower.spent.add(15)
         },
         get effect(){
+            if (hasMM6Upg(8)){
+                return player.exponenting.fractal.fractals.slog().slog().div(2.7)
+
+            }
             return player.exponenting.fractal.fractals.slog().slog().div(3)
         },
         get effectDisplay() {
@@ -24,7 +26,6 @@ const mm6_upgrades = [
         }
     },
     {//2
-        name: "s1^605",
         desc: "4D Volumes softcap^1 lates based on 6D Fractals",
         get require() {
             return getRealmm61().gte(2)
@@ -46,7 +47,6 @@ const mm6_upgrades = [
         }
     },
     {//3
-        name: "qolc",
         desc: "Force unlock Compress",
         get require() {
             return player.exponenting.fractal.fractalEngine.gte(5)
@@ -60,6 +60,172 @@ const mm6_upgrades = [
         bought_do() {
         },
     },
+    {//4
+        desc: "Unlock Fractal Engine MK2",
+        get require() {
+            return player.volume_generated.mm6.gte(200)
+        },
+        get require_desc(){
+            return "Total 200 mm<sup>6</sup>"
+        },
+        get unlocked(){
+            return hasMM6Upg(3)
+        },
+        bought_do() {
+        },
+
+    },
+    {//5
+        desc: "Keep 5D Dimensions when reseting",
+        get require() {
+            return getRealmm61().gte(5)
+        },
+        get require_desc(){
+            return "5 mm<sup>6.1</sup>"
+        },
+        get unlocked(){
+            return hasMM6Upg(4)
+        },
+        bought_do() {
+            player.exponenting.tower.spent = player.exponenting.tower.spent.add(5)
+        },
+
+    },
+    {//6
+        desc: "Gain more mm<sup>6</sup> based on 6D Fractals",
+        get require() {
+            return getRealmm61().gte(50)
+        },
+        get require_desc(){
+            return "50 mm<sup>6.1</sup>"
+        },
+        get unlocked(){
+            return hasMM6Upg(5)
+        },
+        bought_do() {
+            player.exponenting.tower.spent = player.exponenting.tower.spent.add(50)
+        },
+        get effect(){
+            return player.exponenting.fractal.fractals.slog().mul(200)
+        },
+        get effectDisplay() {
+            return `×${this.effect.formatA()}`
+        }
+
+    },
+    {//7
+        desc: "Buying mm<sup>6.1</sup> doesn't cost fractals, you can buy max",
+        get require() {
+            return getRealmm61().gte(10)
+        },
+        get require_desc(){
+            return "10 mm<sup>6.1</sup>"
+        },
+        get unlocked(){
+            return hasMM6Upg(6)
+        },
+        bought_do() {
+            player.exponenting.tower.spent = player.exponenting.tower.spent.add(10)
+        }
+    },
+    {//8
+        desc: "Improve 1<sup>st</sup> mm<sup>6</sup> upgrade formula",
+        get require() {
+            return getRealmm61().gte(900)
+        },
+        get require_desc(){
+            return "900 mm<sup>6.1</sup>"
+        },
+        get unlocked(){
+            return hasMM6Upg(7)
+        },
+        bought_do() {
+            player.exponenting.tower.spent = player.exponenting.tower.spent.add(900)
+        }
+    },
+    {//9
+        desc: "Buying mm<sup>5.95</sup> upgrades doesn't cost. You can auto buy mm<sup>5.95</sup> upgrades",
+        get require() {
+            return getRealmm61().gte(300)
+        },
+        get require_desc(){
+            return "300 mm<sup>6.1</sup>"
+        },
+        get unlocked(){
+            return hasMM6Upg(8)
+        },
+        bought_do() {
+            player.exponenting.tower.spent = player.exponenting.tower.spent.add(300)
+        }
+    },
+    {//10
+        desc: "Buying 5D Dimensions doesn't cost. You can auto buy 5D Dimensions ",
+        get require() {
+            return getRealmm61().gte(700)
+        },
+        get require_desc(){
+            return "700 mm<sup>6.1</sup>"
+        },
+        get unlocked(){
+            return hasMM6Upg(9)
+        },
+        bought_do() {
+            player.exponenting.tower.spent = player.exponenting.tower.spent.add(700)
+        }
+    },
+    {//11
+        desc: "Keep mm<sup>5.9</sup> when reset",
+        get require() {
+            return getRealmm61().gte(11451)
+        },
+        get require_desc(){
+            return "11451 mm<sup>6.1</sup>"
+        },
+        get unlocked(){
+            return hasMM6Upg(10)
+        },
+        bought_do() {
+            player.exponenting.tower.spent = player.exponenting.tower.spent.add(11451)
+        }
+    },
+    {//12
+        desc: "Buying Fractal Engine MK2 doesn't reset Fractal Engine MK1.<br>Fractal Engine MK2 produce more Fractal Engine MK1.",
+        get require() {
+            return player.exponenting.fractal.fractalEngine
+        },
+        get require_desc(){
+            return "18 Fractal Engines"
+        },
+        get unlocked(){
+            return hasMM6Upg(11)
+        },
+        bought_do() {
+           
+        }
+    },
+    
+    {//13
+        desc: "Gain more mm<sup>6</sup> based on total mm<sup>6.1</sup>'s.<br>Keep mm<sup>5</sup> galaxies in exponenting reset.",
+        get require() {
+            return player.exponenting.tower.from6DFractal.gte(25000)
+        },
+        get require_desc(){
+            return "Total 25000 mm<sup>6.1</sup>"
+        },
+        get unlocked(){
+            return hasMM6Upg(12)
+        },
+        bought_do() {
+           
+        },
+        get effect(){
+            return player.exponenting.tower.from6DFractal.root(2.5)
+        },
+        get effectDisplay() {
+            return `×${this.effect.formatA()} to mm<sup>6</sup> gain`
+        }
+    },
+     
     /*
     {//2
         desc: "2<sup>nd</sup> 4D Dimension exponentplier +0.15",
@@ -113,7 +279,7 @@ function hasMM6Upg(id) {
 
 }
 function buyMM6Upg(id) {
-    if (mm6_upgrades[id - 1].require) {
+    if (mm6_upgrades[id - 1].require && !hasMM6Upg(id)) {
         player.exponenting.upgrades.push(id)
         mm6_upgrades[id - 1].bought_do()
     }
@@ -145,4 +311,42 @@ function getMM6UpgClassName(id) {
     //if (typeof (mm4_upgrades[id-1].disableInChal5) == "boolean") upgradeClassName = "mm4_upg_disabled"
 
     return upgradeClassName
+}
+function buyMM61(){
+    if (player.exponenting.fractal.fractals.gte(tmp.mm6tower.mm61costFromFractal)){
+        if (!hasMM6Upg(7)){
+            player.exponenting.fractal.fractals = player.exponenting.fractal.fractals.sub(tmp.mm6tower.mm61costFromFractal)
+        }
+        player.exponenting.tower.from6DFractal = player.exponenting.tower.from6DFractal.add(1)
+    }
+}
+function buyMM61Max() {
+    if (!hasMM6Upg(7)){
+        buyMM61()
+    }else{
+        let buycounttotal = player.exponenting.fractal.fractals.div(3).logarithm(2).floor();
+        if (buycounttotal.gt(player.exponenting.tower.from6DFractal)){
+            player.exponenting.tower.from6DFractal = buycounttotal.clone()
+        }
+    }
+}
+function handleAutobuyMM595(){
+    if (hasMM6Upg(9) && player.auto.includes(12)) buyMM595Upgrade(3)
+    if (hasMM6Upg(9)){
+        if (player.auto.includes(10)){
+            let temp1 = player.compress.mm595.div(100).logarithm(8.64454438).ceil();
+            if (temp1.gt(player.compress.buyables[0])){
+                player.compress.buyables[0] = temp1
+            }
+        }
+        if (player.auto.includes(11)){
+            let temp2 = player.compress.mm595.div(2000).logarithm(2.3).ceil();
+            if (temp2.gt(player.compress.buyables[1])){
+                player.compress.buyables[1] = temp2
+            }
+        }
+    }
+    
+// player.compress.mm595.div(2000).logarithm(2.3).ceil()      2
+// player.compress.mm595.div(100).logarithm(8.64454438).ceil()1
 }

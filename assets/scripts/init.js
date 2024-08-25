@@ -85,6 +85,16 @@ function fromCharCodes(list){
     }
     return result
 }
+function doubleExponentSoftcap(value,start,power){
+    let temp2 = value.clone();
+    let temp3 = temp2.clone();
+    if (value.gte(start)){
+        temp3 = start.log10().log10().add(
+            temp2.log10().log10().sub(start.log10().log10()).mul(power)
+        ).tenpow().tenpow()
+    }
+    return temp3;
+}
 
 const E30825 = E(Number.MAX_VALUE);
 const EE5 = E("ee5");
@@ -93,7 +103,7 @@ const EE1000 = E("ee1000");
 const EEE8 = E("eee8");
 const K9E15 = E("10").expansion(Number.MAX_SAFE_INTEGER)
 
-const ENDGAME= E.E_MAX_SAFE_INTEGER.clone();
+const ENDGAME= E("ee38");
 const LY = E("9454254955488000000");
 const UNI = LY.mul("9.3e10");
 const mm5_scale = [2,8,32,128,512,2048,8192,32768]
