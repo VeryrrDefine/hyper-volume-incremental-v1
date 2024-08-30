@@ -1,11 +1,15 @@
 function mm5Galaxycost(){ //50 100 800
-    let temp1 = E.mul("1e6",E.pow("1e3.2",player.secutitation.mm5_volumes.galaxies));
-    if (player.secutitation.mm5_volumes.galaxies.gte(50)){
-        temp1 = temp1.mul(E.pow(10,player.secutitation.mm5_volumes.galaxies.sub(49)))
+    let x = player.secutitation.mm5_volumes.galaxies
+    let temp1 = E.mul("1e6",E.pow("1e3.2",x));
+    /*if (x.gte(50)){
+        temp1 = temp1.mul(E.pow(10,x.sub(49)))
     }
-    if (player.secutitation.mm5_volumes.galaxies.gte(100)){
-        temp1 = temp1.mul(E.pow(10,player.secutitation.mm5_volumes.galaxies.sub(99).pow(1.5)))
+    if (x.gte(100)){
+        temp1 = temp1.mul(E.pow(10,x.sub(99).pow(1.5)))
     }
+    if (x.gte(1000)){
+        temp1 = temp1.mul(E.pow("1e100",x.sub(999)))
+    }*/
     return temp1
     /*if (player.secutitation.mm5_volumes.galaxies.eq(0)){
         return E("1e9");
@@ -20,6 +24,12 @@ function mm5Galaxycost(){ //50 100 800
         return E("1e18");
     }
     return E.GRAHAMS_NUMBER*/
+}
+function buyMaxGalaxies(){
+    let temp1 = player.secutitation.mm5_volumes.energy.div("1e6").logarithm("1e3.2").floor()
+    if (temp1.gt(player.secutitation.mm5_volumes.galaxies)){
+        player.secutitation.mm5_volumes.galaxies = temp1.clone()
+    }
 }
 const galaxy_rewards = [
     {
@@ -61,10 +71,10 @@ const galaxy_rewards = [
             return "×"+this.effect.format();
         }
     },{
-        req: E("76"),
-        desc: "Get a 4D Dimensions exponentplier based on galaxies count",
+        req: E("85"),
+        desc: "Get a 4D Dimensions exponentplier based on galaxies count(max 500 galaxies)",
         get effect() {
-            return shortcut.mm5.galaxies.logarithm(10).div(40)
+            return shortcut.mm5.galaxies.min(500).sub(9).logarithm(10).div(40).mul(hasResearch("5D31") ? 12 : 1).max(0)
             /*
             
             */
@@ -73,6 +83,9 @@ const galaxy_rewards = [
             return "+"+this.effect.format();
         }
 
+    },{
+        req: E("290"),
+        desc: "You can maxinum buy Galaxies",
     }/*
     {
         req: E("7"),
@@ -106,12 +119,7 @@ function mm5_gal_reset_manmade(){
     }
 }
 function getSuperMM5GalaxyType(){
-    if (shortcut.mm5.galaxies.gte(100)){
-        return "Hyper|"
-    }
-    if (shortcut.mm5.galaxies.gte(50)){
-        return "Super|"
-    }
+    return ""
 }
 function getMM5galaxyText(){
     let a = `Reach `

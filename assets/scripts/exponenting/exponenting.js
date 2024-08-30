@@ -78,3 +78,53 @@ function doMM6resetManmade(){
     }
     doMM6reset()
 }
+
+function fixExponenting(){
+    if (player.exponenting.upgrades === void 0){
+        player.exponenting.upgrades = []
+    }
+    if (player.exponenting.tower === void 0){
+        player.exponenting.tower = {
+            from6DFractal: E(0),
+            spent: E(0)
+        }
+    }
+    if (player.exponenting.research === void 0){
+        player.exponenting.research = {
+            researchSelects: [],
+            researchId: "",
+            researchTimeSpent: E(0),
+            research63215Dspent: E(0),
+            research6Dspent: E(0),
+            researchGetted: []
+        }
+    }
+    delete player.exponenting.research.research4Dspent
+    if (player.exponenting.research.research63125Dspent === void 0){
+        player.exponenting.research.research63125Dspent = E(0)
+    }
+    if (player.exponenting.fractal === void 0) {
+        player.exponenting.fractal = {
+            fractals: E(0),
+            fractalEngine: E(0),
+            fractalEngineMore: E(0),
+            fractalEngineMK2: E(0)
+        }
+    }
+    if (player.exponenting.fractal.fractalEngineMore === void 0){
+        player.exponenting.fractal.fractalEngineMore = E(0)
+    }
+    if (player.exponenting.fractal.fractalEngineMK2 === void 0){
+        player.exponenting.fractal.fractalEngineMK2 = E(0)
+    }
+    if (player.exponenting.pointAllocate === void 0){
+        player.exponenting.pointAllocate = {
+            mm6125: E(0),
+            mm625: E(0),
+            mm6375: E(0),
+            mm61875: E(0),
+            mm63125: E(0),
+            mm64375: E(0),
+        }
+    }
+}

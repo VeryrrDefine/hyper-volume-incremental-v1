@@ -221,10 +221,10 @@ function hard_reset() {
     }
 
     window.player = {
-        volumes: E(11),
+        volumes: E(11.4514),
         version: 10,
+        recordUnlocked: [],
         volumeInfinite: false,
-        achieve: new Array(200),
         display_mode: 0,
         dimensions_buymulti: [
             E(2), E(2), E(2), E(2), E(2), E(2), E(2), E(2),
@@ -305,8 +305,24 @@ function hard_reset() {
                 from6DFractal: E(0),
                 spent: E(0)
             },
-            upgrades: []
+            upgrades: [],
+            research: {
+                researchSelects: [],
+                researchId: "",
+                researchTimeSpent: E(0),
+                research63215Dspent: E(0),
+                research6Dspent: E(0),
+                researchGetted: []
+            },
+            pointAllocate: {
+                mm6125: E(0),
+                mm625: E(0),
+                mm6375: E(0),
 
+                mm61875: E(0),
+                mm63125: E(0),
+                mm64375: E(0),
+            }
         },
         auto: [],
         multi: {
@@ -334,8 +350,8 @@ function hard_reset() {
         },
         selectedMM3Challenge: 0,
         inMM3Challenge: 0,
-        selectedMM5Challenge: 0,
-        inMM5Challenge: 0,
+        selectedMM6Challenge: 0,
+        inMM6Challenge: 0,
         lastTab: '1',
         unlockedMM5ChallengeLeastOnce: false,
         newsticker_time: 0,
@@ -470,6 +486,7 @@ function loop() {
         if (Number.isNaN(player.offlinedTime)) {
             player.offlinedTime = 0
         }
+        player.recordUnlocked = [...(new Set(player.recordUnlocked))]
         if (hasMM6Upg(3)) player.compress.unl=true
         if (window.eHook && !app.developer_mode) {
             getAch(43);
@@ -491,11 +508,13 @@ function loop() {
         window.diff2 = E(window.global_diff * player.options.gamespeed);
         window.diff = E(diff2 * (player.inMM3Challenge === 8 ? 0.001 : 1)).mul(tmp.mm6.perMM6speed);
 
+        researchLoop()
 
         sacrif(1)
         updateAch()
         reactorLoop()
         updateFractal()
+        updateAllocate()
         // QoL challenging life
         if (player.inMM3Challenge != 0 && player.auto.includes(9) && player.volumes.gte(
             mm3_challenges[player.inMM3Challenge - 1].complete_requirement
@@ -584,6 +603,8 @@ function loop() {
                 //doMM6reset();
                 player.fakeGoInfinite = false
             }
+        }else{
+            player.fGItime = 0
         }
 
 
@@ -700,8 +721,12 @@ function buyAll() {
 }
 function transformToE(object) {
     for (let key in object) {
-
-        if (key !== "offlinedTime" && typeof object[key] === "string" && !new E(object[key]).isNaN()) {
+        if (key == "offlinedTime" || key == "researchGetted" || key == "researchId" || key=="recordUnlocked"){
+            continue
+        }
+        if (typeof object[key] === "string" && !E.isNaN(object[key])) {
+            
+            console.log(key)
             object[key] = new E(object[key]);
         }
         if (typeof object[key] === "object") {
@@ -812,15 +837,7 @@ function fix() {/*
             spent: E(0)
         }
     }
-    if (player.exponenting.upgrades === void 0){
-        player.exponenting.upgrades = []
-    }
-    if (player.exponenting.tower === void 0){
-        player.exponenting.tower = {
-            from6DFractal: E(0),
-            spent: E(0)
-        }
-    }
+    
     if (player.dimensions[DIMENSIONS_EXPONENT] === void 0) {
         player.dimensions[DIMENSIONS_EXPONENT] = [E(1), E(1), E(1), E(1), E(1), E(1), E(1), E(1)]
     }
@@ -843,20 +860,7 @@ function fix() {/*
     if (player.compress.highestMM4inCompress === void 0) {
         player.compress.highestMM4inCompress = E(0)
     }
-    if (player.exponenting.fractal === void 0) {
-        player.exponenting.fractal = {
-            fractals: E(0),
-            fractalEngine: E(0),
-            fractalEngineMore: E(0),
-            fractalEngineMK2: E(0)
-        }
-    }
-    if (player.exponenting.fractal.fractalEngineMore === void 0){
-        player.exponenting.fractal.fractalEngineMore = E(0)
-    }
-    if (player.exponenting.fractal.fractalEngineMK2 === void 0){
-        player.exponenting.fractal.fractalEngineMK2 = E(0)
-    }
+    fixExponenting()
     player.lastTab = player.lastTab.toNumber().toString()
 }
 var parallelUniverseId = 1
@@ -1074,4 +1078,24 @@ var shortcut = {
         return player.secutitation.mm5_volumes
 
     }
+}
+
+function overflow(number,start,power,meta=1){
+    if (E.isNaN(number)) return E(0)
+    start = E.iteratedexp(10,meta-1,1.0001).max(start)
+    if (number.gte(start)){
+        let s = start.iteratedlog(10,meta)
+        number = E.iteratedexp(10,meta,number.iteratedlog(10,meta).div(s).pow(power).mul(s))
+    }
+}
+
+function tetraflow(number,start,power) { // EXPERIMENTAL FUNCTION - x => 10^^((slog10(x)-slog10(s))*p+slog10(s))
+    if(E.isNaN(number))return E(0);
+	start=E(start);
+	if(number.gte(start)){
+        let s = start.slog(10)
+        // Fun Fact: if 0 < number.slog(10) - start.slog(10) < 1, such like overflow(number,start,power,start.slog(10).sub(1).floor())
+		number=E.tetrate(10,number.slog(10).sub(s).mul(power).add(s))
+	}
+	return number;
 }

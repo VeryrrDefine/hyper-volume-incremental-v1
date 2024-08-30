@@ -1,4 +1,14 @@
+
+
+
+
 function loadVue() {
+    Vue.component("rainbow", {
+        name: "rainbow",
+        get template() {
+            return `<div :style="{color: getUndulatingColor()}"><slot></slot></div>`
+        }
+    })
     window.app = new Vue({
         el: "#app",
         data: {
@@ -9,14 +19,14 @@ function loadVue() {
             developer_mode: !location.hostname.endsWith("github.io"),
             developer_get_mm4: "1e100",
             dimensions: [
-                {id: 1, label: '1st Dimension'},
-                {id: 2, label: '2nd Dimension'},
-                {id: 3, label: '3rd Dimension'},
-                {id: 4, label: '4th Dimension'},
-                {id: 5, label: '5th Dimension'},
-                {id: 6, label: '6th Dimension'},
-                {id: 7, label: '7th Dimension'},
-                {id: 8, label: '8th Dimension'},
+                { id: 1, label: '1st Dimension' },
+                { id: 2, label: '2nd Dimension' },
+                { id: 3, label: '3rd Dimension' },
+                { id: 4, label: '4th Dimension' },
+                { id: 5, label: '5th Dimension' },
+                { id: 6, label: '6th Dimension' },
+                { id: 7, label: '7th Dimension' },
+                { id: 8, label: '8th Dimension' },
             ],
             save: "",
             mm5_upg: chunkArrayIntoGroupsOfTen(mm5_upgrades),
@@ -26,7 +36,7 @@ function loadVue() {
 
             mm3_chal: chunkArrayIntoGroupsOfTen(mm3_challenges),
             mm5_chal: chunkArrayIntoGroupsOfTen(mm5_challenges),
-            
+
             isShowingPopup: false,
             hasError: false,
             errortext: "",
@@ -41,7 +51,17 @@ function loadVue() {
             whistle_unlock: false,
             devNews: window.texts,
             parallelUniverseModal: false,
+            input1: "1",
+            input2: "1",
+            input3: "1",
             changelogs: [
+                {
+                    version: "v1.2.1", title: "",
+                    changes: [
+                        "添加了Fractal, Fractal Engine, Fractal Engine MK2, Research, 6DPoint-Allocation",
+                        "解禁了部分新闻中的REDACTED"
+                    ]
+                },
                 {
                     version: "v1.2.0", title: "Exponenting Update!",
                     changes: [
@@ -50,13 +70,13 @@ function loadVue() {
                 },
                 {
                     version: "v1.1.7", title: "",
-                    changes:[
+                    changes: [
                         "添加了Compress"
                     ]
                 },
                 {
                     version: "v1.1.6", title: "",
-                    changes:[
+                    changes: [
                         "添加了Reactor"
                     ]
                 },
@@ -162,9 +182,6 @@ function loadVue() {
             }
         }
     })
-    Vue.component("rainbow", {
-        template() {
-            return `<div :style="{color: getUndulatingColor()}"><slot></slot></div>`
-        }
-    })
+    
 }
+

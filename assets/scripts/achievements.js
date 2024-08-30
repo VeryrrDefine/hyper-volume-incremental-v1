@@ -18,6 +18,7 @@ Vue.component("achievements", {
       </table>
     </div>`,
 })
+const EE99 = E("ee99")
 const achievements = [
     [
         { title: "Hello?", goal: "Buy 1<sup>st</sup> Dimensions" },
@@ -33,7 +34,7 @@ const achievements = [
         { title: "授人以鱼，不如授人以鱼恒(Fishernity)", get goal() { return "Reach 1.797e308 mm<sup>3</sup>" } },
         { title: "3D Volumes", goal: "Get 1 mm<sup>3</sup>" },
         { title: "Challenge Era", goal: "Unlock mm<sup>3</sup> challenge" },
-        { title: "There's nothing I'd rather do", goal: "Unlock 17<sup>th</sup> mm<sup>4</sup> Upgrade" },
+        { title: "seventeen upgrades", goal: "Unlock 17<sup>th</sup> mm<sup>4</sup> Upgrade" },
         { title: "Why does we cannot produce 8<sup>th</sup> Dimensions?", goal: "Reach 1e20000 mm<sup>3</sup>", secret: true },
         {
             title: `啊${String.fromCodePoint(129322)}～啊${String.fromCodePoint(129322)}～啊咦${String.fromCodePoint(128556)}啊咦${String.fromCodePoint(128556)}`,
@@ -71,8 +72,10 @@ const achievements = [
         { title: "Save fixer 1", goal: "Try to import a save from Wind spirit creation", secret: true },
         { title: "Can you download more RAMs?", goal: "Make 3 FPS", secret: true},
         { title: "MegaVerse", goal: "Reach "+display_volumes(MEGAVERSE)},
-        { title: "I didn't need compress, just a upgrade ^_^", goal:"Reach "+display_volumes(E.E_MAX_SAFE_INTEGER)+" without gaining mm<sup>5.95</sup>"},
-        { title: "But i wanted a prestige dygm...", goal:"Reach "+format(E30825)+" mm<sup>5</sup>"}
+        { title: "I didn't need compress, just a upgrade ^_^", goal:"Reach "+display_volumes(E.E_MAX_SAFE_INTEGER)+" without gaining mm<sup>5.95</sup><br>Or get next achievements?"},
+        { title: "壹式風靈作成", goal:"Buy a Fractal Engine"},
+        { title: "贰式風靈作成", goal:"Buy a Fractal Engine MK2"},
+        { title: "Ultraman Zeta", goal: "Reach "+display_volumes(EE99)}
     ],
 
 ]
@@ -187,11 +190,17 @@ function updateAch() {
         if (player.volumes.gte(MEGAVERSE)) {
             getAch(53)
         }
-        if (player.volumes.gte(E.E_MAX_SAFE_INTEGER) && player.compress.mm595.lte(0)) {
+        if ((player.volumes.gte(E.E_MAX_SAFE_INTEGER) && player.compress.mm595.lte(0))||hasAch(55)){
             getAch(54)
         }
-        if (shortcut.secu.points.gte(E30825)) {
+        if (player.exponenting.fractal.fractalEngine.gte(1)) {
             getAch(55)
+        }
+        if (player.exponenting.fractal.fractalEngineMK2.gte(1)) {
+            getAch(56)
+        }
+        if (player.volumes.gte(EE99)) {
+            getAch(57)
         }
 
     }
@@ -226,9 +235,6 @@ for (let i in achievements) {
         }
     }
     totalachievements += achievements[i].length
-}
-let achData = {
-    ach13timer: Array(8).fill(0)
 }
 
 function getAchClass(ach) {

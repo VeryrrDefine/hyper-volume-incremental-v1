@@ -75,7 +75,9 @@ body {
 .center {
     text-align: center;
 }
-
+big {
+    font-size: 35px;
+}
 /*}*/
 /*.mm3_upgrades{*/
 /*    width: 23.5vw;*/
@@ -323,4 +325,41 @@ button {
 .adaptText{
     font-size: 50%;
     text-align: center;
+}
+
+.sellbtn{
+    max-width: 100px;
+}
+input{
+    background: #222;
+    border: 1px solid #444;
+    border-radius: 2px;
+}
+input.mm6input{
+    background: #202;
+    border: 1px solid #404;
+    border-radius: 2px;
+    color: #f0f
+}
+input.mm6input::-webkit-input-placeholder{
+    color: #a0a;
+    opacity: 1;
+}
+
+
+.popup {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    border: solid 2px #222;
+    background-color: #171717;
+    padding: 7px 25px;
+    pointer-events: auto;
+    max-width: 75%;
+    max-height: 75%;
+    overflow: auto;
+    font-size: 16px;
+    z-index: 8;
 }

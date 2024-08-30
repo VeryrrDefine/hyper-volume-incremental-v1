@@ -53,7 +53,10 @@ function buymm5dimMax(dim){
     let x = player.secutitation.mm5_volumes.points.clone();
     let temp1 = x.logarithm(mm5_scale[dim-1]).ceil()
     if (temp1.gt(player.mm5_volume_dimensions[DIMENSIONS_BOUGHT][dim - 1])){
+        player.mm5_volume_dimensions[DIMENSIONS_POINTS][dim-1] = 
+        player.mm5_volume_dimensions[DIMENSIONS_POINTS][dim-1].add(temp1.sub(player.mm5_volume_dimensions[DIMENSIONS_BOUGHT][dim - 1]))
         player.mm5_volume_dimensions[DIMENSIONS_BOUGHT][dim - 1] = temp1.clone()
+
     }
 }
 function buymm5dim(dim) {

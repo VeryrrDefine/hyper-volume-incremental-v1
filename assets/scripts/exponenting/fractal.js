@@ -44,7 +44,7 @@ function updateFractal(){
     handleAutobuyMM595()
 }
 function getFractalProduce(){
-    return player.exponenting.fractal.fractalEngine.add(player.exponenting.fractal.fractalEngineMore).mul(E.pow(1.1,player.exponenting.fractal.fractalEngine.add(player.exponenting.fractal.fractalEngineMore))).mul(tmp.mm6.fractal.fracEff3)
+    return player.exponenting.fractal.fractalEngine.add(player.exponenting.fractal.fractalEngineMore).mul(E.pow(1.1,player.exponenting.fractal.fractalEngine.add(player.exponenting.fractal.fractalEngineMore))).mul(tmp.mm6.fractal.fracEff3).pow(ihraed("6F22"))
 }
 function getFractalProduce2(){
     if (!hasMM6Upg(12)){

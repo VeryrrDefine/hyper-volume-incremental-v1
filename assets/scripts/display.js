@@ -133,7 +133,9 @@ function display_volumes_stat(a) {
 }
 
 function display_volumes(a) {
-    return a.formatA() + " mm<sup>4</sup>";
+    if (player.display_mode == 0){
+        return a.formatA() + " mm<sup>4</sup>";
+    }
     return display_volumes_stat(a)
 }
 
@@ -203,7 +205,7 @@ function e114e514() {
 function getGameSpeedText() {
     let temp = developer.timeboost * player.options.gamespeed * (player.inMM3Challenge === 8 ? 0.001 : 1);
     if (temp === 1) {
-        return "Game speed is unaltered: 1.000"
+        return "Game speed is normal: 1.000"
     } else {
         return `Game speed is altered: ${temp}`
     }
@@ -331,3 +333,9 @@ function getPageOpacity(){
         return 1
     }
 }
+
+function overflowText(resourceName,resourceGainName,overflowStart,formatFunction=format,effect,inv=false) {
+    let temp1 = E(effect);
+    return `Because of ${resourceName} overflow at <b>${formatFunction(overflowStart)}</b>, your ${resourceGainName} is ${inv ? "raised" : "rooted"} by ${format(temp1)}`
+    
+}// tmp.mm595.mm595Overflow

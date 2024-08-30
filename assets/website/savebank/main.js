@@ -25,8 +25,8 @@ var savesFetch = fetch("../../json/saveBank/index.json")
             }
             categories.push(new Category(categoryName, temp1[category].style, categorySaves))
         }
-        return categories
-    }).then(function (categories) {
+      /*  return categories
+    }).then(function (categories) {*/
         categoriesCount = categories.length;
         saves = new CategorySaveGroup(categories)
         saves.applyAllHTML();

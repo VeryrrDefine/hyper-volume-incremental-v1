@@ -455,7 +455,7 @@ Teresa的现实在公开开放后的1/1e300秒内立刻崩溃了。(Error: Serve
                 text: "遇事不决，先ExpantaNum.js"
             },
             {
-                text: "Put my heart to develop my game, don't think that 傻逼 <span class='redacted'>REDACTED</span><sup>5</sup>"
+                text: "Put my heart to develop my game, don't think that 傻逼 dygm"
             },
             {
                 text: "本游戏没有任何超级折算"
@@ -571,16 +571,16 @@ Teresa的现实在公开开放后的1/1e300秒内立刻崩溃了。(Error: Serve
                 text: "我昨天吃了1.79e308g海苔，今天一看里面有2.912e310g是钠伪装的"
             },
             {
-                text: "隔壁家叔叔过年了还在Arcaea Malody ??? MuseDash ??? ??? ??? Phigros ??? ??? ??? osu Steam FLStudio ??? QQ 网易云音乐 Discord 几何冲刺 ??? ??? ??? ??? ??? ??? ??? Prenium ??? ??? Google ??? ??? Devc++ ??? bilibili ??? Terraria ??? ??? Au Photoshop Pycharm Clion Visual-Studio-Code ??? Word Excel Outlook Powerpoint ??? ??? ??? Github OBS"
-            },
-            {
                 text: "【UP猪】你【？！～！】的操作，很【抢】啊，不仅【几树】不错，外挂也用的【步厝】，所以，能不能【彡脸】换置顶【链接已屏蔽】？？！"
             },
             {
                 text: '在后期，你获取e1.000e10 mm<sup>6</sup>需要1.000F5 mm<sup>4</sup>'
             },
-            {
+            {//140
                 text: "当你看到某个升级的价格为"+format(K9E15)+"这个数字，就说明这个升级被硬上限了"
+            },
+            {
+                text: "我长这么大，从来没有见过这么乖的狗，你一摸它，它就笑，来，摸摸嗯摸摸嗯，看到了吗？他笑的多开心，一摸它它就笑，一摸它它就笑，好乖的狗呀，"
             }
             /*
             {

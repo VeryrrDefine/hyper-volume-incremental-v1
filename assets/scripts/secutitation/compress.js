@@ -5,7 +5,13 @@ function tryUnlockCompress() {
 }
 function compressButton() {
     if (player.compress.inCompress){
-        return "Exit Compress, gain "+tmp.mm59.gain.format() + " mm<sup>5.9</sup>"
+        if (player.compress.highestMM4inCompress.lt(E30825)){
+            return "Exit Compress, reach "+display_volumes(E30825)+" to get mm<sup>5.9</sup>"
+        }else if (player.volumes.lt(player.compress.highestMM4inCompress)){
+            return "Exit Compress, reach "+display_volumes(player.compress.highestMM4inCompress)+" to get mm<sup>5.9</sup>"
+        }else{
+            return "Exit Compress, gain "+tmp.mm59.gain.format() + " mm<sup>5.9</sup>"
+        }
     }else{
         return "Enter Compress"
     }

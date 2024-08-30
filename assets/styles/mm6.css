@@ -61,13 +61,12 @@
     margin:auto;
     border: 2px solid #ff00ff;
     border-radius: 5px;
-    color: #00ff80;
     z-index: 0;
     background-color: #000000;
 }
 
 .progress-bar-now {
-    width: 100%;
+    width: 0%;
     height: 30px;
     text-align:center;
     z-index: 1;
@@ -80,4 +79,19 @@
     height: 30px;
     border: 1px solid #800080;
     background: #400040;
+}
+
+.research-icon.selected{
+    border: 1px solid #c000c0;
+    background: #600060;
+
+}
+.research-screen{
+    margin:auto;
+    width: 300px;
+    height: 300px;
+    border: 1px solid #800080;
+    background: #400040;
+    font-size: 12px;
+    font-family: 'Consolas';
 }

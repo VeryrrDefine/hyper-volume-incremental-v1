@@ -11,7 +11,6 @@ var tmp = {
                 if (hasMM3Upg(8)) {
                     result = E("2.105")
                 }
-
                 //.add(player.mm3o5_volumes.points.logarithm("100").div(10).minimum("1.5")))
                 result = result.pow(player.dimensions[DIMENSIONS_BOUGHT][i].floor())
                 result = result.mul(tmp.mm35.effect_to_dimensions);
@@ -55,7 +54,7 @@ var tmp = {
 
                 result = softcap(result, tmp.dimension.softcap2, hasMM5TowUpg(51) ? 0.95 : 0.7, "pow", dis = !softcapped)
 
-                result = result.mul(tmp.mm5.energyeffect);
+                if (!hasResearch('5D41')) result = result.mul(tmp.mm5.energyeffect);
                 if (player.secutitation.mm5_volumes.galaxies.gte("2") && dimid != 1) {
                     result = result.mul("e1e6")
                 }
@@ -112,6 +111,8 @@ var tmp = {
             }
             if (hasMM6Upg(1)) result = result.add(mm6_upgrades[0].effect)
             if (shortcut.mm5.galaxies.gte(76)) result = result.add(galaxy_rewards[7].effect)
+            result = result.add(ihraed('5D41',0))
+            if (dimid === 1)  result = result.add(getMM61875Effect())
             return result
         },
         get softcap() {
@@ -189,8 +190,11 @@ var tmp = {
             temp1 = temp1.mul(hasMM5TowUpg(61) ? (
                 player.secutitation.mm53.pow(2).tenpow().logarithm(3).tenpow()
             ) : 1)
-                if (player.compress.inCompress) { temp1 = doubleExponentMult(temp1, tmp.mm59.compressPenalty) }
-                temp1 = temp1.overflow(tmp.mm4.softcap3_start, tmp.mm4.softcap3_power)
+
+            
+            if (player.compress.inCompress) { temp1 = doubleExponentMult(temp1, tmp.mm59.compressPenalty) }
+
+            temp1 = doubleExponentSoftcap(temp1, tmp.mm4.softcap3_start, tmp.mm4.softcap3_power)
             temp1 = doubleExponentSoftcap(temp1, tmp.mm4.softcap4_start, tmp.mm4.softcap4_power)
             if (temp1.gte(tmp.mm4.softcap4_start)){
                 temp1 = tmp.mm4.softcap4_start.log10().log10().add(
@@ -208,13 +212,14 @@ var tmp = {
         get softcap1_start() {
             let temp1 = E("e1.2e14")
             if (hasMM6Upg(2)) temp1 = temp1.pow(mm6_upgrades[1].effect)
+            temp1 = temp1.pow(ihraed("4B24"))
             return temp1
         },
         get softcapped2() {
             return tmp.mm4.gain.gte(tmp.mm4.softcap2_start)
         },
         get softcap2_power() {
-            return 0.15
+            return 0.15 + (1-0.15)*ihraed("6F11",0)
         },
         get softcap2_start() {
             return E("e5e36")
@@ -223,19 +228,19 @@ var tmp = {
             return tmp.mm4.gain.gte(tmp.mm4.softcap3_start)
         },
         get softcap3_power() {
-            return 0.001
+            return 0.75
         },
         get softcap3_start() {
-            return E("e5e85")
+            return E("e5e85").pow(ihraed("4B24"))
         },
         get softcapped4() {
             return tmp.mm4.gain.gte(tmp.mm4.softcap4_start)
         },
         get softcap4_power() {
-            return 0.5
+            return 0.01
         },
         get softcap4_start() {
-            return E("e1.797e308")
+            return E("e1e110").pow(hasResearch('6B32') ? 1.2 : 1)
         },
     },
     mm35: {
@@ -323,7 +328,9 @@ var tmp = {
         getDimMultiplier(dimid) {
             i = dimid - 1;
             let result = E('1.5')
-
+            if (hasResearch('5D11')){
+                result = E(3)
+            }
             //.add(player.mm3o5_volumes.points.logarithm("100").div(10).minimum("1.5")))
             result = result.pow(player.mm5_volume_dimensions[DIMENSIONS_BOUGHT][i].floor())
             /*if (hasMM5TowUpg(82)){
@@ -348,6 +355,9 @@ var tmp = {
 
         dimcost(dimid) { // 1-8
             return E.pow(mm5_scale[dimid - 1], player.mm5_volume_dimensions[DIMENSIONS_BOUGHT][dimid - 1].add(1))
+        },
+        get energyeffectAfter5D41() {
+            return mm6_researches['5D41'].effect
         },
         get energyeffect() {
             /*if (player.secutitation.mm5_volumes.galaxies.gte(9)){
@@ -397,9 +407,11 @@ var tmp = {
             } else return E(0)
         },
         get mm595gain() {
-            return player.compress.mm59.mul(
+            let temp1 =  player.compress.mm59.mul(
                 E.pow(3, player.compress.buyables[0])
             ).mul(tmp.mm6.fractal.fracEff2).overflow("1e20",0.7)
+            temp1 = temp1.overflow(this.mm595GainSoftcap,0.3)
+            return temp1
         },
         get compressPenalty() {
             return E(0.5495).mul(E.pow(1.001, player.compress.buyables[2]))
@@ -422,6 +434,10 @@ var tmp = {
             }
             return temp1
         },
+        get mm595GainSoftcap() {
+            let temp1 = E("e300")
+            return temp1
+        },
         get mm595EffectNosoftcap() {
             let temp1 = E.pow(
                 E.add(1.165,player.compress.buyables[1].mul(0.02))
@@ -440,6 +456,9 @@ var tmp = {
                 return "<span class=\"softcap\">(softcapped)</span>"
             }
         }
+    },
+    get perMM6speed(){
+        return this.mm6.perMM6speed.mul(getMM64375Effect())
     },
     mm6: {
         get gain() {
