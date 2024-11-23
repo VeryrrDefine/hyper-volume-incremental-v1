@@ -2,6 +2,8 @@
 
 Project initiator: [VeryrrDefine](https://github.com/VeryrrDefine)
 
+## THIS PROJECT WILL BE ARCHIVED!!!!!!!!!
+
 ---
 
 Language switching
